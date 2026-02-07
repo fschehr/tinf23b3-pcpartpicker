@@ -1,0 +1,53 @@
+# Maven - Verhindert, dass kompilierte Dateien hochgeladen werden
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.utils/
+pom.xml.v
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Java - Verhindert, dass die manuell erstellten .class Dateien im Repo landen
+*.class
+*.log
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+# Visual Studio Code
+.vscode/
+.history/
+*.code-workspace
+
+# Eclipse
+.metadata/
+bin/
+tmp/
+.tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders/
+.project
+.classpath
+
+# OS spezifisch (Falls ihr auf unterschiedlichen Systemen arbeitet)
+.DS_Store
+Thumbs.db
