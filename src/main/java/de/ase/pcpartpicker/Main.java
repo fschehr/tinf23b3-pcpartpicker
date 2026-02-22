@@ -6,6 +6,7 @@ import de.ase.pcpartpicker.adapters.cli.*;
 
 public class Main {
     public static void main(String[] args) {
+        System.setProperty("fileEncoding", "UTF-8"); 
         ConsoleMenu menu = new ConsoleMenu();
         menu.start();
     }

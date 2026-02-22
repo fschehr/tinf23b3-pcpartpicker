@@ -24,4 +24,10 @@ public class InputReader {
             }
         }
     }
+
+
+    public String readString(String prompt) {
+        System.out.println(prompt + ": ");
+        return scanner.nextLine(); 
+    }
 }
