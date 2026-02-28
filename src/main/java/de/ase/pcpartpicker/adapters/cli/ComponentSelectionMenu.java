@@ -1,11 +1,37 @@
 package de.ase.pcpartpicker.adapters.cli;
 
+import java.util.List;
+import java.util.Locale;
+
+import de.ase.pcpartpicker.adapters.sqlite.repositories.CpuRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.GpuRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.MainboardRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.RamRepository;
+import de.ase.pcpartpicker.domain.Cpu;
+import de.ase.pcpartpicker.domain.Gpu;
+import de.ase.pcpartpicker.domain.Mainboard;
+import de.ase.pcpartpicker.domain.Ram;
+
 public class ComponentSelectionMenu {
     
     private final InputReader reader;
+    private final CpuRepository cpuRepository;
+    private final GpuRepository gpuRepository;
+    private final RamRepository ramRepository;
+    private final MainboardRepository mainboardRepository;
 
-    public ComponentSelectionMenu(InputReader reader) {
+    public ComponentSelectionMenu(
+        InputReader reader,
+        CpuRepository cpuRepository,
+        GpuRepository gpuRepository,
+        RamRepository ramRepository,
+        MainboardRepository mainboardRepository
+    ) {
         this.reader = reader;
+        this.cpuRepository = cpuRepository;
+        this.gpuRepository = gpuRepository;
+        this.ramRepository = ramRepository;
+        this.mainboardRepository = mainboardRepository;
     }
 
     public void start() {
@@ -15,15 +41,17 @@ public class ComponentSelectionMenu {
             System.out.println("1. CPU auswählen");
             System.out.println("2. GPU auswählen");
             System.out.println("3. RAM auswählen");
+            System.out.println("4. Mainboard auswählen");
             System.out.println("0. Zurück zum Hauptmenü");
         
 
-            int choice = reader.readInt("Wählen Sie eine Kategorie", 0, 3);
+            int choice = reader.readInt("Wählen Sie eine Kategorie", 0, 4);
 
             switch (choice) {
                 case 1 -> showCpuList();
-                case 2 -> System.out.println("[Logik für GPU folgt...]");
-                case 3 -> System.out.println("[Logik für RAM folgt...]");
+                case 2 -> showGpuList();
+                case 3 -> showRamList();
+                case 4 -> showMainboardList();
                 case 0 -> back = true;
             }
         }
@@ -31,15 +59,93 @@ public class ComponentSelectionMenu {
 
 
 
-    // nur temporär, um später das ganze durch eine Datenbankanbindung zu ersetzen
     public void showCpuList() {
+        List<Cpu> cpus = cpuRepository.findAll();
+        if (cpus.isEmpty()) {
+            System.out.println("\nKeine CPUs in der Datenbank gefunden.");
+            return;
+        }
+
         TableGenerator table = new TableGenerator("ID", "Name", "Sockel", "Preis");
-        
-        table.addRow("1", "Intel Core i9-13900K", "LGA1700", "589.00€");
-        table.addRow("2", "AMD Ryzen 9 7950X", "AM5", "545.00€");
-        table.addRow("3", "Intel Core i5-13600K", "LGA1700", "319.00€");
+
+        for (Cpu cpu : cpus) {
+            table.addRow(
+                String.valueOf(cpu.getId()),
+                cpu.getName(),
+                cpu.getSocket(),
+                String.format(Locale.GERMANY, "%.2f€", cpu.getPrice())
+            );
+        }
         
         System.out.println("\nVerfügbare Prozessoren:");
+        table.printTable();
+    }
+
+    public void showGpuList() {
+        List<Gpu> gpus = gpuRepository.findAll();
+        if (gpus.isEmpty()) {
+            System.out.println("\nKeine GPUs in der Datenbank gefunden.");
+            return;
+        }
+
+        TableGenerator table = new TableGenerator("ID", "Name", "VRAM (GB)", "Preis");
+
+        for (Gpu gpu : gpus) {
+            table.addRow(
+                String.valueOf(gpu.getId()),
+                gpu.getName(),
+                String.valueOf(gpu.getVramGb()),
+                String.format(Locale.GERMANY, "%.2f€", gpu.getPrice())
+            );
+        }
+
+        System.out.println("\nVerfügbare Grafikkarten:");
+        table.printTable();
+    }
+
+    public void showRamList() {
+        List<Ram> ramModules = ramRepository.findAll();
+        if (ramModules.isEmpty()) {
+            System.out.println("\nKein RAM in der Datenbank gefunden.");
+            return;
+        }
+
+        TableGenerator table = new TableGenerator("ID", "Name", "Kapazität", "Geschwindigkeit", "Preis");
+
+        for (Ram ram : ramModules) {
+            table.addRow(
+                String.valueOf(ram.getId()),
+                ram.getName(),
+                ram.getCapacityGb() + " GB",
+                ram.getSpeedMhz() + " MHz",
+                String.format(Locale.GERMANY, "%.2f€", ram.getPrice())
+            );
+        }
+
+        System.out.println("\nVerfügbarer Arbeitsspeicher:");
+        table.printTable();
+    }
+
+    public void showMainboardList() {
+        List<Mainboard> mainboards = mainboardRepository.findAll();
+        if (mainboards.isEmpty()) {
+            System.out.println("\nKeine Mainboards in der Datenbank gefunden.");
+            return;
+        }
+
+        TableGenerator table = new TableGenerator("ID", "Name", "Sockel", "Formfaktor", "Preis");
+
+        for (Mainboard mainboard : mainboards) {
+            table.addRow(
+                String.valueOf(mainboard.getId()),
+                mainboard.getName(),
+                mainboard.getSocket(),
+                mainboard.getFormFactor(),
+                String.format(Locale.GERMANY, "%.2f€", mainboard.getPrice())
+            );
+        }
+
+        System.out.println("\nVerfügbare Mainboards:");
         table.printTable();
     }
 }
