@@ -23,6 +23,8 @@ public class Case extends Part {
         return formMB.getForm();
     }
 
+    // Gibt alle möglichen Mainboardformate zurück, die mit dem Formfaktor des Gehäuses kompatibel sind
+    // Anders als beim Netzteil ist der Formfaktor bei Motherbaords absteigend kompatibel
     public String[] possibleMBs() {
         return formMB.possibleMotherboards();
     }

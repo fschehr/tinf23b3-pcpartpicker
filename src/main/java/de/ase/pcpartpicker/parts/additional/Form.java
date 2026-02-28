@@ -14,6 +14,7 @@ public class Form {
         setForm(form, motherboard);
     }
 
+    // Formfaktor wird für Motherboard oder Netzteil validiert, je nachdem was übergeben wird
     private void setForm(String form, boolean motherboard) {
         this.motherboard = motherboard;
         if(motherboard) {
@@ -32,6 +33,7 @@ public class Form {
         throw new IllegalArgumentException(form + " is not a valid form factor for a " + (motherboard ? "Motherboard" : "PSU") + ". Valid form factors are: " + String.join("\n", formfactors));
     }
 
+    // Gibt alle möglichen Mainboardformate zurück, die mit dem Formfaktor des Gehäuses kompatibel sind
     public String[] possibleMotherboards() {
         String[] possibleMBs;
         if(!motherboard)

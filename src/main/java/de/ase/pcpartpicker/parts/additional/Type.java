@@ -10,6 +10,7 @@ public class Type {
         setType(type);
     }
 
+    // Typ wird validiert
     private void setType(String type) {
         for(String t: types) {
             if(t.equals(type)) {
