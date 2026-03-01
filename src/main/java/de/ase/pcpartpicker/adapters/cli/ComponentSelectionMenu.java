@@ -77,8 +77,29 @@ public class ComponentSelectionMenu {
             );
         }
         
-        System.out.println("\nVerfügbare Prozessoren:");
+        System.out.println("\n--- Verfügbare Prozessoren ---");
         table.printTable();
+        String input = reader.readString("Geben Sie die ID der gewünschten CPU ein (oder '0' zum Abbrechen)");
+
+        if(!input.equals("0")) {
+            CPU selected = null; 
+            for(CPU cpu: cpus) {
+                if(cpu.getId().equalsIgnoreCase(input)) {
+                    selected = cpu; 
+                    break;
+                }
+            }
+
+            if(selected != null) {
+                config.addComponent(selected);
+                System.out.println(">> " + selected.getName() + " wurde ihrer Konfiguration hinzugefügt!");
+            }
+            else {
+                System.out.println(">> Fehler: ID '" + input + "' nicht gefunden.");
+            }
+        }
+
+
     }
 
     public void showGpuList() {
