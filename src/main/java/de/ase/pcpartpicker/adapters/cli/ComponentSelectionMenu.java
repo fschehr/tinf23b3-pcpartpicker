@@ -72,7 +72,7 @@ public class ComponentSelectionMenu {
             table.addRow(
                 String.valueOf(cpu.getId()),
                 cpu.getName(),
-                cpu.getSocket(),
+                cpu.getSocket().getName(),
                 String.format(Locale.GERMANY, "%.2f€", cpu.getPrice())
             );
         }
@@ -160,8 +160,8 @@ public class ComponentSelectionMenu {
             table.addRow(
                 String.valueOf(mainboard.getId()),
                 mainboard.getName(),
-                mainboard.getSocket(),
-                mainboard.getFormFactor(),
+                mainboard.getSocket().getName(),
+                mainboard.getFormFactor().getName(),
                 String.format(Locale.GERMANY, "%.2f€", mainboard.getPrice())
             );
         }

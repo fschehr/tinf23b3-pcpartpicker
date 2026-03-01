@@ -9,6 +9,8 @@ import java.util.List;
 
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
 import de.ase.pcpartpicker.domain.Gpu;
+import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
+import de.ase.pcpartpicker.domain.HelperClasses.Type;
 
 public class GpuRepository extends BaseRepository<Gpu> {
     /**
@@ -21,7 +23,20 @@ public class GpuRepository extends BaseRepository<Gpu> {
 
     @Override
     public List<Gpu> findAll() {
-        String sql = "SELECT id, name, vram_gb, price FROM gpu ORDER BY id";
+        String sql = """
+            SELECT g.id,
+                   g.name,
+                   g.price,
+                   g.vram_gb,
+                   t.id AS type_id,
+                   t.name AS type_name,
+                   m.id AS manufacturer_id,
+                   m.name AS manufacturer_name
+            FROM gpu g
+            JOIN type t ON t.id = g.type_id
+            JOIN manufacturer m ON m.id = g.manufacturer_id
+            ORDER BY g.id
+            """;
         List<Gpu> gpus = new ArrayList<>();
 
         try (Connection connection = connectionFactory.createConnection();
@@ -29,11 +44,16 @@ public class GpuRepository extends BaseRepository<Gpu> {
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
+                Type type = new Type(resultSet.getInt("type_id"), resultSet.getString("type_name"));
+                Manufacturer manufacturer = new Manufacturer(resultSet.getInt("manufacturer_id"), resultSet.getString("manufacturer_name"));
+
                 gpus.add(new Gpu(
                     resultSet.getInt("id"),
+                    type,
                     resultSet.getString("name"),
-                    resultSet.getInt("vram_gb"),
-                    resultSet.getDouble("price")
+                    resultSet.getDouble("price"),
+                    manufacturer,
+                    resultSet.getInt("vram_gb")
                 ));
             }
             return gpus;
