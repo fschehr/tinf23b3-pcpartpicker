@@ -1,30 +1,42 @@
 package de.ase.pcpartpicker.domain;
 
 import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
-import de.ase.pcpartpicker.domain.HelperClasses.MotherBoardFormFactor;
-import de.ase.pcpartpicker.domain.HelperClasses.PsuFormFactor;
-import de.ase.pcpartpicker.domain.HelperClasses.Type;
+import de.ase.pcpartpicker.domain.HelperClasses.MotherboardFormFactor;
+import de.ase.pcpartpicker.domain.HelperClasses.PSUFormFactor;
+import de.ase.pcpartpicker.domain.HelperClasses.PSUFormFactor;
 
+/**
+ * Klasse für die Case-Komponente.
+ * @param id Eindeutige ID des Cases
+ * @param name Name des Cases
+ * @param manufacturer Hersteller des Cases
+ * @param motherBoardFormFactor Unterstütztes Motherboard-Formfaktor des Cases
+ * @param psuFormFactor Unterstütztes PSU-Formfaktor des Cases
+ * @param hasWindow Gibt an, ob das Case ein Fenster hat
+ * @param fanSlots Anzahl der Lüfterplätze im Case
+ * @param price Preis des Cases
+ * @author Tuluhan
+ */
 public class Case extends Component {
 
-    private final MotherBoardFormFactor motherBoardFormFactor;
-    private final PsuFormFactor psuFormFactor;
+    private final MotherboardFormFactor motherboardFormFactor;
+    private final PSUFormFactor psuFormFactor;
     private final boolean hasWindow;
     private final int fanSlots;
 
-    public Case(int id, Type type, String name, double price, Manufacturer manufacturer, MotherBoardFormFactor motherBoardFormFactor, PsuFormFactor psuFormFactor, boolean hasWindow, int fanSlots) {
-        super(id, type, name, price, manufacturer);
-        this.motherBoardFormFactor = motherBoardFormFactor;
+    public Case(int id, String name, double price, Manufacturer manufacturer, MotherboardFormFactor motherboardFormFactor, PSUFormFactor psuFormFactor, boolean hasWindow, int fanSlots) {
+        super(id, name, price, manufacturer);
+        this.motherboardFormFactor = motherboardFormFactor;
         this.psuFormFactor = psuFormFactor;
         this.hasWindow = hasWindow;
         this.fanSlots = fanSlots;
     }
 
-    public MotherBoardFormFactor getMotherBoardFormFactor() {
-        return motherBoardFormFactor;
+    public MotherboardFormFactor getMotherboardFormFactor() {
+        return motherboardFormFactor;
     }
     
-    public PsuFormFactor getPsuFormFactor() {
+    public PSUFormFactor getPSUFormFactor() {
         return psuFormFactor;
     }
     

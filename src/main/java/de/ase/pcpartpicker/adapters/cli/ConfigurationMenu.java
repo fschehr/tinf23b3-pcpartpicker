@@ -1,8 +1,8 @@
 package de.ase.pcpartpicker.adapters.cli;
 
 
-import de.ase.pcpartpicker.domain.models.Component;
-import de.ase.pcpartpicker.domain.models.PCConfiguration;
+import de.ase.pcpartpicker.domain.Component;
+import de.ase.pcpartpicker.domain.PCConfiguration;
 
 public class ConfigurationMenu {
     private final PCConfiguration config;

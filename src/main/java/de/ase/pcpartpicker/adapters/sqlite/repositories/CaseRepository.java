@@ -10,8 +10,8 @@ import java.util.List;
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
 import de.ase.pcpartpicker.domain.Case;
 import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
-import de.ase.pcpartpicker.domain.HelperClasses.PsuFormFactor;
-import de.ase.pcpartpicker.domain.HelperClasses.Type;
+import de.ase.pcpartpicker.domain.HelperClasses.MotherboardFormFactor;
+import de.ase.pcpartpicker.domain.HelperClasses.PSUFormFactor;
 
 public class CaseRepository extends BaseRepository<Case> {
 
@@ -44,17 +44,19 @@ public class CaseRepository extends BaseRepository<Case> {
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                Type type = new Type(resultSet.getInt("type_id"), resultSet.getString("type_name"));
                 Manufacturer manufacturer = new Manufacturer(resultSet.getInt("manufacturer_id"), resultSet.getString("manufacturer_name"));
-                PsuFormFactor psuFormFactor = new PsuFormFactor(resultSet.getInt("psu_form_factor_id"), resultSet.getString("psu_form_factor_name"));
+                MotherboardFormFactor motherboardFormFactor = null; // MotherboardFormFactor ist in der Datenbank nicht vorhanden, daher auf null gesetzt
+                PSUFormFactor psuFormFactor = new PSUFormFactor(resultSet.getInt("psu_form_factor_id"), resultSet.getString("psu_form_factor_name"));
 
                 cases.add(new Case(
                     resultSet.getInt("id"),
-                    type,
                     resultSet.getString("name"),
                     resultSet.getDouble("price"),
                     manufacturer,
-                    psuFormFactor
+                    motherboardFormFactor,
+                    psuFormFactor,
+                    false, // hasWindow ist in der Datenbank nicht vorhanden, daher auf false gesetzt
+                    0      // fanSlots ist in der Datenbank nicht vorhanden, daher auf 0
                 ));
             }
             return cases;

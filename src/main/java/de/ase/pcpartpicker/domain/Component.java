@@ -1,7 +1,6 @@
 package de.ase.pcpartpicker.domain;
 
 import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
-import de.ase.pcpartpicker.domain.HelperClasses.Type;
 
 /**
  * Abstrakte Basisklasse für alle Komponenten.
@@ -13,14 +12,12 @@ import de.ase.pcpartpicker.domain.HelperClasses.Type;
 public abstract class Component {
 
     private final int id;
-    private final Type type;
     private final String name;
     private final double price;
     private final Manufacturer manufacturer;
 
-    protected Component(int id, Type type, String name, double price, Manufacturer manufacturer) {
+    protected Component(int id, String name, double price, Manufacturer manufacturer) {
         this.id = id;
-        this.type = type;
         this.name = name;
         this.price = price;
         this.manufacturer = manufacturer;
@@ -28,10 +25,6 @@ public abstract class Component {
 
     public int getId() {
         return id;
-    }
-
-    public Type getType() {
-        return type;
     }
 
     public String getName() {
@@ -49,7 +42,6 @@ public abstract class Component {
     @Override
     public String toString() {
         String manufacturerName = manufacturer != null ? manufacturer.getName() : "-";
-        String typeName = type != null ? type.getName() : "-";
-        return String.format("%s (ID: %d, Typ: %s, Preis: %.2f, Hersteller: %s)", name, id, typeName, price, manufacturerName);
+        return String.format("%s (ID: %d, Typ: %s, Preis: %.2f, Hersteller: %s)", name, id, this.getClass().getSimpleName(), price, manufacturerName);
     }
 }

@@ -7,10 +7,10 @@ import de.ase.pcpartpicker.adapters.sqlite.repositories.CpuRepository;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.GpuRepository;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.MainboardRepository;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.RamRepository;
-import de.ase.pcpartpicker.domain.Cpu;
-import de.ase.pcpartpicker.domain.Gpu;
+import de.ase.pcpartpicker.domain.CPU;
+import de.ase.pcpartpicker.domain.GPU;
 import de.ase.pcpartpicker.domain.Mainboard;
-import de.ase.pcpartpicker.domain.Ram;
+import de.ase.pcpartpicker.domain.RAM;
 
 public class ComponentSelectionMenu {
     
@@ -60,7 +60,7 @@ public class ComponentSelectionMenu {
 
 
     public void showCpuList() {
-        List<Cpu> cpus = cpuRepository.findAll();
+        List<CPU> cpus = cpuRepository.findAll();
         if (cpus.isEmpty()) {
             System.out.println("\nKeine CPUs in der Datenbank gefunden.");
             return;
@@ -68,7 +68,7 @@ public class ComponentSelectionMenu {
 
         TableGenerator table = new TableGenerator("ID", "Name", "Sockel", "Preis");
 
-        for (Cpu cpu : cpus) {
+        for (CPU cpu : cpus) {
             table.addRow(
                 String.valueOf(cpu.getId()),
                 cpu.getName(),

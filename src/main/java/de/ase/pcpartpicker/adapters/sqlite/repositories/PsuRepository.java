@@ -10,8 +10,7 @@ import java.util.List;
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
 import de.ase.pcpartpicker.domain.PSU;
 import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
-import de.ase.pcpartpicker.domain.HelperClasses.PsuFormFactor;
-import de.ase.pcpartpicker.domain.HelperClasses.Type;
+import de.ase.pcpartpicker.domain.HelperClasses.PSUFormFactor;
 
 public class PsuRepository extends BaseRepository<PSU> {
 
@@ -45,13 +44,11 @@ public class PsuRepository extends BaseRepository<PSU> {
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                Type type = new Type(resultSet.getInt("type_id"), resultSet.getString("type_name"));
                 Manufacturer manufacturer = new Manufacturer(resultSet.getInt("manufacturer_id"), resultSet.getString("manufacturer_name"));
-                PsuFormFactor formFactor = new PsuFormFactor(resultSet.getInt("form_factor_id"), resultSet.getString("form_factor_name"));
+                PSUFormFactor formFactor = new PSUFormFactor(resultSet.getInt("form_factor_id"), resultSet.getString("form_factor_name"));
 
                 psus.add(new PSU(
                     resultSet.getInt("id"),
-                    type,
                     resultSet.getString("name"),
                     resultSet.getDouble("price"),
                     manufacturer,

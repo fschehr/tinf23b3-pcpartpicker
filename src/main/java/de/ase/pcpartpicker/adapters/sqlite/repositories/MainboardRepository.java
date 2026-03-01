@@ -10,9 +10,8 @@ import java.util.List;
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
 import de.ase.pcpartpicker.domain.Mainboard;
 import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
-import de.ase.pcpartpicker.domain.HelperClasses.MotherBoardFormFactor;
+import de.ase.pcpartpicker.domain.HelperClasses.MotherboardFormFactor;
 import de.ase.pcpartpicker.domain.HelperClasses.Socket;
-import de.ase.pcpartpicker.domain.HelperClasses.Type;
 
 public class MainboardRepository extends BaseRepository<Mainboard> {
     /**
@@ -51,14 +50,12 @@ public class MainboardRepository extends BaseRepository<Mainboard> {
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                Type type = new Type(resultSet.getInt("type_id"), resultSet.getString("type_name"));
                 Manufacturer manufacturer = new Manufacturer(resultSet.getInt("manufacturer_id"), resultSet.getString("manufacturer_name"));
                 Socket socket = new Socket(resultSet.getInt("socket_id"), resultSet.getString("socket_name"));
-                MotherBoardFormFactor formFactor = new MotherBoardFormFactor(resultSet.getInt("form_factor_id"), resultSet.getString("form_factor_name"));
+                MotherboardFormFactor formFactor = new MotherboardFormFactor(resultSet.getInt("form_factor_id"), resultSet.getString("form_factor_name"));
 
                 mainboards.add(new Mainboard(
                     resultSet.getInt("id"),
-                    type,
                     resultSet.getString("name"),
                     resultSet.getDouble("price"),
                     manufacturer,

@@ -1,9 +1,8 @@
 package de.ase.pcpartpicker.domain;
 
 import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
-import de.ase.pcpartpicker.domain.HelperClasses.MotherBoardFormFactor;
+import de.ase.pcpartpicker.domain.HelperClasses.MotherboardFormFactor;
 import de.ase.pcpartpicker.domain.HelperClasses.Socket;
-import de.ase.pcpartpicker.domain.HelperClasses.Type;
 
 /**
  * Klasse für die Mainboard-Komponente.
@@ -18,18 +17,17 @@ import de.ase.pcpartpicker.domain.HelperClasses.Type;
 public class Mainboard extends Component {
 
     private final Socket socket;
-    private final MotherBoardFormFactor formFactor;
+    private final MotherboardFormFactor formFactor;
 
     public Mainboard(
         int id,
-        Type type,
         String name,
         double price,
         Manufacturer manufacturer,
         Socket socket,
-        MotherBoardFormFactor formFactor
+        MotherboardFormFactor formFactor
     ) {
-        super(id, type, name, price, manufacturer);
+        super(id, name, price, manufacturer);
         this.socket = socket;
         this.formFactor = formFactor;
     }
@@ -38,7 +36,7 @@ public class Mainboard extends Component {
         return socket;
     }
 
-    public MotherBoardFormFactor getFormFactor() {
+    public MotherboardFormFactor getFormFactor() {
         return formFactor;
     }
 }

@@ -1,27 +1,26 @@
 package de.ase.pcpartpicker.domain;
 
 import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
-import de.ase.pcpartpicker.domain.HelperClasses.Type;
 
 /**
  * Klasse für die GPU-Komponente.
  * @param id Eindeutige ID der GPU
  * @param name Name der GPU
  * @param manufacturer Hersteller der GPU
- * @param vramGb VRAM-Kapazität der GPU in GB
+ * @param vramGB VRAM-Kapazität der GPU in GB
  * @param price Preis der GPU
  * @author Fabio
  */
-public class Gpu extends Component {
+public class GPU extends Component {
 
-    private final int vramGb;
+    private final int vramGB;
 
-    public Gpu(int id, Type type, String name, double price, Manufacturer manufacturer, int vramGb) {
-        super(id, type, name, price, manufacturer);
-        this.vramGb = vramGb;
+    public GPU(int id, String name, double price, Manufacturer manufacturer, int vramGB) {
+        super(id, name, price, manufacturer);
+        this.vramGB = vramGB;
     }
 
-    public int getVramGb() {
-        return vramGb;
+    public int getVramGB() {
+        return vramGB;
     }
 }

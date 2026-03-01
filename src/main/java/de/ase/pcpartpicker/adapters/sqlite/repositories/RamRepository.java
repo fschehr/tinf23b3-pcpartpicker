@@ -8,11 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
-import de.ase.pcpartpicker.domain.Ram;
+import de.ase.pcpartpicker.domain.RAM;
 import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
-import de.ase.pcpartpicker.domain.HelperClasses.Type;
 
-public class RamRepository extends BaseRepository<Ram> {
+public class RamRepository extends BaseRepository<RAM> {
     /**
      * Repository für die RAM-Komponente.
      * @author Fabio
@@ -22,7 +21,7 @@ public class RamRepository extends BaseRepository<Ram> {
     }
 
     @Override
-    public List<Ram> findAll() {
+    public List<RAM> findAll() {
         String sql = """
             SELECT r.id,
                    r.name,
@@ -38,19 +37,17 @@ public class RamRepository extends BaseRepository<Ram> {
             JOIN manufacturer m ON m.id = r.manufacturer_id
             ORDER BY r.id
             """;
-        List<Ram> ramModules = new ArrayList<>();
+        List<RAM> ramModules = new ArrayList<>();
 
         try (Connection connection = connectionFactory.createConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                Type type = new Type(resultSet.getInt("type_id"), resultSet.getString("type_name"));
                 Manufacturer manufacturer = new Manufacturer(resultSet.getInt("manufacturer_id"), resultSet.getString("manufacturer_name"));
 
-                ramModules.add(new Ram(
+                ramModules.add(new RAM(
                     resultSet.getInt("id"),
-                    type,
                     resultSet.getString("name"),
                     resultSet.getDouble("price"),
                     manufacturer,

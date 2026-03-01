@@ -3,6 +3,8 @@ package de.ase.pcpartpicker.domain.HelperClasses;
 /**
  * Abstrakte Klasse für Hilfstabellen wie Hersteller, Sockeltypen, etc.
  * Diese Klassen haben nur eine ID und einen Namen.
+ * @param id Eindeutige ID des Eintrags
+ * @param name Name des Eintrags
  * @author Fabio
  */
 public abstract class HelperTable {

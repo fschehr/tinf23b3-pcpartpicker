@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
-import de.ase.pcpartpicker.domain.Cpu;
+import de.ase.pcpartpicker.domain.CPU;
 import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
 import de.ase.pcpartpicker.domain.HelperClasses.Socket;
-import de.ase.pcpartpicker.domain.HelperClasses.Type;
 
-public class CpuRepository extends BaseRepository<Cpu> {
+public class CpuRepository extends BaseRepository<CPU> {
     /**
      * Repository für die CPU-Komponente.
      * Implementiert das BaseRepository-Interface für die CPU-Komponente.
@@ -26,7 +25,7 @@ public class CpuRepository extends BaseRepository<Cpu> {
 
 
     @Override
-    public List<Cpu> findAll() {
+    public List<CPU> findAll() {
         String sql = """
             SELECT c.id,
                    c.name,
@@ -44,20 +43,18 @@ public class CpuRepository extends BaseRepository<Cpu> {
             JOIN sockets s ON s.id = c.socket_id
             ORDER BY c.id
             """;
-        List<Cpu> cpus = new ArrayList<>();
+        List<CPU> cpus = new ArrayList<>();
 
         try (Connection connection = connectionFactory.createConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                Type type = new Type(resultSet.getInt("type_id"), resultSet.getString("type_name"));
                 Manufacturer manufacturer = new Manufacturer(resultSet.getInt("manufacturer_id"), resultSet.getString("manufacturer_name"));
                 Socket socket = new Socket(resultSet.getInt("socket_id"), resultSet.getString("socket_name"));
 
-                cpus.add(new Cpu(
+                cpus.add(new CPU(
                     resultSet.getInt("id"),
-                    type,
                     resultSet.getString("name"),
                     resultSet.getDouble("price"),
                     manufacturer,
