@@ -3,7 +3,6 @@ package de.ase.pcpartpicker.domain;
 import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
 import de.ase.pcpartpicker.domain.HelperClasses.MotherboardFormFactor;
 import de.ase.pcpartpicker.domain.HelperClasses.PSUFormFactor;
-import de.ase.pcpartpicker.domain.HelperClasses.PSUFormFactor;
 
 /**
  * Klasse für die Case-Komponente.
