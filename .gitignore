@@ -1,3 +1,6 @@
+#db
+pcpartpicker.db
+
 # Maven - Verhindert, dass kompilierte Dateien hochgeladen werden
 target/
 pom.xml.tag

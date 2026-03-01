@@ -1,15 +1,23 @@
 package de.ase.pcpartpicker.adapters.cli;
 
-import de.ase.pcpartpicker.domain.models.PCConfiguration;
-import de.ase.pcpartpicker.domain.services.ComponentService;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.CpuRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.GpuRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.MainboardRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.RamRepository;
 
 public class ConsoleMenu {
     private final InputReader reader = new InputReader();
-    private final ComponentService service = new ComponentService();
-    private final PCConfiguration currentConfig = new PCConfiguration();
-    private final ComponentSelectionMenu selectionMenu = new ComponentSelectionMenu(reader, service, currentConfig);
-    private final ConfigurationMenu configMenu = new ConfigurationMenu(currentConfig);
+    private final ComponentSelectionMenu selectionMenu;
     private boolean running = true; 
+
+    public ConsoleMenu(
+        CpuRepository cpuRepository,
+        GpuRepository gpuRepository,
+        RamRepository ramRepository,
+        MainboardRepository mainboardRepository
+    ) {
+        this.selectionMenu = new ComponentSelectionMenu(reader, cpuRepository, gpuRepository, ramRepository, mainboardRepository);
+    }
 
 
     public void start() {
