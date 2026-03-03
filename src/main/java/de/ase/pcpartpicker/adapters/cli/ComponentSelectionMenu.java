@@ -7,10 +7,10 @@ import de.ase.pcpartpicker.adapters.sqlite.repositories.CpuRepository;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.GpuRepository;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.MainboardRepository;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.RamRepository;
-import de.ase.pcpartpicker.domain.Cpu;
-import de.ase.pcpartpicker.domain.Gpu;
+import de.ase.pcpartpicker.domain.CPU;
+import de.ase.pcpartpicker.domain.GPU;
 import de.ase.pcpartpicker.domain.Mainboard;
-import de.ase.pcpartpicker.domain.Ram;
+import de.ase.pcpartpicker.domain.RAM;
 
 public class ComponentSelectionMenu {
     
@@ -60,7 +60,7 @@ public class ComponentSelectionMenu {
 
 
     public void showCpuList() {
-        List<Cpu> cpus = cpuRepository.findAll();
+        List<CPU> cpus = cpuRepository.findAll();
         if (cpus.isEmpty()) {
             System.out.println("\nKeine CPUs in der Datenbank gefunden.");
             return;
@@ -68,11 +68,11 @@ public class ComponentSelectionMenu {
 
         TableGenerator table = new TableGenerator("ID", "Name", "Sockel", "Preis");
 
-        for (Cpu cpu : cpus) {
+        for (CPU cpu : cpus) {
             table.addRow(
                 String.valueOf(cpu.getId()),
                 cpu.getName(),
-                cpu.getSocket(),
+                cpu.getSocket().getName(),
                 String.format(Locale.GERMANY, "%.2f€", cpu.getPrice())
             );
         }
@@ -84,7 +84,7 @@ public class ComponentSelectionMenu {
         if(!input.equals("0")) {
             CPU selected = null; 
             for(CPU cpu: cpus) {
-                if(cpu.getId().equalsIgnoreCase(input)) {
+                if(String.valueOf(cpu.getId()).equals(input)) {
                     selected = cpu; 
                     break;
                 }
@@ -103,7 +103,7 @@ public class ComponentSelectionMenu {
     }
 
     public void showGpuList() {
-        List<Gpu> gpus = gpuRepository.findAll();
+        List<GPU> gpus = gpuRepository.findAll();
         if (gpus.isEmpty()) {
             System.out.println("\nKeine GPUs in der Datenbank gefunden.");
             return;
@@ -111,11 +111,11 @@ public class ComponentSelectionMenu {
 
         TableGenerator table = new TableGenerator("ID", "Name", "VRAM (GB)", "Preis");
 
-        for (Gpu gpu : gpus) {
+        for (GPU gpu : gpus) {
             table.addRow(
                 String.valueOf(gpu.getId()),
                 gpu.getName(),
-                String.valueOf(gpu.getVramGb()),
+                String.valueOf(gpu.getVramGB()),
                 String.format(Locale.GERMANY, "%.2f€", gpu.getPrice())
             );
         }
@@ -125,7 +125,7 @@ public class ComponentSelectionMenu {
     }
 
     public void showRamList() {
-        List<Ram> ramModules = ramRepository.findAll();
+        List<RAM> ramModules = ramRepository.findAll();
         if (ramModules.isEmpty()) {
             System.out.println("\nKein RAM in der Datenbank gefunden.");
             return;
@@ -133,12 +133,12 @@ public class ComponentSelectionMenu {
 
         TableGenerator table = new TableGenerator("ID", "Name", "Kapazität", "Geschwindigkeit", "Preis");
 
-        for (Ram ram : ramModules) {
+        for (RAM ram : ramModules) {
             table.addRow(
                 String.valueOf(ram.getId()),
                 ram.getName(),
-                ram.getCapacityGb() + " GB",
-                ram.getSpeedMhz() + " MHz",
+                ram.getCapacityGB() + " GB",
+                ram.getSpeedMHz() + " MHz",
                 String.format(Locale.GERMANY, "%.2f€", ram.getPrice())
             );
         }
@@ -160,8 +160,8 @@ public class ComponentSelectionMenu {
             table.addRow(
                 String.valueOf(mainboard.getId()),
                 mainboard.getName(),
-                mainboard.getSocket(),
-                mainboard.getFormFactor(),
+                mainboard.getSocket().getName(),
+                mainboard.getFormFactor().getName(),
                 String.format(Locale.GERMANY, "%.2f€", mainboard.getPrice())
             );
         }

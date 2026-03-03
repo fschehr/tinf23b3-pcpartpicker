@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
-import de.ase.pcpartpicker.domain.Ram;
+import de.ase.pcpartpicker.domain.RAM;
+import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
 
-public class RamRepository extends BaseRepository<Ram> {
+public class RamRepository extends BaseRepository<RAM> {
     /**
      * Repository für die RAM-Komponente.
      * @author Fabio
@@ -20,21 +21,38 @@ public class RamRepository extends BaseRepository<Ram> {
     }
 
     @Override
-    public List<Ram> findAll() {
-        String sql = "SELECT id, name, capacity_gb, speed_mhz, price FROM ram ORDER BY id";
-        List<Ram> ramModules = new ArrayList<>();
+    public List<RAM> findAll() {
+        String sql = """
+            SELECT r.id,
+                   r.name,
+                   r.price,
+                   r.capacity_gb,
+                   r.speed_mhz,
+                   t.id AS type_id,
+                   t.name AS type_name,
+                   m.id AS manufacturer_id,
+                   m.name AS manufacturer_name
+            FROM ram r
+            JOIN type t ON t.id = r.type_id
+            JOIN manufacturer m ON m.id = r.manufacturer_id
+            ORDER BY r.id
+            """;
+        List<RAM> ramModules = new ArrayList<>();
 
         try (Connection connection = connectionFactory.createConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                ramModules.add(new Ram(
+                Manufacturer manufacturer = new Manufacturer(resultSet.getInt("manufacturer_id"), resultSet.getString("manufacturer_name"));
+
+                ramModules.add(new RAM(
                     resultSet.getInt("id"),
                     resultSet.getString("name"),
+                    resultSet.getDouble("price"),
+                    manufacturer,
                     resultSet.getInt("capacity_gb"),
-                    resultSet.getInt("speed_mhz"),
-                    resultSet.getDouble("price")
+                    resultSet.getInt("speed_mhz")
                 ));
             }
             return ramModules;

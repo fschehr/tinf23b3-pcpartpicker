@@ -8,42 +8,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
-import de.ase.pcpartpicker.domain.CPU;
+import de.ase.pcpartpicker.domain.Case;
 import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
-import de.ase.pcpartpicker.domain.HelperClasses.Socket;
+import de.ase.pcpartpicker.domain.HelperClasses.MotherboardFormFactor;
+import de.ase.pcpartpicker.domain.HelperClasses.PSUFormFactor;
 
-public class CpuRepository extends BaseRepository<CPU> {
-    /**
-     * Repository für die CPU-Komponente.
-     * Implementiert das BaseRepository-Interface für die CPU-Komponente.
-     * @author Fabio
-    */
+public class CaseRepository extends BaseRepository<Case> {
 
-    public CpuRepository(ConnectionFactory connectionFactory) {
+    public CaseRepository(ConnectionFactory connectionFactory) {
         super(connectionFactory);
     }
 
-
     @Override
-    public List<CPU> findAll() {
+    public List<Case> findAll() {
         String sql = """
             SELECT c.id,
                    c.name,
                    c.price,
-                   c.speed_ghz,
                    t.id AS type_id,
                    t.name AS type_name,
                    m.id AS manufacturer_id,
                    m.name AS manufacturer_name,
-                   s.id AS socket_id,
-                   s.name AS socket_name
-            FROM cpu c
+                   ff.id AS psu_form_factor_id,
+                   ff.name AS psu_form_factor_name
+            FROM pc_case c
             JOIN type t ON t.id = c.type_id
             JOIN manufacturer m ON m.id = c.manufacturer_id
-            JOIN sockets s ON s.id = c.socket_id
+            JOIN psu_form_factor ff ON ff.id = c.psu_form_factor_id
             ORDER BY c.id
             """;
-        List<CPU> cpus = new ArrayList<>();
+        List<Case> cases = new ArrayList<>();
 
         try (Connection connection = connectionFactory.createConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
@@ -51,21 +45,24 @@ public class CpuRepository extends BaseRepository<CPU> {
 
             while (resultSet.next()) {
                 Manufacturer manufacturer = new Manufacturer(resultSet.getInt("manufacturer_id"), resultSet.getString("manufacturer_name"));
-                Socket socket = new Socket(resultSet.getInt("socket_id"), resultSet.getString("socket_name"));
+                MotherboardFormFactor motherboardFormFactor = null; // MotherboardFormFactor ist in der Datenbank nicht vorhanden, daher auf null gesetzt
+                PSUFormFactor psuFormFactor = new PSUFormFactor(resultSet.getInt("psu_form_factor_id"), resultSet.getString("psu_form_factor_name"));
 
-                cpus.add(new CPU(
+                cases.add(new Case(
                     resultSet.getInt("id"),
                     resultSet.getString("name"),
                     resultSet.getDouble("price"),
                     manufacturer,
-                    socket,
-                    resultSet.getDouble("speed_ghz")
+                    motherboardFormFactor,
+                    psuFormFactor,
+                    false, // hasWindow ist in der Datenbank nicht vorhanden, daher auf false gesetzt
+                    0      // fanSlots ist in der Datenbank nicht vorhanden, daher auf 0
                 ));
             }
-            return cpus;
+            return cases;
 
         } catch (SQLException e) {
-            throw new IllegalStateException("CPU-Daten konnten nicht geladen werden.", e);
+            throw new IllegalStateException("Case-Daten konnten nicht geladen werden.", e);
         }
     }
 }
