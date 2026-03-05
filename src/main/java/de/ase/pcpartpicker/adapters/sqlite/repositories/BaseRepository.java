@@ -18,5 +18,6 @@ public abstract class BaseRepository<T extends Component> implements ComponentRe
         this.connectionFactory = connectionFactory;
     }
     
+    @Override
     public abstract List<T> findAll();
 }

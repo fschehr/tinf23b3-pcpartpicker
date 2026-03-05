@@ -30,4 +30,9 @@ public class InputReader {
         System.out.println(prompt + ": ");
         return scanner.nextLine(); 
     }
+
+    public void waitForEnter(String prompt) {
+        System.out.println(prompt);
+        scanner.nextLine();
+    }
 }
