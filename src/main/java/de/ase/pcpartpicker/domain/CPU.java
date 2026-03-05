@@ -34,4 +34,8 @@ public class CPU extends Component {
     public double getspeedGHz() {
         return speedGHz;
     }
+
+    public boolean hasIntegratedGraphics() {
+        return hasIntegratedGraphics;
+    }
 }
