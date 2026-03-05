@@ -24,4 +24,15 @@ public class InputReader {
             }
         }
     }
+
+
+    public String readString(String prompt) {
+        System.out.println(prompt + ": ");
+        return scanner.nextLine(); 
+    }
+
+    public void waitForEnter(String prompt) {
+        System.out.println(prompt);
+        scanner.nextLine();
+    }
 }
