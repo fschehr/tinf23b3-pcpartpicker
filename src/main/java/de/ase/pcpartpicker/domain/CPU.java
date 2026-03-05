@@ -7,10 +7,11 @@ import de.ase.pcpartpicker.domain.HelperClasses.Socket;
  * Klasse für die CPU-Komponente.
  * @param id Eindeutige ID der CPU
  * @param name Name der CPU
+ * @param price Preis der CPU
  * @param manufacturer Hersteller der CPU
  * @param socket Sockeltyp der CPU (z.B. AM4, LGA1200)
  * @param speedGHz Taktfrequenz der CPU in GHz
- * @param price Preis der CPU
+ * @param hasIntegratedGraphics Gibt an, ob die CPU integrierte Grafik hat
  * @author Fabio
  */
 public class CPU extends Component {
