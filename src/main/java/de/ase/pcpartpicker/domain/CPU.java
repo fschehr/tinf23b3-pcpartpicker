@@ -17,11 +17,13 @@ public class CPU extends Component {
 
     private final Socket socket;
     private final double speedGHz;
+    private final boolean hasIntegratedGraphics;
 
-    public CPU(int id, String name, double price, Manufacturer manufacturer, Socket socket, double speedGHz) {
+    public CPU(int id, String name, double price, Manufacturer manufacturer, Socket socket, double speedGHz, boolean hasIntegratedGraphics) {
         super(id, name, price, manufacturer);
         this.socket = socket;
         this.speedGHz = speedGHz;
+        this.hasIntegratedGraphics = hasIntegratedGraphics;
     }
 
     public Socket getSocket() {
