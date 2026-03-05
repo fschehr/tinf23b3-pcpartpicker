@@ -28,6 +28,10 @@ public class MainboardRepository extends BaseRepository<Mainboard> {
             SELECT mb.id,
                    mb.name,
                    mb.price,
+                     mb.ram_slots,
+                     mb.pcie_slots,
+                     mb.sata_slots,
+                     mb.m2_slots,
                    t.id AS type_id,
                    t.name AS type_name,
                    m.id AS manufacturer_id,
@@ -60,7 +64,11 @@ public class MainboardRepository extends BaseRepository<Mainboard> {
                     resultSet.getDouble("price"),
                     manufacturer,
                     socket,
-                    formFactor
+                    formFactor,
+                    resultSet.getInt("ram_slots"),
+                    resultSet.getInt("pcie_slots"),
+                    resultSet.getInt("sata_slots"),
+                    resultSet.getInt("m2_slots")
                 ));
             }
             return mainboards;
