@@ -125,6 +125,10 @@ public class DatabaseInitializer {
                     price REAL NOT NULL,
                     socket_id INTEGER NOT NULL,
                     form_factor_id INTEGER NOT NULL,
+                    ram_slots INTEGER NOT NULL,
+                    pcie_slots INTEGER NOT NULL,
+                    sata_slots INTEGER NOT NULL,
+                    m2_slots INTEGER NOT NULL,
                     FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(id),
                     FOREIGN KEY (type_id) REFERENCES type(id),
                     FOREIGN KEY (socket_id) REFERENCES sockets(id),
@@ -226,14 +230,18 @@ public class DatabaseInitializer {
                 """);
 
             statement.executeUpdate("""
-                INSERT INTO mainboard (manufacturer_id, type_id, name, price, socket_id, form_factor_id)
+                INSERT INTO mainboard (manufacturer_id, type_id, name, price, socket_id, form_factor_id, ram_slots, pcie_slots, sata_slots, m2_slots)
                 VALUES (
                     (SELECT id FROM manufacturer WHERE name = 'MSI'),
                     (SELECT id FROM type WHERE name = 'Mainboard'),
                     'MSI LAUSEN B650 Tomahawk',
                     219.00,
                     (SELECT id FROM sockets WHERE name = 'AM5'),
-                    (SELECT id FROM motherboard_form_factor WHERE name = 'ATX')
+                    (SELECT id FROM motherboard_form_factor WHERE name = 'ATX'),
+                    4,
+                    3,
+                    6,
+                    2
                 ),
                 (
                     (SELECT id FROM manufacturer WHERE name = 'ASUS'),
@@ -241,7 +249,11 @@ public class DatabaseInitializer {
                     'ASUS TUF B760M-PLUS',
                     169.00,
                     (SELECT id FROM sockets WHERE name = 'LGA1700'),
-                    (SELECT id FROM motherboard_form_factor WHERE name = 'Micro-ATX')
+                    (SELECT id FROM motherboard_form_factor WHERE name = 'Micro-ATX'),
+                    4,
+                    2,
+                    4,
+                    2
                 )
                 """);
 

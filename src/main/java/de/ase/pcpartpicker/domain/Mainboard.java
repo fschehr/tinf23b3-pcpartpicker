@@ -18,6 +18,10 @@ public class Mainboard extends Component {
 
     private final Socket socket;
     private final MotherboardFormFactor formFactor;
+    private final int ramSlots;
+    private final int pcieSlots;
+    private final int sataSlots;
+    private final int m2Slots;
 
     public Mainboard(
         int id,
@@ -25,11 +29,19 @@ public class Mainboard extends Component {
         double price,
         Manufacturer manufacturer,
         Socket socket,
-        MotherboardFormFactor formFactor
+        MotherboardFormFactor formFactor,
+        int ramSlots,
+        int pcieSlots,
+        int sataSlots,
+        int m2Slots
     ) {
         super(id, name, price, manufacturer);
         this.socket = socket;
         this.formFactor = formFactor;
+        this.ramSlots = ramSlots;
+        this.pcieSlots = pcieSlots;
+        this.sataSlots = sataSlots;
+        this.m2Slots = m2Slots;
     }
 
     public Socket getSocket() {
@@ -38,5 +50,21 @@ public class Mainboard extends Component {
 
     public MotherboardFormFactor getFormFactor() {
         return formFactor;
+    }
+
+    public int getRamSlots() {
+        return ramSlots;
+    }
+
+    public int getPcieSlots() {
+        return pcieSlots;
+    }
+
+    public int getSataSlots() {
+        return sataSlots;
+    }
+
+    public int getM2Slots() {
+        return m2Slots;
     }
 }
