@@ -83,6 +83,7 @@ public class DatabaseInitializer {
                     price REAL NOT NULL,
                     socket_id INTEGER NOT NULL,
                     speed_ghz REAL NOT NULL,
+                    hasIntegratedGraphics BOOLEAN NOT NULL DEFAULT 0,
                     FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(id),
                     FOREIGN KEY (type_id) REFERENCES type(id),
                     FOREIGN KEY (socket_id) REFERENCES sockets(id)
