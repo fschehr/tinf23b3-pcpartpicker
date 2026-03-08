@@ -59,7 +59,8 @@ public class CpuRepository extends BaseRepository<CPU> {
                     resultSet.getDouble("price"),
                     manufacturer,
                     socket,
-                    resultSet.getDouble("speed_ghz")
+                    resultSet.getDouble("speed_ghz"),
+                    false // Achtung das nicht mit commiten !!!!
                 ));
             }
             return cpus;
