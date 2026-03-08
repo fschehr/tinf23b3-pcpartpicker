@@ -18,7 +18,8 @@ public class MenuFactory {
 
     public Menu createMainMenu() {
         Menu mainMenu = new Menu("PC Part Picker - Hauptmenü", inputReader);
-        mainMenu.add(new MenuItem("Komponenten auswählen", new OpenComponentSelectionCommand(createComponentMenu())));
+        mainMenu.add(new MenuItem("Konfiguration ansehen", new OpenMenuCommand(createConfigurationMenu()))); 
+        mainMenu.add(new MenuItem("Komponenten auswählen", new OpenMenuCommand(createComponentMenu())));
         return mainMenu;
     }
 
@@ -31,8 +32,16 @@ public class MenuFactory {
         menu.add(listItem(configs.mainboard()));
         menu.add(listItem(configs.psu()));
         menu.add(listItem(configs.pcCase()));
-        
+        menu.add(listItem(configs.m2ssd())); 
+        menu.add(listItem(configs.ssd()));    
+        menu.add(listItem(configs.hdd()));     
         return menu;
+    }
+
+
+    private Menu createConfigurationMenu() {
+        Menu menu = new Menu("Aktuelle Konfiguration", inputReader);
+        return menu; 
     }
 
 
