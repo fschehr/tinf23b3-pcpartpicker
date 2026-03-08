@@ -29,11 +29,14 @@ public class CaseRepository extends BaseRepository<Case> {
                    t.name AS type_name,
                    m.id AS manufacturer_id,
                    m.name AS manufacturer_name,
+                 mff.id AS motherboard_form_factor_id,
+                 mff.name AS motherboard_form_factor_name,
                    ff.id AS psu_form_factor_id,
                    ff.name AS psu_form_factor_name
             FROM pc_case c
             JOIN type t ON t.id = c.type_id
             JOIN manufacturer m ON m.id = c.manufacturer_id
+             JOIN motherboard_form_factor mff ON mff.id = c.motherboard_form_factor_id
             JOIN psu_form_factor ff ON ff.id = c.psu_form_factor_id
             ORDER BY c.id
             """;
@@ -45,7 +48,10 @@ public class CaseRepository extends BaseRepository<Case> {
 
             while (resultSet.next()) {
                 Manufacturer manufacturer = new Manufacturer(resultSet.getInt("manufacturer_id"), resultSet.getString("manufacturer_name"));
-                MotherboardFormFactor motherboardFormFactor = null; // MotherboardFormFactor ist in der Datenbank nicht vorhanden, daher auf null gesetzt
+                MotherboardFormFactor motherboardFormFactor = new MotherboardFormFactor(
+                    resultSet.getInt("motherboard_form_factor_id"),
+                    resultSet.getString("motherboard_form_factor_name")
+                );
                 PSUFormFactor psuFormFactor = new PSUFormFactor(resultSet.getInt("psu_form_factor_id"), resultSet.getString("psu_form_factor_name"));
 
                 cases.add(new Case(

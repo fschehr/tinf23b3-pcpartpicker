@@ -31,6 +31,7 @@ public class CpuRepository extends BaseRepository<CPU> {
                    c.name,
                    c.price,
                    c.speed_ghz,
+                     c.hasIntegratedGraphics,
                    t.id AS type_id,
                    t.name AS type_name,
                    m.id AS manufacturer_id,
