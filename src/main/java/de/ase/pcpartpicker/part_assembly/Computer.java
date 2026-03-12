@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Klasse die einen vollständig konfigurierten Computer abbildet
- * Diese Klasse ist unveränderlich.
+ * Diese Klasse ist unveränderlich. <br>
  * {@link Computer.Builder} dient zum Erstellen von Computer-Objekten
  * 
  * @author Tuluhan
@@ -84,7 +84,16 @@ public class Computer {
 
     /**
      * Statische Hilfsklasse zum schrittweisen Aufbau eines Computer-Objekts.
-     * Ermöglicht die Validierung von Komponenten vor der Instanziierung.
+     * Ermöglicht die Validierung von Komponenten vor der Instanziierung. <br>
+     * {@link Builder#setCPU(CPU)} dient zum Festlegen der CPU. <br>
+     * {@link Builder#setGPU(GPU)} dient zum Festlegen der GPU. <br>
+     * {@link Builder#setMainboard(Mainboard)} dient zum Festlegen des Mainboards. <br>
+     * {@link Builder#setRAM(RAM, int)} dient zum Festlegen des RAMs und der Anzahl der Module. <br>
+     * {@link Builder#setPSU(PSU)} dient zum Festlegen des Netzteils. <br>
+     * {@link Builder#setComputerCase(Case)} dient zum Festlegen des Gehäuses. <br> 
+     * {@link Builder#setStorageDevices(Storage[])} dient zum Festlegen der Speichermedien. Es können mehrere Speichermedien hinzugefügt werden, z.B. eine Kombination aus SSD und HDD. <br>
+     * {@link Builder#build()} erstellt den Computer nach erfolgreicher Validierung. <br>
+     * @author Tuluhan
      */
     public static class Builder {
         private Case computerCase;
@@ -96,32 +105,57 @@ public class Computer {
         private PSU psu;
         private List<Storage> storageDevices;
 
+        /**
+         * Setzt das Gehäuse für den Computer. Es muss ein Gehäuse ausgewählt werden, damit der Computer erstellt werden kann.
+         * @param computerCase Das Gehäuse, z.B. ein ATX-Gehäuse mit Fenster
+         */
         public Builder setComputerCase(Case computerCase) {
             this.computerCase = computerCase;
             return this;
         }
 
+        /**
+         * Setzt die CPU für den Computer. Es muss eine CPU ausgewählt werden, damit der Computer erstellt werden kann.
+         * @param cpu Die CPU, z.B. ein AMD Ryzen 5 5600X
+         */
         public Builder setCPU(CPU cpu) {
             this.cpu = cpu;
             return this;
         }
 
+        /**
+         * Setzt die GPU für den Computer. Es ist möglich, keinen GPU zu wählen, wenn die CPU über integrierte Grafik verfügt.
+         * @param gpu Die GPU, z.B. eine NVIDIA GeForce RTX 3080
+         */
         public Builder setGPU(GPU gpu) {
             this.gpu = gpu;
             return this;
         }
 
+        /**
+         * Setzt das Mainboard für den Computer. Es muss ein Mainboard ausgewählt werden, damit der Computer erstellt werden kann.
+         * @param mainboard Das Mainboard, z.B. ein ATX-Mainboard mit AM4-Sockel
+         */
         public Builder setMainboard(Mainboard mainboard) {
             this.mainboard = mainboard;
             return this;
         }
 
+        /**
+         * Setzt den RAM und die Anzahl der Module für den Computer. Es muss mindestens ein RAM-Modul ausgewählt werden, damit der Computer erstellt werden kann.
+         * @param ram Das RAM-Modul, z.B. 16GB DDR4
+         * @param anzahlModule Die Anzahl der RAM-Module, z.B. 2 für 2x8GB
+         */
         public Builder setRAM(RAM ram, int anzahlModule) {
             this.ram = ram;
             this.ramModule = anzahlModule;
             return this;
         }
 
+        /**
+         * Setzt das Netzteil für den Computer. Es muss ein Netzteil ausgewählt werden, damit der Computer erstellt werden kann.
+         * @param psu
+         */
         public Builder setPSU(PSU psu) {
             this.psu = psu;
             return this;
@@ -136,9 +170,12 @@ public class Computer {
             return this;
         }
 
-        // Diese Methode überprüft die Kompatibilität der Komponenten.
-        // Es wird lediglich überprüft, ob der PC so gebaut werden und existieren könnte.
-        // Bspw. ob das Netzteil genug Leistung hat, um die Komponenten zu versorgen, wird hier nicht überprüft.
+        /**
+         * Diese Methode überprüft die Kompatibilität der Komponenten.
+         * Es wird lediglich überprüft, ob der PC so gebaut werden und existieren könnte.
+         * Bspw. ob das Netzteil genug Leistung hat, um die Komponenten zu versorgen, wird hier nicht überprüft.
+         * @return true, wenn die Komponenten kompatibel sind und der Computer erstellt werden kann, andernfalls false. Es werden auch Fehlermeldungen ausgegeben, die erklären, warum der Computer nicht erstellt werden kann.
+         */
         private boolean validate() {
 
             if(ram == null) {
@@ -199,7 +236,10 @@ public class Computer {
             return true;
         }
 
-        // Hier wird der eigentliche Computer nach erfolgreicher Validierung erstellt. Ansonsten wird eine Fehlermeldung ausgegeben und null zurückgegeben.
+        /**
+         * Erstellt den Computer nach erfolgreicher Validierung. Ansonsten wird eine Fehlermeldung ausgegeben und null zurückgegeben.
+         * @return Der erstellte Computer oder null, falls die Validierung fehlschlägt.
+         */
         public Computer build() {
             if(validate())
                 return new Computer(this);
