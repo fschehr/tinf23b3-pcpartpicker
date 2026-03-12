@@ -60,7 +60,8 @@ public class CpuRepository extends BaseRepository<CPU> {
                     manufacturer,
                     socket,
                     resultSet.getDouble("speed_ghz"),
-                    resultSet.getBoolean("hasIntegratedGraphics")
+                    resultSet.getBoolean("hasIntegratedGraphics"),
+                    0 // Damit Compiler nicht rumheult, bitte fixen @Fabio
                 ));
             }
             return cpus;
