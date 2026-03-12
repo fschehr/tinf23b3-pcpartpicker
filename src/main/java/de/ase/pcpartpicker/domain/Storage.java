@@ -6,9 +6,9 @@ import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
  * Abstrakte Basisklasse für Storage-Komponenten.
  * @param id Eindeutige ID des Storages
  * @param name Name des Storages
+ * @param price Preis des Storages
  * @param manufacturer Hersteller des Storages
  * @param capacityGB Kapazität in GB
- * @param price Preis des Storages
  * @author Fabio
  */
 public abstract class Storage extends Component {

@@ -7,10 +7,10 @@ import de.ase.pcpartpicker.domain.HelperClasses.PSUFormFactor;
  * Klasse für die PSU-Komponente.
  * @param id Eindeutige ID der PSU
  * @param name Name der PSU
+ * @param price Preis der PSU
  * @param manufacturer Hersteller der PSU
  * @param wattage Leistung der PSU in Watt
  * @param formFactor Formfaktor der PSU
- * @param price Preis der PSU
  * @author Fabio
  */
 public class PSU extends Component {

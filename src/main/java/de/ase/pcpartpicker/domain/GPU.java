@@ -6,9 +6,9 @@ import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
  * Klasse für die GPU-Komponente.
  * @param id Eindeutige ID der GPU
  * @param name Name der GPU
+ * @param price Preis der GPU
  * @param manufacturer Hersteller der GPU
  * @param vramGB VRAM-Kapazität der GPU in GB
- * @param price Preis der GPU
  * @param powerConsumptionW Maximaler Stromverbrauch der Komponente in Watt
  * @author Fabio
  */

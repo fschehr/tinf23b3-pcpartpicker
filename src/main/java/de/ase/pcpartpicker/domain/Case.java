@@ -8,12 +8,12 @@ import de.ase.pcpartpicker.domain.HelperClasses.PSUFormFactor;
  * Klasse für die Case-Komponente.
  * @param id Eindeutige ID des Cases
  * @param name Name des Cases
+ * @param price Preis des Cases
  * @param manufacturer Hersteller des Cases
  * @param motherBoardFormFactor Unterstütztes Motherboard-Formfaktor des Cases
  * @param psuFormFactor Unterstütztes PSU-Formfaktor des Cases
  * @param hasWindow Gibt an, ob das Case ein Fenster hat
  * @param fanSlots Anzahl der Lüfterplätze im Case
- * @param price Preis des Cases
  * @author Tuluhan
  */
 public class Case extends Component {
