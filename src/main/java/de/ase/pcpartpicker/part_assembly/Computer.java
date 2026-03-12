@@ -1,8 +1,7 @@
 package de.ase.pcpartpicker.part_assembly;
 
-import java.util.HashMap;
-
 import de.ase.pcpartpicker.domain.*;
+import java.util.List;
 
 /**
  * Klasse die einen vollständig konfigurierten Computer abbildet
@@ -18,7 +17,9 @@ public class Computer {
     private final GPU gpu;
     private final Mainboard mainboard;
     private final RAM ram;
+    private final int ramModule; // Anzahl der RAM-Module, z.B. 2 für 2x8GB
     private final PSU psu;
+    private final List<Storage> storageDevices; // Array von Speichermedien (z.B. SSDs, HDDs)
 
     /**
      * Erzeugt einen Computer basierend auf den Einstellungen im Builder.
@@ -30,7 +31,9 @@ public class Computer {
         this.gpu = builder.gpu;
         this.mainboard = builder.mainboard;
         this.ram = builder.ram;
+        this.ramModule = builder.ramModule;
         this.psu = builder.psu;
+        this.storageDevices = builder.storageDevices;
     }
 
     public void printConfiguration() {
@@ -39,8 +42,12 @@ public class Computer {
         System.out.println("CPU: " + cpu.getName());
         System.out.println("GPU: " + (gpu != null ? gpu.getName() : "Keine dedizierte Grafikkarte"));
         System.out.println("Mainboard: " + mainboard.getName());
-        System.out.println("RAM: " + ram.getName());
+        System.out.println("RAM: " + ram.getName() + " (" + ramModule + " Module)");
         System.out.println("Netzteil: " + psu.getName());
+        System.out.println("Speichermedien:");
+        for (Storage storage : storageDevices) {
+            System.out.println(" - " + storage.getName());
+        }
     }
 
     public double getTotalPrice() {
@@ -53,14 +60,27 @@ public class Computer {
         totalPrice += mainboard.getPrice();
         totalPrice += ram.getPrice();
         totalPrice += psu.getPrice();
+        for (Storage storage : storageDevices) {
+            totalPrice += storage.getPrice();
+        }
         return totalPrice;
     }
 
-    // public double getTotalPowerConsumption() {
-    //     double totalPower = 0;
-    // }
-
-
+    public double getTotalPowerConsumption() {
+        double totalPower = 0;
+        totalPower += computerCase.getPowerConsumptionW();
+        totalPower += cpu.getPowerConsumptionW();
+        if (gpu != null) {
+            totalPower += gpu.getPowerConsumptionW();
+        }
+        totalPower += mainboard.getPowerConsumptionW();
+        totalPower += ram.getPowerConsumptionW();
+        totalPower += psu.getPowerConsumptionW();
+        for (Storage storage : storageDevices) {
+            totalPower += storage.getPowerConsumptionW();
+        }
+        return totalPower;
+    }
 
     /**
      * Statische Hilfsklasse zum schrittweisen Aufbau eines Computer-Objekts.
@@ -72,19 +92,21 @@ public class Computer {
         private GPU gpu;
         private Mainboard mainboard;
         private RAM ram;
+        private int ramModule; // Anzahl der RAM-Module, z.B. 2 für 2x8GB
         private PSU psu;
+        private List<Storage> storageDevices;
 
         public Builder setComputerCase(Case computerCase) {
             this.computerCase = computerCase;
             return this;
         }
 
-        public Builder setCpu(CPU cpu) {
+        public Builder setCPU(CPU cpu) {
             this.cpu = cpu;
             return this;
         }
 
-        public Builder setGpu(GPU gpu) {
+        public Builder setGPU(GPU gpu) {
             this.gpu = gpu;
             return this;
         }
@@ -94,13 +116,23 @@ public class Computer {
             return this;
         }
 
-        public Builder setRam(RAM ram) {
+        public Builder setRAM(RAM ram, int anzahlModule) {
             this.ram = ram;
+            this.ramModule = anzahlModule;
             return this;
         }
 
-        public Builder setPsu(PSU psu) {
+        public Builder setPSU(PSU psu) {
             this.psu = psu;
+            return this;
+        }
+
+        /**
+         * Setzt die Speichermedien für den Computer. Es können mehrere Speichermedien hinzugefügt werden, z.B. eine Kombination aus SSD und HDD.
+         * @param storageDevices Ein Array von Storage-Objekten
+         */
+        public Builder setStorageDevices(Storage[] storageDevices) {
+            this.storageDevices = List.of(storageDevices);
             return this;
         }
 
@@ -154,6 +186,16 @@ public class Computer {
                 return false;
             }
 
+            if(ramModule > mainboard.getRamSlots()) {
+                System.out.println("Das Mainboard hat nicht genug RAM-Slots für die Anzahl der RAM-Module.");
+                return false;
+            }
+
+            if(storageDevices.isEmpty()) {
+                System.out.println("Es muss mindestens ein Speichermedium ausgewählt werden.");
+                return false;
+            }
+
             return true;
         }
 
@@ -169,12 +211,13 @@ public class Computer {
 }
 // Weil verwirrend hier ein Beispiel wie das aufgebaut werden könnte:
 // Computer computer = new Computer.Builder()
-//     .setCpu(cpu)
-//     .setGpu(gpu)
+//     .setCPU(cpu)
+//     .setGPU(gpu)
 //     .setMainboard(mainboard)
-//     .setRam(ram)
-//     .setPsu(psu)
+//     .setRAM(ram, 5)
+//     .setPSU(psu)
 //     .setComputerCase(computerCase)
+//     .setStorageDevices({ssd, hdd})
 //     .build();
 
-// ein Konstruktor mit so vielen Elementen wäre unübersichtlich, daher der Builder Pattern.
+// ein Konstruktor mit so vielen Elementen wäre unübersichtlich, daher das Builder Pattern.
