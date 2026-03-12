@@ -35,7 +35,7 @@ public class Mainboard extends Component {
         int sataSlots,
         int m2Slots
     ) {
-        super(id, name, price, manufacturer);
+        super(id, name, price, manufacturer, 15); // Ein Mainboard hat einen angenommenen Stromverbrauch von 15 Watt
         this.socket = socket;
         this.formFactor = formFactor;
         this.ramSlots = ramSlots;

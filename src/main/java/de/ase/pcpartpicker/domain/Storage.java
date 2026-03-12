@@ -16,7 +16,7 @@ public abstract class Storage extends Component {
     private final int capacityGB;
 
     protected Storage(int id, String name, double price, Manufacturer manufacturer, int capacityGB) {
-        super(id, name, price, manufacturer);
+        super(id, name, price, manufacturer, 10); // Ein Storage-Gerät hat einen angenommenen Stromverbrauch von 10 Watt
         this.capacityGB = capacityGB;
     }
 

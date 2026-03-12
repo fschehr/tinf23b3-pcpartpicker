@@ -18,7 +18,7 @@ public class RAM extends Component {
     private final int speedMHz;
 
     public RAM(int id, String name, double price, Manufacturer manufacturer, int capacityGB, int speedMHz) {
-        super(id, name, price, manufacturer);
+        super(id, name, price, manufacturer, 15); // Ein RAM-Modul hat einen angenommenen Stromverbrauch von 15 Watt
         this.capacityGB = capacityGB;
         this.speedMHz = speedMHz;
     }
