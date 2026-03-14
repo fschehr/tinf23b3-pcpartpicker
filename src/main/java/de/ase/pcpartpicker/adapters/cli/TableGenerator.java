@@ -5,10 +5,10 @@ import java.util.List;
 
 public class TableGenerator {
     private final List<String[]> rows = new ArrayList<>();
-    private final String[] headers; 
+    private String[] headers;
 
     public TableGenerator(String... headers) {
-        this.headers = headers; 
+        this.headers = headers;
     }
 
     public void addRow(String... columns) {
@@ -16,41 +16,57 @@ public class TableGenerator {
     }
 
     public void printTable() {
-        if(rows.isEmpty()) {
+        if (rows.isEmpty()) {
             System.out.println("Keine Daten verfügbar.");
             return;
         }
 
-        int[] columnWidths = new int[headers.length];
-        for(int i = 0; i < headers.length; i++) {
+        // Dynamisch maximale Spaltenanzahl ermitteln
+        int maxColumns = headers.length;
+        for (String[] row : rows) {
+            maxColumns = Math.max(maxColumns, row.length);
+        }
+
+        // Headers erweitern falls nötig
+        if (headers.length < maxColumns) {
+            String[] newHeaders = new String[maxColumns];
+            for (int i = 0; i < maxColumns; i++) {
+                newHeaders[i] = (i < headers.length) ? headers[i] : "";
+            }
+            headers = newHeaders;
+        }
+
+        // Spaltenbreiten berechnen
+        int[] columnWidths = new int[maxColumns];
+        for (int i = 0; i < maxColumns; i++) {
             columnWidths[i] = headers[i].length();
-            for (String[] row: rows) {
-                if(row[i] != null) {
+            for (String[] row : rows) {
+                if (i < row.length && row[i] != null) {
                     columnWidths[i] = Math.max(columnWidths[i], row[i].length());
                 }
             }
         }
 
-        StringBuilder divider = new StringBuilder("+"); 
-        for(int width: columnWidths) {
-            divider.append("-".repeat(width+2)).append("+");
+        // Tabelle ausgeben
+        StringBuilder divider = new StringBuilder("+");
+        for (int width : columnWidths) {
+            divider.append("-".repeat(width + 2)).append("+");
         }
 
-
         System.out.println(divider);
-        printRow(headers, columnWidths); 
+        printRow(headers, columnWidths);
         System.out.println(divider);
-        for (String[] row: rows) {
+        for (String[] row : rows) {
             printRow(row, columnWidths);
         }
         System.out.println(divider);
-
     }
 
     private void printRow(String[] row, int[] widths) {
         System.out.print("|");
-        for (int i = 0; i < row.length; i++) {
-            System.out.printf(" %-" + widths[i] + "s |", row[i]);
+        for (int i = 0; i < widths.length; i++) {
+            String value = (i < row.length && row[i] != null) ? row[i] : "";
+            System.out.printf(" %-" + widths[i] + "s |", value);
         }
         System.out.println();
     }
