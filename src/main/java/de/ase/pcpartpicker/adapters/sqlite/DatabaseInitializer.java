@@ -27,9 +27,14 @@ public class DatabaseInitializer {
              Statement statement = connection.createStatement()) {
             statement.execute("PRAGMA foreign_keys = ON");
 
+            statement.executeUpdate("DROP TABLE IF EXISTS computer");
+            statement.executeUpdate("DROP TABLE IF EXISTS users");
             statement.executeUpdate("DROP TABLE IF EXISTS cpu");
             statement.executeUpdate("DROP TABLE IF EXISTS gpu");
             statement.executeUpdate("DROP TABLE IF EXISTS ram");
+            statement.executeUpdate("DROP TABLE IF EXISTS hdd");
+            statement.executeUpdate("DROP TABLE IF EXISTS ssd");
+            statement.executeUpdate("DROP TABLE IF EXISTS m2_ssd");
             statement.executeUpdate("DROP TABLE IF EXISTS mainboard");
             statement.executeUpdate("DROP TABLE IF EXISTS psu");
             statement.executeUpdate("DROP TABLE IF EXISTS pc_case");
@@ -118,6 +123,45 @@ public class DatabaseInitializer {
                 """);
 
             statement.executeUpdate("""
+                CREATE TABLE hdd (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    manufacturer_id INTEGER NOT NULL,
+                    type_id INTEGER NOT NULL,
+                    name TEXT NOT NULL,
+                    price REAL NOT NULL,
+                    capacity_gb INTEGER NOT NULL,
+                    FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(id),
+                    FOREIGN KEY (type_id) REFERENCES type(id)
+                )
+                """);
+
+            statement.executeUpdate("""
+                CREATE TABLE ssd (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    manufacturer_id INTEGER NOT NULL,
+                    type_id INTEGER NOT NULL,
+                    name TEXT NOT NULL,
+                    price REAL NOT NULL,
+                    capacity_gb INTEGER NOT NULL,
+                    FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(id),
+                    FOREIGN KEY (type_id) REFERENCES type(id)
+                )
+                """);
+
+            statement.executeUpdate("""
+                CREATE TABLE m2_ssd (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    manufacturer_id INTEGER NOT NULL,
+                    type_id INTEGER NOT NULL,
+                    name TEXT NOT NULL,
+                    price REAL NOT NULL,
+                    capacity_gb INTEGER NOT NULL,
+                    FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(id),
+                    FOREIGN KEY (type_id) REFERENCES type(id)
+                )
+                """);
+
+            statement.executeUpdate("""
                 CREATE TABLE mainboard (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     manufacturer_id INTEGER NOT NULL,
@@ -159,15 +203,44 @@ public class DatabaseInitializer {
                     type_id INTEGER NOT NULL,
                     name TEXT NOT NULL,
                     price REAL NOT NULL,
+                    motherboard_form_factor_id INTEGER NOT NULL,
                     psu_form_factor_id INTEGER NOT NULL,
                     FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(id),
                     FOREIGN KEY (type_id) REFERENCES type(id),
+                    FOREIGN KEY (motherboard_form_factor_id) REFERENCES motherboard_form_factor(id),
                     FOREIGN KEY (psu_form_factor_id) REFERENCES psu_form_factor(id)
                 )
                 """);
 
-            statement.executeUpdate("INSERT INTO type (name) VALUES ('CPU'), ('GPU'), ('RAM'), ('Mainboard'), ('PSU'), ('Case')");
-            statement.executeUpdate("INSERT INTO manufacturer (name) VALUES ('Intel'), ('AMD'), ('NVIDIA'), ('Corsair'), ('G.Skill'), ('MSI'), ('ASUS'), ('be quiet!'), ('Fractal Design')");
+            statement.executeUpdate("""
+                CREATE TABLE users (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL UNIQUE
+                )
+                """);
+
+            statement.executeUpdate("""
+                CREATE TABLE computer (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    cpu_id INTEGER NOT NULL,
+                    gpu_id INTEGER,
+                    mainboard_id INTEGER NOT NULL,
+                    ram_id INTEGER NOT NULL,
+                    psu_id INTEGER NOT NULL,
+                    case_id INTEGER NOT NULL,
+                    FOREIGN KEY (user_id) REFERENCES users(id),
+                    FOREIGN KEY (cpu_id) REFERENCES cpu(id),
+                    FOREIGN KEY (gpu_id) REFERENCES gpu(id),
+                    FOREIGN KEY (mainboard_id) REFERENCES mainboard(id),
+                    FOREIGN KEY (ram_id) REFERENCES ram(id),
+                    FOREIGN KEY (psu_id) REFERENCES psu(id),
+                    FOREIGN KEY (case_id) REFERENCES pc_case(id)
+                )
+                """);
+
+            statement.executeUpdate("INSERT INTO type (name) VALUES ('CPU'), ('GPU'), ('RAM'), ('Mainboard'), ('PSU'), ('Case'), ('HDD'), ('SSD'), ('M2SSD')");
+            statement.executeUpdate("INSERT INTO manufacturer (name) VALUES ('Intel'), ('AMD'), ('NVIDIA'), ('Corsair'), ('G.Skill'), ('MSI'), ('ASUS'), ('be quiet!'), ('Fractal Design'), ('Samsung'), ('Western Digital'), ('Seagate')");
             statement.executeUpdate("INSERT INTO sockets (name) VALUES ('LGA1700'), ('AM5')");
             statement.executeUpdate("INSERT INTO motherboard_form_factor (name) VALUES ('ATX'), ('Micro-ATX')");
             statement.executeUpdate("INSERT INTO psu_form_factor (name) VALUES ('ATX')");
@@ -231,6 +304,39 @@ public class DatabaseInitializer {
                 """);
 
             statement.executeUpdate("""
+                INSERT INTO hdd (manufacturer_id, type_id, name, price, capacity_gb)
+                VALUES (
+                    (SELECT id FROM manufacturer WHERE name = 'Seagate'),
+                    (SELECT id FROM type WHERE name = 'HDD'),
+                    'Seagate Barracuda 2TB',
+                    59.00,
+                    2000
+                )
+                """);
+
+            statement.executeUpdate("""
+                INSERT INTO ssd (manufacturer_id, type_id, name, price, capacity_gb)
+                VALUES (
+                    (SELECT id FROM manufacturer WHERE name = 'Western Digital'),
+                    (SELECT id FROM type WHERE name = 'SSD'),
+                    'WD Blue SATA SSD 1TB',
+                    79.00,
+                    1000
+                )
+                """);
+
+            statement.executeUpdate("""
+                INSERT INTO m2_ssd (manufacturer_id, type_id, name, price, capacity_gb)
+                VALUES (
+                    (SELECT id FROM manufacturer WHERE name = 'Samsung'),
+                    (SELECT id FROM type WHERE name = 'M2SSD'),
+                    'Samsung 990 EVO 1TB',
+                    99.00,
+                    1000
+                )
+                """);
+
+            statement.executeUpdate("""
                 INSERT INTO mainboard (manufacturer_id, type_id, name, price, socket_id, form_factor_id, ram_slots, pcie_slots, sata_slots, m2_slots)
                 VALUES (
                     (SELECT id FROM manufacturer WHERE name = 'MSI'),
@@ -271,13 +377,32 @@ public class DatabaseInitializer {
                 """);
 
             statement.executeUpdate("""
-                INSERT INTO pc_case (manufacturer_id, type_id, name, price, psu_form_factor_id)
+                INSERT INTO pc_case (manufacturer_id, type_id, name, price, motherboard_form_factor_id, psu_form_factor_id)
                 VALUES (
                     (SELECT id FROM manufacturer WHERE name = 'Fractal Design'),
                     (SELECT id FROM type WHERE name = 'Case'),
                     'Fractal Design ElektrotechnikHolzhand',
                     149.00,
+                    (SELECT id FROM motherboard_form_factor WHERE name = 'ATX'),
                     (SELECT id FROM psu_form_factor WHERE name = 'ATX')
+                )
+                """);
+
+            statement.executeUpdate("""
+                INSERT INTO users (name)
+                VALUES ('Test User')
+                """);
+
+            statement.executeUpdate("""
+                INSERT INTO computer (user_id, cpu_id, gpu_id, mainboard_id, ram_id, psu_id, case_id)
+                VALUES (
+                    (SELECT id FROM users WHERE name = 'Test User'),
+                    (SELECT id FROM cpu ORDER BY id LIMIT 1),
+                    (SELECT id FROM gpu ORDER BY id LIMIT 1),
+                    (SELECT id FROM mainboard ORDER BY id LIMIT 1),
+                    (SELECT id FROM ram ORDER BY id LIMIT 1),
+                    (SELECT id FROM psu ORDER BY id LIMIT 1),
+                    (SELECT id FROM pc_case ORDER BY id LIMIT 1)
                 )
                 """);
        } catch (SQLException e) {

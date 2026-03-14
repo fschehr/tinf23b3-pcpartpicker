@@ -66,6 +66,44 @@ public class Computer {
         return totalPrice;
     }
 
+    public Case getComputerCase() {
+        return computerCase;
+    }
+    public CPU getCpu() {
+        return cpu;
+    }
+    public GPU getGpu() {
+        return gpu;
+    }
+    public Mainboard getMainboard() {
+        return mainboard;
+    }
+    public RAM getRam() {
+        return ram;
+    }
+    public PSU getPsu() {
+        return psu;
+    }
+
+    public Case getComputerCase() {
+        return computerCase;
+    }
+    public CPU getCpu() {
+        return cpu;
+    }
+    public GPU getGpu() {
+        return gpu;
+    }
+    public Mainboard getMainboard() {
+        return mainboard;
+    }
+    public RAM getRam() {
+        return ram;
+    }
+    public PSU getPsu() {
+        return psu;
+    }
+
     public double getTotalPowerConsumption() {
         double totalPower = 0;
         totalPower += computerCase.getPowerConsumptionW();
