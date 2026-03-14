@@ -12,6 +12,7 @@ import de.ase.pcpartpicker.domain.HelperClasses.Socket;
  * @param socket Sockeltyp der CPU (z.B. AM4, LGA1200)
  * @param speedGHz Taktfrequenz der CPU in GHz
  * @param hasIntegratedGraphics Gibt an, ob die CPU integrierte Grafik hat
+ * @param powerConsumptionW Maximaler Stromverbrauch der Komponente in Watt
  * @author Fabio
  */
 public class CPU extends Component {
@@ -20,8 +21,8 @@ public class CPU extends Component {
     private final double speedGHz;
     private final boolean hasIntegratedGraphics;
 
-    public CPU(int id, String name, double price, Manufacturer manufacturer, Socket socket, double speedGHz, boolean hasIntegratedGraphics) {
-        super(id, name, price, manufacturer);
+    public CPU(int id, String name, double price, Manufacturer manufacturer, Socket socket, double speedGHz, boolean hasIntegratedGraphics, int powerConsumptionW) {
+        super(id, name, price, manufacturer, powerConsumptionW);
         this.socket = socket;
         this.speedGHz = speedGHz;
         this.hasIntegratedGraphics = hasIntegratedGraphics;

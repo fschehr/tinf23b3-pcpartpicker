@@ -8,12 +8,12 @@ import de.ase.pcpartpicker.domain.HelperClasses.PSUFormFactor;
  * Klasse für die Case-Komponente.
  * @param id Eindeutige ID des Cases
  * @param name Name des Cases
+ * @param price Preis des Cases
  * @param manufacturer Hersteller des Cases
  * @param motherBoardFormFactor Unterstütztes Motherboard-Formfaktor des Cases
  * @param psuFormFactor Unterstütztes PSU-Formfaktor des Cases
  * @param hasWindow Gibt an, ob das Case ein Fenster hat
  * @param fanSlots Anzahl der Lüfterplätze im Case
- * @param price Preis des Cases
  * @author Tuluhan
  */
 public class Case extends Component {
@@ -24,7 +24,7 @@ public class Case extends Component {
     private final int fanSlots;
 
     public Case(int id, String name, double price, Manufacturer manufacturer, MotherboardFormFactor motherboardFormFactor, PSUFormFactor psuFormFactor, boolean hasWindow, int fanSlots) {
-        super(id, name, price, manufacturer);
+        super(id, name, price, manufacturer, fanSlots * 5); // Für jeden Lüfter (der am Gehäuse angebracht werden kann) wird ein zusätzlicher Stromverbrauch von 5 Watt angenommen
         this.motherboardFormFactor = motherboardFormFactor;
         this.psuFormFactor = psuFormFactor;
         this.hasWindow = hasWindow;
@@ -46,5 +46,4 @@ public class Case extends Component {
     public int getFanSlots() {
         return fanSlots;
     }
-    
 }

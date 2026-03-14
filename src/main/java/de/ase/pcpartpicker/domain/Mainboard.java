@@ -8,10 +8,10 @@ import de.ase.pcpartpicker.domain.HelperClasses.Socket;
  * Klasse für die Mainboard-Komponente.
  * @param id Eindeutige ID des Mainboards
  * @param name Name des Mainboards
+ * @param price Preis des Mainboards
  * @param manufacturer Hersteller des Mainboards
  * @param socket Sockeltyp des Mainboards (z.B. AM4, LGA1200)
  * @param formFactor Formfaktor des Mainboards (z.B. ATX, Micro-ATX)
- * @param price Preis des Mainboards
  * @author Fabio
  */
 public class Mainboard extends Component {
@@ -35,7 +35,7 @@ public class Mainboard extends Component {
         int sataSlots,
         int m2Slots
     ) {
-        super(id, name, price, manufacturer);
+        super(id, name, price, manufacturer, 15); // Ein Mainboard hat einen angenommenen Stromverbrauch von 15 Watt
         this.socket = socket;
         this.formFactor = formFactor;
         this.ramSlots = ramSlots;

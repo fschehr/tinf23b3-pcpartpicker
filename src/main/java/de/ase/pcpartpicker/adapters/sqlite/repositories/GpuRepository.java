@@ -50,7 +50,8 @@ public class GpuRepository extends BaseRepository<GPU> {
                     resultSet.getString("name"),
                     resultSet.getDouble("price"),
                     manufacturer,
-                    resultSet.getInt("vram_gb")
+                    resultSet.getInt("vram_gb"),
+                    0 // Damit Compiler nicht rumheult, bitte fixen @Fabio
                 ));
             }
             return gpus;
