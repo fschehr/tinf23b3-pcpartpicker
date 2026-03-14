@@ -3,6 +3,12 @@ package de.ase.pcpartpicker.adapters.cli;
 import de.ase.pcpartpicker.adapters.cli.commands.*;
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
 
+/**
+ * Klasse, die die Menüs erstellt und konfiguriert
+ * @param inputReader Liest Benutzereingaben
+ * @param configs Enthält Konfigurationen für PC Komponenten
+ * @author Henri
+ */
 public class MenuFactory {
     private final InputReader inputReader;
     private final ComponentConfigs configs;

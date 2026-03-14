@@ -2,7 +2,12 @@ package de.ase.pcpartpicker.adapters.cli;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Klasse, die Tabellen für das CLI erzeugt
+ * @param rows Spalten der Tabelle
+ * @param headers Überschriften der Tabelle 
+ * @author Henri
+ */
 public class TableGenerator {
     private final List<String[]> rows = new ArrayList<>();
     private String[] headers;
