@@ -1,6 +1,9 @@
 package de.ase.pcpartpicker.adapters.cli;
 
-import de.ase.pcpartpicker.adapters.cli.commands.*;
+import de.ase.pcpartpicker.adapters.cli.commands.CreateUserCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.NewUserCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.OpenMenuCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.ShowListCommand;
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
 
 /**
@@ -26,24 +29,38 @@ public class MenuFactory {
         Menu mainMenu = new Menu("PC Part Picker - Hauptmenü", inputReader);
         mainMenu.add(new MenuItem("Konfiguration ansehen", new OpenMenuCommand(createConfigurationMenu()))); 
         mainMenu.add(new MenuItem("Komponenten auswählen", new OpenMenuCommand(createComponentMenu())));
+        mainMenu.add(new MenuItem("Nutzerverwaltung", new OpenMenuCommand(createUserMenu()))); 
+        mainMenu.add(new MenuItem("Login", new OpenMenuCommand(createLoginMenu()))); 
         return mainMenu;
     }
 
     private Menu createComponentMenu() {
-        Menu menu = new Menu("Komponenten auswählen", inputReader);
+        Menu componentMenu = new Menu("Komponenten auswählen", inputReader);
         
-        menu.add(listItem(configs.cpu()));
-        menu.add(listItem(configs.gpu()));
-        menu.add(listItem(configs.ram()));
-        menu.add(listItem(configs.mainboard()));
-        menu.add(listItem(configs.psu()));
-        menu.add(listItem(configs.pcCase()));
-        menu.add(listItem(configs.m2ssd())); 
-        menu.add(listItem(configs.ssd()));    
-        menu.add(listItem(configs.hdd()));     
-        return menu;
+        componentMenu.add(listItem(configs.cpu()));
+        componentMenu.add(listItem(configs.gpu()));
+        componentMenu.add(listItem(configs.ram()));
+        componentMenu.add(listItem(configs.mainboard()));
+        componentMenu.add(listItem(configs.psu()));
+        componentMenu.add(listItem(configs.pcCase()));
+        componentMenu.add(listItem(configs.m2ssd())); 
+        componentMenu.add(listItem(configs.ssd()));    
+        componentMenu.add(listItem(configs.hdd()));     
+        return componentMenu;
     }
 
+
+    private Menu createUserMenu() {
+        Menu userMenu = new Menu("Nutzerverwaltung",inputReader); 
+        userMenu.add(new MenuItem("Neuen Nutzer anlegen", new NewUserCommand(inputReader))); 
+        return userMenu; 
+    }
+
+    private Menu createLoginMenu() {
+        Menu loginMenu = new Menu("Login", inputReader);
+        
+        return loginMenu;
+    }
 
     private Menu createConfigurationMenu() {
         Menu menu = new Menu("Aktuelle Konfiguration", inputReader);
