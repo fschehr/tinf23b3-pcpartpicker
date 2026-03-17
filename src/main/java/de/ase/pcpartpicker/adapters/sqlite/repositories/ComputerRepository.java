@@ -166,11 +166,11 @@ public class ComputerRepository {
         de.ase.pcpartpicker.domain.Case pcCase = getRequired(index.cases, caseId, "Case");
 
         Computer computer = new Computer.Builder()
-            .setCpu(cpu)
-            .setGpu(gpu)
+            .setCPU(cpu)
+            .setGPU(gpu)
             .setMainboard(mainboard)
-            .setRam(ram)
-            .setPsu(psu)
+            .setRAM(ram, 0) // ACHTUNG: 0 ist Platzhalter Anzahl Module muss noch implementiert werden
+            .setPSU(psu)
             .setComputerCase(pcCase)
             .build();
 

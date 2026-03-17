@@ -1,5 +1,9 @@
 package de.ase.pcpartpicker.adapters.cli;
-
+/**
+ * Klasse, die Hilfsmethoden enhält
+ * @link {@link #clear()} Bereinigt die CLI
+ * @author Henri
+ */
 public class UIUtils {
     public static void clear() {
         try {

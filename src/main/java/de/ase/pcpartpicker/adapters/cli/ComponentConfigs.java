@@ -4,6 +4,12 @@ import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.*;
 import de.ase.pcpartpicker.domain.*;
 
+/**
+ * Klasse, in der die Konfigurationen der einzelnen Komponenten gespeichert sind
+ * Wenn eine Komponente eine Eigenschaft fehlt kann sie hier ergänzt werden 
+ * @author Henri
+ */
+
 public class ComponentConfigs {
     private final ConnectionFactory cf;
 

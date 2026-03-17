@@ -2,6 +2,11 @@ package de.ase.pcpartpicker.adapters.cli;
 
 import java.util.Scanner;
 
+/**
+ * Klasse, die Tastatureingaben je nach Datentyp liest
+ * @author Henri
+ */
+
 public class InputReader {
     private final Scanner scanner; 
 

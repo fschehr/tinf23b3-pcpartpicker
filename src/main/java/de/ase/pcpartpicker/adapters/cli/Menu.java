@@ -3,6 +3,14 @@ package de.ase.pcpartpicker.adapters.cli;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasse, die den grundsätzlichen Aufbau eines Menüs definiert
+ * @param title Titel des Menüs
+ * @param children Enthält Untermenüs, die im aktuellen Menü angezeigt werden können
+ * @param inputReader liest die Benutzereingaben von der Konsole 
+ * @param running Flag, das angibt bo das Menü gerade aktiv ist 
+ * @author Henri
+ */
 public class Menu implements IMenuComponent {
     private final String title;
     private final List<IMenuComponent> children = new ArrayList<>();

@@ -123,11 +123,11 @@ class DatabaseIntegrationTest {
             }
 
             Computer computer = new Computer.Builder()
-                .setCpu(compatibleCpu)
-                .setGpu(gpu)
+                .setCPU(compatibleCpu)
+                .setGPU(gpu)
                 .setMainboard(mainboard)
-                .setRam(ram)
-                .setPsu(compatiblePsu)
+                .setRAM(ram,0)// ACHTUNG: hier auch noch implementieren von Anzahl RAM Module
+                .setPSU(compatiblePsu)
                 .setComputerCase(compatibleCase)
                 .build();
 
