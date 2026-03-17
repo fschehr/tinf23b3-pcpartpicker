@@ -20,3 +20,11 @@ Die Anwendung ist für den Betrieb unter Linux (getestet auf Fedora) optimiert.
 1. Navigieren Sie in das Projektverzeichnis: `cd tinf23b3-pcpartpicker`
 2. Kompilieren und Testen: `mvn clean install`.
 3. Starten der Anwendung: `mvn exec:java -Dexec.main
+
+## 3. Tests
+Die Tests laufen mit Maven und JUnit 5.
+
+- Alle Tests ausführen:
+	mvn test
+- Nur die Datenbank-Integrationstests ausführen:
+	mvn -Dtest=DatabaseIntegrationTest test

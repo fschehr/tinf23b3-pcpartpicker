@@ -1,5 +1,7 @@
 package de.ase.pcpartpicker.domain.HelperClasses;
 
+import java.util.Objects;
+
 /**
  * Abstrakte Klasse für Hilfstabellen wie Hersteller, Sockeltypen, etc.
  * Diese Klassen haben nur eine ID und einen Namen.
@@ -26,6 +28,23 @@ public abstract class HelperTable {
     
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        HelperTable that = (HelperTable) other;
+        return id == that.id && Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getClass(), id, name);
     }
     
 }

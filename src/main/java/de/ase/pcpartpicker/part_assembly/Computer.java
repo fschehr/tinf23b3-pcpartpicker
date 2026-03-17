@@ -1,7 +1,14 @@
 package de.ase.pcpartpicker.part_assembly;
 
-import de.ase.pcpartpicker.domain.*;
 import java.util.List;
+
+import de.ase.pcpartpicker.domain.CPU;
+import de.ase.pcpartpicker.domain.Case;
+import de.ase.pcpartpicker.domain.GPU;
+import de.ase.pcpartpicker.domain.Mainboard;
+import de.ase.pcpartpicker.domain.PSU;
+import de.ase.pcpartpicker.domain.RAM;
+import de.ase.pcpartpicker.domain.Storage;
 
 /**
  * Klasse die einen vollständig konfigurierten Computer abbildet
@@ -65,6 +72,26 @@ public class Computer {
         }
         return totalPrice;
     }
+
+    public Case getComputerCase() {
+        return computerCase;
+    }
+    public CPU getCpu() {
+        return cpu;
+    }
+    public GPU getGpu() {
+        return gpu;
+    }
+    public Mainboard getMainboard() {
+        return mainboard;
+    }
+    public RAM getRam() {
+        return ram;
+    }
+    public PSU getPsu() {
+        return psu;
+    }
+
 
     public double getTotalPowerConsumption() {
         double totalPower = 0;
