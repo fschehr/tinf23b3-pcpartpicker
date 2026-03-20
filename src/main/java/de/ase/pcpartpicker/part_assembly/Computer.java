@@ -1,5 +1,6 @@
 package de.ase.pcpartpicker.part_assembly;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.ase.pcpartpicker.domain.CPU;
@@ -88,6 +89,12 @@ public class Computer {
     public RAM getRam() {
         return ram;
     }
+    public int getRamModule() {
+        return ramModule;
+    }
+    public List<Storage> getStorageDevices() {
+        return storageDevices;
+    }
     public PSU getPsu() {
         return psu;
     }
@@ -130,7 +137,7 @@ public class Computer {
         private RAM ram;
         private int ramModule; // Anzahl der RAM-Module, z.B. 2 für 2x8GB
         private PSU psu;
-        private List<Storage> storageDevices;
+        private List<Storage> storageDevices = new ArrayList<>();
 
         /**
          * Setzt das Gehäuse für den Computer. Es muss ein Gehäuse ausgewählt werden, damit der Computer erstellt werden kann.

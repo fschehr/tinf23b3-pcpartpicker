@@ -1,10 +1,5 @@
 package de.ase.pcpartpicker.adapters.sqlite.repositories;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
@@ -27,6 +22,7 @@ public class GpuRepository extends BaseRepository<GPU> {
                    g.name,
                    g.price,
                    g.vram_gb,
+                   g.power_consumption_w,
                    t.id AS type_id,
                    t.name AS type_name,
                    m.id AS manufacturer_id,
@@ -36,28 +32,22 @@ public class GpuRepository extends BaseRepository<GPU> {
             JOIN manufacturer m ON m.id = g.manufacturer_id
             ORDER BY g.id
             """;
-        List<GPU> gpus = new ArrayList<>();
 
-        try (Connection connection = connectionFactory.createConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
+        return queryList(
+            sql,
+            resultSet -> {
                 Manufacturer manufacturer = new Manufacturer(resultSet.getInt("manufacturer_id"), resultSet.getString("manufacturer_name"));
 
-                gpus.add(new GPU(
+                return new GPU(
                     resultSet.getInt("id"),
                     resultSet.getString("name"),
                     resultSet.getDouble("price"),
                     manufacturer,
                     resultSet.getInt("vram_gb"),
-                    0 // Damit Compiler nicht rumheult, bitte fixen @Fabio
-                ));
-            }
-            return gpus;
-
-        } catch (SQLException e) {
-            throw new IllegalStateException("GPU-Daten konnten nicht geladen werden.", e);
-        }
+                    resultSet.getInt("power_consumption_w")
+                );
+            },
+            "GPU-Daten konnten nicht geladen werden."
+        );
     }
 }

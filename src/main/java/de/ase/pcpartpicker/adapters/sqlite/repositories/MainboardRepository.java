@@ -1,10 +1,5 @@
 package de.ase.pcpartpicker.adapters.sqlite.repositories;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
@@ -28,10 +23,10 @@ public class MainboardRepository extends BaseRepository<Mainboard> {
             SELECT mb.id,
                    mb.name,
                    mb.price,
-                     mb.ram_slots,
-                     mb.pcie_slots,
-                     mb.sata_slots,
-                     mb.m2_slots,
+                   mb.ram_slots,
+                   mb.pcie_slots,
+                   mb.sata_slots,
+                   mb.m2_slots,
                    t.id AS type_id,
                    t.name AS type_name,
                    m.id AS manufacturer_id,
@@ -47,18 +42,15 @@ public class MainboardRepository extends BaseRepository<Mainboard> {
             JOIN motherboard_form_factor ff ON ff.id = mb.form_factor_id
             ORDER BY mb.id
             """;
-        List<Mainboard> mainboards = new ArrayList<>();
 
-        try (Connection connection = connectionFactory.createConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
+        return queryList(
+            sql,
+            resultSet -> {
                 Manufacturer manufacturer = new Manufacturer(resultSet.getInt("manufacturer_id"), resultSet.getString("manufacturer_name"));
                 Socket socket = new Socket(resultSet.getInt("socket_id"), resultSet.getString("socket_name"));
                 MotherboardFormFactor formFactor = new MotherboardFormFactor(resultSet.getInt("form_factor_id"), resultSet.getString("form_factor_name"));
 
-                mainboards.add(new Mainboard(
+                return new Mainboard(
                     resultSet.getInt("id"),
                     resultSet.getString("name"),
                     resultSet.getDouble("price"),
@@ -69,12 +61,9 @@ public class MainboardRepository extends BaseRepository<Mainboard> {
                     resultSet.getInt("pcie_slots"),
                     resultSet.getInt("sata_slots"),
                     resultSet.getInt("m2_slots")
-                ));
-            }
-            return mainboards;
-
-        } catch (SQLException e) {
-            throw new IllegalStateException("Mainboard-Daten konnten nicht geladen werden.", e);
-        }
+                );
+            },
+            "Mainboard-Daten konnten nicht geladen werden."
+        );
     }
 }

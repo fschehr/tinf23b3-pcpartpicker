@@ -86,6 +86,7 @@ class DatabaseIntegrationTest {
         PsuRepository psuRepository = new PsuRepository(connectionFactory);
         CaseRepository caseRepository = new CaseRepository(connectionFactory);
         GpuRepository gpuRepository = new GpuRepository(connectionFactory);
+        SsdRepository ssdRepository = new SsdRepository(connectionFactory);
 
         List<CPU> cpus = cpuRepository.findAll();
         List<Mainboard> mainboards = mainboardRepository.findAll();
@@ -93,6 +94,7 @@ class DatabaseIntegrationTest {
 
         RAM ram = ramRepository.findAll().get(0);
         GPU gpu = gpuRepository.findAll().get(0);
+        Storage storage = ssdRepository.findAll().get(0); // Get first available SSD
 
         for (Mainboard mainboard : mainboards) {
             CPU compatibleCpu = cpus.stream()
@@ -126,9 +128,10 @@ class DatabaseIntegrationTest {
                 .setCPU(compatibleCpu)
                 .setGPU(gpu)
                 .setMainboard(mainboard)
-                .setRAM(ram,0)// ACHTUNG: hier auch noch implementieren von Anzahl RAM Module
+                .setRAM(ram, 2) // 2 RAM modules
                 .setPSU(compatiblePsu)
                 .setComputerCase(compatibleCase)
+                .setStorageDevices(new Storage[] {storage})
                 .build();
 
             if (computer != null) {
