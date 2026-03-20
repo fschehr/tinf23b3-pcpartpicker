@@ -1,8 +1,8 @@
 package de.ase.pcpartpicker.adapters.cli;
 
-import de.ase.pcpartpicker.adapters.cli.commands.CreateUserCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.NewUserCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.OpenMenuCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.ShowAllUserCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ShowListCommand;
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
 
@@ -13,16 +13,16 @@ import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
  * @author Henri
  */
 public class MenuFactory {
-    private final InputReader inputReader;
     private final ComponentConfigs configs;
+    private final InputReader inputReader = new InputReader();
+    private final ConnectionFactory connectionFactory = new ConnectionFactory();
 
     public static Menu createApp() {
         return new MenuFactory().createMainMenu();
     }
 
     public MenuFactory() {
-        this.inputReader = new InputReader();
-        this.configs = new ComponentConfigs(new ConnectionFactory());
+        this.configs = new ComponentConfigs(connectionFactory);
     }
 
     public Menu createMainMenu() {
@@ -52,7 +52,8 @@ public class MenuFactory {
 
     private Menu createUserMenu() {
         Menu userMenu = new Menu("Nutzerverwaltung",inputReader); 
-        userMenu.add(new MenuItem("Neuen Nutzer anlegen", new NewUserCommand(inputReader))); 
+        userMenu.add(new MenuItem("Neuen Nutzer anlegen", new NewUserCommand(inputReader, connectionFactory))); 
+        userMenu.add(new MenuItem("Zeige alle Nutzer", new ShowAllUserCommand(connectionFactory, inputReader,configs))); 
         return userMenu; 
     }
 

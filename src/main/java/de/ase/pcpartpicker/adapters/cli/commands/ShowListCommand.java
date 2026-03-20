@@ -1,10 +1,13 @@
 package de.ase.pcpartpicker.adapters.cli.commands;
 
-import de.ase.pcpartpicker.adapters.cli.*;
-import de.ase.pcpartpicker.domain.Component;
 import java.util.List;
 
-public class ShowListCommand<T extends Component> implements ICommand {
+import de.ase.pcpartpicker.adapters.cli.InputReader;
+import de.ase.pcpartpicker.adapters.cli.TableGenerator;
+import de.ase.pcpartpicker.adapters.cli.UIUtils;
+import de.ase.pcpartpicker.adapters.cli.rComponentConfig;
+
+public class ShowListCommand<T> implements ICommand {
     private final rComponentConfig<T> config;
     private final InputReader inputReader;
 

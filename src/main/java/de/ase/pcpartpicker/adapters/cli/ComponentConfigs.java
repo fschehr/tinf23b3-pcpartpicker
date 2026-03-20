@@ -1,8 +1,26 @@
 package de.ase.pcpartpicker.adapters.cli;
 
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
-import de.ase.pcpartpicker.adapters.sqlite.repositories.*;
-import de.ase.pcpartpicker.domain.*;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.CaseRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.CpuRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.GpuRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.HddRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.M2SsdRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.MainboardRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.PsuRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.RamRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.SsdRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.UserRepository;
+import de.ase.pcpartpicker.domain.CPU;
+import de.ase.pcpartpicker.domain.Case;
+import de.ase.pcpartpicker.domain.GPU;
+import de.ase.pcpartpicker.domain.HDD;
+import de.ase.pcpartpicker.domain.HelperClasses.User;
+import de.ase.pcpartpicker.domain.M2SSD;
+import de.ase.pcpartpicker.domain.Mainboard;
+import de.ase.pcpartpicker.domain.PSU;
+import de.ase.pcpartpicker.domain.RAM;
+import de.ase.pcpartpicker.domain.SSD;
 
 /**
  * Klasse, in der die Konfigurationen der einzelnen Komponenten gespeichert sind
@@ -147,5 +165,18 @@ public class ComponentConfigs {
                 hdd.getPrice() + " €"
             }
         );
+    }
+
+    public rComponentConfig<User> user() {
+        return new rComponentConfig<>(
+            "Nutzer",
+            new String[]{"ID", "Name"},
+            new UserRepository(cf),
+            user -> new String[] {
+                String.valueOf(user.getId()),
+                user.getName()
+            }
+        );
+
     }
 }
