@@ -27,6 +27,8 @@ public class DatabaseInitializer {
              Statement statement = connection.createStatement()) {
             statement.execute("PRAGMA foreign_keys = ON");
 
+            statement.executeUpdate("DROP TABLE IF EXISTS computer_storage");
+            statement.executeUpdate("DROP TABLE IF EXISTS config");
             statement.executeUpdate("DROP TABLE IF EXISTS computer");
             statement.executeUpdate("DROP TABLE IF EXISTS users");
             statement.executeUpdate("DROP TABLE IF EXISTS cpu");
@@ -89,6 +91,7 @@ public class DatabaseInitializer {
                     socket_id INTEGER NOT NULL,
                     speed_ghz REAL NOT NULL,
                     hasIntegratedGraphics BOOLEAN NOT NULL DEFAULT 0,
+                    power_consumption_w INTEGER NOT NULL DEFAULT 0,
                     FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(id),
                     FOREIGN KEY (type_id) REFERENCES type(id),
                     FOREIGN KEY (socket_id) REFERENCES sockets(id)
@@ -103,6 +106,7 @@ public class DatabaseInitializer {
                     name TEXT NOT NULL,
                     price REAL NOT NULL,
                     vram_gb INTEGER NOT NULL,
+                    power_consumption_w INTEGER NOT NULL DEFAULT 0,
                     FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(id),
                     FOREIGN KEY (type_id) REFERENCES type(id)
                 )
@@ -222,20 +226,40 @@ public class DatabaseInitializer {
             statement.executeUpdate("""
                 CREATE TABLE computer (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    user_id INTEGER NOT NULL,
                     cpu_id INTEGER NOT NULL,
                     gpu_id INTEGER,
                     mainboard_id INTEGER NOT NULL,
                     ram_id INTEGER NOT NULL,
+                    ram_module_count INTEGER NOT NULL DEFAULT 1,
                     psu_id INTEGER NOT NULL,
                     case_id INTEGER NOT NULL,
-                    FOREIGN KEY (user_id) REFERENCES users(id),
                     FOREIGN KEY (cpu_id) REFERENCES cpu(id),
                     FOREIGN KEY (gpu_id) REFERENCES gpu(id),
                     FOREIGN KEY (mainboard_id) REFERENCES mainboard(id),
                     FOREIGN KEY (ram_id) REFERENCES ram(id),
                     FOREIGN KEY (psu_id) REFERENCES psu(id),
                     FOREIGN KEY (case_id) REFERENCES pc_case(id)
+                )
+                """);
+
+            statement.executeUpdate("""
+                CREATE TABLE config (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    computer_id INTEGER NOT NULL,
+                    FOREIGN KEY (user_id) REFERENCES users(id),
+                    FOREIGN KEY (computer_id) REFERENCES computer(id) ON DELETE CASCADE
+                )
+                """);
+
+            statement.executeUpdate("""
+                CREATE TABLE computer_storage (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    computer_id INTEGER NOT NULL,
+                    storage_type TEXT NOT NULL,
+                    storage_id INTEGER NOT NULL,
+                    FOREIGN KEY (computer_id) REFERENCES computer(id) ON DELETE CASCADE,
+                    CONSTRAINT unique_computer_storage UNIQUE(computer_id, storage_type, storage_id)
                 )
                 """);
 
@@ -246,14 +270,15 @@ public class DatabaseInitializer {
             statement.executeUpdate("INSERT INTO psu_form_factor (name) VALUES ('ATX')");
 
             statement.executeUpdate("""
-                INSERT INTO cpu (manufacturer_id, type_id, name, price, socket_id, speed_ghz)
+                INSERT INTO cpu (manufacturer_id, type_id, name, price, socket_id, speed_ghz, power_consumption_w)
                 VALUES (
                     (SELECT id FROM manufacturer WHERE name = 'Intel'),
                     (SELECT id FROM type WHERE name = 'CPU'),
                     'Intel Tuluhan i9-13900K',
                     589.00,
                     (SELECT id FROM sockets WHERE name = 'LGA1700'),
-                    3.0
+                    3.0,
+                    125
                 ),
                 (
                     (SELECT id FROM manufacturer WHERE name = 'AMD'),
@@ -261,25 +286,28 @@ public class DatabaseInitializer {
                     'AMD Schröder 7 7800X3D',
                     399.00,
                     (SELECT id FROM sockets WHERE name = 'AM5'),
-                    4.0
+                    4.0,
+                    120
                 )
                 """);
 
             statement.executeUpdate("""
-                INSERT INTO gpu (manufacturer_id, type_id, name, price, vram_gb)
+                INSERT INTO gpu (manufacturer_id, type_id, name, price, vram_gb, power_consumption_w)
                 VALUES (
                     (SELECT id FROM manufacturer WHERE name = 'NVIDIA'),
                     (SELECT id FROM type WHERE name = 'GPU'),
                     'NVIDIA Benjamin RTX 4070',
                     599.00,
-                    12
+                    12,
+                    200
                 ),
                 (
                     (SELECT id FROM manufacturer WHERE name = 'AMD'),
                     (SELECT id FROM type WHERE name = 'GPU'),
                     'AMD Radeon RX 7800 XT',
                     539.00,
-                    16
+                    16,
+                    210
                 )
                 """);
 
@@ -394,15 +422,32 @@ public class DatabaseInitializer {
                 """);
 
             statement.executeUpdate("""
-                INSERT INTO computer (user_id, cpu_id, gpu_id, mainboard_id, ram_id, psu_id, case_id)
+                INSERT INTO computer (cpu_id, gpu_id, mainboard_id, ram_id, ram_module_count, psu_id, case_id)
                 VALUES (
-                    (SELECT id FROM users WHERE name = 'Test User'),
                     (SELECT id FROM cpu ORDER BY id LIMIT 1),
                     (SELECT id FROM gpu ORDER BY id LIMIT 1),
                     (SELECT id FROM mainboard ORDER BY id LIMIT 1),
                     (SELECT id FROM ram ORDER BY id LIMIT 1),
+                    2,
                     (SELECT id FROM psu ORDER BY id LIMIT 1),
                     (SELECT id FROM pc_case ORDER BY id LIMIT 1)
+                )
+                """);
+
+            statement.executeUpdate("""
+                INSERT INTO config (user_id, computer_id)
+                VALUES (
+                    (SELECT id FROM users WHERE name = 'Test User'),
+                    (SELECT id FROM computer ORDER BY id LIMIT 1)
+                )
+                """);
+
+            statement.executeUpdate("""
+                INSERT INTO computer_storage (computer_id, storage_type, storage_id)
+                VALUES (
+                    (SELECT id FROM computer ORDER BY id LIMIT 1),
+                    'ssd',
+                    (SELECT id FROM ssd ORDER BY id LIMIT 1)
                 )
                 """);
        } catch (SQLException e) {
