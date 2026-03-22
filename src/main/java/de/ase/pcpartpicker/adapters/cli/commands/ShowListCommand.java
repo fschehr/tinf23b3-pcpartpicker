@@ -5,13 +5,13 @@ import java.util.List;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
 import de.ase.pcpartpicker.adapters.cli.UIUtils;
-import de.ase.pcpartpicker.adapters.cli.rComponentConfig;
+import de.ase.pcpartpicker.adapters.cli.rListConfiguration;
 
 public class ShowListCommand<T> implements ICommand {
-    private final rComponentConfig<T> config;
+    private final rListConfiguration<T> config;
     private final InputReader inputReader;
 
-    public ShowListCommand(rComponentConfig<T> config, InputReader inputReader) {
+    public ShowListCommand(rListConfiguration<T> config, InputReader inputReader) {
         this.config = config;
         this.inputReader = inputReader;
     }

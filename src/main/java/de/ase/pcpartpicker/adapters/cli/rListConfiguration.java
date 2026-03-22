@@ -11,7 +11,7 @@ import de.ase.pcpartpicker.adapters.sqlite.repositories.Repository;
  * @param rowMapper Wandelt Komponente in Array von Strings um für tabellarische Ansicht
  * @author Henri
  */
-public record rComponentConfig<T>(
+public record rListConfiguration<T>(
     String title,
     String[] headers,
     Repository<T> repository,

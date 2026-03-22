@@ -4,7 +4,9 @@ import de.ase.pcpartpicker.adapters.cli.commands.NewUserCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.OpenMenuCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ShowAllUserCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ShowListCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.LoginCommand;
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.UserRepository;
 
 /**
  * Klasse, die die Menüs erstellt und konfiguriert
@@ -13,16 +15,17 @@ import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
  * @author Henri
  */
 public class MenuFactory {
-    private final ComponentConfigs configs;
+    private final ListConfiguration configs;
     private final InputReader inputReader = new InputReader();
     private final ConnectionFactory connectionFactory = new ConnectionFactory();
+    private final UserRepository userRepository = new UserRepository(connectionFactory); 
 
     public static Menu createApp() {
         return new MenuFactory().createMainMenu();
     }
 
     public MenuFactory() {
-        this.configs = new ComponentConfigs(connectionFactory);
+        this.configs = new ListConfiguration(connectionFactory);
     }
 
     public Menu createMainMenu() {
@@ -52,16 +55,17 @@ public class MenuFactory {
 
     private Menu createUserMenu() {
         Menu userMenu = new Menu("Nutzerverwaltung",inputReader); 
-        userMenu.add(new MenuItem("Neuen Nutzer anlegen", new NewUserCommand(inputReader, connectionFactory))); 
-        userMenu.add(new MenuItem("Zeige alle Nutzer", new ShowAllUserCommand(connectionFactory, inputReader,configs))); 
+        userMenu.add(new MenuItem("Neuen Nutzer anlegen", new NewUserCommand(inputReader, userRepository))); 
+        userMenu.add(new MenuItem("Zeige alle Nutzer", new ShowAllUserCommand(inputReader,configs))); 
         return userMenu; 
     }
 
     private Menu createLoginMenu() {
         Menu loginMenu = new Menu("Login", inputReader);
-        
+        loginMenu.add(new MenuItem("Login starten", new LoginCommand(inputReader, userRepository)));
         return loginMenu;
     }
+
 
     private Menu createConfigurationMenu() {
         Menu menu = new Menu("Aktuelle Konfiguration", inputReader);
@@ -69,7 +73,7 @@ public class MenuFactory {
     }
 
 
-    private <T extends de.ase.pcpartpicker.domain.Component> MenuItem listItem(rComponentConfig<T> config) {
+    private <T extends de.ase.pcpartpicker.domain.Component> MenuItem listItem(rListConfiguration<T> config) {
         return new MenuItem(config.title(), new ShowListCommand<>(config, inputReader));
     }
 }

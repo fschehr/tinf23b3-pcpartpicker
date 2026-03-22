@@ -28,15 +28,15 @@ import de.ase.pcpartpicker.domain.SSD;
  * @author Henri
  */
 
-public class ComponentConfigs {
+public class ListConfiguration {
     private final ConnectionFactory cf;
 
-    public ComponentConfigs(ConnectionFactory cf) {
+    public ListConfiguration(ConnectionFactory cf) {
         this.cf = cf;
     }
 
-    public rComponentConfig<CPU> cpu() {
-        return new rComponentConfig<>(
+    public rListConfiguration<CPU> cpu() {
+        return new rListConfiguration<>(
             "CPUs",
             new String[]{"#", "Name", "Hersteller", "Sockel", "Takt (GHz)", "Preis"},
             new CpuRepository(cf),
@@ -51,8 +51,8 @@ public class ComponentConfigs {
         );
     }
 
-    public rComponentConfig<GPU> gpu() {
-        return new rComponentConfig<>(
+    public rListConfiguration<GPU> gpu() {
+        return new rListConfiguration<>(
             "GPUs",
             new String[]{"#", "Name", "Hersteller", "Preis"},
             new GpuRepository(cf),
@@ -65,8 +65,8 @@ public class ComponentConfigs {
         );
     }
 
-    public rComponentConfig<RAM> ram() {
-        return new rComponentConfig<>(
+    public rListConfiguration<RAM> ram() {
+        return new rListConfiguration<>(
             "RAM",
             new String[]{"#", "Name", "Hersteller", "Preis"},
             new RamRepository(cf),
@@ -79,8 +79,8 @@ public class ComponentConfigs {
         );
     }
 
-    public rComponentConfig<Mainboard> mainboard() {
-        return new rComponentConfig<>(
+    public rListConfiguration<Mainboard> mainboard() {
+        return new rListConfiguration<>(
             "Mainboards",
             new String[]{"#", "Name", "Hersteller", "Sockel", "Formfaktor", "Preis"},
             new MainboardRepository(cf),
@@ -95,8 +95,8 @@ public class ComponentConfigs {
         );
     }
 
-    public rComponentConfig<PSU> psu() {
-        return new rComponentConfig<>(
+    public rListConfiguration<PSU> psu() {
+        return new rListConfiguration<>(
             "Netzteile",
             new String[]{"#", "Name", "Hersteller", "Watt", "Formfaktor", "Preis"},
             new PsuRepository(cf),
@@ -111,8 +111,8 @@ public class ComponentConfigs {
         );
     }
 
-    public rComponentConfig<Case> pcCase() {
-        return new rComponentConfig<>(
+    public rListConfiguration<Case> pcCase() {
+        return new rListConfiguration<>(
             "Gehäuse",
             new String[]{"#", "Name", "Hersteller", "Formfaktor", "Preis"},
             new CaseRepository(cf),
@@ -125,8 +125,8 @@ public class ComponentConfigs {
         );
     }
 
-    public rComponentConfig<SSD> ssd() {
-        return new rComponentConfig<>(
+    public rListConfiguration<SSD> ssd() {
+        return new rListConfiguration<>(
             "SSDs",
             new String[]{"#", "Name", "Hersteller", "Preis"},
             new SsdRepository(cf),
@@ -139,8 +139,8 @@ public class ComponentConfigs {
         );
     }
 
-    public rComponentConfig<M2SSD> m2ssd() {
-        return new rComponentConfig<>(
+    public rListConfiguration<M2SSD> m2ssd() {
+        return new rListConfiguration<>(
             "M.2 SSDs",
             new String[]{"#", "Name", "Hersteller", "Preis"},
             new M2SsdRepository(cf),
@@ -153,8 +153,8 @@ public class ComponentConfigs {
         );
     }
 
-    public rComponentConfig<HDD> hdd() {
-        return new rComponentConfig<>(
+    public rListConfiguration<HDD> hdd() {
+        return new rListConfiguration<>(
             "HDDs",
             new String[]{"#", "Name", "Hersteller", "Preis"},
             new HddRepository(cf),
@@ -167,8 +167,8 @@ public class ComponentConfigs {
         );
     }
 
-    public rComponentConfig<User> user() {
-        return new rComponentConfig<>(
+    public rListConfiguration<User> user() {
+        return new rListConfiguration<>(
             "Nutzer",
             new String[]{"ID", "Name"},
             new UserRepository(cf),

@@ -1,18 +1,21 @@
-// package de.ase.pcpartpicker.adapters.cli; 
-// import de.ase.pcpartpicker.adapters.sqlite.*; 
+package de.ase.pcpartpicker.adapters.cli; 
+import de.ase.pcpartpicker.domain.HelperClasses.*;
 
-// public class SessionManager {
-//     private final ConnectionFactory connectionFactory = new ConnectionFactory(); 
+public class SessionManager {
 
-//     public static User getCurrentUser() {
-//         // Wie kriege ich die Id des aktuellen Users.
-        
-//         return currentUser;
-//     }
+    private static User currentUser;
 
-//     public ConnectionFactory getConnectionFactory() {
+    public static User getcurrentUser() {
+        return currentUser;
+    }
+    
+    public static void setCurrentUser(User user) {
+        currentUser = user; 
+    }
 
-//     }
+    public static boolean isLoggedIn() {
+        return currentUser != null; 
+    }
 
 
-// }
+}
