@@ -82,7 +82,7 @@ public class MenuFactory {
     private Menu createComputerMenu() {
         Menu computerMenu = new Menu("Computerverwaltung", inputReader);
         Menu configuratorMenu = createConfiguratorMenu();
-        computerMenu.add(new MenuItem("neuen Computer anlegen", new StartComputerDraftCommand(computerDraft, configuratorMenu)));
+        computerMenu.add(new MenuItem("neuen Computer anlegen", new StartComputerDraftCommand(computerDraft, configuratorMenu, inputReader)));
         return computerMenu;
     }
 

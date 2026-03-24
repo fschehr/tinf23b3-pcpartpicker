@@ -4,6 +4,7 @@ import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.ComputerRepository;
+import de.ase.pcpartpicker.domain.HelperClasses.User;
 import de.ase.pcpartpicker.part_assembly.Computer;
 
 public class FinishComputerCommand implements ICommand {
@@ -23,8 +24,8 @@ public class FinishComputerCommand implements ICommand {
         Computer newComputer = draft.getBuilder().build();
 
         if (newComputer != null) {
-            // Speichern in Datenbank aktivieren, wenn gewünscht:
-            computerRepository.save(SessionManager.getcurrentUser().getId(), newComputer);
+            User currentUser = SessionManager.getcurrentUser();
+            computerRepository.save(currentUser.getId(), newComputer);
             
             System.out.println("Erfolg! Computer wurde erfolgreich gebaut.");
             newComputer.printConfiguration();
