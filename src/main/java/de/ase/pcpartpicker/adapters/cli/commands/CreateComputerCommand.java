@@ -22,7 +22,7 @@ public class CreateComputerCommand implements ICommand {
     public void execute() {
         boolean loggedIn = SessionManager.isLoggedIn();
         if(loggedIn) {
-            
+            System.out.println("\n=== Neuen Computer konfigurieren ===");
         }
         else {
             System.out.println("Sie sind nich eingeloggt. Bitte melden Sie sich an um einen neuen Computer anzulegen."); 
