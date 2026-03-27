@@ -111,15 +111,15 @@ public class ComputerRepository {
              PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setInt(1, userId);
-            statement.setInt(2, computer.getCpu().getId());
-            if (computer.getGpu() != null) {
-                statement.setInt(3, computer.getGpu().getId());
+            statement.setInt(2, computer.getCPU().getId());
+            if (computer.getGPU() != null) {
+                statement.setInt(3, computer.getGPU().getId());
             } else {
                 statement.setNull(3, java.sql.Types.INTEGER);
             }
             statement.setInt(4, computer.getMainboard().getId());
-            statement.setInt(5, computer.getRam().getId());
-            statement.setInt(6, computer.getPsu().getId());
+            statement.setInt(5, computer.getRAM().getId());
+            statement.setInt(6, computer.getPSU().getId());
             statement.setInt(7, computer.getComputerCase().getId());
 
             statement.executeUpdate();

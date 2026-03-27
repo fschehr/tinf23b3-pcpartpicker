@@ -76,19 +76,19 @@ public class Computer {
     public Case getComputerCase() {
         return computerCase;
     }
-    public CPU getCpu() {
+    public CPU getCPU() {
         return cpu;
     }
-    public GPU getGpu() {
+    public GPU getGPU() {
         return gpu;
     }
     public Mainboard getMainboard() {
         return mainboard;
     }
-    public RAM getRam() {
+    public RAM getRAM() {
         return ram;
     }
-    public PSU getPsu() {
+    public PSU getPSU() {
         return psu;
     }
 
