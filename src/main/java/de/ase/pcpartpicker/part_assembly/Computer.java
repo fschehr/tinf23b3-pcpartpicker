@@ -249,7 +249,7 @@ public class Computer {
             // Ergänzen: Mainboard-Gehäuse Kompatibilität bezüglich abwärtskompatibler Formfaktoren (z.B. ATX, Micro-ATX, Mini-ITX)
             if (!computerCase.getMotherboardFormFactor().equals(mainboard.getFormFactor())) {
                 System.out.println("Das Mainboard passt nicht ins Gehäuse.");
-                return false;
+                return true;
             }            
 
             if(!cpu.getSocket().equals(mainboard.getSocket())) {

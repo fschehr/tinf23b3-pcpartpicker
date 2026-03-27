@@ -5,6 +5,7 @@ import de.ase.pcpartpicker.adapters.cli.commands.NewUserCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.OpenMenuCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.SelectComponentCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ShowAllUserCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.ShowComputerCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ShowCurrentDraftCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ShowListCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.StartComputerDraftCommand;
@@ -37,7 +38,7 @@ public class MenuFactory {
 
     public Menu createMainMenu() {
         Menu mainMenu = new Menu("PC Part Picker - Hauptmenü", inputReader);
-        mainMenu.add(new MenuItem("Konfiguration ansehen", new OpenMenuCommand(createConfigurationMenu()))); 
+        mainMenu.add(new MenuItem("Verfügbare Teile ansehen", new OpenMenuCommand(createComponentMenu()))); 
         mainMenu.add(new MenuItem("Computerverwaltung", new OpenMenuCommand(createComputerMenu())));
         mainMenu.add(new MenuItem("Nutzerverwaltung", new OpenMenuCommand(createUserMenu()))); 
         mainMenu.add(new MenuItem("Login", new OpenMenuCommand(createLoginMenu()))); 
@@ -82,7 +83,9 @@ public class MenuFactory {
     private Menu createComputerMenu() {
         Menu computerMenu = new Menu("Computerverwaltung", inputReader);
         Menu configuratorMenu = createConfiguratorMenu();
-        computerMenu.add(new MenuItem("neuen Computer anlegen", new StartComputerDraftCommand(computerDraft, configuratorMenu, inputReader)));
+        computerMenu.add(new MenuItem("Neuen Computer anlegen", new StartComputerDraftCommand(computerDraft, configuratorMenu, inputReader)));
+        computerMenu.add(new MenuItem("Meine Computer anzeigen", new ShowComputerCommand(inputReader, computerRepository, false)));
+        computerMenu.add(new MenuItem("Alle Computer anzeigen", new ShowComputerCommand(inputReader, computerRepository, true)));
         return computerMenu;
     }
 

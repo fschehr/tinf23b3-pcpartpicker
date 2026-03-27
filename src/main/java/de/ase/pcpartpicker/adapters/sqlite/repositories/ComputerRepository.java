@@ -3,7 +3,6 @@ package de.ase.pcpartpicker.adapters.sqlite.repositories;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;

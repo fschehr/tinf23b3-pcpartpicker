@@ -2,6 +2,7 @@ package de.ase.pcpartpicker.adapters.cli;
 
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.CaseRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.ComputerRepository;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.CpuRepository;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.GpuRepository;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.HddRepository;
@@ -21,6 +22,7 @@ import de.ase.pcpartpicker.domain.Mainboard;
 import de.ase.pcpartpicker.domain.PSU;
 import de.ase.pcpartpicker.domain.RAM;
 import de.ase.pcpartpicker.domain.SSD;
+import de.ase.pcpartpicker.part_assembly.Computer;
 
 /**
  * Klasse, in der die Konfigurationen der einzelnen Komponenten gespeichert sind
@@ -68,12 +70,13 @@ public class ListConfiguration {
     public rListConfiguration<RAM> ram() {
         return new rListConfiguration<>(
             "RAM",
-            new String[]{"#", "Name", "Hersteller", "Preis"},
+            new String[]{"#", "Name", "Hersteller", "Größe", "Preis"},
             new RamRepository(cf),
             ram -> new String[]{
                 String.valueOf(ram.getId()),
                 ram.getName(),
                 ram.getManufacturer().getName(),
+                String.valueOf(ram.getCapacityGB()),
                 ram.getPrice() + " €"
             }
         );
@@ -120,6 +123,7 @@ public class ListConfiguration {
                 String.valueOf(c.getId()),
                 c.getName(),
                 c.getManufacturer().getName(),
+                c.getMotherboardFormFactor().getName(),
                 c.getPrice() + " €"
             }
         );
@@ -178,5 +182,16 @@ public class ListConfiguration {
             }
         );
 
+    }
+
+    public rListConfiguration<Computer> computer() {
+        return new rListConfiguration<>(
+            "Computer",
+            new String[]{"CPU", "GPU", "Mainboard", "RAM", "Netzteil", "Gehäuse", "HDD", "SSD", "M2SSD", "Gesamtpreis"},
+            new ComputerRepository(cf),
+            user -> new String[] {
+                
+            }
+        );
     }
 }

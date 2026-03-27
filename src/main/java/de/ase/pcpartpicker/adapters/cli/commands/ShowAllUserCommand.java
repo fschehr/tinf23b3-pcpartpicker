@@ -1,7 +1,7 @@
 package de.ase.pcpartpicker.adapters.cli.commands;
 
-import de.ase.pcpartpicker.adapters.cli.ListConfiguration;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
+import de.ase.pcpartpicker.adapters.cli.ListConfiguration;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
 
 public class ShowAllUserCommand implements ICommand {
