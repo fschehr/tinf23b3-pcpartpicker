@@ -84,19 +84,19 @@ public class ComputerDraft {
     }
 
     public void printCurrentState() {
-        System.out.println("CPU:       " + (cpu != null ? cpu.getName() : "--- nicht ausgewählt ---"));
-        System.out.println("GPU:       " + (gpu != null ? gpu.getName() : "--- nicht ausgewählt ---"));
-        System.out.println("Mainboard: " + (mainboard != null ? mainboard.getName() : "--- nicht ausgewählt ---"));
-        System.out.println("RAM:       " + (ram != null ? ramModules + "x " + ram.getName() : "--- nicht ausgewählt ---"));
-        System.out.println("Netzteil:  " + (psu != null ? psu.getName() : "--- nicht ausgewählt ---"));
-        System.out.println("Gehäuse:   " + (computerCase != null ? computerCase.getName() : "--- nicht ausgewählt ---"));
+        System.out.println("CPU:       " + (cpu != null ? cpu : "--- nicht ausgewählt ---"));
+        System.out.println("GPU:       " + (gpu != null ? gpu : "--- nicht ausgewählt ---"));
+        System.out.println("Mainboard: " + (mainboard != null ? mainboard : "--- nicht ausgewählt ---"));
+        System.out.println("RAM:       " + (ram != null ? ramModules + "x " + ram : "--- nicht ausgewählt ---"));
+        System.out.println("Netzteil:  " + (psu != null ? psu : "--- nicht ausgewählt ---"));
+        System.out.println("Gehäuse:   " + (computerCase != null ? computerCase : "--- nicht ausgewählt ---"));
         
         System.out.print("Speicher:  ");
         if (storage == null || storage.isEmpty()) {
             System.out.println("--- nicht ausgewählt ---");
         } else {
             for (int i = 0; i < storage.size(); i++) {
-                System.out.print(storage.get(i).getName());
+                System.out.print(storage.get(i));
                 if (i < storage.size() - 1) System.out.print(", ");
             }
             System.out.println();

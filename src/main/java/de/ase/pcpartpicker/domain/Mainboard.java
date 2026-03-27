@@ -67,4 +67,23 @@ public class Mainboard extends Component {
     public int getM2Slots() {
         return m2Slots;
     }
+
+    @Override
+    public String toString() {
+        String socketName = socket != null ? socket.getName() : "-";
+        String formFactorName = formFactor != null ? formFactor.getName() : "-";
+        return String.format(
+            "%s | %s | %.2f EUR | %s | %s | %d RAM-Slots | %d PCIe-Slots | %d SATA-Slots | %d M.2-Slots | %d W",
+            getName(),
+            getManufacturer() != null ? getManufacturer().getName() : "-",
+            getPrice(),
+            socketName,
+            formFactorName,
+            ramSlots,
+            pcieSlots,
+            sataSlots,
+            m2Slots,
+            getPowerConsumptionW()
+        );
+    }
 }

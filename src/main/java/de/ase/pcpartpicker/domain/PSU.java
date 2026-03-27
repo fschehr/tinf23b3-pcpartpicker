@@ -37,4 +37,18 @@ public class PSU extends Component {
     public PSUFormFactor getFormFactor() {
         return formFactor;
     }
+
+    @Override
+    public String toString() {
+        String formFactorName = formFactor != null ? formFactor.getName() : "-";
+        return String.format(
+            "%s | %s | %.2f EUR | %d W | %s | %d W",
+            getName(),
+            getManufacturer() != null ? getManufacturer().getName() : "-",
+            getPrice(),
+            wattage,
+            formFactorName,
+            getPowerConsumptionW()
+        );
+    }
 }
