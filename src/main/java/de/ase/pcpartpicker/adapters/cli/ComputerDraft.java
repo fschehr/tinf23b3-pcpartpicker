@@ -1,7 +1,6 @@
 package de.ase.pcpartpicker.adapters.cli;
 
-import java.util.List; // Importiert CPU, GPU, Case etc.
-
+import java.util.List;
 import de.ase.pcpartpicker.domain.CPU;
 import de.ase.pcpartpicker.domain.Case;
 import de.ase.pcpartpicker.domain.GPU;
@@ -17,7 +16,7 @@ public class ComputerDraft {
     private GPU gpu;
     private Mainboard mainboard;
     private RAM ram;
-    private int ramModules;
+    private int ramModule;
     private PSU psu;
     private Case computerCase;
     private List<Storage> storage;
@@ -25,7 +24,7 @@ public class ComputerDraft {
     public void startNewDraft() {
         this.builder = new Computer.Builder();
         this.cpu = null; this.gpu = null; this.mainboard = null;
-        this.ram = null; this.ramModules = 0; this.psu = null;
+        this.ram = null; this.ramModule = 0; this.psu = null;
         this.computerCase = null; this.storage = null;
     }
 
@@ -53,10 +52,10 @@ public class ComputerDraft {
         this.builder.setMainboard(mb);
     }
 
-    public void setRam(RAM ram, int modules) {
+    public void setRam(RAM ram, int module) {
         this.ram = ram;
-        this.ramModules = modules;
-        this.builder.setRAM(ram, modules);
+        this.ramModule = module;
+        this.builder.setRAM(ram, module);
     }
 
     public void setPsu(PSU psu) {
@@ -83,11 +82,44 @@ public class ComputerDraft {
         this.builder.setStorageDevices(this.storage.toArray(new Storage[0]));
     }
 
+    public GPU getGPU() {
+        return gpu; 
+    }
+
+    public CPU getCPU() {
+        return cpu; 
+    }
+
+    public Mainboard getMainboard() {
+        return mainboard;
+    }
+
+    public RAM getRAM() {
+        return ram; 
+    }
+
+    public PSU getPSU() {
+        return psu; 
+    }
+
+    public Case getComputerCase() {
+        return computerCase; 
+    }
+
+    public List<Storage> getStorage() {
+        return storage;
+    }
+
+    public int getRamModule() {
+        return ramModule;
+    }
+
+
     public void printCurrentState() {
         System.out.println("CPU:       " + (cpu != null ? cpu : "--- nicht ausgewählt ---"));
         System.out.println("GPU:       " + (gpu != null ? gpu : "--- nicht ausgewählt ---"));
         System.out.println("Mainboard: " + (mainboard != null ? mainboard : "--- nicht ausgewählt ---"));
-        System.out.println("RAM:       " + (ram != null ? ramModules + "x " + ram : "--- nicht ausgewählt ---"));
+        System.out.println("RAM:       " + (ram != null ? ramModule + "x " + ram : "--- nicht ausgewählt ---"));
         System.out.println("Netzteil:  " + (psu != null ? psu : "--- nicht ausgewählt ---"));
         System.out.println("Gehäuse:   " + (computerCase != null ? computerCase : "--- nicht ausgewählt ---"));
         

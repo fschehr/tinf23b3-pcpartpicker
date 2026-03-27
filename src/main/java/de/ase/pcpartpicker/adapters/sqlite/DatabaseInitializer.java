@@ -426,7 +426,7 @@ public class DatabaseInitializer {
                 VALUES (
                     (SELECT id FROM cpu ORDER BY id LIMIT 1),
                     (SELECT id FROM gpu ORDER BY id LIMIT 1),
-                    (SELECT id FROM mainboard ORDER BY id LIMIT 1),
+                    2,
                     (SELECT id FROM ram ORDER BY id LIMIT 1),
                     2,
                     (SELECT id FROM psu ORDER BY id LIMIT 1),

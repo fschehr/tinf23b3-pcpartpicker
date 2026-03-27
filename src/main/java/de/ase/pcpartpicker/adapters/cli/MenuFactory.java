@@ -83,7 +83,7 @@ public class MenuFactory {
     private Menu createComputerMenu() {
         Menu computerMenu = new Menu("Computerverwaltung", inputReader);
         Menu configuratorMenu = createConfiguratorMenu();
-        computerMenu.add(new MenuItem("Neuen Computer anlegen", new StartComputerDraftCommand(computerDraft, configuratorMenu, inputReader)));
+        computerMenu.add(new MenuItem("Neuen Computer anlegen", new StartComputerDraftCommand(computerDraft, configuratorMenu, userRepository, inputReader)));
         computerMenu.add(new MenuItem("Meine Computer anzeigen", new ShowComputerCommand(inputReader, computerRepository, false)));
         computerMenu.add(new MenuItem("Alle Computer anzeigen", new ShowComputerCommand(inputReader, computerRepository, true)));
         return computerMenu;
@@ -136,6 +136,12 @@ public class MenuFactory {
             ssd -> ssd.getId(), ssd -> ssd.getName(), 
             (draft, ssd) -> draft.addStorage(ssd) 
         )));
+
+        menu.add(new MenuItem("Speicher (M2SSD) auswählen", new SelectComponentCommand<>(
+            inputReader, computerDraft, configs.m2ssd(),
+                m2ssd -> m2ssd.getId(), m2ssd -> m2ssd.getName(),
+                (draft, m2ssd) -> draft.addStorage(m2ssd)
+            )));
 
 
         menu.add(new MenuItem("Speicher (HDD) auswählen", new SelectComponentCommand<>(

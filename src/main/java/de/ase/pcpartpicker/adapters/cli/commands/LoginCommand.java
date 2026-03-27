@@ -20,7 +20,7 @@ public class LoginCommand implements ICommand{
     @Override
     public void execute() {
 
-        String username = inputReader.readString("Nutzename");
+        String username = inputReader.readString("Nutzername");
 
         List<User> users = userRepository.findAll();
 
@@ -36,7 +36,7 @@ public class LoginCommand implements ICommand{
             SessionManager.setCurrentUser(foundUser); 
         }
         else{
-            System.out.println("Nutzename nicht gefunden."); 
+            System.out.println("Nutzername nicht gefunden."); 
         }
 
     }   

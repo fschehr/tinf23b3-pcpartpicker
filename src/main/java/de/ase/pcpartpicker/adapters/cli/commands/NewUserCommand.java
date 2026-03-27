@@ -16,7 +16,7 @@ public class NewUserCommand implements ICommand{
 
     @Override
     public void execute() {
-        String username = inputReader.readString("Bitte Nutzernamen eingeben:");
+        String username = inputReader.readString("Bitte Nutzernamen eingeben");
         boolean exists = userRepository.findAll().stream()
             .anyMatch(user -> user.getName().equalsIgnoreCase(username));
 
