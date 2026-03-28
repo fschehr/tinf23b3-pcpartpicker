@@ -23,4 +23,16 @@ public abstract class Storage extends Component {
     public int getCapacityGB() {
         return capacityGB;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "%s | %s | %.2f EUR | %d GB | %d W",
+            getName(),
+            getManufacturer() != null ? getManufacturer().getName() : "-",
+            getPrice(),
+            capacityGB,
+            getPowerConsumptionW()
+        );
+    }
 }

@@ -30,4 +30,17 @@ public class RAM extends Component {
     public int getSpeedMHz() {
         return speedMHz;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "%s | %s | %.2f EUR | %d GB | %d MHz | %d W",
+            getName(),
+            getManufacturer() != null ? getManufacturer().getName() : "-",
+            getPrice(),
+            capacityGB,
+            speedMHz,
+            getPowerConsumptionW()
+        );
+    }
 }

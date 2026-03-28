@@ -1,10 +1,9 @@
 package de.ase.pcpartpicker.adapters.sqlite.repositories;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,9 +13,13 @@ import java.util.stream.Collectors;
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
 import de.ase.pcpartpicker.domain.CPU;
 import de.ase.pcpartpicker.domain.GPU;
+import de.ase.pcpartpicker.domain.HDD;
+import de.ase.pcpartpicker.domain.M2SSD;
 import de.ase.pcpartpicker.domain.Mainboard;
 import de.ase.pcpartpicker.domain.PSU;
 import de.ase.pcpartpicker.domain.RAM;
+import de.ase.pcpartpicker.domain.SSD;
+import de.ase.pcpartpicker.domain.Storage;
 import de.ase.pcpartpicker.part_assembly.Computer;
 
 /**
@@ -27,16 +30,14 @@ import de.ase.pcpartpicker.part_assembly.Computer;
  * bestehenden Komponenten-Repositories geladen und in Maps indexiert. Dadurch bleibt die SQL-Abfrage
  * kurz und das N+1-Problem wird vermieden.</p>
  */
-public class ComputerRepository {
-
-    private final ConnectionFactory connectionFactory;
+public class ComputerRepository extends JdbcRepository<Computer> {
     private static final String BASE_COMPUTER_SELECT = """
-        SELECT id, user_id, cpu_id, gpu_id, mainboard_id, ram_id, psu_id, case_id
+        SELECT id, cpu_id, gpu_id, mainboard_id, ram_id, ram_module_count, psu_id, case_id
         FROM computer
         """;
 
     public ComputerRepository(ConnectionFactory connectionFactory) {
-        this.connectionFactory = connectionFactory;
+        super(connectionFactory);
     }
 
     /**
@@ -48,68 +49,74 @@ public class ComputerRepository {
     public List<Computer> findAll() {
         String sql = BASE_COMPUTER_SELECT + " ORDER BY id";
         ComponentIndex index = loadComponentIndex();
-        List<Computer> computers = new ArrayList<>();
 
-        try (Connection connection = connectionFactory.createConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
-                computers.add(mapComputer(resultSet, index));
-            }
-            return computers;
-
-        } catch (SQLException e) {
-            throw new IllegalStateException("Computer-Daten konnten nicht geladen werden.", e);
-        }
+        return queryList(
+            sql,
+            resultSet -> mapComputer(resultSet, index),
+            "Computer-Daten konnten nicht geladen werden."
+        );
     }
 
     /**
-     * Lädt alle gespeicherten Computer-Konfigurationen eines bestimmten Users.
+     * Lädt alle gespeicherten Computer-Konfigurationen eines bestimmten Users über die Config-Tabelle.
      *
      * @param userId ID des Users.
      * @return Liste aller Computer des Users in aufsteigender ID-Reihenfolge.
      * @throws IllegalStateException wenn die Datenbankabfrage fehlschlägt.
      */
     public List<Computer> findAllByUserId(int userId) {
-        String sql = BASE_COMPUTER_SELECT + " WHERE user_id = ? ORDER BY id";
+        String sql = """
+            SELECT computer.id, computer.cpu_id, computer.gpu_id, computer.mainboard_id, computer.ram_id, computer.ram_module_count, computer.psu_id, computer.case_id
+            FROM computer
+            JOIN config ON computer.id = config.computer_id
+            WHERE config.user_id = ? ORDER BY computer.id
+            """;
         ComponentIndex index = loadComponentIndex();
-        List<Computer> computers = new ArrayList<>();
 
-        try (Connection connection = connectionFactory.createConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            statement.setInt(1, userId);
-
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    computers.add(mapComputer(resultSet, index));
-                }
-            }
-            return computers;
-
-        } catch (SQLException e) {
-            throw new IllegalStateException("Computer-Daten konnten nicht geladen werden.", e);
-        }
+        return queryList(
+            sql,
+            statement -> statement.setInt(1, userId),
+            resultSet -> mapComputer(resultSet, index),
+            "Computer-Daten konnten nicht geladen werden."
+        );
     }
 
     /**
-     * Speichert eine Computer-Konfiguration für einen User.
+     * Speichert eine Computer-Konfiguration und verknüpft sie mit einem User via Config-Tabelle.
      *
      * @param userId ID des Users, dem die Konfiguration gehört.
      * @param computer zu speichernde Computer-Konfiguration.
-     * @return generierte Primärschlüssel-ID des gespeicherten Eintrags.
+     * @return generierte Primärschlüssel-ID der Computer-Konfiguration.
      * @throws IllegalStateException wenn der Insert fehlschlägt oder keine ID zurückgegeben wird.
      */
     public int save(int userId, Computer computer) {
-        String sql = """
-            INSERT INTO computer (user_id, cpu_id, gpu_id, mainboard_id, ram_id, psu_id, case_id)
+        String sqlComputer = """
+            INSERT INTO computer (cpu_id, gpu_id, mainboard_id, ram_id, ram_module_count, psu_id, case_id)
             VALUES (?, ?, ?, ?, ?, ?, ?)
             """;
 
-        try (Connection connection = connectionFactory.createConnection();
-             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        int computerId = insertAndReturnGeneratedKey(
+            sqlComputer,
+            statement -> {
+                statement.setInt(1, computer.getCpu().getId());
+                if (computer.getGpu() != null) {
+                    statement.setInt(2, computer.getGpu().getId());
+                } else {
+                    statement.setNull(2, Types.INTEGER);
+                }
+                statement.setInt(3, computer.getMainboard().getId());
+                statement.setInt(4, computer.getRam().getId());
+                statement.setInt(5, computer.getRamModule());
+                statement.setInt(6, computer.getPsu().getId());
+                statement.setInt(7, computer.getComputerCase().getId());
+            },
+            "Computer konnte nicht gespeichert werden."
+        );
 
+        // Erstelle Config-Eintrag für die User-Computer-Verknüpfung
+        String sqlConfig = "INSERT INTO config (user_id, computer_id) VALUES (?, ?)";
+        try (Connection connection = connectionFactory.createConnection();
+             java.sql.PreparedStatement statement = connection.prepareStatement(sqlConfig)) {
             statement.setInt(1, userId);
             statement.setInt(2, computer.getCPU().getId());
             if (computer.getGPU() != null) {
@@ -123,17 +130,14 @@ public class ComputerRepository {
             statement.setInt(7, computer.getComputerCase().getId());
 
             statement.executeUpdate();
-
-            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    return generatedKeys.getInt(1);
-                }
-            }
-            throw new IllegalStateException("Computer konnte nicht gespeichert werden: Keine ID zurückgegeben.");
-
         } catch (SQLException e) {
-            throw new IllegalStateException("Computer konnte nicht gespeichert werden.", e);
+            throw new IllegalStateException("Config-Eintrag konnte nicht erstellt werden.", e);
         }
+
+        // Speichere StorageDevices in der computer_storage Tabelle
+        saveStorageDevices(computerId, computer.getStorageDevices());
+
+        return computerId;
     }
 
     /**
@@ -147,6 +151,7 @@ public class ComputerRepository {
      * @throws IllegalStateException wenn eine referenzierte Komponente fehlt oder der Builder fehlschlägt.
      */
     private Computer mapComputer(ResultSet resultSet, ComponentIndex index) throws SQLException {
+        int computerId = resultSet.getInt("id");
         int cpuId = resultSet.getInt("cpu_id");
         CPU cpu = getRequired(index.cpus, cpuId, "CPU");
 
@@ -158,6 +163,7 @@ public class ComputerRepository {
 
         int ramId = resultSet.getInt("ram_id");
         RAM ram = getRequired(index.rams, ramId, "RAM");
+        int ramModuleCount = resultSet.getInt("ram_module_count");
 
         int psuId = resultSet.getInt("psu_id");
         PSU psu = getRequired(index.psus, psuId, "PSU");
@@ -165,14 +171,21 @@ public class ComputerRepository {
         int caseId = resultSet.getInt("case_id");
         de.ase.pcpartpicker.domain.Case pcCase = getRequired(index.cases, caseId, "Case");
 
-        Computer computer = new Computer.Builder()
+        Computer.Builder builder = new Computer.Builder()
             .setCPU(cpu)
             .setGPU(gpu)
             .setMainboard(mainboard)
-            .setRAM(ram, 0) // ACHTUNG: 0 ist Platzhalter Anzahl Module muss noch implementiert werden
+            .setRAM(ram, ramModuleCount)
             .setPSU(psu)
-            .setComputerCase(pcCase)
-            .build();
+            .setComputerCase(pcCase);
+
+        // Lade StorageDevices
+        List<Storage> storageDevices = loadStorageDevices(computerId, index);
+        if (!storageDevices.isEmpty()) {
+            builder.setStorageDevices(storageDevices.toArray(new Storage[0]));
+        }
+
+        Computer computer = builder.build();
 
         if (computer == null) {
             throw new IllegalStateException("Computer konnte aus Datenbankeintrag nicht aufgebaut werden.");
@@ -204,6 +217,77 @@ public class ComputerRepository {
     }
 
     /**
+     * Speichert StorageDevices für einen Computer.
+     *
+     * @param computerId ID des Computers.
+     * @param storageDevices zu speichernde Storage-Geräte.
+     */
+    private void saveStorageDevices(int computerId, List<Storage> storageDevices) {
+        String sql = "INSERT INTO computer_storage (computer_id, storage_type, storage_id) VALUES (?, ?, ?)";
+        try (Connection connection = connectionFactory.createConnection();
+             java.sql.PreparedStatement statement = connection.prepareStatement(sql)) {
+            for (Storage storage : storageDevices) {
+                statement.setInt(1, computerId);
+                if (storage instanceof HDD) {
+                    statement.setString(2, "hdd");
+                } else if (storage instanceof SSD) {
+                    statement.setString(2, "ssd");
+                } else if (storage instanceof M2SSD) {
+                    statement.setString(2, "m2_ssd");
+                }
+                statement.setInt(3, storage.getId());
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException("StorageDevices konnten nicht gespeichert werden.", e);
+        }
+    }
+
+    /**
+     * Lädt alle StorageDevices für einen Computer.
+     *
+     * @param computerId ID des Computers.
+     * @param index vorbereiteter Komponenten-Index für Storage-Lookups.
+     * @return Liste der Storage-Geräte für den Computer.
+     */
+    private List<Storage> loadStorageDevices(int computerId, ComponentIndex index) {
+        List<Storage> storageDevices = new ArrayList<>();
+        String sql = "SELECT storage_type, storage_id FROM computer_storage WHERE computer_id = ? ORDER BY id";
+        try (Connection connection = connectionFactory.createConnection();
+             java.sql.PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, computerId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                HddRepository hddRepository = new HddRepository(connectionFactory);
+                SsdRepository ssdRepository = new SsdRepository(connectionFactory);
+                M2SsdRepository m2SsdRepository = new M2SsdRepository(connectionFactory);
+
+                Map<Integer, HDD> hdds = toMapById(hddRepository.findAll(), HDD::getId);
+                Map<Integer, SSD> ssds = toMapById(ssdRepository.findAll(), SSD::getId);
+                Map<Integer, M2SSD> m2ssds = toMapById(m2SsdRepository.findAll(), M2SSD::getId);
+
+                while (resultSet.next()) {
+                    String storageType = resultSet.getString("storage_type");
+                    int storageId = resultSet.getInt("storage_id");
+
+                    if ("hdd".equals(storageType)) {
+                        HDD hdd = hdds.get(storageId);
+                        if (hdd != null) storageDevices.add(hdd);
+                    } else if ("ssd".equals(storageType)) {
+                        SSD ssd = ssds.get(storageId);
+                        if (ssd != null) storageDevices.add(ssd);
+                    } else if ("m2_ssd".equals(storageType)) {
+                        M2SSD m2ssd = m2ssds.get(storageId);
+                        if (m2ssd != null) storageDevices.add(m2ssd);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException("StorageDevices konnten nicht geladen werden.", e);
+        }
+        return storageDevices;
+    }
+
+    /**
      * Hilfsmethode zum Umwandeln einer Liste in eine ID-basierte Map.
      * 
      * @param values Liste mit Domain-Objekten.
@@ -213,7 +297,6 @@ public class ComputerRepository {
      */
     private <T> Map<Integer, T> toMapById(List<T> values, Function<T, Integer> idExtractor) {
         return values.stream().collect(Collectors.toMap(idExtractor, Function.identity()));
-        //ich halte das nicht mehr lange aus
     }
 
     /**

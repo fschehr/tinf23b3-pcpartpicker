@@ -24,4 +24,16 @@ public class GPU extends Component {
     public int getVramGB() {
         return vramGB;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "%s | %s | %.2f EUR | %d GB VRAM | %d W",
+            getName(),
+            getManufacturer() != null ? getManufacturer().getName() : "-",
+            getPrice(),
+            vramGB,
+            getPowerConsumptionW()
+        );
+    }
 }
