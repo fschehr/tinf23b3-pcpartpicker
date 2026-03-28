@@ -67,13 +67,16 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
         
         for (T item : items) {
             if (idExtractor.apply(item) == selectedId) {
-                draftSetter.accept(draft, item); 
+    
                 String warning = draft.getBuilder().validate(draft, item); 
                 if (warning != null) {
                     System.out.println("\nAchtung: " + warning); 
-                    System.out.println("Willst du die Komponente wiklich hinzufügen?");
-                    
+                    int add = inputReader.readInt("Willst du die Komponente wirklich hinzufügen? [0: Nein, 1: Ja]", 0, 1);
+                    if(add == 0) {
+                        return; 
+                    }
                 }
+                draftSetter.accept(draft, item);
                 System.out.println("\n-> " + nameExtractor.apply(item) + " wurde zum Computer hinzugefügt!");
                 inputReader.waitForEnter("Enter drücken um zurück zum Konfigurator zu gelangen");
                 return;

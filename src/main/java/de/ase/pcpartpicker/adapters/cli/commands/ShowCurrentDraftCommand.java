@@ -2,6 +2,7 @@ package de.ase.pcpartpicker.adapters.cli.commands;
 
 import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
+import de.ase.pcpartpicker.adapters.cli.TableGenerator;
 
 public class ShowCurrentDraftCommand implements ICommand {
     private final ComputerDraft draft;
@@ -18,7 +19,13 @@ public class ShowCurrentDraftCommand implements ICommand {
         System.out.println("   DEIN AKTUELLER PC-ENTWURF");
         System.out.println("==================================");
         
-        draft.printCurrentState(); 
+        // draft.printCurrentState(); 
+
+        TableGenerator table = new TableGenerator(new String[]{"Komponente", "Eigenschaft", "Details"});
+        for (String[] row : draft.getDraftAsTableRows()) {
+            table.addRow(row);
+        }
+        table.printTable();
         
         System.out.println("==================================\n");
         inputReader.waitForEnter("Enter drücken um zurückzukehren...");

@@ -30,10 +30,10 @@ public class StartComputerDraftCommand implements ICommand {
 
             if (input == 1) {
                 SessionManager.setCurrentUser(standardUser);
-                draft.startNewDraft();
-                configuratorMenu.execute();
             }
         }
+        draft.startNewDraft();
+        configuratorMenu.execute();
         
     }
 }
