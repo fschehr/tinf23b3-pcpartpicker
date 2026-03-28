@@ -118,7 +118,17 @@ public class ComputerRepository extends JdbcRepository<Computer> {
         try (Connection connection = connectionFactory.createConnection();
              java.sql.PreparedStatement statement = connection.prepareStatement(sqlConfig)) {
             statement.setInt(1, userId);
-            statement.setInt(2, computerId);
+            statement.setInt(2, computer.getCPU().getId());
+            if (computer.getGPU() != null) {
+                statement.setInt(3, computer.getGPU().getId());
+            } else {
+                statement.setNull(3, java.sql.Types.INTEGER);
+            }
+            statement.setInt(4, computer.getMainboard().getId());
+            statement.setInt(5, computer.getRAM().getId());
+            statement.setInt(6, computer.getPSU().getId());
+            statement.setInt(7, computer.getComputerCase().getId());
+
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new IllegalStateException("Config-Eintrag konnte nicht erstellt werden.", e);

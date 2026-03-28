@@ -32,7 +32,7 @@ public class CPU extends Component {
         return socket;
     }
 
-    public double getspeedGHz() {
+    public double getSpeedGHz() {
         return speedGHz;
     }
 
