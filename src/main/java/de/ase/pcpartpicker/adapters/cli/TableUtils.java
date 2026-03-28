@@ -21,7 +21,7 @@ public class TableUtils {
         if (computer.getComputerCase() != null) {
             rows.add(new String[]{"Gehäuse", "Name", computer.getComputerCase().getName()});
             rows.add(new String[]{"", "Formfaktor", computer.getComputerCase().getMotherboardFormFactor().getName()});
-            rows.add(new String[]{"", "Preis", String.valueOf(computer.getComputerCase().getPrice())});
+            rows.add(new String[]{"", "Preis", String.valueOf(computer.getComputerCase().getPrice()) + " €"});
         }
         rows.add(new String[]{"", "", ""});
 
@@ -29,7 +29,7 @@ public class TableUtils {
         if (computer.getCPU() != null) {
             rows.add(new String[]{"CPU", "Name", computer.getCPU().getName()});
             rows.add(new String[]{"", "Takt", computer.getCPU().getSpeedGHz() + " GHz"});
-            rows.add(new String[]{"", "Preis", String.valueOf(computer.getCPU().getPrice())});
+            rows.add(new String[]{"", "Preis", String.valueOf(computer.getCPU().getPrice()) + " €"});
         }
         rows.add(new String[]{"", "", ""});
 
@@ -37,7 +37,7 @@ public class TableUtils {
         if (computer.getGPU() != null) {
             rows.add(new String[]{"GPU", "Name", computer.getGPU().getName()});
             rows.add(new String[]{"", "VRAM", computer.getGPU().getVramGB() + " GB"});
-            rows.add(new String[]{"", "Preis", String.valueOf(computer.getGPU().getPrice())});
+            rows.add(new String[]{"", "Preis", String.valueOf(computer.getGPU().getPrice()) + " €"});
         }
         rows.add(new String[]{"", "", ""});
 
@@ -45,7 +45,7 @@ public class TableUtils {
         if (computer.getMainboard() != null) {
             rows.add(new String[]{"Mainboard", "Name", computer.getMainboard().getName()});
             rows.add(new String[]{"", "Formfaktor", computer.getMainboard().getFormFactor().getName()});
-            rows.add(new String[]{"", "Preis", String.valueOf(computer.getMainboard().getPrice())});
+            rows.add(new String[]{"", "Preis", String.valueOf(computer.getMainboard().getPrice()) + " €"});
         }
         rows.add(new String[]{"", "", ""});
 
@@ -54,7 +54,7 @@ public class TableUtils {
             rows.add(new String[]{"RAM", "Name", computer.getRAM().getName()});
             rows.add(new String[]{"", "Module", String.valueOf(computer.getRamModule())});
             rows.add(new String[]{"", "Kapazität", computer.getRAM().getCapacityGB() + " GB"});
-            rows.add(new String[]{"", "Preis", String.valueOf(computer.getRAM().getPrice())});
+            rows.add(new String[]{"", "Preis", String.valueOf(computer.getRAM().getPrice()) + " €"});
         }
         rows.add(new String[]{"", "", ""});
 
@@ -63,7 +63,7 @@ public class TableUtils {
             rows.add(new String[]{"Netzteil", "Name", computer.getPSU().getName()});
             rows.add(new String[]{"", "Leistung", computer.getPSU().getWattage() + " W"});
             rows.add(new String[]{"", "Formfaktor", computer.getPSU().getFormFactor().getName()});
-            rows.add(new String[]{"", "Preis", String.valueOf(computer.getPSU().getPrice())});
+            rows.add(new String[]{"", "Preis", String.valueOf(computer.getPSU().getPrice()) + " €"});
         }
         rows.add(new String[]{"", "", ""});
 
@@ -75,7 +75,7 @@ public class TableUtils {
                 String comp = (i == 0) ? "Speicher" : "";
                 rows.add(new String[]{comp, "Name", s.getName()});
                 rows.add(new String[]{"", "Kapazität", s.getCapacityGB() + " GB"});
-                rows.add(new String[]{"", "Preis", String.valueOf(s.getPrice())});
+                rows.add(new String[]{"", "Preis", String.valueOf(s.getPrice()) + " €"});
                 rows.add(new String[]{"", "", ""});
                 i++;
             }
@@ -96,7 +96,7 @@ public class TableUtils {
         if (computer.getComputerCase() != null) {
             rows.add(new String[]{"Gehäuse", "Name", computer.getComputerCase().getName()});
             rows.add(new String[]{"", "Formfaktor", computer.getComputerCase().getMotherboardFormFactor().getName()});
-            rows.add(new String[]{"", "Preis", String.valueOf(computer.getComputerCase().getPrice())});
+            rows.add(new String[]{"", "Preis", String.valueOf(computer.getComputerCase().getPrice()) + " €"});
         }
         rows.add(new String[]{"", "", ""});
 
@@ -104,7 +104,7 @@ public class TableUtils {
         if (computer.getCPU() != null) {
             rows.add(new String[]{"CPU", "Name", computer.getCPU().getName()});
             rows.add(new String[]{"", "Takt", computer.getCPU().getSpeedGHz() + " GHz"});
-            rows.add(new String[]{"", "Preis", String.valueOf(computer.getCPU().getPrice())});
+            rows.add(new String[]{"", "Preis", String.valueOf(computer.getCPU().getPrice()) + " €"});
         }
         rows.add(new String[]{"", "", ""});
 
@@ -112,7 +112,7 @@ public class TableUtils {
         if (computer.getGPU() != null) {
             rows.add(new String[]{"GPU", "Name", computer.getGPU().getName()});
             rows.add(new String[]{"", "VRAM", computer.getGPU().getVramGB() + " GB"});
-            rows.add(new String[]{"", "Preis", String.valueOf(computer.getGPU().getPrice())});
+            rows.add(new String[]{"", "Preis", String.valueOf(computer.getGPU().getPrice()) + " €"});
         }
         rows.add(new String[]{"", "", ""});
 
@@ -120,7 +120,7 @@ public class TableUtils {
         if (computer.getMainboard() != null) {
             rows.add(new String[]{"Mainboard", "Name", computer.getMainboard().getName()});
             rows.add(new String[]{"", "Formfaktor", computer.getMainboard().getFormFactor().getName()});
-            rows.add(new String[]{"", "Preis", String.valueOf(computer.getMainboard().getPrice())});
+            rows.add(new String[]{"", "Preis", String.valueOf(computer.getMainboard().getPrice()) + " €"});
         }
         rows.add(new String[]{"", "", ""});
 
@@ -129,7 +129,7 @@ public class TableUtils {
             rows.add(new String[]{"RAM", "Name", computer.getRAM().getName()});
             rows.add(new String[]{"", "Module", String.valueOf(computer.getRamModule())});
             rows.add(new String[]{"", "Kapazität", computer.getRAM().getCapacityGB() + " GB"});
-            rows.add(new String[]{"", "Preis", String.valueOf(computer.getRAM().getPrice())});
+            rows.add(new String[]{"", "Preis", String.valueOf(computer.getRAM().getPrice()) + " €"});
         }
         rows.add(new String[]{"", "", ""});
 
@@ -138,7 +138,7 @@ public class TableUtils {
             rows.add(new String[]{"Netzteil", "Name", computer.getPSU().getName()});
             rows.add(new String[]{"", "Leistung", computer.getPSU().getWattage() + " W"});
             rows.add(new String[]{"", "Formfaktor", computer.getPSU().getFormFactor().getName()});
-            rows.add(new String[]{"", "Preis", String.valueOf(computer.getPSU().getPrice())});
+            rows.add(new String[]{"", "Preis", String.valueOf(computer.getPSU().getPrice()) + " €"});
         }
         rows.add(new String[]{"", "", ""});
 
@@ -150,7 +150,7 @@ public class TableUtils {
                 String comp = (i == 0) ? "Speicher" : "";
                 rows.add(new String[]{comp, "Name", s.getName()});
                 rows.add(new String[]{"", "Kapazität", s.getCapacityGB() + " GB"});
-                rows.add(new String[]{"", "Preis", String.valueOf(s.getPrice())});
+                rows.add(new String[]{"", "Preis", String.valueOf(s.getPrice()) + " €"});
                 rows.add(new String[]{"", "", ""});
                 i++;
             }
