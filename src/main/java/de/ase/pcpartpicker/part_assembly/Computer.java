@@ -14,6 +14,8 @@ import de.ase.pcpartpicker.domain.Component;
 
 import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 
+import de.ase.pcpartpicker.ColorConstants;
+
 /**
  * Klasse die einen vollständig konfigurierten Computer abbildet
  * Diese Klasse ist unveränderlich. <br>
@@ -289,56 +291,56 @@ public class Computer {
         private boolean validate() {
 
             if(ram == null) {
-                System.out.println("Es muss mindestens ein RAM-Modul ausgewählt werden.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Es muss mindestens ein RAM-Modul ausgewählt werden.");
                 return false;
             }
 
             if(cpu == null) {
-                System.out.println("Es muss eine CPU ausgewählt werden.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Es muss eine CPU ausgewählt werden.");
                 return false;
             }
 
             if(!cpu.hasIntegratedGraphics() && gpu == null) {
-                System.out.println("Warnung: Der Computer hat keine dedizierte Grafikkarte und die CPU verfügt nicht über integrierte Grafik. Es könnte zu Problemen bei der Anzeige kommen.");
+                System.out.println(ColorConstants.YELLOW("WARNUNG") + " | Der Computer hat keine dedizierte Grafikkarte und die CPU verfügt nicht über integrierte Grafik. Es könnte zu Problemen bei der Anzeige kommen.");
             }
 
             if(mainboard == null) {
-                System.out.println("Es muss ein Mainboard ausgewählt werden.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Es muss ein Mainboard ausgewählt werden.");
                 return false;
             }
 
             if(psu == null) {
-                System.out.println("Es muss ein Netzteil ausgewählt werden.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Es muss ein Netzteil ausgewählt werden.");
                 return false;
             }
 
             if(computerCase == null) {
-                System.out.println("Es muss ein Gehäuse ausgewählt werden.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Es muss ein Gehäuse ausgewählt werden.");
                 return false;
             }
 
             if (!computerCase.getPSUFormFactor().equals(psu.getFormFactor())) {
-                System.out.println("Die Form des Netzteils passt nicht zum Gehäuse.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Die Form des Netzteils passt nicht zum Gehäuse.");
                 return false;
             }
 
             if (!checkMainboardCaseCompatibility(mainboard, computerCase)) {
-                System.out.println("Das Mainboard passt nicht ins Gehäuse.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Das Mainboard passt nicht ins Gehäuse.");
                 return false;
             }            
 
             if(!cpu.getSocket().equals(mainboard.getSocket())) {
-                System.out.println("Die CPU ist nicht mit dem Mainboard kompatibel.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Die CPU ist nicht mit dem Mainboard kompatibel.");
                 return false;
             }
 
             if(ramModule > mainboard.getRamSlots()) {
-                System.out.println("Das Mainboard hat nicht genug RAM-Slots für die Anzahl der RAM-Module.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Das Mainboard hat nicht genug RAM-Slots für die Anzahl der RAM-Module.");
                 return false;
             }
 
             if(storageDevices.isEmpty()) {
-                System.out.println("Es muss mindestens ein Speichermedium ausgewählt werden.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Es muss mindestens ein Speichermedium ausgewählt werden.");
                 return false;
             }
 
@@ -353,7 +355,7 @@ public class Computer {
             if(validate())
                 return new Computer(this);
             else
-                System.out.println("Der Computer konnte nicht erstellt werden. Bitte prüfen sie die Kompatibilität der Komponenten.\n");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Der Computer konnte nicht erstellt werden. Bitte prüfen sie die Kompatibilität der Komponenten.\n");
             return null;
         }
     }

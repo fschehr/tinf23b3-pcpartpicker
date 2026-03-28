@@ -9,6 +9,8 @@ import de.ase.pcpartpicker.adapters.sqlite.repositories.ComputerRepository;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
 import de.ase.pcpartpicker.part_assembly.Computer;
 
+import de.ase.pcpartpicker.ColorConstants;
+
 public class FinishComputerCommand implements ICommand {
     private final InputReader inputReader;
     private final ComputerRepository computerRepository;
@@ -25,14 +27,14 @@ public class FinishComputerCommand implements ICommand {
         
 
         try {
-            System.out.println("\n--- Kompatibilität wird geprüft ---");
+            System.out.println("\n--- Kompatibilität wird geprüft ---\n");
             Computer newComputer = draft.getBuilder().build();
 
             if (newComputer != null) {
                 User currentUser = SessionManager.getcurrentUser();
                 computerRepository.save(currentUser.getId(), newComputer);
                 
-                System.out.println("Erfolg! Computer wurde erfolgreich gebaut.");
+                System.out.println(ColorConstants.GREEN("ERFOLG") + " | Computer wurde erfolgreich gebaut.");
                 TableGenerator table = new TableGenerator(new String[]{"Komponente", "Eigenschaft", "Details"});
                 for (String[] row : TableUtils.getComputerAsTableRows(newComputer)){
                     table.addRow(row);
@@ -42,7 +44,7 @@ public class FinishComputerCommand implements ICommand {
                 draft.clear();
             } 
         } catch (Exception e) {
-            System.out.println("Du hast bereits den Computer erstellt. Um eine neuen Computer zu erstellen gehe zurück und drücke erneut auf Computer erstellen."); 
+            System.out.println(ColorConstants.RED("FEHLER") + " | Du hast bereits den Computer erstellt. Um eine neuen Computer zu erstellen gehe zurück und drücke erneut auf Computer erstellen."); 
         }
         
         

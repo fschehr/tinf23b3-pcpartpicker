@@ -3,6 +3,8 @@ package de.ase.pcpartpicker.adapters.cli.commands;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.sqlite.DatabaseInitializer;
 
+import de.ase.pcpartpicker.ColorConstants;
+
 /**
  * Setzt die Datenbank auf Basis der JSONL-Dateien im data-Ordner zurueck.
  */
@@ -18,7 +20,7 @@ public class ResetDatabaseCommand implements ICommand {
 
     @Override
     public void execute() {
-        System.out.println("WARNUNG: Alle vorhandenen Daten in der Datenbank werden geloescht.");
+        System.out.println(ColorConstants.YELLOW("WARNUNG") + " | Alle vorhandenen Daten in der Datenbank werden gelöscht.");
         int confirmation = inputReader.readInt("Datenbank wirklich resetten? 1=Ja, 2=Nein", 1, 2);
 
         if (confirmation != 1) {
@@ -32,7 +34,7 @@ public class ResetDatabaseCommand implements ICommand {
             databaseInitializer.resetDatabase();
             System.out.println("Datenbank erfolgreich aus JSONL-Dateien neu aufgebaut.");
         } catch (IllegalStateException e) {
-            System.out.println("Fehler beim Datenbank-Reset: " + e.getMessage());
+            System.out.println(ColorConstants.RED("FEHLER") + " | " + e.getMessage());
         }
 
         inputReader.waitForEnter("Druecke Enter zum Fortfahren...");

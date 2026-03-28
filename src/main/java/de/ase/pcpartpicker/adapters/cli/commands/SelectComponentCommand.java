@@ -11,6 +11,8 @@ import de.ase.pcpartpicker.adapters.cli.rListConfiguration;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.Repository;
 import de.ase.pcpartpicker.domain.Component;
 
+import de.ase.pcpartpicker.ColorConstants;
+
 public class SelectComponentCommand<T extends Component> implements ICommand {
     private static final int PAGE_SIZE = 10;
     
@@ -111,13 +113,13 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
             }
 
             if (selectedItem == null) {
-                System.out.println("Fehler: ID nicht gefunden.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | ID nicht gefunden.");
                 continue;
             }
 
             String warning = draft.getBuilder().validate(draft, selectedItem);
             if (warning != null) {
-                System.out.println("\nAchtung: " + warning);
+                System.out.println(ColorConstants.YELLOW("WARNUNG") + " | " + warning);
                 int add = inputReader.readInt("Willst du die Komponente wirklich hinzufügen? [0: Nein, 1: Ja]", 0, 1);
                 if (add == 0) {
                     return;
@@ -125,7 +127,7 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
             }
 
             draftSetter.accept(draft, selectedItem);
-            System.out.println("\n-> " + nameExtractor.apply(selectedItem) + " wurde zum Computer hinzugefügt!");
+            System.out.println("\n" + ColorConstants.GREEN("ERFOLG") + " | " + nameExtractor.apply(selectedItem) + " wurde zum Computer hinzugefügt!");
             inputReader.waitForEnter("Enter drücken um zurück zum Konfigurator zu gelangen");
             return;
         }
