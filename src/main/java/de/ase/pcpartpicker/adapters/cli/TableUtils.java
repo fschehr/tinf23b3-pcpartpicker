@@ -158,29 +158,10 @@ public class TableUtils {
 
         // Trennlinie und Gesamtpreis
         rows.add(new String[]{"---", "---", "---"});
-        rows.add(new String[]{"Gesamtpreis", "", String.format("%.2f €", getDraftTotalPrice(computer))});
+        rows.add(new String[]{"Gesamtpreis", "", String.format("%.2f €", computer.getTotalPrice())});
 
         return rows.toArray(new String[0][]);
     }
-
-
-    private static double getDraftTotalPrice(ComputerDraft draft) {
-        double total = 0.0;
-        if (draft.getComputerCase() != null) total += draft.getComputerCase().getPrice();
-        if (draft.getCPU() != null) total += draft.getCPU().getPrice();
-        if (draft.getGPU() != null) total += draft.getGPU().getPrice();
-        if (draft.getMainboard() != null) total += draft.getMainboard().getPrice();
-        if (draft.getRAM() != null) total += draft.getRAM().getPrice();
-        if (draft.getPSU() != null) total += draft.getPSU().getPrice();
-        List<Storage> storage = draft.getStorage();
-        if (storage != null && !storage.isEmpty()) {
-            for (Storage s : storage) {
-                total += s.getPrice();
-            }
-        }
-        return total;
-    }
-
 
     public String getUserName(int computerID) {
         User user = userRepository.findByComputerId(computerID);

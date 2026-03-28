@@ -49,20 +49,6 @@ public class Computer {
         this.storageDevices = builder.storageDevices;
     }
 
-    public void printConfiguration() {
-        System.out.println("Computer-Konfiguration:");
-        System.out.println("Gehäuse: " + computerCase.getName());
-        System.out.println("CPU: " + cpu.getName());
-        System.out.println("GPU: " + (gpu != null ? gpu.getName() : "Keine dedizierte Grafikkarte"));
-        System.out.println("Mainboard: " + mainboard.getName());
-        System.out.println("RAM: " + ram.getName() + " (" + ramModule + " Module)");
-        System.out.println("Netzteil: " + psu.getName());
-        System.out.println("Speichermedien:");
-        for (Storage storage : storageDevices) {
-            System.out.println(" - " + storage.getName());
-        }
-    }
-
     public double getTotalPrice() {
         double totalPrice = 0;
         totalPrice += computerCase.getPrice();
