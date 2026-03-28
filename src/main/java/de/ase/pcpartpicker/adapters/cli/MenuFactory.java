@@ -25,7 +25,6 @@ public class MenuFactory {
     private final ConnectionFactory connectionFactory = new ConnectionFactory();
     private final UserRepository userRepository = new UserRepository(connectionFactory); 
     private final ComputerRepository computerRepository = new ComputerRepository(connectionFactory);
-    private final SessionManager sessionManager = new SessionManager();
     private final ComputerDraft computerDraft = new ComputerDraft();
 
     public static Menu createApp() {
@@ -74,11 +73,6 @@ public class MenuFactory {
         return loginMenu;
     }
 
-
-    private Menu createConfigurationMenu() {
-        Menu menu = new Menu("Aktuelle Konfiguration", inputReader);
-        return menu; 
-    }
 
     private Menu createComputerMenu() {
         Menu computerMenu = new Menu("Computerverwaltung", inputReader);

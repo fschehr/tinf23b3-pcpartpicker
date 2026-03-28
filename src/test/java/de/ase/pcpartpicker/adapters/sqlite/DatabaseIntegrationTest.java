@@ -72,10 +72,10 @@ class DatabaseIntegrationTest {
         assertEquals(1, userComputers.size());
 
         Computer loadedComputer = userComputers.get(0);
-        assertEquals(computer.getCpu().getId(), loadedComputer.getCpu().getId());
+        assertEquals(computer.getCPU().getId(), loadedComputer.getCPU().getId());
         assertEquals(computer.getMainboard().getId(), loadedComputer.getMainboard().getId());
-        assertEquals(computer.getRam().getId(), loadedComputer.getRam().getId());
-        assertEquals(computer.getPsu().getId(), loadedComputer.getPsu().getId());
+        assertEquals(computer.getRAM().getId(), loadedComputer.getRAM().getId());
+        assertEquals(computer.getPSU().getId(), loadedComputer.getPSU().getId());
         assertEquals(computer.getComputerCase().getId(), loadedComputer.getComputerCase().getId());
     }
 

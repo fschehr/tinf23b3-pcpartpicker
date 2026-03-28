@@ -100,6 +100,12 @@ public class Computer {
     }
 
 
+    // TODO: Erstmal temporär eingefügt, damit die Funktion gefunden wird
+    public List<Storage> getStorageDevices() {
+        return storageDevices;
+    }
+
+
     public double getTotalPowerConsumption() {
         double totalPower = 0;
         totalPower += computerCase.getPowerConsumptionW();
@@ -232,7 +238,7 @@ public class Computer {
             }
 
             if(component instanceof Case) {
-                if(draft.getPsu() != null && !((Case) component).getPSUFormFactor().equals(draft.getPsu().getFormFactor())) {
+                if(draft.getPSU() != null && !((Case) component).getPSUFormFactor().equals(draft.getPSU().getFormFactor())) {
                     //System.out.println("LIVE: Die Form des ausgewählten Netzteils passt nicht zum Gehäuse.");
                     return "Das ausgewählte Netzeil passt nicht in das Gehäuse.";
                     // WICHTIG: Hier ergänzen dass abwärtskompatibel

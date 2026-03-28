@@ -47,7 +47,7 @@ public class ListConfiguration {
                 cpu.getName(),
                 cpu.getManufacturer().getName(),
                 cpu.getSocket().getName(),
-                String.format("%.1f",cpu.getspeedGHz()),
+                String.format("%.1f",cpu.getSpeedGHz()),
                 cpu.getPrice() + " €"
             }
         );
