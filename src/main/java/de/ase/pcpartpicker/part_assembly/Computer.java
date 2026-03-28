@@ -23,6 +23,7 @@ import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
  */
 public class Computer {
     
+    private final int id;
     private final Case computerCase;
     private final CPU cpu;
     private final GPU gpu;
@@ -37,6 +38,7 @@ public class Computer {
      * @param builder Der Builder, der die Komponenten enthält.
      */
     private Computer(Builder builder) {
+        this.id = builder.id;
         this.computerCase = builder.computerCase;
         this.cpu = builder.cpu;
         this.gpu = builder.gpu;
@@ -77,6 +79,9 @@ public class Computer {
         return totalPrice;
     }
 
+    public int getId() {
+        return id;
+    }
     public Case getComputerCase() {
         return computerCase;
     }
@@ -136,6 +141,7 @@ public class Computer {
      * @author Tuluhan
      */
     public static class Builder {
+        private int id = 0;
         private Case computerCase;
         private CPU cpu;
         private GPU gpu;
@@ -144,6 +150,11 @@ public class Computer {
         private int ramModule; // Anzahl der RAM-Module, z.B. 2 für 2x8GB
         private PSU psu;
         private List<Storage> storageDevices = new ArrayList<>();
+
+        public Builder setId(int id) {
+            this.id = id;
+            return this;
+        }
 
         /**
          * Setzt das Gehäuse für den Computer. Es muss ein Gehäuse ausgewählt werden, damit der Computer erstellt werden kann.

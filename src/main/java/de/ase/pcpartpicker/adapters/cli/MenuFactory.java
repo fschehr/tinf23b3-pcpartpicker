@@ -1,6 +1,7 @@
 package de.ase.pcpartpicker.adapters.cli;
 import de.ase.pcpartpicker.adapters.cli.commands.FinishComputerCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.LoginCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.LogoutCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.NewUserCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.OpenMenuCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.SelectComponentCommand;
@@ -70,6 +71,7 @@ public class MenuFactory {
     private Menu createLoginMenu() {
         Menu loginMenu = new Menu("Login", inputReader);
         loginMenu.add(new MenuItem("Login starten", new LoginCommand(inputReader, userRepository)));
+        loginMenu.add(new MenuItem("Logout", new LogoutCommand()));
         return loginMenu;
     }
 

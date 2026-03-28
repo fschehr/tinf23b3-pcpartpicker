@@ -59,4 +59,24 @@ public class UserRepository extends JdbcRepository<User> {
             resultSet.getString("name")
         );
     }
+
+    public int findUserIdByComputerId(int computerId) {
+        String sql = "SELECT user_id FROM config WHERE computer_id = ?";
+        return queryOptional(
+            sql,
+            statement -> statement.setInt(1, computerId),
+            rs -> rs.getInt("user_id"),
+            "User-ID konnte über Computer-ID nicht geladen werden."
+        ).orElse(-1);
+    }
+
+    public User findByComputerId(int computerId) {
+        String sql = "SELECT u.id, u.name FROM users u JOIN config c ON c.user_id = u.id WHERE c.computer_id = ?";
+        return queryOptional(
+            sql,
+            statement -> statement.setInt(1, computerId),
+            this::mapUser,
+            "User konnte über Computer-ID nicht geladen werden."
+        ).orElse(null);
+    }
 }

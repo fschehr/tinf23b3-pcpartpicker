@@ -162,6 +162,7 @@ public class ComputerRepository extends JdbcRepository<Computer> {
         de.ase.pcpartpicker.domain.Case pcCase = getRequired(index.cases, caseId, "Case");
 
         Computer.Builder builder = new Computer.Builder()
+            .setId(computerId)
             .setCPU(cpu)
             .setGPU(gpu)
             .setMainboard(mainboard)

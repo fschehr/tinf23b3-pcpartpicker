@@ -3,6 +3,7 @@ package de.ase.pcpartpicker.adapters.cli.commands;
 import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
+import de.ase.pcpartpicker.adapters.cli.TableUtils;
 
 public class ShowCurrentDraftCommand implements ICommand {
     private final ComputerDraft draft;
@@ -22,7 +23,7 @@ public class ShowCurrentDraftCommand implements ICommand {
         // draft.printCurrentState(); 
 
         TableGenerator table = new TableGenerator(new String[]{"Komponente", "Eigenschaft", "Details"});
-        for (String[] row : draft.getDraftAsTableRows()) {
+        for (String[] row : TableUtils.getDraftAsTableRows(draft)) {
             table.addRow(row);
         }
         table.printTable();

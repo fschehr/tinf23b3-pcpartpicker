@@ -116,93 +116,6 @@ public class ComputerDraft {
     }
 
 
-    public String[][] getDraftAsTableRows() {
-    List<String[]> rows = new ArrayList<>();
-
-        // Gehäuse
-        if (computerCase != null) {
-            rows.add(new String[]{"Gehäuse", "Name", computerCase.getName()});
-            rows.add(new String[]{"", "Formfaktor", computerCase.getMotherboardFormFactor().getName()});
-            rows.add(new String[]{"", "Preis", String.valueOf(computerCase.getPrice())});
-        } else {
-            rows.add(new String[]{"Gehäuse", "Status", "Nicht ausgewählt"});
-        }
-        rows.add(new String[]{"", "", ""});
-
-        // CPU
-        if (cpu != null) {
-            rows.add(new String[]{"CPU", "Name", cpu.getName()});
-            rows.add(new String[]{"", "Takt", cpu.getSpeedGHz() + " GHz"});
-            rows.add(new String[]{"", "Preis", String.valueOf(cpu.getPrice())});
-        } else {
-            rows.add(new String[]{"CPU", "Status", "Nicht ausgewählt"});
-        }
-        rows.add(new String[]{"", "", ""});
-
-        // GPU
-        if (gpu != null) {
-            rows.add(new String[]{"GPU", "Name", gpu.getName()});
-            rows.add(new String[]{"", "VRAM", gpu.getVramGB() + " GB"});
-            rows.add(new String[]{"", "Preis", String.valueOf(gpu.getPrice())});
-        } else {
-            rows.add(new String[]{"GPU", "Status", "Nicht ausgewählt"});
-        }
-        rows.add(new String[]{"", "", ""});
-
-        // Mainboard
-        if (mainboard != null) {
-            rows.add(new String[]{"Mainboard", "Name", mainboard.getName()});
-            rows.add(new String[]{"", "Formfaktor", mainboard.getFormFactor().getName()});
-            rows.add(new String[]{"", "Preis", String.valueOf(mainboard.getPrice())});
-        } else {
-            rows.add(new String[]{"Mainboard", "Status", "Nicht ausgewählt"});
-        }
-        rows.add(new String[]{"", "", ""});
-
-        // RAM
-        if (ram != null) {
-            rows.add(new String[]{"RAM", "Name", ram.getName()});
-            rows.add(new String[]{"", "Module", String.valueOf(ramModule)});
-            rows.add(new String[]{"", "Kapazität", ram.getCapacityGB() + " GB"});
-            rows.add(new String[]{"", "Preis", String.valueOf(ram.getPrice())});
-        } else {
-            rows.add(new String[]{"RAM", "Status", "Nicht ausgewählt"});
-        }
-        rows.add(new String[]{"", "", ""});
-
-        // Netzteil
-        if (psu != null) {
-            rows.add(new String[]{"Netzteil", "Name", psu.getName()});
-            rows.add(new String[]{"", "Leistung", psu.getWattage() + " W"});
-            rows.add(new String[]{"", "Formfaktor", psu.getFormFactor().getName()});
-            rows.add(new String[]{"", "Preis", String.valueOf(psu.getPrice())});
-        } else {
-            rows.add(new String[]{"Netzteil", "Status", "Nicht ausgewählt"});
-        }
-        rows.add(new String[]{"", "", ""});
-
-        // Storage (alle Geräte auflisten)
-        if (storage != null && !storage.isEmpty()) {
-            int i = 0;
-            for (Storage s : storage) {
-                String comp = (i == 0) ? "Speicher" : "";
-                rows.add(new String[]{comp, "Name", s.getName()});
-                rows.add(new String[]{"", "Kapazität", s.getCapacityGB() + " GB"});
-                rows.add(new String[]{"", "Preis", String.valueOf(s.getPrice())});
-                rows.add(new String[]{"", "", ""});
-                i++;
-            }
-        } else {
-            rows.add(new String[]{"Speicher", "Status", "Nicht ausgewählt"});
-            rows.add(new String[]{"", "", ""});
-        }
-        
-        rows.add(new String[]{"------", "------", "------"});
-        rows.add(new String[]{"Gesamtpreis","", String.format("%.2f €", getTotalPrice()) }); 
-
-        return rows.toArray(new String[0][]);
-    }
-
     private double getTotalPrice() {
         double totalPrice = 0.0;
         if (computerCase != null) totalPrice += computerCase.getPrice();
@@ -218,4 +131,5 @@ public class ComputerDraft {
         }
         return totalPrice; 
     }
+
 }
