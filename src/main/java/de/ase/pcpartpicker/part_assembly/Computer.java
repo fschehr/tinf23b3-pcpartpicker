@@ -242,7 +242,7 @@ public class Computer {
                     //System.out.println("LIVE: Die Form des ausgewählten Netzteils passt nicht zum Gehäuse.");
                     return "Das ausgewählte Netzeil passt nicht in das Gehäuse.";
                     // WICHTIG: Hier ergänzen dass abwärtskompatibel
-                } else if(draft.getMainboard() != null && !((Case) component).getMotherboardFormFactor().equals(draft.getMainboard().getFormFactor())) {
+                } else if(draft.getMainboard() != null && !checkMainboardCaseCompatibility(draft.getMainboard(), (Case) component)) {
                     //System.out.println("LIVE: Das ausgewählte Mainboard passt nicht ins Gehäuse.");
                     return "Das ausgewählte Mainboard ist zu groß für das Gehäuse.";
                 }
@@ -325,9 +325,9 @@ public class Computer {
                 return false;
             }
 
-            if (checkMainboardCaseCompatibility(mainboard, computerCase)) {
+            if (!checkMainboardCaseCompatibility(mainboard, computerCase)) {
                 System.out.println("Das Mainboard passt nicht ins Gehäuse.");
-                return true;
+                return false;
             }            
 
             if(!cpu.getSocket().equals(mainboard.getSocket())) {
