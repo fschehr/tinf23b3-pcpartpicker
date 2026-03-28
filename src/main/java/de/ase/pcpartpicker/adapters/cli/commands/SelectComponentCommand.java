@@ -12,6 +12,7 @@ import de.ase.pcpartpicker.adapters.sqlite.repositories.Repository;
 import de.ase.pcpartpicker.domain.Component;
 
 public class SelectComponentCommand<T extends Component> implements ICommand {
+    private static final int PAGE_SIZE = 10;
     
     private final InputReader inputReader;
     private final Repository<T> repository; 
@@ -46,43 +47,87 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
 
     @Override
     public void execute() {
-        System.out.println("\n--- " + componentName + " Auswählen ---");
-        
-        List<T> items = repository.findAll(); 
-        
-        TableGenerator table = new TableGenerator(tableHeaders);
-        for (T item : items) {
-            table.addRow(rowMapper.apply(item));
+        List<T> items = repository.findAll();
+
+        if (items.isEmpty()) {
+            System.out.println("\nKeine Komponenten gefunden.");
+            inputReader.waitForEnter("Enter drücken...");
+            return;
         }
-        table.printTable();
 
-        System.out.println("\n[Tipp: Gib 0 ein, um die Auswahl abzubrechen und zurückzukehren]");
+        int currentPage = 0;
+        int totalPages = (items.size() + PAGE_SIZE - 1) / PAGE_SIZE;
 
-        int selectedId = inputReader.readInt("Bitte die ID der gewünschten Komponente eingeben", 0, items.size());
+        while (true) {
+            System.out.println("\n--- " + componentName + " Auswählen ---");
 
-        if (selectedId == 0) {
-            System.out.println("-> Auswahl abgebrochen.");
-            return; 
-        }
-        
-        for (T item : items) {
-            if (idExtractor.apply(item) == selectedId) {
-    
-                String warning = draft.getBuilder().validate(draft, item); 
-                if (warning != null) {
-                    System.out.println("\nAchtung: " + warning); 
-                    int add = inputReader.readInt("Willst du die Komponente wirklich hinzufügen? [0: Nein, 1: Ja]", 0, 1);
-                    if(add == 0) {
-                        return; 
-                    }
-                }
-                draftSetter.accept(draft, item);
-                System.out.println("\n-> " + nameExtractor.apply(item) + " wurde zum Computer hinzugefügt!");
-                inputReader.waitForEnter("Enter drücken um zurück zum Konfigurator zu gelangen");
+            int startIndex = currentPage * PAGE_SIZE;
+            int endIndex = Math.min(startIndex + PAGE_SIZE, items.size());
+
+            TableGenerator table = new TableGenerator(tableHeaders);
+            for (int i = startIndex; i < endIndex; i++) {
+                table.addRow(rowMapper.apply(items.get(i)));
+            }
+            table.printTable();
+
+            System.out.println("\nSeite " + (currentPage + 1) + " von " + totalPages
+                + " | m = nächste Seite | n = vorherige Seite | 0 = zurück");
+
+            String input = inputReader.readString("ID oder Aktion (m/n/0)").trim().toLowerCase();
+
+            if ("0".equals(input)) {
+                System.out.println("-> Auswahl abgebrochen.");
                 return;
             }
+
+            if ("m".equals(input)) {
+                if (currentPage < totalPages - 1) {
+                    currentPage++;
+                }
+                continue;
+            }
+
+            if ("n".equals(input)) {
+                if (currentPage > 0) {
+                    currentPage--;
+                }
+                continue;
+            }
+
+            int selectedId;
+            try {
+                selectedId = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Ungültige Eingabe.");
+                continue;
+            }
+
+            T selectedItem = null;
+            for (T item : items) {
+                if (idExtractor.apply(item) == selectedId) {
+                    selectedItem = item;
+                    break;
+                }
+            }
+
+            if (selectedItem == null) {
+                System.out.println("Fehler: ID nicht gefunden.");
+                continue;
+            }
+
+            String warning = draft.getBuilder().validate(draft, selectedItem);
+            if (warning != null) {
+                System.out.println("\nAchtung: " + warning);
+                int add = inputReader.readInt("Willst du die Komponente wirklich hinzufügen? [0: Nein, 1: Ja]", 0, 1);
+                if (add == 0) {
+                    return;
+                }
+            }
+
+            draftSetter.accept(draft, selectedItem);
+            System.out.println("\n-> " + nameExtractor.apply(selectedItem) + " wurde zum Computer hinzugefügt!");
+            inputReader.waitForEnter("Enter drücken um zurück zum Konfigurator zu gelangen");
+            return;
         }
-        System.out.println("Fehler: ID nicht gefunden.");
-        inputReader.waitForEnter("Enter drücken...");
     }
 }

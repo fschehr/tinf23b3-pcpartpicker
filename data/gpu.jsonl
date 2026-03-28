@@ -1,0 +1,1000 @@
+{"name":"MSI GeForce RTX 3060 Ventus 2X 12G","price":299.97,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1777,"color":"Black","length":235}
+{"name":"Sapphire PULSE","price":379.99,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":3290,"color":"Black","length":240}
+{"name":"MSI SHADOW 3X OC","price":829.99,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2497,"color":"Black","length":303}
+{"name":"Gigabyte WINDFORCE OC SFF","price":549.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2542,"color":"Black","length":282}
+{"name":"Sapphire PULSE","price":749.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2400,"boost_clock":2970,"color":"Black","length":320}
+{"name":"ASRock Challenger OC","price":369.99,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":3290,"color":"Black / Silver","length":249}
+{"name":"Gigabyte GAMING OC","price":729.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2520,"boost_clock":3060,"color":"Black","length":288}
+{"name":"Gigabyte GAMING OC","price":359.97,"chipset":"Radeon RX 7600 XT","memory":16,"core_clock":1720,"boost_clock":2810,"color":"Black / Gray","length":281}
+{"name":"Asus ROG Astral OC","price":3359.99,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":2610,"color":"Black / Silver","length":358}
+{"name":"ASRock Challenger D","price":219.99,"chipset":"Radeon RX 6600","memory":8,"core_clock":1626,"boost_clock":null,"color":"Black","length":269}
+{"name":"Asus PRIME OC","price":719.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2460,"boost_clock":3030,"color":"Black","length":312}
+{"name":"Asus PRIME","price":479.99,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2602,"color":"Black","length":304}
+{"name":"MSI VENTUS 2X BLACK OC","price":449.99,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2505,"color":"Black","length":199}
+{"name":"Asus PRIME OC","price":589.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":null,"color":"Black / White","length":306}
+{"name":"MSI VENTUS 2X PLUS OC","price":499.99,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2617,"color":"Black / Gray","length":227}
+{"name":"MSI VENTUS 3X OC","price":789.99,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2497,"color":"Silver / Black","length":303}
+{"name":"ASRock Steel Legend","price":699.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2400,"boost_clock":2970,"color":"White / Gray","length":298}
+{"name":"Gigabyte GAMING OC","price":389.99,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":null,"color":"Black","length":281}
+{"name":"Intel Limited Edition","price":289.99,"chipset":"Arc B580","memory":12,"core_clock":2670,"boost_clock":null,"color":"Black","length":272}
+{"name":"MSI SHADOW 2X OC","price":299.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2535,"color":"Black / Silver","length":197}
+{"name":"PNY OC","price":549.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2325,"boost_clock":2587,"color":"Black","length":300}
+{"name":"XFX Swift OC","price":389.98,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":3320,"color":"Black","length":290}
+{"name":"MSI VENTUS 2X OC","price":179.99,"chipset":"GeForce RTX 3050 6GB","memory":6,"core_clock":1040,"boost_clock":1492,"color":"Black","length":189}
+{"name":"Gigabyte WINDFORCE OC","price":299.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":null,"color":"Black","length":199}
+{"name":"Asus TUF GAMING OC","price":1564.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"Black / Silver","length":348}
+{"name":"XFX Swift OC","price":534.45,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":3320,"color":"White","length":290}
+{"name":"ASRock Challenger","price":599.99,"chipset":"Radeon RX 9070","memory":16,"core_clock":2070,"boost_clock":2520,"color":"Black / Silver","length":290}
+{"name":"Sapphire NITRO+","price":799.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2520,"boost_clock":3060,"color":"Black","length":331}
+{"name":"Gigabyte AORUS MASTER","price":2939.32,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":2655,"color":"White","length":360}
+{"name":"PowerColor Reaper","price":501.39,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":3230,"color":"Black","length":200}
+{"name":"NVIDIA Founders Edition","price":null,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2017,"boost_clock":2407,"color":"Black / Silver","length":304}
+{"name":"Gigabyte WINDFORCE SFF","price":970,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2452,"boost_clock":null,"color":"Black","length":304}
+{"name":"XFX Speedster SWFT 210","price":345,"chipset":"Radeon RX 6600","memory":8,"core_clock":1626,"boost_clock":2491,"color":"Black","length":241}
+{"name":"PowerColor RX7800XT 16G-P","price":599.99,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2430,"color":"Black","length":260}
+{"name":"Asus TUF GAMING OC","price":999,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2610,"color":"Black / Silver","length":329}
+{"name":"XFX Swift","price":779.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":1660,"boost_clock":2970,"color":"Black","length":325}
+{"name":"ASRock Phantom Gaming OC","price":899.99,"chipset":"Radeon RX 7900 XTX","memory":24,"core_clock":2300,"boost_clock":2615,"color":"Black","length":330}
+{"name":"XFX GTS XXX","price":159.99,"chipset":"Radeon RX 580","memory":8,"core_clock":1366,"boost_clock":1386,"color":"Black / Red","length":270}
+{"name":"PNY VCNRTX6000ADA-PB","price":6974,"chipset":"RTX 6000 Ada Generation","memory":48,"core_clock":915,"boost_clock":2505,"color":"Black / Gold","length":267}
+{"name":"Gigabyte WINDFORCE OC","price":845.93,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2505,"color":"Black","length":261}
+{"name":"Zotac GAMING Twin Edge","price":256.98,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1777,"color":"Black","length":224}
+{"name":"Asus ROG Astral OC","price":1799.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"Black / Silver","length":358}
+{"name":"NVIDIA Founders Edition","price":549.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2510,"color":"Black / Gray","length":242}
+{"name":"Asus DUAL OC","price":479.99,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2632,"color":"Black / Silver","length":229}
+{"name":"Sapphire PURE","price":991.27,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2460,"boost_clock":3010,"color":"White","length":320}
+{"name":"Asus PRIME","price":829.99,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2482,"color":"Black / White","length":306}
+{"name":"Asus PRIME OC","price":1399.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"Black / White","length":306}
+{"name":"NVIDIA Founders Edition","price":489.09,"chipset":"GeForce RTX 3060 Ti","memory":8,"core_clock":1410,"boost_clock":1670,"color":"Black / Silver","length":242}
+{"name":"Asus TUF GAMING OC","price":1117.99,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2670,"color":"Black","length":305}
+{"name":"Gigabyte WINDFORCE","price":501.01,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2572,"color":"Black","length":208}
+{"name":"Gigabyte AERO OC","price":979.99,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2588,"boost_clock":null,"color":"White / Silver","length":340}
+{"name":"NVIDIA Founders Edition","price":null,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2620,"color":"Black / Gray","length":304}
+{"name":"Gigabyte GAMING OC","price":1525,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"Black","length":340}
+{"name":"XFX Swift OC","price":359.99,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":3320,"color":"Black","length":270}
+{"name":"Gigabyte WINDFORCE SFF","price":604.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2512,"color":"Black","length":282}
+{"name":"XFX Speedster MERC 310 Black Edition","price":1049.99,"chipset":"Radeon RX 7900 XTX","memory":24,"core_clock":2300,"boost_clock":2615,"color":"Black / Silver","length":344}
+{"name":"Gigabyte WINDFORCE OC SFF","price":869.99,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2497,"boost_clock":null,"color":"Black","length":304}
+{"name":"Asus ROG Astral LC OC","price":4246.33,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":2610,"color":"Black / Silver","length":288}
+{"name":"Gigabyte WINDFORCE OC","price":449.99,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2587,"color":"Black","length":208}
+{"name":"Asus Dual GeForce RTX 3060 V2 OC Edition","price":329.97,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1867,"color":"Black","length":200}
+{"name":"MSI GAMING TRIO OC","price":549.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":null,"color":"Black","length":338}
+{"name":"MSI GAMING TRIO OC","price":559.99,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2662,"color":"White","length":300}
+{"name":"Asus DUAL OC V2","price":369.99,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2535,"color":"Black","length":202}
+{"name":"Asus DUAL EVO OC","price":439.99,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2535,"color":"Black","length":227}
+{"name":"Sapphire PULSE","price":642.99,"chipset":"Radeon RX 9070","memory":16,"core_clock":2070,"boost_clock":2520,"color":"Black","length":280}
+{"name":"PNY Dual Fan OC","price":428.33,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2407,"boost_clock":2691,"color":"Black","length":245}
+{"name":"ASRock Steel Legend OC","price":519,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":3320,"color":"White / Gray","length":298}
+{"name":"Gigabyte GAMING OC","price":249.99,"chipset":"Radeon RX 9060 XT","memory":8,"core_clock":2220,"boost_clock":null,"color":"Black","length":281}
+{"name":"Asus DUAL EVO OC","price":274.99,"chipset":"Radeon RX 7600","memory":8,"core_clock":1720,"boost_clock":2715,"color":"Black","length":229}
+{"name":"Gigabyte WINDFORCE OC","price":820,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":2490,"color":"Black","length":261}
+{"name":"Gigabyte GAMING OC","price":null,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2565,"color":"Black","length":302}
+{"name":"Gigabyte GAMING OC","price":969.99,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2588,"boost_clock":null,"color":"Black","length":340}
+{"name":"XFX Swift","price":799.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":1660,"boost_clock":2970,"color":"White","length":325}
+{"name":"MSI GAMING TRIO OC","price":3049.99,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":null,"color":"Black / Silver","length":359}
+{"name":"PowerColor Hellhound OC","price":859.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2400,"boost_clock":3010,"color":"Black","length":327}
+{"name":"NVIDIA Founders Edition","price":2995.99,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2230,"boost_clock":2520,"color":"Black / Silver","length":304}
+{"name":"PNY VERTO OC","price":759.99,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2490,"color":"Black","length":247}
+{"name":"ASRock Challenger OC","price":399.97,"chipset":"Radeon RX 7700 XT","memory":12,"core_clock":1700,"boost_clock":2584,"color":"Black","length":266}
+{"name":"Asus PRIME","price":609.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":null,"color":"Black / White","length":306}
+{"name":"Gigabyte GAMING OC","price":2809.36,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":2550,"color":"Black","length":342}
+{"name":"MSI GAMING TRIO OC WHITE","price":954.13,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":null,"color":"White","length":338}
+{"name":"Asus PRIME","price":299.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2527,"color":"Black","length":268}
+{"name":"MSI VENTUS 3X OC PLUS","price":1599.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"Silver / Black","length":303}
+{"name":"Asus TUF GAMING OC","price":604.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":null,"color":"Black / Silver","length":329}
+{"name":"Gigabyte AERO OC SFF","price":1579.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"White / Silver","length":304}
+{"name":"XFX Speedster MERC 310","price":996.87,"chipset":"Radeon RX 7900 XT","memory":20,"core_clock":2000,"boost_clock":2535,"color":"Black / Silver","length":344}
+{"name":"ASRock Challenger","price":318.42,"chipset":"Radeon RX 6600","memory":8,"core_clock":1626,"boost_clock":2491,"color":"White","length":269}
+{"name":"Gigabyte GAMING OC","price":469.99,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2647,"color":"Black","length":281}
+{"name":"Gigabyte WINDFORCE OC","price":429.99,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":null,"color":"Black","length":192}
+{"name":"Gigabyte AORUS MASTER","price":2999.99,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":2655,"color":"Black","length":360}
+{"name":"Gigabyte GAMING OC","price":669.99,"chipset":"Radeon RX 9070","memory":16,"core_clock":2070,"boost_clock":2700,"color":"Black","length":288}
+{"name":"Gigabyte GAMING OC","price":null,"chipset":"Radeon RX 7700 XT","memory":12,"core_clock":1700,"boost_clock":2599,"color":"Black","length":302}
+{"name":"Asus TUF GAMING","price":2759.99,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":null,"color":"Black / Silver","length":348}
+{"name":"Sapphire PULSE","price":299.99,"chipset":"Radeon RX 9060 XT","memory":8,"core_clock":2220,"boost_clock":3290,"color":"Black","length":240}
+{"name":"Asus PRIME OC","price":939.99,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2527,"color":"Black / White","length":306}
+{"name":"MSI GAMING TRIO OC","price":1449.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"Black / Silver","length":338}
+{"name":"Gigabyte GAMING OC","price":369.95,"chipset":"Radeon RX 7600","memory":8,"core_clock":1720,"boost_clock":2755,"color":"Black / Silver","length":282}
+{"name":"Asus TUF GAMING OC","price":698,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":1845,"color":"Black","length":300}
+{"name":"MSI SHADOW 2X OC","price":599.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2557,"boost_clock":null,"color":"Black","length":231}
+{"name":"Asus DUAL OC","price":199.97,"chipset":"GeForce RTX 3050 6GB","memory":6,"core_clock":1040,"boost_clock":1537,"color":"Black","length":201}
+{"name":"XFX Speedster QICK 319 Core","price":689,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2430,"color":"Black","length":335}
+{"name":"Asus PRIME OC","price":439.99,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":null,"color":"Black","length":304}
+{"name":"Gigabyte GAMING OC Rev 2.0","price":354.99,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1837,"color":"Black / Gray","length":282}
+{"name":"MSI VENTUS 2X XS OC","price":219.99,"chipset":"GeForce RTX 3050 8GB","memory":8,"core_clock":1550,"boost_clock":1807,"color":"Black / Gray","length":205}
+{"name":"Zotac SOLID SFF OC","price":839.99,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2482,"color":"Black / Gold","length":304}
+{"name":"MSI GAMING TRIO OC","price":1310.93,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2580,"color":"White","length":338}
+{"name":"XFX Speedster SWFT 210 Core","price":409.99,"chipset":"Radeon RX 7700 XT","memory":12,"core_clock":1425,"boost_clock":2544,"color":"Black","length":280}
+{"name":"PowerColor Reaper","price":799.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2400,"boost_clock":2970,"color":"Black / Red","length":289}
+{"name":"XFX Quicksilver","price":799.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2400,"boost_clock":2970,"color":"Black","length":350}
+{"name":"Gigabyte EAGLE OC SFF","price":669.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2587,"color":"White","length":290}
+{"name":"PNY OC","price":749.99,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2295,"boost_clock":2572,"color":"Black","length":300}
+{"name":"MSI GAMING TRIO OC PLUS","price":849.99,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2580,"color":"Black","length":338}
+{"name":"NVIDIA Founders Edition","price":399,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":2540,"color":"Black / Silver","length":244}
+{"name":"Gigabyte AORUS ELITE","price":1059.54,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2570,"boost_clock":3100,"color":"Black","length":339}
+{"name":"MSI SHADOW 3X OC","price":1339,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2655,"color":"Black","length":303}
+{"name":"MSI GT 710 2GD3 LP","price":59.95,"chipset":"GeForce GT 710","memory":2,"core_clock":954,"boost_clock":null,"color":"Black","length":146}
+{"name":"Zotac Twin Edge OC","price":479.99,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2602,"color":"Black","length":220}
+{"name":"Asus TUF GAMING OC","price":945.2,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2520,"boost_clock":3080,"color":"Black / Silver","length":330}
+{"name":"ONIX ODYSSEY","price":259.99,"chipset":"Arc B580","memory":12,"core_clock":2670,"boost_clock":null,"color":"Black / Silver","length":260}
+{"name":"Asus DUAL EVO OC","price":439.99,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":2595,"color":"Black","length":227}
+{"name":"Lenovo 4X61D97085","price":7516.34,"chipset":"RTX A5000","memory":24,"core_clock":1170,"boost_clock":1695,"color":"Black","length":267}
+{"name":"MSI VENTUS XS OC","price":339,"chipset":"GeForce GTX 1660 SUPER","memory":6,"core_clock":1530,"boost_clock":1815,"color":"Black / Silver","length":204}
+{"name":"ASRock Taichi OC","price":799.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2570,"boost_clock":3100,"color":"Black","length":330}
+{"name":"Gigabyte AORUS XTREME WATERFORCE","price":3762.26,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":2655,"color":"Black","length":246}
+{"name":"MSI VENTUS 3X OC","price":2699.99,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":null,"color":"Silver / Black","length":325}
+{"name":"XFX RX-79TMBABF9","price":700.26,"chipset":"Radeon RX 7900 XT","memory":20,"core_clock":2000,"boost_clock":2400,"color":"Black","length":276}
+{"name":"XFX Speedster QICK 319 Core","price":null,"chipset":"Radeon RX 6750 XT","memory":12,"core_clock":2150,"boost_clock":2600,"color":"Black","length":323}
+{"name":"XFX Speedster SWFT 309","price":null,"chipset":"Radeon RX 6700 XT","memory":12,"core_clock":2321,"boost_clock":2581,"color":"Black","length":304}
+{"name":"Gigabyte AERO OC","price":694.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2625,"color":"Black","length":324}
+{"name":"Gigabyte EAGLE OC ICE","price":329.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":null,"color":"White","length":208}
+{"name":"EVGA FTW3 ULTRA GAMING","price":899.99,"chipset":"GeForce RTX 3080 10GB","memory":10,"core_clock":1440,"boost_clock":1800,"color":"Black","length":300}
+{"name":"XFX Speedster QICK 319 BLACK","price":569,"chipset":"Radeon RX 7700 XT","memory":12,"core_clock":1700,"boost_clock":2599,"color":"Black","length":335}
+{"name":"Gigabyte GAMING OC","price":439.99,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":null,"color":"Black","length":281}
+{"name":"PNY VCG508016TFXPB1","price":1349.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2620,"color":"Black","length":329}
+{"name":"PowerColor Red Devil OC","price":819.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2460,"boost_clock":3060,"color":"Black / Red","length":340}
+{"name":"Gigabyte GAMING","price":349.99,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":null,"color":"Black","length":281}
+{"name":"MSI GeForce RTX 3060 Ti GAMING X","price":null,"chipset":"GeForce RTX 3060 Ti","memory":8,"core_clock":1410,"boost_clock":1770,"color":"Black / Silver","length":278}
+{"name":"MSI SHADOW 3X OC","price":599.44,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2557,"color":"Black","length":303}
+{"name":"Gigabyte AORUS MASTER ICE","price":1629.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"White / Silver","length":360}
+{"name":"Palit Infinity 3","price":923,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2325,"boost_clock":2512,"color":"Black","length":292}
+{"name":"Sapphire NITRO+","price":null,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":null,"color":"Black","length":320}
+{"name":"ASRock Phantom Gaming D OC","price":159.99,"chipset":"Radeon RX 6500 XT","memory":4,"core_clock":2365,"boost_clock":2820,"color":"Black","length":240}
+{"name":"MSI SUPRIM LIQUID SOC","price":3229,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":null,"color":"Black / Silver","length":280}
+{"name":"PowerColor Reaper","price":669.99,"chipset":"Radeon RX 9070","memory":16,"core_clock":2070,"boost_clock":2520,"color":"Black","length":289}
+{"name":"Asus TUF GAMING OC","price":1798.99,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2640,"color":"Black","length":348}
+{"name":"Asus ROG STRIX GAMING OC","price":null,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2625,"color":"Black / Silver","length":332}
+{"name":"Asus ROG STRIX GAMING OC","price":3185,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2235,"boost_clock":2640,"color":"Black","length":358}
+{"name":"NVIDIA Founders Edition","price":949.99,"chipset":"GeForce RTX 3080 Ti","memory":12,"core_clock":1370,"boost_clock":1670,"color":"Silver / Black","length":285}
+{"name":"MSI VENTUS 2X OC","price":319.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2535,"color":"Silver / Black","length":197}
+{"name":"Gigabyte WINDFORCE OC SFF","price":1399.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"Black","length":304}
+{"name":"PNY OC","price":1349.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2730,"color":"Black","length":329}
+{"name":"Gigabyte WINDFORCE OC","price":2639.99,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":2467,"color":"Black","length":342}
+{"name":"Sapphire PULSE","price":429,"chipset":"Radeon RX 6700 XT","memory":12,"core_clock":2321,"boost_clock":2581,"color":"Black","length":260}
+{"name":"NVIDIA Founders Edition","price":null,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":1730,"color":"Black","length":242}
+{"name":"NVIDIA Founders Edition","price":899,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":2480,"color":"Black / Silver","length":244}
+{"name":"Sapphire PULSE","price":337.33,"chipset":"Radeon RX 7600","memory":8,"core_clock":1720,"boost_clock":2755,"color":"Black / Red","length":240}
+{"name":"Sapphire NITRO+","price":null,"chipset":"Radeon RX 7900 XTX","memory":24,"core_clock":2300,"boost_clock":2680,"color":"Silver / Black","length":320}
+{"name":"MSI VENTUS 2X OC","price":629.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2557,"color":"White","length":236}
+{"name":"Sparkle TITAN OC","price":319.99,"chipset":"Arc B580","memory":12,"core_clock":2670,"boost_clock":2740,"color":"Blue / White","length":317}
+{"name":"Zotac GAMING SOLID OC","price":609.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2542,"color":"Black / Copper","length":304}
+{"name":"Gigabyte AERO OC","price":649,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2647,"color":"White / Silver","length":281}
+{"name":"Asus DUAL OC","price":299.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2565,"color":"Black","length":228}
+{"name":"Gigabyte EAGLE OC","price":599,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2617,"color":"White / Silver","length":215}
+{"name":"Asus DUAL EVO OC","price":775.87,"chipset":"GeForce RTX 4060 Ti","memory":16,"core_clock":2310,"boost_clock":2625,"color":"Black","length":227}
+{"name":"Sparkle GUARDIAN OC","price":259.99,"chipset":"Arc B570","memory":10,"core_clock":2500,"boost_clock":2660,"color":"Blue / White","length":242}
+{"name":"Zotac GAMING SOLID OC","price":2599.98,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":2422,"color":"Black / Copper","length":330}
+{"name":"Asus DUAL OC","price":699,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2520,"color":"Black","length":280}
+{"name":"Asus PRIME","price":1264.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"Black / White","length":306}
+{"name":"NVIDIA Founders Edition","price":1849.99,"chipset":"GeForce RTX 4080","memory":16,"core_clock":2210,"boost_clock":2510,"color":"Black / Silver","length":304}
+{"name":"AMD Radeon RX 6950 XT","price":null,"chipset":"Radeon RX 6950 XT","memory":16,"core_clock":1890,"boost_clock":2310,"color":"Black","length":267}
+{"name":"Sapphire PULSE","price":762.12,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":null,"color":"Black / Red","length":280}
+{"name":"Sapphire NITRO+","price":649.99,"chipset":"Radeon RX 9070","memory":16,"core_clock":2210,"boost_clock":2700,"color":"Black","length":331}
+{"name":"Zotac GAMING SOLID","price":3495.23,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":2407,"color":"Black / Copper","length":330}
+{"name":"XFX Swift OC","price":319.99,"chipset":"Radeon RX 9060 XT","memory":8,"core_clock":2220,"boost_clock":3320,"color":"White","length":270}
+{"name":"EVGA KO ULTRA GAMING","price":320,"chipset":"GeForce RTX 2060","memory":6,"core_clock":1365,"boost_clock":1755,"color":"Black","length":202}
+{"name":"Gigabyte AORUS MASTER","price":1629.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"Black","length":360}
+{"name":"XFX Mercury OC RGB","price":869.98,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":1870,"boost_clock":3100,"color":"Black","length":360}
+{"name":"XFX Swift OC","price":299.99,"chipset":"Radeon RX 9060 XT","memory":8,"core_clock":2220,"boost_clock":3320,"color":"Black","length":270}
+{"name":"Gainward Phoenix-S","price":null,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2452,"color":"Black","length":332}
+{"name":"XFX Speedster SWFT 210 Core","price":331.42,"chipset":"Radeon RX 6650 XT","memory":8,"core_clock":2055,"boost_clock":2635,"color":"Black / Silver","length":241}
+{"name":"PNY ARGB EPIC-X RGB OC","price":1256.39,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2295,"boost_clock":2640,"color":"Black","length":300}
+{"name":"Zotac GAMING SOLO","price":299.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2497,"color":"Black","length":164}
+{"name":"Asus PRIME","price":612.98,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2460,"boost_clock":2990,"color":"Black","length":312}
+{"name":"Intel Limited Edition","price":249,"chipset":"Arc A750","memory":8,"core_clock":2050,"boost_clock":null,"color":"Black","length":250}
+{"name":"MSI GAMING TRIO OC","price":549.99,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2662,"color":"Black","length":300}
+{"name":"PNY VCQGV100-PB","price":null,"chipset":"Quadro GV100","memory":32,"core_clock":1200,"boost_clock":1447,"color":"Black / Gold","length":267}
+{"name":"NVIDIA Founders Edition","price":null,"chipset":"GeForce RTX 3080 10GB","memory":10,"core_clock":1440,"boost_clock":1710,"color":"Black","length":285}
+{"name":"XFX Speedster SWFT 210 Core","price":289.99,"chipset":"Radeon RX 7600","memory":8,"core_clock":1875,"boost_clock":2655,"color":"Black","length":241}
+{"name":"Zotac GAMING AMP Extreme INFINITY","price":1460.14,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2670,"color":"Black / Copper","length":332}
+{"name":"Gigabyte GAMING OC","price":572.12,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":1815,"color":"Black / Silver","length":286}
+{"name":"Gigabyte OC Low Profile","price":339.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":null,"color":"Black","length":182}
+{"name":"MSI VENTUS 3X OC","price":1409.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2655,"color":"White","length":303}
+{"name":"PowerColor Hellhound Spectral","price":839.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2400,"boost_clock":3010,"color":"White","length":327}
+{"name":"Asus PRIME OC","price":529.99,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2647,"color":"Black","length":304}
+{"name":"MSI VENTUS 2X OC","price":629.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2557,"color":"Silver / Black","length":236}
+{"name":"Asus ROG Astral OC","price":null,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":2610,"color":"White","length":358}
+{"name":"PNY EPIC-X RGB OC","price":2799.99,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":2625,"color":"Black","length":329}
+{"name":"Gigabyte EAGLE","price":535,"chipset":"Radeon RX 6600","memory":8,"core_clock":1626,"boost_clock":2491,"color":"Black / Silver","length":282}
+{"name":"MSI VENTUS 2X BLACK OC","price":479.99,"chipset":"GeForce RTX 4060 Ti","memory":16,"core_clock":2310,"boost_clock":2625,"color":"Black","length":199}
+{"name":"Asus TUF GAMING OC","price":267.3,"chipset":"GeForce GTX 1660 SUPER","memory":6,"core_clock":1530,"boost_clock":1845,"color":"Black","length":206}
+{"name":"Gigabyte WINDFORCE V2","price":1548.99,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2550,"color":"Black","length":330}
+{"name":"MSI VENTUS 2X OC","price":933.74,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2520,"color":"Black","length":242}
+{"name":"MSI SUPRIM SOC","price":3199.99,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":null,"color":"Black / Silver","length":359}
+{"name":"NVIDIA Founders Edition","price":null,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2480,"color":"Black / Silver","length":244}
+{"name":"ASRock Challenger OC","price":279.97,"chipset":"Radeon RX 7600","memory":8,"core_clock":1720,"boost_clock":2695,"color":"Black","length":269}
+{"name":"Zotac GAMING AMP Extreme INFINITY","price":899.99,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2512,"color":"Black","length":332}
+{"name":"Asus TUF GAMING OC","price":1099.99,"chipset":"GeForce RTX 4070 Ti","memory":12,"core_clock":2310,"boost_clock":2760,"color":"Black","length":305}
+{"name":"Gigabyte WINDFORCE OC Rev 2.0","price":324.97,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1792,"color":"Black","length":198}
+{"name":"Gigabyte WINDFORCE","price":379.99,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":2572,"color":"Black","length":208}
+{"name":"NVIDIA Founders Edition","price":null,"chipset":"GeForce GTX 1080 Ti","memory":11,"core_clock":1480,"boost_clock":1582,"color":"Black / Silver","length":267}
+{"name":"XFX Speedster SWFT 210 Core","price":649,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2430,"color":"Black","length":283}
+{"name":"EVGA FTW3 ULTRA GAMING","price":765,"chipset":"GeForce RTX 3070 Ti","memory":8,"core_clock":1575,"boost_clock":1860,"color":"Black","length":300}
+{"name":"PowerColor Hellhound","price":1174.08,"chipset":"Radeon RX 7900 XTX","memory":24,"core_clock":2300,"boost_clock":2525,"color":"Black","length":320}
+{"name":"EVGA FTW3 ULTRA GAMING","price":1518.99,"chipset":"GeForce RTX 3090","memory":24,"core_clock":1395,"boost_clock":1800,"color":"Black","length":300}
+{"name":"XFX Quicksilver","price":799.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":1660,"boost_clock":2970,"color":"White","length":360}
+{"name":"ASRock Challenger OC","price":269.98,"chipset":"Arc B580","memory":12,"core_clock":2670,"boost_clock":2740,"color":"Black","length":249}
+{"name":"Asus TUF GAMING OC","price":599.99,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2692,"color":"Black / Silver","length":302}
+{"name":"MSI VANGUARD SOC","price":859.99,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2602,"color":"Black / Silver","length":357}
+{"name":"Sapphire PULSE","price":468,"chipset":"Radeon RX 7600 XT","memory":16,"core_clock":1720,"boost_clock":2810,"color":"Black / Red","length":250}
+{"name":"XFX Mercury OC RGB","price":839.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":1870,"boost_clock":3100,"color":"White","length":360}
+{"name":"Asus DUAL OC","price":399.99,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2535,"color":"White","length":227}
+{"name":"MSI VANGUARD SOC","price":649.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":null,"color":"Black","length":337}
+{"name":"Gigabyte GAMING OC","price":619.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2625,"color":"Black","length":327}
+{"name":"Sapphire 21323-01-20G","price":null,"chipset":"Radeon RX 7900 XT","memory":20,"core_clock":2000,"boost_clock":2400,"color":"Black","length":276}
+{"name":"Zotac Twin Edge","price":642.11,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2572,"color":"Black","length":220}
+{"name":"Asus DUAL EVO OC","price":949.97,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":2550,"color":"Black","length":227}
+{"name":"Asus ROG STRIX GAMING OC","price":3539.99,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2235,"boost_clock":2640,"color":"White","length":358}
+{"name":"MSI INSPIRE 3X OC PLUS","price":1010,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2497,"color":"Gold / Black","length":288}
+{"name":"ASRock Intel Arc A380 Challenger ITX","price":139.99,"chipset":"Arc A380","memory":6,"core_clock":2250,"boost_clock":null,"color":"Black","length":190}
+{"name":"XFX Swift OC","price":399.99,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":3320,"color":"Black","length":290}
+{"name":"ONIX LUMI OC","price":285.98,"chipset":"Arc B580","memory":12,"core_clock":2670,"boost_clock":2740,"color":"White / Silver","length":260}
+{"name":"XFX RX-79GMERCB9","price":669.99,"chipset":"Radeon RX 7900 GRE","memory":16,"core_clock":1270,"boost_clock":2395,"color":"Black","length":335}
+{"name":"Asus TUF GAMING OC","price":2940.55,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":null,"color":"Black / Silver","length":348}
+{"name":"MSI GeForce RTX 3080 VENTUS 3X 10G OC","price":879.99,"chipset":"GeForce RTX 3080 10GB","memory":10,"core_clock":1440,"boost_clock":null,"color":"Black","length":305}
+{"name":"MSI GT 710 2GD3H LP","price":71.62,"chipset":"GeForce GT 710","memory":2,"core_clock":954,"boost_clock":954,"color":"Black","length":146}
+{"name":"Gigabyte GAMING OC","price":595,"chipset":"Radeon RX 5700 XT","memory":8,"core_clock":1650,"boost_clock":1905,"color":"Black","length":280}
+{"name":"Asus TUF GAMING OC","price":1009.99,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2610,"color":"White / Silver","length":329}
+{"name":"Palit GamingPro","price":null,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2452,"color":"Black","length":332}
+{"name":"MSI GeForce RTX 2070 SUPER VENTUS GP OC","price":689,"chipset":"GeForce RTX 2070 SUPER","memory":8,"core_clock":1605,"boost_clock":1785,"color":"Silver / Black","length":258}
+{"name":"XFX Swift OC","price":719.99,"chipset":"Radeon RX 9070","memory":16,"core_clock":1440,"boost_clock":2700,"color":"White","length":325}
+{"name":"MSI GTX 1050 Ti 4GT OC","price":263.99,"chipset":"GeForce GTX 1050 Ti","memory":4,"core_clock":1341,"boost_clock":1455,"color":"Black / White","length":215}
+{"name":"MSI VENTUS 3X OC","price":1299.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2655,"color":"Silver / Black","length":303}
+{"name":"Sapphire PURE","price":540.66,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":3290,"color":"Black","length":240}
+{"name":"Gigabyte EAGLE OC ICE SFF","price":1149,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2541,"boost_clock":null,"color":"White / Silver","length":304}
+{"name":"MSI GeForce RTX 3070 VENTUS 3X OC","price":534.19,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":1755,"color":"Black / Silver","length":305}
+{"name":"MSI GeForce GTX 1650 SUPER","price":419,"chipset":"GeForce GTX 1650 SUPER","memory":4,"core_clock":1530,"boost_clock":1740,"color":"Black / Silver","length":180}
+{"name":"Sapphire PURE","price":896.64,"chipset":"Radeon RX 9070","memory":16,"core_clock":2210,"boost_clock":2700,"color":"White","length":320}
+{"name":"NVIDIA Founders Edition","price":null,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2550,"color":"Black","length":304}
+{"name":"Asus TUF GAMING OC","price":479.99,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":null,"color":"Black / Silver","length":304}
+{"name":"MSI GAMING X","price":575,"chipset":"GeForce RTX 2060 SUPER","memory":8,"core_clock":1470,"boost_clock":1695,"color":"Black / Silver","length":248}
+{"name":"PowerColor Hellhound OC","price":399.98,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":3310,"color":"Black","length":310}
+{"name":"XFX Speedster SWFT 319","price":null,"chipset":"Radeon RX 6800","memory":16,"core_clock":1700,"boost_clock":2105,"color":"Black","length":340}
+{"name":"Gigabyte WINDFORCE OC","price":249.99,"chipset":"GeForce RTX 5050","memory":8,"core_clock":2317,"boost_clock":2587,"color":"Black","length":199}
+{"name":"MSI GAMING X","price":425,"chipset":"GeForce GTX 1660 Ti","memory":6,"core_clock":1500,"boost_clock":1875,"color":"Black","length":247}
+{"name":"Sapphire NITRO+","price":399.99,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":3320,"color":"Black","length":300}
+{"name":"ASRock Radeon RX6700XT CLD 12G","price":null,"chipset":"Radeon RX 6700 XT","memory":12,"core_clock":2321,"boost_clock":2581,"color":"Black","length":269}
+{"name":"Asus Dual V3","price":null,"chipset":"Radeon RX 6600","memory":8,"core_clock":1626,"boost_clock":2491,"color":"Black","length":219}
+{"name":"Gigabyte AERO OC","price":null,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":null,"color":"White","length":281}
+{"name":"Gigabyte AORUS MASTER","price":1039.99,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2670,"boost_clock":null,"color":"Black","length":360}
+{"name":"MSI VANGUARD SOC LAUNCH EDITION","price":3062.98,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":null,"color":"Black / Silver","length":357}
+{"name":"Gigabyte WINDFORCE","price":1999.99,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":2407,"color":"Black","length":342}
+{"name":"MSI GeForce GTX 1060 6GT OCV1","price":null,"chipset":"GeForce GTX 1060 6GB","memory":6,"core_clock":1544,"boost_clock":1759,"color":"Black / White","length":243}
+{"name":"Gigabyte GAMING OC","price":1480,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2655,"color":"Black","length":300}
+{"name":"Gigabyte AERO OC","price":334.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":null,"color":"Silver","length":281}
+{"name":"Gigabyte EAGLE","price":528.66,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":null,"color":"Black","length":272}
+{"name":"Gigabyte GAMING OC","price":null,"chipset":"GeForce RTX 3060 Ti","memory":8,"core_clock":1410,"boost_clock":1740,"color":"Black / Silver","length":282}
+{"name":"Asus DUAL OC","price":784.35,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2572,"color":"Black / Silver","length":249}
+{"name":"NVIDIA Founders Edition","price":null,"chipset":"GeForce RTX 3090","memory":24,"core_clock":1395,"boost_clock":1695,"color":"Black / Silver","length":313}
+{"name":"Zotac GAMING SOLID CORE OC","price":1682.12,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2640,"color":"Black / Copper","length":304}
+{"name":"Asus ROG STRIX GAMING OC","price":1299.99,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2670,"color":"White","length":358}
+{"name":"PNY XLR8 Gaming VERTO EPIC-X RGB","price":579,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":2475,"color":"Black","length":305}
+{"name":"PNY ARGB EPIC-X RGB OC","price":1459.24,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2780,"color":"Black","length":329}
+{"name":"PNY Dual Fan OC","price":353.48,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2407,"boost_clock":2692,"color":"Black","length":245}
+{"name":"NVIDIA Founders Edition","price":null,"chipset":"GeForce RTX 3070 Ti","memory":8,"core_clock":1575,"boost_clock":1770,"color":"Black","length":267}
+{"name":"MSI GAMING TRIO OC","price":369.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2640,"color":"White","length":300}
+{"name":"Gigabyte GAMING","price":499,"chipset":"GeForce GTX 1080","memory":8,"core_clock":1721,"boost_clock":1860,"color":"Black / Orange","length":286}
+{"name":"NVIDIA 9001G4112520001","price":null,"chipset":"GeForce GTX 1070","memory":8,"core_clock":1506,"boost_clock":1683,"color":"Black / Silver","length":267}
+{"name":"ASRock Challenger OC","price":319.99,"chipset":"Radeon RX 9060 XT","memory":8,"core_clock":2220,"boost_clock":3290,"color":"Black / Silver","length":249}
+{"name":"PowerColor Hellhound OC","price":677.54,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2520,"color":"Black","length":322}
+{"name":"Asus PRIME OC","price":737.85,"chipset":"Radeon RX 9070","memory":16,"core_clock":2120,"boost_clock":2610,"color":"Black","length":312}
+{"name":"MSI VENTUS 2X","price":329.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2512,"color":"White","length":197}
+{"name":"MSI INSPIRE 3X OC","price":1399.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2655,"color":"Gold / Black","length":288}
+{"name":"MSI VENTUS 2X BLACK OC","price":593.01,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":null,"color":"Black","length":199}
+{"name":"Palit Infinity 3 OC","price":653.25,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2407,"boost_clock":2662,"color":"Black","length":292}
+{"name":"PNY ARGB EPIC-X RGB OC","price":599.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2325,"boost_clock":2685,"color":"Black","length":300}
+{"name":"Gigabyte GAMING OC","price":2915.99,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2235,"boost_clock":null,"color":"Black","length":340}
+{"name":"ASRock Steel Legend OC","price":339.99,"chipset":"Radeon RX 9060 XT","memory":8,"core_clock":2220,"boost_clock":3320,"color":"White / Gray","length":298}
+{"name":"MSI RTX 3060 Ventus 3X 12G OC","price":569.99,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1807,"color":"Black","length":316}
+{"name":"MSI VANGUARD SOC","price":2799.99,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":null,"color":"Black / Silver","length":357}
+{"name":"MSI VENTUS 3X OC","price":489.99,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2617,"color":"Silver / Black","length":306}
+{"name":"ASRock Steel Legend OC","price":279.98,"chipset":"Arc B580","memory":12,"core_clock":2670,"boost_clock":2800,"color":"White / Gray","length":298}
+{"name":"Sapphire PULSE","price":null,"chipset":"Radeon RX 7900 XT","memory":20,"core_clock":2000,"boost_clock":2450,"color":"Black / Red","length":313}
+{"name":"XFX Speedster MERC 319 CORE","price":719,"chipset":"Radeon RX 6800 XT","memory":16,"core_clock":1825,"boost_clock":2250,"color":"Black / Silver","length":340}
+{"name":"MSI VENTUS 3X OC","price":579.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2557,"boost_clock":null,"color":"Gray / Black","length":302}
+{"name":"MSI RTX 4070 Ti SUPER 16G VENTUS 3X BLACK OC","price":null,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2655,"color":null,"length":322}
+{"name":"Gigabyte EAGLE OC","price":499,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":null,"color":"Black","length":272}
+{"name":"Asus GT1030-2G-CSM","price":106.56,"chipset":"GeForce GT 1030","memory":2,"core_clock":1266,"boost_clock":1506,"color":"Black / Blue","length":173}
+{"name":"PNY OC","price":2699.99,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":2527,"color":"Black","length":329}
+{"name":"Gainward Python III","price":null,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2572,"color":"Black","length":292}
+{"name":"Asus ProArt OC","price":1799,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2640,"color":"Black / Gold","length":300}
+{"name":"NVIDIA Founders Edition","price":879,"chipset":"GeForce RTX 2080 Ti","memory":11,"core_clock":1350,"boost_clock":1635,"color":null,"length":267}
+{"name":"Gigabyte GAMING OC","price":795,"chipset":"GeForce RTX 3070 Ti","memory":8,"core_clock":1575,"boost_clock":1830,"color":"Black / Silver","length":320}
+{"name":"PowerColor Fighter OC","price":110.49,"chipset":"Radeon RX 6500 XT","memory":4,"core_clock":2310,"boost_clock":null,"color":"Black","length":191}
+{"name":"MSI GAMING OC","price":359.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2640,"color":"Black","length":248}
+{"name":"Zotac GAMING Twin Fan","price":255,"chipset":"GeForce GTX 1660 SUPER","memory":6,"core_clock":1530,"boost_clock":1785,"color":"Black","length":173}
+{"name":"PNY RTX A-Series","price":4974,"chipset":"RTX A6000","memory":48,"core_clock":1455,"boost_clock":1860,"color":"Black / Gold","length":267}
+{"name":"Asus TUF GAMING OC","price":null,"chipset":"GeForce RTX 3080 10GB","memory":10,"core_clock":1440,"boost_clock":null,"color":"Black","length":300}
+{"name":"Sapphire PULSE","price":null,"chipset":"Radeon RX 580","memory":8,"core_clock":1257,"boost_clock":1366,"color":"Black","length":230}
+{"name":"MSI GAMING TRIO OC","price":869.99,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2580,"color":"Black","length":338}
+{"name":"EVGA XC3 ULTRA GAMING","price":695,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":1770,"color":"Black / Silver","length":285}
+{"name":"Inno3D X3","price":1472,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2295,"boost_clock":2617,"color":"Black / Silver","length":300}
+{"name":"MSI RX 6600 XT MECH 2X 8G OC","price":648,"chipset":"Radeon RX 6600 XT","memory":8,"core_clock":1968,"boost_clock":2602,"color":"Black / Silver","length":235}
+{"name":"Palit GameRock","price":3719.15,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":null,"color":"Black","length":332}
+{"name":"MSI VENTUS 2X PLUS OC","price":379.99,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":2617,"color":"Black / Gray","length":227}
+{"name":"Gigabyte EAGLE OC SFF","price":659.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2586,"color":"Black","length":290}
+{"name":"Gigabyte GV-R9070XTGAMING-16GD","price":839.95,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2400,"boost_clock":2970,"color":"Black","length":288}
+{"name":"Gigabyte WINDFORCE OC","price":270.89,"chipset":"GeForce RTX 3050 6GB","memory":6,"core_clock":1040,"boost_clock":1477,"color":"Black / Gray","length":191}
+{"name":"MSI GAMING TRIO OC","price":349.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2640,"color":"Black","length":300}
+{"name":"MSI LP OC","price":219.98,"chipset":"GeForce RTX 3050 6GB","memory":6,"core_clock":1040,"boost_clock":1492,"color":"Black","length":174}
+{"name":"NVIDIA Founders Edition","price":1949.99,"chipset":"GeForce RTX 3090 Ti","memory":24,"core_clock":1560,"boost_clock":1860,"color":"Silver / Black","length":313}
+{"name":"Asus DUAL EVO OC","price":877.7,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":2550,"color":"White","length":227}
+{"name":"Sapphire PULSE","price":633.37,"chipset":"Radeon RX 7700 XT","memory":12,"core_clock":1700,"boost_clock":2544,"color":"Black / Red","length":280}
+{"name":"Gigabyte WINDFORCE","price":299.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":null,"color":"Black","length":199}
+{"name":"ASRock Taichi OC","price":1416.06,"chipset":"Radeon RX 7900 XTX","memory":24,"core_clock":2300,"boost_clock":2680,"color":"White","length":345}
+{"name":"Gigabyte EAGLE OC SFF","price":1019.98,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2542,"boost_clock":null,"color":"Black","length":304}
+{"name":"MSI GeForce RTX 3060 Ventus 2X 12G OC","price":349.75,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1807,"color":"Black","length":235}
+{"name":"Asus TUF GAMING OC","price":1556.77,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2670,"color":"White","length":305}
+{"name":"Asus DUAL EVO OC","price":866,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2550,"color":"Black","length":227}
+{"name":"Gigabyte GAMING OC","price":null,"chipset":"GeForce RTX 2070 SUPER","memory":8,"core_clock":1605,"boost_clock":1815,"color":"Black","length":286}
+{"name":"PNY Triple Fan Plus OC","price":null,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2295,"boost_clock":2572,"color":"Black","length":328}
+{"name":"Asus PRIME OC","price":379.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2595,"color":"Black","length":268}
+{"name":"Zotac GAMING SOLID OC","price":3112.98,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":2422,"color":"White / Copper","length":330}
+{"name":"PowerColor Reaper","price":299.99,"chipset":"Radeon RX 9060 XT","memory":8,"core_clock":2220,"boost_clock":3130,"color":"Black","length":200}
+{"name":"XFX Mercury OC Magnetic Air RGB","price":879.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":1870,"boost_clock":3100,"color":"White","length":360}
+{"name":"Asus TUF GAMING","price":1264.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"Black / Silver","length":348}
+{"name":"MSI VENTUS 2X OC","price":464,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2505,"color":"White / Silver","length":199}
+{"name":"Palit GamingPro","price":1558.8,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2295,"boost_clock":2617,"color":"Black","length":332}
+{"name":"ASRock Steel Legend Dark","price":1615.52,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2400,"boost_clock":2970,"color":"Black / Gray","length":298}
+{"name":"MSI VENTUS 3X OC","price":944.99,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2520,"color":"Black / Silver","length":308}
+{"name":"MSI GeForce RTX 2060 VENTUS GP OC","price":349.99,"chipset":"GeForce RTX 2060","memory":6,"core_clock":1365,"boost_clock":1710,"color":"Gray / Black","length":231}
+{"name":"EVGA FTW3 ULTRA GAMING LE iCX3","price":1298,"chipset":"GeForce RTX 3080 Ti","memory":12,"core_clock":1365,"boost_clock":1800,"color":"Black","length":300}
+{"name":"Sapphire PURE","price":null,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2475,"color":"White","length":320}
+{"name":"XFX Speedster SWFT 210","price":459,"chipset":"Radeon RX 7600 XT","memory":16,"core_clock":1720,"boost_clock":2755,"color":"Black","length":272}
+{"name":"Zotac GAMING SOLID OC","price":1470,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2625,"color":"Black / Copper","length":330}
+{"name":"Gigabyte GAMING OC","price":3411.6,"chipset":"GeForce RTX 3080 10GB","memory":10,"core_clock":1440,"boost_clock":1800,"color":"Black / Gray","length":320}
+{"name":"MSI GAMING TRIO OC","price":1867.62,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"White / Silver","length":338}
+{"name":"Asus PRIME OC","price":378,"chipset":"Radeon RX 9060 XT","memory":8,"core_clock":2220,"boost_clock":null,"color":"Black","length":304}
+{"name":"Asus DUAL","price":339.99,"chipset":"Radeon RX 9060 XT","memory":8,"core_clock":2220,"boost_clock":null,"color":"Black","length":202}
+{"name":"Inno3D X3","price":null,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2295,"boost_clock":2452,"color":"Black / Silver","length":300}
+{"name":"Asus TUF GAMING OC","price":409.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2677,"color":"Black","length":302}
+{"name":"Zotac Twin Edge OC","price":null,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2475,"color":"Black / Silver","length":221}
+{"name":"ASRock Phantom Gaming OC","price":811.84,"chipset":"Radeon RX 7900 XT","memory":20,"core_clock":2000,"boost_clock":2450,"color":"White","length":330}
+{"name":"MSI RX 580 8G","price":260,"chipset":"Radeon RX 580","memory":8,"core_clock":1257,"boost_clock":1340,"color":"Black / Red","length":243}
+{"name":"Gigabyte EAGLE OC","price":459.99,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2617,"color":"Black","length":215}
+{"name":"NVIDIA Founders Edition","price":575,"chipset":"GeForce RTX 2060 SUPER","memory":8,"core_clock":1470,"boost_clock":1650,"color":"Silver","length":229}
+{"name":"Sparkle TITAN Luna OC","price":393.45,"chipset":"Arc B580","memory":12,"core_clock":2670,"boost_clock":2740,"color":"White","length":315}
+{"name":"PNY VERTO OC","price":null,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2625,"color":"Black","length":305}
+{"name":"XFX Mercury","price":null,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":1870,"boost_clock":3100,"color":"Black","length":360}
+{"name":"MSI VENTUS 3X OC","price":1799.99,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2595,"color":"Black","length":322}
+{"name":"Asus ROG STRIX-GTX1070-O8G-GAMING","price":499,"chipset":"GeForce GTX 1070","memory":8,"core_clock":1632,"boost_clock":1860,"color":"Black","length":298}
+{"name":"Asus PRIME OC","price":709.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2587,"color":"White / Silver","length":304}
+{"name":"MSI D4 LP OC","price":99.97,"chipset":"GeForce GT 1030 DDR4","memory":4,"core_clock":1151,"boost_clock":1430,"color":"Black","length":150}
+{"name":"Acer Nitro OC","price":319.99,"chipset":"Arc B580","memory":12,"core_clock":2740,"boost_clock":null,"color":"Black / Silver","length":268}
+{"name":"XFX Swift OC","price":299.99,"chipset":"Radeon RX 9060 XT","memory":8,"core_clock":2220,"boost_clock":3320,"color":"Black","length":270}
+{"name":"XFX Speedster QICK 319 Core","price":1028,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2430,"color":"White","length":335}
+{"name":"ASRock Steel Legend OC","price":null,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2520,"color":"White","length":304}
+{"name":"Zotac GAMING SOLID CORE","price":1809.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2617,"color":"Black / Copper","length":304}
+{"name":"XFX Speedster QICK 210","price":169.99,"chipset":"Radeon RX 6500 XT","memory":4,"core_clock":2310,"boost_clock":2825,"color":"Black / Silver","length":232}
+{"name":"Gigabyte WINDFORCE OC","price":429.95,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1792,"color":"Black","length":198}
+{"name":"Asus ROG STRIX OC","price":447.31,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2700,"color":"Black","length":311}
+{"name":"EVGA XC GAMING","price":595,"chipset":"GeForce RTX 3060 Ti","memory":8,"core_clock":1410,"boost_clock":1710,"color":"Black","length":202}
+{"name":"AMD 100-438385","price":null,"chipset":"Radeon RX 6700 XT","memory":12,"core_clock":2321,"boost_clock":2581,"color":"Black / Silver","length":267}
+{"name":"EVGA SC ULTRA GAMING","price":279.99,"chipset":"GeForce GTX 1660 SUPER","memory":6,"core_clock":1530,"boost_clock":1830,"color":"Black","length":202}
+{"name":"Zotac GAMING AMP Extreme AIRO","price":2590,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2235,"boost_clock":2580,"color":"Black / Silver","length":356}
+{"name":"XFX Mercury OC RGB V2","price":859.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":1870,"boost_clock":3100,"color":"Black","length":360}
+{"name":"MSI GeForce RTX 3080 GAMING X TRIO 10G","price":779,"chipset":"GeForce RTX 3080 10GB","memory":10,"core_clock":1440,"boost_clock":null,"color":"Black","length":323}
+{"name":"Inno3D X3","price":null,"chipset":"GeForce RTX 5090","memory":32,"core_clock":1635,"boost_clock":2400,"color":"Black / Silver","length":333}
+{"name":"MSI GT 710 1GD3H LP","price":45.99,"chipset":"GeForce GT 710","memory":1,"core_clock":954,"boost_clock":null,"color":"Black","length":146}
+{"name":"EVGA XC GAMING","price":748.97,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1882,"color":"Black","length":202}
+{"name":"MSI Radeon RX 5600 XT GAMING MX","price":null,"chipset":"Radeon RX 5600 XT","memory":6,"core_clock":1280,"boost_clock":1620,"color":"Black / Silver","length":297}
+{"name":"Asus ROG Astral OC","price":null,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2790,"color":"White","length":358}
+{"name":"Asus TUF GAMING OC","price":3275,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2235,"boost_clock":2595,"color":"Black","length":348}
+{"name":"Gigabyte GAMING OC","price":339.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":null,"color":"Black","length":281}
+{"name":"ASRock Challenger OC","price":239.98,"chipset":"Arc B570","memory":10,"core_clock":2500,"boost_clock":2600,"color":"Black","length":249}
+{"name":"Asus DUAL OC","price":419.99,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":2632,"color":"Black / Silver","length":229}
+{"name":"PowerColor Red Devil E/OC","price":1043.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2460,"boost_clock":3060,"color":"White","length":340}
+{"name":"Gigabyte AORUS XTREME WATERFORCE","price":1939,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2805,"color":"Black","length":220}
+{"name":"PNY EPIC-X RGB OC","price":499.99,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2407,"boost_clock":2692,"color":"Black","length":297}
+{"name":"MSI SUPRIM SOC","price":1809,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"Black / Silver","length":359}
+{"name":"Inno3D X3 OC","price":null,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2295,"boost_clock":2640,"color":"Black / Silver","length":300}
+{"name":"PowerColor Red Devil","price":539,"chipset":"Radeon RX 5700 XT","memory":8,"core_clock":1605,"boost_clock":1905,"color":"Black / Red","length":300}
+{"name":"PowerColor Fighter","price":345,"chipset":"Radeon RX 6600","memory":8,"core_clock":1626,"boost_clock":2491,"color":"Black","length":200}
+{"name":"Zotac SOLID SFF","price":null,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2452,"color":"Black / Gold","length":304}
+{"name":"NVIDIA Founders Edition","price":775,"chipset":"GeForce RTX 2070 SUPER","memory":8,"core_clock":1605,"boost_clock":1770,"color":"Silver","length":267}
+{"name":"Asus STRIX GAMING","price":749,"chipset":"GeForce GTX 1080 Ti","memory":11,"core_clock":1493,"boost_clock":1632,"color":"Black","length":298}
+{"name":"MSI RTX 3070 GAMING X TRIO","price":699,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":1830,"color":"Black / Silver","length":323}
+{"name":"Zotac GAMING SOLID CORE","price":762.98,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2452,"color":"Black / Copper","length":304}
+{"name":"AMD 100-300000082","price":null,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2430,"color":"Black","length":267}
+{"name":"Asus DUAL","price":385,"chipset":"GeForce GTX 1060 6GB","memory":6,"core_clock":1594,"boost_clock":1809,"color":"White","length":242}
+{"name":"Zotac GAMING AMP","price":499.99,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2632,"color":"Black","length":220}
+{"name":"Sapphire PULSE","price":327.12,"chipset":"Radeon RX 6600","memory":8,"core_clock":1626,"boost_clock":2491,"color":"Black / Red","length":193}
+{"name":"MSI VANGUARD SOC","price":1459.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"Black / Silver","length":357}
+{"name":"MSI VENTUS 2X OC","price":487.54,"chipset":"GeForce RTX 3060 Ti","memory":8,"core_clock":1410,"boost_clock":1695,"color":"Black / Silver","length":232}
+{"name":"MSI GAMING X","price":194.99,"chipset":"GeForce RTX 3050 6GB","memory":6,"core_clock":1040,"boost_clock":1507,"color":"Black","length":205}
+{"name":"XFX Speedster SWFT 210 Core","price":299.99,"chipset":"Radeon RX 6650 XT","memory":8,"core_clock":2055,"boost_clock":2635,"color":"Black","length":241}
+{"name":"Acer Nitro OC","price":987.91,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2400,"boost_clock":3100,"color":"Black / Silver","length":297}
+{"name":"Gigabyte GAMING OC","price":1324.17,"chipset":"GeForce RTX 3080 Ti","memory":12,"core_clock":1365,"boost_clock":1770,"color":"Black / Silver","length":320}
+{"name":"PNY VERTO","price":449.99,"chipset":"GeForce RTX 4060 Ti","memory":16,"core_clock":2310,"boost_clock":2535,"color":"Black","length":245}
+{"name":"AMD 100-300000053","price":null,"chipset":"Radeon RX 7900 XTX","memory":24,"core_clock":2300,"boost_clock":2500,"color":"Black","length":287}
+{"name":"XFX Swift OC","price":null,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":3320,"color":"White","length":270}
+{"name":"PowerColor Hellhound OC","price":699.99,"chipset":"Radeon RX 9070","memory":16,"core_clock":2070,"boost_clock":2590,"color":"Black","length":327}
+{"name":"XFX Swift OC","price":712.98,"chipset":"Radeon RX 9070","memory":16,"core_clock":1440,"boost_clock":2700,"color":"Black","length":325}
+{"name":"Gigabyte GAMING OC","price":1799.99,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2595,"color":"Black","length":342}
+{"name":"Sapphire PULSE","price":null,"chipset":"Radeon RX 7900 XTX","memory":24,"core_clock":2300,"boost_clock":2525,"color":"Black / Red","length":313}
+{"name":"Zotac GAMING SOLID","price":null,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2452,"color":"Black / Copper","length":330}
+{"name":"NVIDIA Founders Edition","price":null,"chipset":"GeForce RTX 2060","memory":6,"core_clock":1365,"boost_clock":1680,"color":"Silver / Black","length":229}
+{"name":"Zotac Solid OC","price":1462.98,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2640,"color":"White / Gold","length":330}
+{"name":"MSI GAMING Z TRIO","price":989,"chipset":"Radeon RX 6800 XT","memory":16,"core_clock":1825,"boost_clock":2310,"color":"Black / Silver","length":324}
+{"name":"Asus ROG STRIX GAMING OC","price":1985,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2670,"color":"Black","length":358}
+{"name":"NVIDIA Founders Edition","price":439,"chipset":"GeForce GTX 1060 6GB","memory":6,"core_clock":1506,"boost_clock":1709,"color":"Black / Silver","length":250}
+{"name":"MSI GAMING TRIO OC","price":429.99,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":2662,"color":"White","length":300}
+{"name":"Gigabyte OC","price":430,"chipset":"GeForce GTX 1660 Ti","memory":6,"core_clock":1500,"boost_clock":1800,"color":"Black / Gray","length":226}
+{"name":"Sapphire NITRO+","price":null,"chipset":"Radeon RX 5700 XT","memory":8,"core_clock":1770,"boost_clock":2010,"color":"Black / Silver","length":306}
+{"name":"Acer Nitro OC","price":832.67,"chipset":"Radeon RX 9070","memory":16,"core_clock":2070,"boost_clock":2700,"color":"Black / Silver","length":297}
+{"name":"Asus TUF GAMING OC","price":1849.99,"chipset":"Radeon RX 7900 XTX","memory":24,"core_clock":2300,"boost_clock":2615,"color":"Black","length":353}
+{"name":"Sparkle ECO","price":129.99,"chipset":"Arc A310","memory":4,"core_clock":1750,"boost_clock":1000,"color":"Blue","length":156}
+{"name":"Asus DUAL OC","price":894.99,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":2550,"color":"Black","length":267}
+{"name":"Zotac GAMING Twin Edge","price":null,"chipset":"GeForce RTX 3060 Ti LHR","memory":8,"core_clock":1410,"boost_clock":1665,"color":"Black","length":222}
+{"name":"Asus ROG Astral","price":1762.98,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"Black / Silver","length":358}
+{"name":"Zotac GAMING Twin Edge OC","price":439.99,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2490,"color":"White","length":221}
+{"name":"EVGA XC GAMING","price":null,"chipset":"GeForce RTX 3060 Ti LHR","memory":8,"core_clock":1410,"boost_clock":1710,"color":"Black","length":202}
+{"name":"Asus DUAL OC","price":566.85,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":2595,"color":"White","length":227}
+{"name":"Asus TUF GAMING OC","price":null,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2565,"color":"Black","length":320}
+{"name":"Gigabyte OC","price":null,"chipset":"GeForce RTX 2060","memory":6,"core_clock":1365,"boost_clock":1755,"color":"Black","length":226}
+{"name":"Zotac GAMING Twin Edge OC","price":429.9,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1807,"color":"Black","length":224}
+{"name":"Sparkle ELF","price":149.99,"chipset":"Arc A380","memory":6,"core_clock":2000,"boost_clock":2000,"color":"Blue / Black","length":153}
+{"name":"MSI VENTUS XS OC","price":null,"chipset":"GeForce GTX 1650 G5","memory":4,"core_clock":1485,"boost_clock":1740,"color":"Black / White","length":170}
+{"name":"Intel Limited Edition","price":null,"chipset":"Arc A770","memory":16,"core_clock":2100,"boost_clock":null,"color":"Black","length":250}
+{"name":"MSI VENTUS 2X OC","price":576.1,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":1755,"color":"Black / Silver","length":232}
+{"name":"Zotac GAMING Trinity","price":1049.99,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2610,"color":"Black","length":307}
+{"name":"MSI GAMING TRIO OC","price":429.99,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":2662,"color":"Black","length":300}
+{"name":"Zotac GAMING Twin Edge OC","price":743.34,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":1755,"color":"Black","length":232}
+{"name":"Zotac GAMING SOLID CORE OC","price":1121.07,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2482,"color":"Black / Copper","length":304}
+{"name":"MSI GeForce RTX 3060 Gaming X12G","price":null,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1837,"color":"Black / Silver","length":276}
+{"name":"MSI GAMING X","price":258.44,"chipset":"GeForce GTX 1660 SUPER","memory":6,"core_clock":1530,"boost_clock":1830,"color":"Black","length":247}
+{"name":"Gigabyte OC","price":521.38,"chipset":"GeForce GTX 1660 SUPER","memory":6,"core_clock":1530,"boost_clock":1830,"color":"Black / Silver","length":226}
+{"name":"Gigabyte AERO OC","price":1749.97,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2595,"color":"White / Silver","length":342}
+{"name":"Asus STRIX GAMING OC","price":1599.99,"chipset":"GeForce RTX 3090","memory":24,"core_clock":1395,"boost_clock":1890,"color":"Black","length":318}
+{"name":"PowerColor Fighter OC","price":708.4,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2475,"color":"Black","length":290}
+{"name":"PowerColor RX 7900 XT 20G","price":998.59,"chipset":"Radeon RX 7900 XT","memory":20,"core_clock":2000,"boost_clock":2400,"color":"Black","length":276}
+{"name":"Asus ROG STRIX GAMING OC","price":835,"chipset":"GeForce RTX 3070 Ti","memory":8,"core_clock":1575,"boost_clock":null,"color":"Black / Silver","length":318}
+{"name":"Asus DUAL OC","price":225,"chipset":"GeForce GTX 1650 G5","memory":4,"core_clock":1485,"boost_clock":1755,"color":"Silver / Black","length":204}
+{"name":"Zotac GAMING SOLID","price":759.9,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2512,"color":"Black / Copper","length":304}
+{"name":"Gigabyte WINDFORCE OC","price":1361.35,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2625,"color":"Black","length":261}
+{"name":"Acer Nitro OC","price":239.99,"chipset":"Arc B570","memory":10,"core_clock":2500,"boost_clock":2690,"color":"Black / Silver","length":288}
+{"name":"Asus ROG STRIX TOP","price":null,"chipset":"Radeon RX 580","memory":8,"core_clock":1257,"boost_clock":1431,"color":"Black","length":298}
+{"name":"Asus DUAL EVO OC","price":339.99,"chipset":"GeForce RTX 2060","memory":6,"core_clock":1365,"boost_clock":1785,"color":"Black","length":242}
+{"name":"NVIDIA Founders Edition","price":null,"chipset":"GeForce GTX 1080","memory":8,"core_clock":1607,"boost_clock":1733,"color":"Black / Silver","length":267}
+{"name":"Asus TUF GAMING OC","price":795,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":2580,"color":"Black","length":301}
+{"name":"MSI GAMING","price":null,"chipset":"GeForce GTX 970","memory":4,"core_clock":1140,"boost_clock":1279,"color":"Black / Red","length":269}
+{"name":"Asus TUF GAMING OC","price":null,"chipset":"Radeon RX 7600 XT","memory":16,"core_clock":1720,"boost_clock":2830,"color":"Black","length":300}
+{"name":"Zotac ZT-71115-20L","price":59.99,"chipset":"GeForce GT 730","memory":4,"core_clock":902,"boost_clock":null,"color":"Black / Gold","length":null}
+{"name":"Gigabyte GAMING OC","price":379.99,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":2647,"color":"Black","length":281}
+{"name":"PowerColor Hellhound Sakura OC","price":null,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2520,"color":"White / Pink","length":322}
+{"name":"Asus STRIX GAMING OC","price":979,"chipset":"GeForce RTX 2080 Ti","memory":11,"core_clock":1350,"boost_clock":1665,"color":"Black","length":305}
+{"name":"Asus TUF GAMING OC","price":null,"chipset":"GeForce RTX 3070 Ti","memory":8,"core_clock":1575,"boost_clock":1815,"color":"Black / Silver","length":300}
+{"name":"Yeston Sakura","price":849,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2640,"color":"White / Blue","length":330}
+{"name":"ASRock Challenger D OC","price":null,"chipset":"Radeon RX 6600 XT","memory":8,"core_clock":1968,"boost_clock":null,"color":"Black","length":269}
+{"name":"Asus TUF GAMING OC","price":1199,"chipset":"GeForce RTX 3080 Ti","memory":12,"core_clock":1365,"boost_clock":1695,"color":"Black","length":300}
+{"name":"XFX Quicksilver Magnetic Air","price":959,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":1870,"boost_clock":3100,"color":"Black","length":350}
+{"name":"MSI SUPRIM LIQUID X","price":3049,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2235,"boost_clock":null,"color":"Black / Silver","length":280}
+{"name":"Asus PRIME","price":419.99,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":2602,"color":"Black","length":304}
+{"name":"Asus PRIME OC","price":1129,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2655,"color":"Black","length":300}
+{"name":"MSI VENTUS 3X OC","price":527.39,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":null,"color":"Black","length":308}
+{"name":"EVGA BLACK GAMING","price":null,"chipset":"GeForce RTX 2070 SUPER","memory":8,"core_clock":1605,"boost_clock":1770,"color":"Black","length":270}
+{"name":"Asus TUF GAMING OC","price":699,"chipset":"GeForce RTX 3060 Ti","memory":8,"core_clock":1410,"boost_clock":1785,"color":"Black","length":302}
+{"name":"MSI Radeon RX 570 ARMOR 8G","price":null,"chipset":"Radeon RX 570","memory":8,"core_clock":1168,"boost_clock":1244,"color":"Black / White","length":246}
+{"name":"MSI VENTUS 2X OC","price":899,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":2520,"color":"Silver / Black","length":242}
+{"name":"Gigabyte GV-N1030D4-2GL","price":77.98,"chipset":"GeForce GT 1030 DDR4","memory":2,"core_clock":1151,"boost_clock":1417,"color":"Black","length":150}
+{"name":"XFX Quicksilver OC","price":833.21,"chipset":"Radeon RX 9070","memory":16,"core_clock":1440,"boost_clock":2700,"color":"Black","length":355}
+{"name":"Gigabyte GAMING OC","price":null,"chipset":"GeForce RTX 3050 8GB","memory":8,"core_clock":1550,"boost_clock":null,"color":"Black","length":282}
+{"name":"Sapphire PULSE Low Profile","price":216.56,"chipset":"Radeon RX 6400","memory":4,"core_clock":1923,"boost_clock":null,"color":"Black / Red","length":170}
+{"name":"Gigabyte EAGLE","price":267.24,"chipset":"Radeon RX 6500 XT","memory":4,"core_clock":2310,"boost_clock":2815,"color":"Black","length":192}
+{"name":"MSI GAMING X","price":469,"chipset":"GeForce GTX 1070","memory":8,"core_clock":1506,"boost_clock":1797,"color":"Black / Red","length":279}
+{"name":"PowerColor Red Devil","price":825,"chipset":"Radeon RX 6700 XT","memory":12,"core_clock":2321,"boost_clock":2622,"color":"Black","length":320}
+{"name":"Zotac GAMING AMP","price":null,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1867,"color":"White","length":232}
+{"name":"Gigabyte AERO OC","price":1443.85,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2655,"color":"White / Silver","length":300}
+{"name":"EVGA FTW3 ULTRA GAMING","price":1999.99,"chipset":"GeForce RTX 3090 Ti","memory":24,"core_clock":1560,"boost_clock":1920,"color":"Black","length":300}
+{"name":"NVIDIA Founders Edition","price":775,"chipset":"GeForce RTX 2080","memory":8,"core_clock":1515,"boost_clock":1800,"color":"Black / Silver","length":267}
+{"name":"Gigabyte GAMING OC","price":269.99,"chipset":"GeForce RTX 5050","memory":8,"core_clock":2317,"boost_clock":2632,"color":"Black","length":280}
+{"name":"XFX Mercury OC Magnetic Air RGB","price":859.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":1870,"boost_clock":3100,"color":"Black","length":360}
+{"name":"MSI VENTUS 3X OC","price":795,"chipset":"GeForce RTX 3070 Ti","memory":8,"core_clock":1575,"boost_clock":1800,"color":"Black / Silver","length":316}
+{"name":"Yeston Sakura","price":587.16,"chipset":"GeForce RTX 4060 Ti","memory":16,"core_clock":2310,"boost_clock":2595,"color":"White / Blue","length":305}
+{"name":"Gigabyte GAMING OC","price":1495,"chipset":"GeForce RTX 4070 Ti","memory":12,"core_clock":2310,"boost_clock":2640,"color":"Black","length":336}
+{"name":"NVIDIA Founders Edition","price":null,"chipset":"GeForce GTX 1070 Ti","memory":8,"core_clock":1607,"boost_clock":1683,"color":"Silver / Black","length":267}
+{"name":"MSI RTX 5060 Ti 16G INSPIRE 2X OC","price":539.98,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2632,"color":"Gold / Black","length":204}
+{"name":"Sapphire NITRO+","price":451.97,"chipset":"Radeon RX 6600 XT","memory":8,"core_clock":1968,"boost_clock":2607,"color":"Black / Silver","length":240}
+{"name":"Sapphire PURE","price":null,"chipset":"Radeon RX 7700 XT","memory":12,"core_clock":1700,"boost_clock":2584,"color":"White","length":320}
+{"name":"Sapphire NITRO+","price":null,"chipset":"Radeon RX 6700 XT","memory":12,"core_clock":2321,"boost_clock":2622,"color":"Silver / Black","length":310}
+{"name":"Zotac GAMING Twin Fan","price":269,"chipset":"GeForce GTX 1660","memory":6,"core_clock":1530,"boost_clock":1785,"color":"Black","length":216}
+{"name":"AMD 100-300000120","price":null,"chipset":"Radeon RX 7600","memory":8,"core_clock":1720,"boost_clock":2655,"color":"Black","length":204}
+{"name":"Gigabyte WINDFORCE SFF","price":1399.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"Black","length":304}
+{"name":"PowerColor Fighter","price":null,"chipset":"Radeon RX 6750 XT","memory":12,"core_clock":2150,"boost_clock":2600,"color":"Black","length":230}
+{"name":"XFX Speedster MERC 319 Black","price":958.99,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2565,"color":"Black / Silver","length":326}
+{"name":"Asus TUF GAMING","price":1984.99,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2580,"color":"Black","length":348}
+{"name":"Zotac GAMING Twin Edge","price":null,"chipset":"GeForce RTX 4060 Ti","memory":16,"core_clock":2310,"boost_clock":2535,"color":"Black","length":226}
+{"name":"Asus ROG STRIX GAMING OC","price":1298,"chipset":"GeForce RTX 3080 Ti","memory":12,"core_clock":1365,"boost_clock":1845,"color":"Black / Silver","length":318}
+{"name":"Gigabyte AERO OC","price":null,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":null,"color":"White / Silver","length":281}
+{"name":"Sapphire PULSE","price":null,"chipset":"Radeon RX 5700 XT","memory":8,"core_clock":1670,"boost_clock":1925,"color":"Black / Red","length":254}
+{"name":"Asus DUAL EVO OC","price":629.99,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2550,"color":"White","length":227}
+{"name":"PowerColor Hellhound OC","price":null,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":3310,"color":"White","length":310}
+{"name":"MSI GAMING X SLIM","price":null,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2655,"color":"Black","length":307}
+{"name":"MSI GAMING X TRIO","price":null,"chipset":"GeForce RTX 2080 SUPER","memory":8,"core_clock":1650,"boost_clock":1845,"color":"Silver / Black","length":328}
+{"name":"MSI VENTUS 3X OC","price":1005.74,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":null,"color":"Silver / Black","length":308}
+{"name":"MSI GAMING X TRIO","price":1245,"chipset":"GeForce RTX 4070 Ti","memory":12,"core_clock":2310,"boost_clock":2760,"color":"Black","length":337}
+{"name":"EVGA FTW3 ULTRA GAMING","price":695,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":1815,"color":"Black / Silver","length":300}
+{"name":"Zotac GAMING AMP Extreme INFINITY","price":2799.99,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":2467,"color":"Black","length":332}
+{"name":"MSI GAMING X TRIO","price":3259.95,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2235,"boost_clock":null,"color":"Black","length":337}
+{"name":"Zotac Twin Edge","price":379.99,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":2572,"color":"Black","length":220}
+{"name":"MSI VENTUS 2X PLUS","price":489.99,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2587,"color":"Black / Gray","length":227}
+{"name":"XFX Mercury OC","price":399.99,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":3320,"color":"Black / Silver","length":320}
+{"name":"Palit Dual","price":452.86,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2497,"color":null,"length":262}
+{"name":"Asus PRIME OC","price":399.99,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":2647,"color":"Black","length":304}
+{"name":"Gigabyte GAMING OC","price":null,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1837,"color":"Black / Silver","length":282}
+{"name":"Palit GameRock","price":1233.54,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2452,"color":"Black","length":332}
+{"name":"Gigabyte WINDFORCE OC","price":384.99,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":2587,"color":"Black","length":208}
+{"name":"AMD 100-300000074","price":3640,"chipset":"Radeon PRO W7900","memory":48,"core_clock":1855,"boost_clock":2495,"color":"Black","length":280}
+{"name":"Asus ROG STRIX","price":498,"chipset":"GeForce GTX 1080","memory":8,"core_clock":1670,"boost_clock":1835,"color":"Black","length":298}
+{"name":"Gigabyte AORUS MASTER","price":757.06,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":1845,"color":"Black","length":290}
+{"name":"Zotac Twin Edge OC","price":829.99,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":2490,"color":"Black","length":226}
+{"name":"MSI Radeon RX 5500 XT MECH 8G OC","price":null,"chipset":"Radeon RX 5500 XT","memory":8,"core_clock":1647,"boost_clock":1845,"color":"Black","length":215}
+{"name":"PowerColor Red Devil Ultimate","price":769.99,"chipset":"Radeon RX 6900 XT","memory":16,"core_clock":1825,"boost_clock":2425,"color":"Black","length":320}
+{"name":"MSI GeForce GTX 1060 3G OCV1","price":null,"chipset":"GeForce GTX 1060 3GB","memory":3,"core_clock":1544,"boost_clock":1759,"color":"Black / White","length":188}
+{"name":"MSI VENTUS 3X OC","price":579.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2557,"color":"Silver / Black","length":302}
+{"name":"MSI GAMING OC","price":539.99,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":null,"color":"Black","length":247}
+{"name":"MSI GAMING X TRIO","price":1795,"chipset":"GeForce RTX 4080","memory":16,"core_clock":2205,"boost_clock":2610,"color":"Black","length":337}
+{"name":"Gigabyte OC Low Profile","price":499.99,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2475,"color":"Black","length":182}
+{"name":"Asus ROG STRIX GAMING OC","price":1398,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2700,"color":"Black","length":336}
+{"name":"Sapphire NITRO+","price":459,"chipset":"Radeon RX 580","memory":8,"core_clock":1257,"boost_clock":1411,"color":"Black","length":260}
+{"name":"Asus DUAL OC","price":null,"chipset":"GeForce RTX 3060 Ti","memory":8,"core_clock":1410,"boost_clock":1710,"color":"White","length":230}
+{"name":"Palit GamingPro OC","price":null,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2295,"boost_clock":2700,"color":"Black","length":332}
+{"name":"Gigabyte WINDFORCE OC V2","price":null,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":2490,"color":"Black","length":261}
+{"name":"Zotac GAMING Trinity OC","price":2590,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2235,"boost_clock":2535,"color":"Black / Silver","length":356}
+{"name":"Yeston Sakura","price":899,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2070,"boost_clock":2700,"color":"White / Blue","length":342}
+{"name":"Gigabyte GAMING OC","price":null,"chipset":"GeForce RTX 2060 SUPER","memory":8,"core_clock":1470,"boost_clock":1815,"color":"Black","length":280}
+{"name":"EVGA XC3 ULTRA GAMING","price":919,"chipset":"GeForce RTX 3080 10GB","memory":10,"core_clock":1440,"boost_clock":1755,"color":"Black","length":285}
+{"name":"Asus TUF Gaming OG OC","price":1819.99,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2235,"boost_clock":2595,"color":"Black","length":326}
+{"name":"Gigabyte AORUS MASTER","price":799.99,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2715,"color":"Black","length":317}
+{"name":"Zotac GAMING Trinity","price":1750,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2550,"color":"Black","length":307}
+{"name":"EVGA SC2","price":null,"chipset":"GeForce GTX 1080 Ti","memory":11,"core_clock":1556,"boost_clock":1670,"color":"Silver","length":267}
+{"name":"Gigabyte EAGLE OC","price":594,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":null,"color":"Black","length":272}
+{"name":"Gigabyte AORUS ELITE","price":795.3,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2722,"color":"Black","length":329}
+{"name":"PNY VCNRTX4000ADA-PB","price":1290.73,"chipset":"RTX 4000 Ada Generation","memory":20,"core_clock":1500,"boost_clock":2175,"color":"Black","length":241}
+{"name":"Zotac GAMING AMP","price":309.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2550,"color":"Black","length":220}
+{"name":"Sparkle ROC Luna OC","price":301.6,"chipset":"Arc A750","memory":8,"core_clock":2050,"boost_clock":2200,"color":"White","length":281}
+{"name":"Asus TUF GAMING OC","price":1189,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2595,"color":"Black","length":301}
+{"name":"XFX Speedster QICK 319 Core","price":null,"chipset":"Radeon RX 6750 XT","memory":12,"core_clock":2150,"boost_clock":2600,"color":"Black / Silver","length":323}
+{"name":"GALAX (1-click OC)","price":null,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2640,"color":"Black","length":303}
+{"name":"ASRock Steel Legend OC","price":430.55,"chipset":"Radeon RX 7600","memory":8,"core_clock":1720,"boost_clock":2725,"color":"White","length":303}
+{"name":"EVGA SC GAMING ACX 3.0","price":495,"chipset":"GeForce GTX 1070","memory":8,"core_clock":1594,"boost_clock":1784,"color":"Black / Silver","length":267}
+{"name":"MSI Radeon RX 6600 MECH 2X 8G","price":595,"chipset":"Radeon RX 6600","memory":8,"core_clock":1626,"boost_clock":2491,"color":"Black / Silver","length":235}
+{"name":"Asus STRIX GAMING OC","price":685,"chipset":"GeForce RTX 2070","memory":8,"core_clock":1410,"boost_clock":1845,"color":"Black","length":305}
+{"name":"MSI GeForce RTX 3090 GAMING X TRIO 24G","price":1695.99,"chipset":"GeForce RTX 3090","memory":24,"core_clock":1395,"boost_clock":null,"color":"Black","length":335}
+{"name":"Asus DUAL OC","price":599,"chipset":"Radeon RX 7700 XT","memory":12,"core_clock":1700,"boost_clock":2599,"color":"Black","length":280}
+{"name":"MSI GAMING X SLIM","price":null,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2685,"color":"Black / Silver","length":307}
+{"name":"XFX Speedster SWFT 309","price":null,"chipset":"Radeon RX 6700","memory":10,"core_clock":2132,"boost_clock":2425,"color":"Black","length":304}
+{"name":"Gigabyte EAGLE OC","price":null,"chipset":"GeForce RTX 3060 Ti","memory":8,"core_clock":1410,"boost_clock":1695,"color":"Black","length":242}
+{"name":"Gigabyte WINDFORCE OC","price":299.99,"chipset":"GeForce GTX 1660 Ti","memory":6,"core_clock":1500,"boost_clock":1845,"color":"Black / Gray","length":265}
+{"name":"Gigabyte WINDFORCE OC","price":null,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":2550,"color":"Black / Silver","length":201}
+{"name":"Asus TUF GAMING OC","price":1889,"chipset":"GeForce RTX 4080","memory":16,"core_clock":2205,"boost_clock":2625,"color":"Black","length":348}
+{"name":"Asus DUAL OC","price":695,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":null,"color":"Black","length":267}
+{"name":"ASRock Challenger OC","price":840.45,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2475,"color":"Black","length":267}
+{"name":"EVGA BLACK GAMING","price":null,"chipset":"GeForce RTX 2080 SUPER","memory":8,"core_clock":1650,"boost_clock":1815,"color":"Black","length":270}
+{"name":"MSI RTX 4090 VENTUS 3X 24G OC","price":3089,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2235,"boost_clock":2565,"color":"Silver / Black","length":322}
+{"name":"Inno3D X3 OC","price":1175.73,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2295,"boost_clock":2482,"color":"White / Silver","length":300}
+{"name":"NVIDIA Founders Edition","price":859,"chipset":"GeForce RTX 2080 SUPER","memory":8,"core_clock":1650,"boost_clock":1815,"color":"Silver","length":267}
+{"name":"Zotac GAMING Trinity OC","price":1699.99,"chipset":"GeForce RTX 3090","memory":24,"core_clock":1395,"boost_clock":1710,"color":"Black","length":318}
+{"name":"Zotac GAMING Low Profile","price":299.28,"chipset":"GeForce RTX 3050 6GB","memory":6,"core_clock":1040,"boost_clock":1470,"color":"Black","length":151}
+{"name":"XFX Speedster MERC 310","price":1059,"chipset":"Radeon RX 7900 XT","memory":20,"core_clock":1775,"boost_clock":2535,"color":"White","length":344}
+{"name":"Zotac Solid Core OC","price":1220.25,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2482,"color":"White / Gold","length":304}
+{"name":"Asus DUAL OC","price":899.99,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2550,"color":"Black","length":267}
+{"name":"Asus DUAL","price":249.99,"chipset":"GeForce RTX 5050","memory":8,"core_clock":2317,"boost_clock":2602,"color":"Black","length":203}
+{"name":"PNY OC","price":299.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2535,"color":"Black","length":200}
+{"name":"Asus DUAL OC","price":619.99,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":2550,"color":"White","length":267}
+{"name":"MSI MECH 2X OC","price":null,"chipset":"Radeon RX 6700 XT","memory":12,"core_clock":2321,"boost_clock":null,"color":"Black / Silver","length":247}
+{"name":"ASRock Steel Legend OC","price":898.99,"chipset":"Radeon RX 9070","memory":16,"core_clock":2210,"boost_clock":2700,"color":"White / Gray","length":298}
+{"name":"NVIDIA 9001G4012510000","price":369,"chipset":"GeForce GTX 970","memory":4,"core_clock":1050,"boost_clock":1178,"color":"Black / Silver","length":267}
+{"name":"PNY XLR8 Gaming VERTO EPIC-X RGB OC","price":899,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2505,"color":"Black","length":305}
+{"name":"Gainward Phoenix","price":null,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":2512,"color":"Black / Silver","length":332}
+{"name":"MSI VENTUS 3X OC","price":514.79,"chipset":"GeForce RTX 3060 Ti LHR","memory":8,"core_clock":1410,"boost_clock":1695,"color":"Black / Gray","length":316}
+{"name":"Gigabyte WINDFORCE OC 3X","price":null,"chipset":"GeForce RTX 2070 SUPER","memory":8,"core_clock":1605,"boost_clock":1785,"color":"Black","length":280}
+{"name":"Gigabyte AERO OC","price":484.02,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":2647,"color":"White / Silver","length":281}
+{"name":"MSI GAMING X","price":445,"chipset":"GeForce GTX 1060 6GB","memory":6,"core_clock":1506,"boost_clock":1809,"color":"Black / Red","length":277}
+{"name":"XFX Speedster SWFT 210","price":null,"chipset":"Radeon RX 6600 XT","memory":8,"core_clock":2092,"boost_clock":2589,"color":"Black","length":241}
+{"name":"PNY VCQP600-PB","price":64.04,"chipset":"Quadro P600","memory":2,"core_clock":1354,"boost_clock":1455,"color":"Black","length":145}
+{"name":"Zotac Twin Edge OC","price":668,"chipset":"GeForce RTX 3060 Ti","memory":8,"core_clock":1410,"boost_clock":1695,"color":"Black","length":222}
+{"name":"Zotac GAMING Trinity OC","price":1080,"chipset":"GeForce RTX 3080 10GB","memory":10,"core_clock":1440,"boost_clock":1725,"color":"Black","length":318}
+{"name":"Asus DUAL","price":530.96,"chipset":"Radeon RX 6600","memory":8,"core_clock":1626,"boost_clock":2491,"color":"Black / Silver","length":243}
+{"name":"Gigabyte AERO OC","price":2990,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2520,"boost_clock":2535,"color":"Silver / White","length":342}
+{"name":"MSI GAMING X","price":699,"chipset":"GeForce GTX 1080 Ti","memory":11,"core_clock":1569,"boost_clock":1683,"color":"Black / Red","length":290}
+{"name":"MSI GAMING X","price":350,"chipset":"GeForce GTX 1050 Ti","memory":4,"core_clock":1290,"boost_clock":1493,"color":"Black / Red","length":229}
+{"name":"Gigabyte Vision OC","price":null,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":1815,"color":"Silver","length":286}
+{"name":"AMD 50th Anniversary","price":null,"chipset":"Radeon RX 5700 XT","memory":8,"core_clock":1680,"boost_clock":1980,"color":"Gold / Black","length":272}
+{"name":"AMD RADEON PRO WX 7100","price":184.96,"chipset":"Radeon Pro WX 7100","memory":8,"core_clock":900,"boost_clock":1080,"color":"Blue","length":242}
+{"name":"AMD 100-438412","price":null,"chipset":"Radeon RX 6750 XT","memory":12,"core_clock":2150,"boost_clock":2600,"color":"Black / Silver","length":267}
+{"name":"MSI SUPRIM LIQUID SOC","price":1699.99,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"Black / Silver","length":280}
+{"name":"Sapphire PULSE","price":null,"chipset":"Radeon RX 5600 XT","memory":6,"core_clock":1247,"boost_clock":1750,"color":"Black / Red","length":254}
+{"name":"PowerColor Hellhound OC","price":365.72,"chipset":"Radeon RX 9060 XT","memory":8,"core_clock":2220,"boost_clock":3310,"color":"Black","length":310}
+{"name":"Asus TUF GAMING V2","price":null,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1807,"color":"Black","length":301}
+{"name":"ASRock Taichi OC","price":null,"chipset":"Radeon RX 7900 XTX","memory":24,"core_clock":2300,"boost_clock":2680,"color":"Black","length":345}
+{"name":"PowerColor Fighter","price":325.61,"chipset":"Radeon RX 7600","memory":8,"core_clock":1720,"boost_clock":2655,"color":"Black","length":212}
+{"name":"PNY RTX A-Series","price":944,"chipset":"RTX A4000","memory":16,"core_clock":735,"boost_clock":1560,"color":"Black / Gold","length":241}
+{"name":"PowerColor Fighter","price":789,"chipset":"Radeon RX 6700 XT","memory":12,"core_clock":2321,"boost_clock":2581,"color":"Black","length":228}
+{"name":"MSI ARMOR OC","price":472.57,"chipset":"Radeon RX 580","memory":8,"core_clock":1257,"boost_clock":1366,"color":"Black / White","length":269}
+{"name":"Gigabyte GAMING OC","price":null,"chipset":"GeForce GTX 1660 SUPER","memory":6,"core_clock":1530,"boost_clock":1860,"color":"Black / Silver","length":280}
+{"name":"Gigabyte Vision OC","price":null,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1837,"color":"Silver / White","length":280}
+{"name":"Gigabyte GAMING","price":null,"chipset":"GeForce GTX 1050 Ti","memory":4,"core_clock":1366,"boost_clock":1506,"color":"Black","length":219}
+{"name":"XFX Speedster MERC 319","price":null,"chipset":"Radeon RX 6950 XT","memory":16,"core_clock":2009,"boost_clock":2368,"color":"Black","length":340}
+{"name":"XFX Swift","price":799.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":1660,"boost_clock":2970,"color":null,"length":325}
+{"name":"Gigabyte Vision OC","price":795,"chipset":"GeForce RTX 3070 Ti","memory":8,"core_clock":1575,"boost_clock":1830,"color":"White / Silver","length":320}
+{"name":"PNY VERTO","price":null,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2460,"color":"Black","length":210}
+{"name":"PNY EPIC-X RGB Triple Fan Plus OC","price":1272.91,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2295,"boost_clock":2640,"color":"Black","length":328}
+{"name":"Sparkle ROC OC","price":404.5,"chipset":"Arc A770","memory":16,"core_clock":2100,"boost_clock":2300,"color":"Black","length":281}
+{"name":"MSI VENTUS 2X OC","price":359.99,"chipset":"GeForce RTX 3060 8GB","memory":8,"core_clock":1320,"boost_clock":1807,"color":"Black","length":235}
+{"name":"Zotac GAMING Twin Edge","price":574.39,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":2535,"color":"Black","length":226}
+{"name":"Sapphire NITRO+","price":null,"chipset":"Radeon RX 580","memory":4,"core_clock":1257,"boost_clock":1411,"color":"Black / Silver","length":260}
+{"name":"XFX Speedster QICK 308 Black","price":376.72,"chipset":"Radeon RX 7600","memory":8,"core_clock":1875,"boost_clock":2755,"color":"Black","length":272}
+{"name":"Gigabyte WINDFORCE OC","price":399,"chipset":"GeForce GTX 1060 6GB","memory":6,"core_clock":1582,"boost_clock":1797,"color":"Black / Red","length":223}
+{"name":"MSI MECH 2X OC","price":null,"chipset":"Radeon RX 6650 XT","memory":8,"core_clock":2055,"boost_clock":null,"color":"Silver / Black","length":235}
+{"name":"Asus DUAL OC V2","price":null,"chipset":"GeForce RTX 3050 8GB","memory":8,"core_clock":1550,"boost_clock":1852,"color":"Black","length":200}
+{"name":"MSI VENTUS 2X PLUS","price":369.99,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":2587,"color":"Black / Gray","length":227}
+{"name":"MSI D6 VENTUS XS OCV3","price":null,"chipset":"GeForce GTX 1650 G6","memory":4,"core_clock":1410,"boost_clock":1620,"color":"Silver / Black","length":179}
+{"name":"Zotac GAMING SOLO","price":null,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2460,"color":"Black","length":163}
+{"name":"Asus ROG STRIX GAMING OC","price":1999.99,"chipset":"GeForce RTX 4080","memory":16,"core_clock":2205,"boost_clock":2655,"color":"Black / Red","length":358}
+{"name":"MSI GAMING X TRIO","price":949.99,"chipset":"GeForce RTX 3070 Ti","memory":8,"core_clock":1575,"boost_clock":1830,"color":"Black / Silver","length":323}
+{"name":"Yeston LP","price":205,"chipset":"GeForce RTX 3050 6GB","memory":6,"core_clock":1040,"boost_clock":1470,"color":"Pink","length":160}
+{"name":"Asus ROG Astral LC","price":null,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":null,"color":"Black / Silver","length":288}
+{"name":"Gigabyte GAMING","price":459,"chipset":"GeForce GTX 1070","memory":8,"core_clock":1594,"boost_clock":1822,"color":"Black / Orange","length":280}
+{"name":"EVGA FTW3 ULTRA GAMING iCX3","price":689,"chipset":"GeForce RTX 3060 Ti","memory":8,"core_clock":1410,"boost_clock":1800,"color":"Black","length":285}
+{"name":"EVGA XC3 ULTRA GAMING","price":593.02,"chipset":"GeForce RTX 3070 Ti","memory":8,"core_clock":1575,"boost_clock":1815,"color":"Black","length":285}
+{"name":"MSI GeForce RTX 2070 GAMING 8G","price":null,"chipset":"GeForce RTX 2070","memory":8,"core_clock":1410,"boost_clock":1620,"color":"Black","length":307}
+{"name":"PNY VERTO OC","price":1799,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2565,"color":"Black","length":340}
+{"name":"Zotac GAMING","price":null,"chipset":"GeForce RTX 2060","memory":6,"core_clock":1365,"boost_clock":1680,"color":"Black","length":210}
+{"name":"EVGA SC GAMING","price":null,"chipset":"GeForce GTX 1060 6GB","memory":6,"core_clock":1607,"boost_clock":1835,"color":"Black / Gray","length":173}
+{"name":"Asus TUF GAMING","price":1189,"chipset":"GeForce RTX 4070 Ti","memory":12,"core_clock":2310,"boost_clock":2640,"color":"Black","length":305}
+{"name":"Gigabyte OC","price":198,"chipset":"GeForce GTX 1050","memory":2,"core_clock":1379,"boost_clock":1518,"color":"Black / Orange","length":191}
+{"name":"PowerColor Red Devil OC","price":864.91,"chipset":"Radeon RX 6800 XT","memory":16,"core_clock":1825,"boost_clock":2340,"color":"Black","length":320}
+{"name":"Gainward Pegasus","price":null,"chipset":"GeForce RTX 3050 6GB","memory":6,"core_clock":1040,"boost_clock":1470,"color":"Black","length":162}
+{"name":"Asus DUAL","price":null,"chipset":"Radeon RX 6700 XT","memory":12,"core_clock":2321,"boost_clock":null,"color":"Black","length":295}
+{"name":"Palit GameRock","price":null,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2295,"boost_clock":2617,"color":"Black","length":332}
+{"name":"Gigabyte WINDFORCE OC","price":null,"chipset":"GeForce GTX 1650 SUPER","memory":4,"core_clock":1530,"boost_clock":1755,"color":"Black / Silver","length":225}
+{"name":"Asus ROG Astral","price":null,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":null,"color":"Black / Silver","length":358}
+{"name":"Asus DUAL OC","price":249.99,"chipset":"GeForce RTX 5050","memory":8,"core_clock":2317,"boost_clock":2677,"color":"Black","length":203}
+{"name":"MSI GAMING X TRIO","price":980.99,"chipset":"GeForce RTX 3080 Ti","memory":12,"core_clock":1365,"boost_clock":1770,"color":"Black / Silver","length":324}
+{"name":"Zotac Twin Edge OC","price":389.99,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":2602,"color":"Black","length":220}
+{"name":"PNY VCQRTX8000-PB","price":3296.96,"chipset":"Quadro RTX 8000","memory":48,"core_clock":1395,"boost_clock":1770,"color":"Black / White","length":267}
+{"name":"EVGA FTW GAMING ACX 3.0","price":598,"chipset":"GeForce GTX 1080","memory":8,"core_clock":1721,"boost_clock":1860,"color":"Black / Silver","length":267}
+{"name":"Gigabyte EAGLE OC ICE","price":599.8,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2505,"color":"White","length":272}
+{"name":"Sapphire NITRO+","price":678.68,"chipset":"Radeon RX 7700 XT","memory":12,"core_clock":1700,"boost_clock":null,"color":"Black","length":320}
+{"name":"MSI GAMING OC","price":379.99,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":null,"color":"Black","length":247}
+{"name":"Asus ROG STRIX GAMING OC","price":1298,"chipset":"GeForce RTX 4070 Ti","memory":12,"core_clock":2310,"boost_clock":2790,"color":"Black","length":336}
+{"name":"Gigabyte GAMING OC","price":null,"chipset":"Radeon RX 7900 XTX","memory":24,"core_clock":2300,"boost_clock":2525,"color":"Black","length":331}
+{"name":"Yeston Sakura","price":519,"chipset":"Radeon RX 7700 XT","memory":12,"core_clock":2171,"boost_clock":2599,"color":"White / Blue","length":340}
+{"name":"MSI VENTUS 3X OC","price":1345,"chipset":"GeForce RTX 3080 Ti","memory":12,"core_clock":1365,"boost_clock":1695,"color":"Black / Silver","length":305}
+{"name":"Sapphire PULSE","price":471.92,"chipset":"Radeon RX 6600 XT","memory":8,"core_clock":1968,"boost_clock":2593,"color":"Black / Red","length":240}
+{"name":"MSI GAMING X","price":518.3,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":null,"color":"Black","length":247}
+{"name":"Inno3D N506T2-16D7X-191073W","price":null,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2407,"boost_clock":2602,"color":"White / Silver","length":250}
+{"name":"AMD Midnight Black","price":null,"chipset":"Radeon RX 6800 XT","memory":16,"core_clock":1825,"boost_clock":2250,"color":"Black","length":267}
+{"name":"Acer Predator BiFrost OC","price":null,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2400,"boost_clock":3100,"color":"Black / Silver","length":297}
+{"name":"PNY RTX A-Series","price":596.96,"chipset":"RTX A2000 12GB","memory":12,"core_clock":562,"boost_clock":1200,"color":"Black","length":167}
+{"name":"MSI Radeon RX 6700 XT 12G","price":null,"chipset":"Radeon RX 6700 XT","memory":12,"core_clock":2321,"boost_clock":null,"color":"Black / Silver","length":267}
+{"name":"Asus ROG STRIX GAMING OC V2","price":699.99,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1912,"color":"Black / Silver","length":300}
+{"name":"Asus ProArt OC","price":1198,"chipset":"GeForce RTX 4060 Ti","memory":16,"core_clock":2310,"boost_clock":2685,"color":"Black / Gold","length":300}
+{"name":"Gigabyte Vision OC","price":null,"chipset":"GeForce RTX 3080 10GB","memory":10,"core_clock":1440,"boost_clock":1800,"color":"Silver / White","length":320}
+{"name":"Inno3D Twin X2","price":778.55,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2325,"boost_clock":2512,"color":"Black / Silver","length":250}
+{"name":"PowerColor Red Devil OC","price":null,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2565,"color":"Black","length":332}
+{"name":"Gigabyte GAMING OC","price":995,"chipset":"Radeon RX 6800 XT","memory":16,"core_clock":1825,"boost_clock":2285,"color":"Black / Silver","length":286}
+{"name":"ASRock Phantom Gaming","price":244.26,"chipset":"Radeon RX 6500 XT","memory":8,"core_clock":2420,"boost_clock":2825,"color":"Black","length":240}
+{"name":"AMD ‎100-438373","price":1099.99,"chipset":"Radeon RX 6900 XT","memory":16,"core_clock":1825,"boost_clock":2250,"color":"Black / Silver","length":267}
+{"name":"Gigabyte AORUS MASTER","price":868,"chipset":"GeForce RTX 3070 Ti","memory":8,"core_clock":1575,"boost_clock":1875,"color":"Black","length":324}
+{"name":"Asus ROG STRIX OC EVA-02","price":null,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2235,"boost_clock":2640,"color":"Red / Black","length":358}
+{"name":"MSI VENTUS XS OC","price":null,"chipset":"GeForce GTX 1660","memory":6,"core_clock":1530,"boost_clock":1830,"color":"Black / White","length":204}
+{"name":"PNY VERTO OC","price":389.99,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":2550,"color":"Black","length":245}
+{"name":"Asus TUF GAMING OC","price":1599.99,"chipset":"GeForce RTX 3090","memory":24,"core_clock":1395,"boost_clock":null,"color":"Black","length":300}
+{"name":"Gigabyte GAMING","price":null,"chipset":"Radeon RX 580","memory":8,"core_clock":1257,"boost_clock":1355,"color":"Black / Orange","length":232}
+{"name":"XFX FATBOY OC+","price":null,"chipset":"Radeon RX 590","memory":8,"core_clock":1580,"boost_clock":1600,"color":"Black / Red","length":270}
+{"name":"MAXSUN Milestone","price":null,"chipset":"Arc B580","memory":12,"core_clock":2670,"boost_clock":2850,"color":"Black / Red","length":241}
+{"name":"Asus TUF GAMING OC","price":799.99,"chipset":"Radeon RX 7900 XT","memory":20,"core_clock":2000,"boost_clock":null,"color":"Black","length":353}
+{"name":"Yeston Sakura","price":null,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2520,"color":"White / Blue","length":340}
+{"name":"Asus DUAL OC","price":null,"chipset":"Radeon RX 7600 XT","memory":16,"core_clock":1720,"boost_clock":2801,"color":"Black","length":227}
+{"name":"Gigabyte OC Low Profile","price":265.99,"chipset":"GeForce RTX 3050 6GB","memory":6,"core_clock":1040,"boost_clock":1477,"color":"Black","length":181}
+{"name":"Asus ROG STRIX GAMING","price":null,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2482,"color":"Black / Silver","length":332}
+{"name":"Sapphire PURE Frostpunk 2 Edition","price":null,"chipset":"Radeon RX 7700 XT","memory":12,"core_clock":1700,"boost_clock":2584,"color":"White","length":320}
+{"name":"Gigabyte EAGLE OC","price":null,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2640,"color":"Black","length":261}
+{"name":"NVIDIA TITAN RTX","price":1269,"chipset":"TITAN RTX","memory":24,"core_clock":1350,"boost_clock":1770,"color":"Gold / Black","length":267}
+{"name":"EVGA SC GAMING ACX 3.0 Black Edition","price":525,"chipset":"GeForce GTX 1070 Ti","memory":8,"core_clock":1607,"boost_clock":1683,"color":"Black","length":267}
+{"name":"PowerColor Red Dragon","price":529,"chipset":"Radeon RX 5700 XT","memory":8,"core_clock":1650,"boost_clock":1905,"color":"Black","length":240}
+{"name":"Asus Phoenix","price":null,"chipset":"GeForce GTX 1050 Ti","memory":4,"core_clock":1290,"boost_clock":1392,"color":"Black / White","length":192}
+{"name":"Gigabyte AERO OC","price":null,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2565,"color":"White / Silver","length":300}
+{"name":"Sapphire NITRO+","price":null,"chipset":"Radeon RX 7900 XT","memory":20,"core_clock":2000,"boost_clock":2560,"color":"Silver / Black","length":320}
+{"name":"EVGA SC ULTRA GAMING","price":235.04,"chipset":"GeForce GTX 1660","memory":6,"core_clock":1530,"boost_clock":1830,"color":"Silver / Black","length":202}
+{"name":"Asus RX550-4G","price":null,"chipset":"Radeon RX 550 - 512","memory":4,"core_clock":1100,"boost_clock":1183,"color":"Black / Red","length":182}
+{"name":"Asus DUAL OC","price":null,"chipset":"GeForce RTX 3060 Ti","memory":8,"core_clock":1410,"boost_clock":1710,"color":"Black","length":230}
+{"name":"Zotac GAMING Twin Edge OC","price":1094,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2490,"color":"Black","length":234}
+{"name":"Asus TUF GAMING OC","price":1295,"chipset":"GeForce RTX 4070 Ti","memory":12,"core_clock":2310,"boost_clock":2760,"color":"White","length":305}
+{"name":"Asus Phoenix GeForce RTX 3060 V2","price":299.99,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1807,"color":"Black","length":177}
+{"name":"PowerColor Red Dragon OC","price":995,"chipset":"Radeon RX 6800 XT","memory":16,"core_clock":1825,"boost_clock":2310,"color":"Black","length":310}
+{"name":"MSI VENTUS 2X OC","price":null,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2655,"color":"Black / Silver","length":242}
+{"name":"PowerColor Hellhound","price":998.99,"chipset":"Radeon RX 7900 XT","memory":20,"core_clock":2000,"boost_clock":2500,"color":"Black","length":320}
+{"name":"Asus TUF GAMING OC","price":1056.64,"chipset":"Radeon RX 9070","memory":16,"core_clock":2170,"boost_clock":2670,"color":"Black / Silver","length":330}
+{"name":"ASRock Phantom Gaming OC","price":1129.99,"chipset":"Radeon RX 7900 XT","memory":20,"core_clock":2000,"boost_clock":2450,"color":"Black","length":330}
+{"name":"Asus TUF GAMING OC","price":705.56,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":2655,"color":"Black","length":300}
+{"name":"ASRock Radeon RX 7900 XTX 24GB","price":null,"chipset":"Radeon RX 7900 XTX","memory":24,"core_clock":2300,"boost_clock":2500,"color":"Black","length":287}
+{"name":"Zotac GAMING Trinity OC","price":null,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2625,"color":"White","length":307}
+{"name":"MSI MECH 2X OC","price":null,"chipset":"Radeon RX 6750 XT","memory":12,"core_clock":2150,"boost_clock":2618,"color":"Silver / Black","length":249}
+{"name":"XFX THICC III Ultra","price":null,"chipset":"Radeon RX 5700 XT","memory":8,"core_clock":1810,"boost_clock":2025,"color":"Black / White","length":315}
+{"name":"Sapphire PULSE ITX PURE","price":220.71,"chipset":"Radeon RX 6500 XT","memory":4,"core_clock":2310,"boost_clock":2825,"color":"White","length":152}
+{"name":"Asus GTX750TI-OC-2GD5","price":null,"chipset":"GeForce GTX 750 Ti","memory":2,"core_clock":1072,"boost_clock":1150,"color":"Black / Red","length":217}
+{"name":"Asus PRIME OC","price":899.97,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2550,"color":"Black","length":269}
+{"name":"Zotac GAMING Trinity OC","price":null,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2565,"color":"White","length":307}
+{"name":"PNY VERTO","price":499.95,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":2535,"color":"Black","length":245}
+{"name":"EVGA SSC ACX 2.0+","price":399,"chipset":"GeForce GTX 960","memory":4,"core_clock":1279,"boost_clock":1342,"color":"Black / Silver","length":257}
+{"name":"Palit GameRock OC","price":3637.59,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":null,"color":"Black","length":332}
+{"name":"Inno3D X3 OC","price":null,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2295,"boost_clock":2640,"color":"White / Silver","length":300}
+{"name":"Palit Dual OC","price":378.95,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":null,"color":"Black","length":245}
+{"name":"Gigabyte WINDFORCE OC","price":null,"chipset":"GeForce RTX 4060 Ti","memory":16,"core_clock":2310,"boost_clock":2565,"color":"Black / Silver","length":201}
+{"name":"PNY VERTO","price":3295,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2235,"boost_clock":2520,"color":"Black","length":337}
+{"name":"XFX Speedster SWFT 105","price":149.99,"chipset":"Radeon RX 6400","memory":4,"core_clock":1923,"boost_clock":null,"color":"Black","length":155}
+{"name":"Gigabyte GAMING OC","price":1060.9,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2565,"color":"Black","length":300}
+{"name":"Asus ROG STRIX GAMING OC","price":449.99,"chipset":"Radeon RX 6600 XT","memory":8,"core_clock":1968,"boost_clock":2607,"color":"Black / Gray","length":243}
+{"name":"Zotac GAMING Trinity OC","price":770,"chipset":"GeForce RTX 3070 Ti","memory":8,"core_clock":1575,"boost_clock":1800,"color":"Black","length":318}
+{"name":"NVIDIA Founders Edition","price":720,"chipset":"GeForce RTX 2070","memory":8,"core_clock":1410,"boost_clock":1710,"color":"Silver / Black","length":229}
+{"name":"MSI VENTUS XS OC","price":785,"chipset":"GeForce RTX 2080 SUPER","memory":8,"core_clock":1650,"boost_clock":1830,"color":"Silver / Black","length":257}
+{"name":"Gigabyte OC Rev 2.0","price":309,"chipset":"GeForce RTX 2060","memory":6,"core_clock":1365,"boost_clock":1755,"color":"Black / Gray","length":226}
+{"name":"MSI GAMING X","price":598,"chipset":"GeForce GTX 1080","memory":8,"core_clock":1607,"boost_clock":1847,"color":"Black / Red","length":279}
+{"name":"AMD 100-300000071","price":null,"chipset":"Radeon RX 7900 XT","memory":20,"core_clock":2000,"boost_clock":2400,"color":"Black","length":276}
+{"name":"Asus GT730-SL-2GD5-BRK","price":79.99,"chipset":"GeForce GT 730","memory":2,"core_clock":902,"boost_clock":null,"color":"Blue / Black","length":165}
+{"name":"Asus ROG STRIX GAMING OC","price":725,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":1905,"color":"Black","length":318}
+{"name":"Asus DUAL OC","price":null,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2550,"color":"White","length":267}
+{"name":"Sapphire PULSE","price":null,"chipset":"Radeon RX 6650 XT","memory":8,"core_clock":2055,"boost_clock":2635,"color":"Red / Black","length":240}
+{"name":"Asus DUAL OC","price":null,"chipset":"Radeon RX 6500 XT","memory":4,"core_clock":2310,"boost_clock":2820,"color":"Black","length":201}
+{"name":"EVGA FTW3 ULTRA GAMING","price":1189,"chipset":"GeForce RTX 3080 12GB LHR","memory":12,"core_clock":1260,"boost_clock":1800,"color":"Black","length":300}
+{"name":"Asus LP BRK OC","price":449,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2520,"color":"Black","length":188}
+{"name":"PNY VCNRTX2000ADA-PB","price":705.93,"chipset":"RTX 2000 Ada Generation","memory":16,"core_clock":1620,"boost_clock":2130,"color":null,"length":168}
+{"name":"Asus ROG STRIX WHITE OC","price":1999.99,"chipset":"GeForce RTX 3090","memory":24,"core_clock":1395,"boost_clock":1890,"color":"White / Black","length":318}
+{"name":"MSI GAMING X SLIM","price":null,"chipset":"GeForce RTX 4060 Ti","memory":16,"core_clock":2310,"boost_clock":2685,"color":"Black","length":307}
+{"name":"ASRock Challenger OC","price":null,"chipset":"Radeon RX 7900 GRE","memory":16,"core_clock":1270,"boost_clock":2293,"color":"Black","length":269}
+{"name":"MSI MECH OC","price":635,"chipset":"Radeon RX 5700 XT","memory":8,"core_clock":1670,"boost_clock":1925,"color":"Black","length":232}
+{"name":"EVGA SC ULTRA GAMING","price":null,"chipset":"GeForce RTX 2060 SUPER","memory":8,"core_clock":1470,"boost_clock":1680,"color":"Black","length":270}
+{"name":"ASRock Steel Legend OC","price":null,"chipset":"Radeon RX 7600 XT","memory":16,"core_clock":1720,"boost_clock":2810,"color":"White / Silver","length":304}
+{"name":"AMD 100-506115","price":132.69,"chipset":"Radeon Pro WX 3200","memory":4,"core_clock":1250,"boost_clock":1290,"color":"Blue / Black","length":168}
+{"name":"Sparkle ORC OC","price":225.93,"chipset":"Arc A580","memory":8,"core_clock":1700,"boost_clock":2000,"color":"Blue / Black","length":222}
+{"name":"Palit StormX","price":null,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2460,"color":"Black","length":170}
+{"name":"Asus TUF GAMING","price":1168.51,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2640,"color":"Black","length":305}
+{"name":"ASRock Steel Legend OC","price":809.81,"chipset":"Radeon RX 7700 XT","memory":12,"core_clock":1700,"boost_clock":2599,"color":"White","length":304}
+{"name":"Palit GamingPro","price":861.59,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2325,"boost_clock":2512,"color":"Black","length":332}
+{"name":"Sapphire PULSE","price":989,"chipset":"Radeon RX 6800 XT","memory":16,"core_clock":1825,"boost_clock":null,"color":"Black / Red","length":313}
+{"name":"ASRock Steel Legend OC","price":null,"chipset":"Radeon RX 7900 GRE","memory":16,"core_clock":1270,"boost_clock":2333,"color":"White","length":304}
+{"name":"AMD 100-506001","price":74.98,"chipset":"Radeon Pro WX 2100","memory":2,"core_clock":925,"boost_clock":1219,"color":"Blue","length":145}
+{"name":"EVGA FTW3 ULTRA GAMING","price":998,"chipset":"GeForce RTX 2080 Ti","memory":11,"core_clock":1350,"boost_clock":1755,"color":"Clear / Black","length":302}
+{"name":"Zotac GAMING Trinity OC","price":1299.99,"chipset":"GeForce RTX 3080 Ti","memory":12,"core_clock":1365,"boost_clock":1695,"color":"Black / Silver","length":318}
+{"name":"Gigabyte EAGLE","price":null,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":1725,"color":"Black / Silver","length":282}
+{"name":"PNY EPIC-X RGB OC","price":399.99,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2407,"boost_clock":2692,"color":"Black","length":297}
+{"name":"MSI VENTUS 3X OC","price":null,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2655,"color":"Black / Silver","length":308}
+{"name":"Asus STRIX GAMING OC","price":null,"chipset":"GeForce RTX 3080 10GB","memory":10,"core_clock":1440,"boost_clock":1935,"color":"Black","length":318}
+{"name":"Asus ROG Astral Dhahab CORE OC","price":null,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2790,"color":"Gold / Blue","length":358}
+{"name":"XFX Mercury OC Magnetic Air RGB V2","price":919.99,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":1870,"boost_clock":3100,"color":"Black","length":360}
+{"name":"MSI GAMING X SLIM","price":3189,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2235,"boost_clock":2610,"color":"Black","length":322}
+{"name":"XFX Speedster MERC 310 Black Edition","price":null,"chipset":"Radeon RX 7900 XT","memory":20,"core_clock":2000,"boost_clock":2560,"color":"Black / Silver","length":344}
+{"name":"MSI GAMING X","price":738,"chipset":"GeForce RTX 2070 SUPER","memory":8,"core_clock":1605,"boost_clock":1800,"color":"Black","length":297}
+{"name":"XFX Quicksilver Magnetic Air","price":920,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2430,"color":"White","length":337}
+{"name":"GALAX (1-click OC)","price":null,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2602,"color":"Black","length":235}
+{"name":"Asus TUF GAMING OC V2","price":1049,"chipset":"GeForce RTX 3080 10GB LHR","memory":10,"core_clock":1440,"boost_clock":1815,"color":"Black","length":300}
+{"name":"MSI GAMING Z TRIO","price":949.95,"chipset":"GeForce RTX 3080 10GB LHR","memory":10,"core_clock":1440,"boost_clock":1830,"color":"Black","length":323}
+{"name":"Asus ROG STRIX-GTX1060-6G-GAMING","price":null,"chipset":"GeForce GTX 1060 6GB","memory":6,"core_clock":1506,"boost_clock":1708,"color":"Black","length":298}
+{"name":"PNY VCG509032TFXPB1","price":3862.99,"chipset":"GeForce RTX 5090","memory":32,"core_clock":2010,"boost_clock":2407,"color":"Black","length":329}
+{"name":"XFX RS XXX","price":299,"chipset":"Radeon RX 570","memory":4,"core_clock":1168,"boost_clock":1284,"color":"Black / Red","length":243}
+{"name":"Asus TUF GAMING","price":799,"chipset":"GeForce RTX 3070 Ti","memory":8,"core_clock":1575,"boost_clock":1800,"color":"Black / Silver","length":300}
+{"name":"Inno3D Twin X2 OC","price":429.55,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2527,"color":"Black / Silver","length":250}
+{"name":"Asus DUAL OC","price":559.99,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":2595,"color":"Black","length":227}
+{"name":"Zotac GAMING AMP Holo","price":698,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":1785,"color":"Silver / Black","length":291}
+{"name":"MSI GAMING X TRIO","price":539,"chipset":"GeForce RTX 3060 Ti","memory":8,"core_clock":1410,"boost_clock":1830,"color":"Black / Silver","length":323}
+{"name":"EVGA XC ULTRA GAMING","price":735,"chipset":"GeForce RTX 2080","memory":8,"core_clock":1515,"boost_clock":1815,"color":"Black / Clear","length":270}
+{"name":"Gigabyte EAGLE OC","price":947.76,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2535,"color":"Black","length":261}
+{"name":"Inno3D X3 OC","price":null,"chipset":"GeForce RTX 3080 12GB LHR","memory":12,"core_clock":1260,"boost_clock":1725,"color":"Black","length":300}
+{"name":"Gigabyte WINDFORCE OC","price":null,"chipset":"GeForce RTX 2080 SUPER","memory":8,"core_clock":1650,"boost_clock":1830,"color":"Black","length":287}
+{"name":"EVGA Superclocked ACX 2.0","price":389,"chipset":"GeForce GTX 980","memory":4,"core_clock":1266,"boost_clock":1367,"color":"Black","length":267}
+{"name":"Gigabyte GAMING OC","price":null,"chipset":"Radeon RX 6750 XT","memory":12,"core_clock":2150,"boost_clock":2623,"color":"Black / Gray","length":281}
+{"name":"ASRock Challenger OC","price":null,"chipset":"Arc A580","memory":8,"core_clock":1700,"boost_clock":2000,"color":"Black","length":271}
+{"name":"MSI VENTUS XS OC","price":425,"chipset":"GeForce GTX 1660 Ti","memory":6,"core_clock":1500,"boost_clock":1830,"color":null,"length":204}
+{"name":"EVGA SC GAMING ACX 2.0","price":259.01,"chipset":"GeForce GTX 1050 Ti","memory":4,"core_clock":1354,"boost_clock":1468,"color":"Black","length":145}
+{"name":"PNY VCG16606SSFPPB","price":259,"chipset":"GeForce GTX 1660 SUPER","memory":6,"core_clock":1530,"boost_clock":1785,"color":"Black","length":168}
+{"name":"PowerColor Red Devil Limited Edition OC","price":1050,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2460,"boost_clock":3060,"color":"Black","length":340}
+{"name":"Sparkle ORC OC","price":280.95,"chipset":"Arc A750","memory":8,"core_clock":2050,"boost_clock":2200,"color":"Blue / Black","length":222}
+{"name":"MSI GeForce RTX 3090 TI GAMING X TRIO 24G","price":1989,"chipset":"GeForce RTX 3090 Ti","memory":24,"core_clock":1560,"boost_clock":1920,"color":"Black","length":325}
+{"name":"Gigabyte WINDFORCE","price":null,"chipset":"GeForce RTX 2070","memory":8,"core_clock":1620,"boost_clock":null,"color":"Black / Silver","length":280}
+{"name":"Asus DUAL EVO","price":null,"chipset":"GeForce RTX 2060","memory":6,"core_clock":1395,"boost_clock":1710,"color":"Black","length":242}
+{"name":"PNY VCG507012TFXPB1","price":795.78,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2325,"boost_clock":2512,"color":"Black","length":300}
+{"name":"PNY VCQRTX4000-PB","price":349.96,"chipset":"Quadro RTX 4000","memory":8,"core_clock":1005,"boost_clock":1545,"color":"Silver / Black","length":267}
+{"name":"Gigabyte AERO OC","price":2140,"chipset":"GeForce RTX 4080","memory":16,"core_clock":2205,"boost_clock":2535,"color":"White","length":342}
+{"name":"Asus ProArt OC","price":null,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2670,"color":"Black / Gold","length":300}
+{"name":"Asus STRIX","price":null,"chipset":"GeForce GTX 970","memory":4,"core_clock":1114,"boost_clock":1253,"color":"Black / Red","length":280}
+{"name":"Asus Noctua OC","price":null,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2640,"color":"Brown / Black","length":310}
+{"name":"Gigabyte GAMING OC","price":795,"chipset":"Radeon RX 6700 XT","memory":12,"core_clock":2321,"boost_clock":null,"color":"Black / Silver","length":281}
+{"name":"Asus DUAL EVO OC","price":329.99,"chipset":"GeForce GTX 1660 SUPER","memory":6,"core_clock":1530,"boost_clock":1860,"color":"Black","length":242}
+{"name":"MSI GAMING X SLIM","price":null,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2685,"color":"White / Silver","length":307}
+{"name":"XFX RX-560D2SFG5","price":109.99,"chipset":"Radeon RX 560 - 896","memory":2,"core_clock":1196,"boost_clock":null,"color":"Black / Red","length":211}
+{"name":"XFX Speedster MERC 319 Black","price":null,"chipset":"Radeon RX 6900 XT","memory":16,"core_clock":1950,"boost_clock":2365,"color":"Black / Silver","length":340}
+{"name":"Inno3D Twin X2 OC","price":784.09,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2325,"boost_clock":2542,"color":"Black / Silver","length":250}
+{"name":"Asus STRIX GAMING OC","price":795,"chipset":"GeForce RTX 2080","memory":8,"core_clock":1515,"boost_clock":1890,"color":null,"length":298}
+{"name":"Asus DUAL","price":null,"chipset":"GeForce GTX 1070","memory":8,"core_clock":1582,"boost_clock":1797,"color":"White","length":240}
+{"name":"Gigabyte WINDFORCE OC","price":null,"chipset":"GeForce GTX 1650 G5","memory":4,"core_clock":1485,"boost_clock":1710,"color":"Black / Silver","length":191}
+{"name":"Asus TUF-RX6800XT-O16G-GAMING","price":998,"chipset":"Radeon RX 6800 XT","memory":16,"core_clock":1825,"boost_clock":2340,"color":"Black","length":320}
+{"name":"EVGA XC ULTRA GAMING","price":749,"chipset":"GeForce RTX 2070 SUPER","memory":8,"core_clock":1605,"boost_clock":1800,"color":"Transparent","length":270}
+{"name":"Gigabyte EAGLE OC","price":null,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1807,"color":"Black","length":242}
+{"name":"Asus DUAL","price":null,"chipset":"GeForce RTX 3050 6GB","memory":6,"core_clock":1040,"boost_clock":1500,"color":"Black","length":201}
+{"name":"MSI SUPRIM X","price":null,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2235,"boost_clock":null,"color":"Black / Silver","length":336}
+{"name":"Gigabyte EAGLE OC","price":329.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":null,"color":"Black","length":208}
+{"name":"MSI GAMING X SLIM","price":null,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2625,"color":"Black","length":322}
+{"name":"MSI VANGUARD SOC LAUNCH EDITION","price":1992,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":null,"color":"Black / Silver","length":357}
+{"name":"XFX Speedster SWFT 210 Core","price":null,"chipset":"Radeon RX 7600","memory":8,"core_clock":1875,"boost_clock":2655,"color":"White","length":241}
+{"name":"Gigabyte GAMING OC","price":null,"chipset":"Radeon RX 7900 GRE","memory":16,"core_clock":1270,"boost_clock":2391,"color":"Black","length":302}
+{"name":"MSI VENTUS 2X OC","price":null,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2535,"color":"White","length":197}
+{"name":"MSI GAMING X TRIO","price":738,"chipset":"GeForce RTX 2070 SUPER","memory":8,"core_clock":1605,"boost_clock":1800,"color":"Black","length":328}
+{"name":"Asus ROG STRIX GAMING","price":3600,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2235,"boost_clock":2550,"color":"Black","length":358}
+{"name":"Inno3D Twin X2","price":437.13,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1777,"color":"Black","length":240}
+{"name":"Zotac GAMING Twin Edge OC White Edition","price":659,"chipset":"GeForce RTX 3070 LHR","memory":8,"core_clock":1500,"boost_clock":1755,"color":"White","length":232}
+{"name":"XFX RX-570P8DFD6","price":399,"chipset":"Radeon RX 570","memory":8,"core_clock":1168,"boost_clock":1286,"color":"Black / Red","length":243}
+{"name":"MSI VENTUS GP OC","price":null,"chipset":"GeForce RTX 2060 SUPER","memory":8,"core_clock":1470,"boost_clock":1665,"color":"Silver / Black","length":232}
+{"name":"ASRock Challenger ITX","price":191.05,"chipset":"Radeon RX 6400","memory":4,"core_clock":1923,"boost_clock":null,"color":"Black / Silver","length":162}
+{"name":"GALAX EX Gamer (1-Click OC)","price":null,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2512,"color":null,"length":322}
+{"name":"Gigabyte WINDFORCE OC","price":null,"chipset":"GeForce RTX 4070 Ti","memory":12,"core_clock":2310,"boost_clock":2625,"color":"Black / Silver","length":261}
+{"name":"XFX Speedster QICK 319 BLACK","price":null,"chipset":"Radeon RX 6700 XT","memory":12,"core_clock":2457,"boost_clock":2622,"color":"Black","length":323}
+{"name":"Gigabyte Vision OC","price":null,"chipset":"GeForce RTX 3080 Ti","memory":12,"core_clock":1365,"boost_clock":1770,"color":"White / Silver","length":320}
+{"name":"EVGA FTW3 ULTRA GAMING","price":null,"chipset":"GeForce RTX 3080 Ti","memory":12,"core_clock":1365,"boost_clock":1800,"color":"Black","length":300}
+{"name":"ASRock Challenger SE OC","price":340.84,"chipset":"Arc A750","memory":8,"core_clock":2200,"boost_clock":null,"color":"Black","length":267}
+{"name":"PowerColor Hellhound Spectral","price":null,"chipset":"Radeon RX 7800 XT","memory":16,"core_clock":1295,"boost_clock":2520,"color":"White","length":322}
+{"name":"PowerColor RX7700XT 12G-P","price":551.18,"chipset":"Radeon RX 7700 XT","memory":12,"core_clock":1700,"boost_clock":2544,"color":"Black","length":260}
+{"name":"Asus STRIX GAMING","price":null,"chipset":"GeForce GTX 1080 Ti","memory":11,"core_clock":1569,"boost_clock":1708,"color":"Black","length":298}
+{"name":"Gigabyte AORUS ELITE","price":553.55,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":null,"color":"Black","length":329}
+{"name":"Asus TUF GAMING","price":649.99,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":2505,"color":"Black","length":301}
+{"name":"MSI GAMING","price":529,"chipset":"GeForce GTX 1070 Ti","memory":8,"core_clock":1607,"boost_clock":1683,"color":"Black / Red","length":279}
+{"name":"MSI GAMING X TRIO","price":985,"chipset":"GeForce RTX 2080 Ti","memory":11,"core_clock":1350,"boost_clock":1755,"color":"Black","length":327}
+{"name":"Zotac GAMING Twin Edge OC","price":569.99,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":2565,"color":"White","length":226}
+{"name":"Gigabyte AERO OC","price":1349,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":2565,"color":"White / Silver","length":300}
+{"name":"MSI VENTUS 2X","price":null,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2625,"color":"Silver / Black","length":242}
+{"name":"Asus DUAL OC","price":369.99,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":null,"color":"Black","length":200}
+{"name":"Gigabyte Vision OC","price":745,"chipset":"GeForce RTX 3060 Ti","memory":8,"core_clock":1665,"boost_clock":1755,"color":"Silver / White","length":281}
+{"name":"ASRock Phantom Gaming OC","price":458.2,"chipset":"Arc A770","memory":16,"core_clock":2100,"boost_clock":null,"color":"Black","length":305}
+{"name":"MSI VENTUS 2X OC","price":521.04,"chipset":"GeForce RTX 3070 LHR","memory":8,"core_clock":1500,"boost_clock":1755,"color":"Black","length":232}
+{"name":"Gainward Phoenix","price":null,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2617,"color":"Black / Silver","length":332}
+{"name":"Palit GameRock OC","price":null,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2295,"boost_clock":2730,"color":"Black","length":332}
+{"name":"MSI SUPRIM X","price":1995,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2655,"color":"Silver / Black","length":336}
+{"name":"Asus TUF GAMING","price":null,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":null,"color":"Black / Silver","length":329}
+{"name":"Asus GT1030-2G-BRK","price":112.01,"chipset":"GeForce GT 1030","memory":2,"core_clock":1266,"boost_clock":1506,"color":"Black / Blue","length":169}
+{"name":"PNY XLR8 Gaming VERTO EPIC-X RGB","price":582.21,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2460,"color":"Black","length":260}
+{"name":"Zotac GAMING Twin Edge","price":null,"chipset":"GeForce RTX 3050 8GB","memory":8,"core_clock":1550,"boost_clock":1777,"color":"Black / Silver","length":224}
+{"name":"MSI GeForce RTX 2060 VENTUS GP 12G OC","price":null,"chipset":"GeForce RTX 2060 12GB","memory":12,"core_clock":1470,"boost_clock":1695,"color":"Gray / Black","length":231}
+{"name":"Gigabyte GAMING OC","price":1456.34,"chipset":"Radeon RX 7900 XT","memory":20,"core_clock":2000,"boost_clock":2535,"color":"Black","length":331}
+{"name":"XFX Speedster QICK 308 Black","price":629.99,"chipset":"Radeon RX 6600 XT","memory":8,"core_clock":2188,"boost_clock":2607,"color":"Black","length":274}
+{"name":"Asus STRIX GAMING OC","price":null,"chipset":"Radeon RX 5700 XT","memory":8,"core_clock":1770,"boost_clock":2035,"color":"Black","length":305}
+{"name":"Asus TUF GAMING OC V2","price":456.61,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1882,"color":"Black","length":301}
+{"name":"MSI VENTUS 3X OC","price":null,"chipset":"GeForce RTX 4080","memory":16,"core_clock":2205,"boost_clock":null,"color":"Black","length":322}
+{"name":"Zotac GAMING Twin Edge OC","price":null,"chipset":"GeForce RTX 3060 Ti LHR","memory":8,"core_clock":1410,"boost_clock":1695,"color":"Black","length":222}
+{"name":"Gigabyte OC","price":299,"chipset":"Radeon RX 5500 XT","memory":4,"core_clock":1647,"boost_clock":1845,"color":"Black / Gray","length":225}
+{"name":"MSI GAMING","price":null,"chipset":"GeForce GTX 980 Ti","memory":6,"core_clock":1178,"boost_clock":1279,"color":"Black / Red","length":277}
+{"name":"GALAX (1-click OC)","price":null,"chipset":"GeForce RTX 5070","memory":12,"core_clock":2160,"boost_clock":null,"color":"Black","length":240}
+{"name":"Zotac GAMING SOLID OC","price":1099,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2482,"color":"Black / Copper","length":330}
+{"name":"MSI VENTUS 2X OC","price":1379,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2655,"color":"White / Silver","length":242}
+{"name":"MSI GeForce RTX 3080 RTX 3080 SUPRIM X 10G","price":1145,"chipset":"GeForce RTX 3080 10GB","memory":10,"core_clock":1440,"boost_clock":1920,"color":"Black / Silver","length":336}
+{"name":"Gigabyte AORUS ELITE","price":null,"chipset":"GeForce RTX 3060 12GB","memory":12,"core_clock":1320,"boost_clock":1867,"color":"Black","length":296}
+{"name":"Sparkle TITAN OC","price":428.12,"chipset":"Arc A770","memory":16,"core_clock":2100,"boost_clock":2300,"color":"Blue / Black","length":306}
+{"name":"Zotac GAMING SOLO","price":249.99,"chipset":"GeForce RTX 5050","memory":8,"core_clock":2317,"boost_clock":2572,"color":"Black / Copper","length":164}
+{"name":"Asus ROG STRIX WHITE OC","price":1219.99,"chipset":"GeForce RTX 3080 10GB","memory":10,"core_clock":1440,"boost_clock":1935,"color":"White","length":318}
+{"name":"Zotac GAMING Trinity OC","price":1212.73,"chipset":"GeForce RTX 4070 Ti","memory":12,"core_clock":2310,"boost_clock":2625,"color":"Black","length":307}
+{"name":"Gigabyte GAMING OC","price":null,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":null,"color":"Black","length":281}
+{"name":"Zotac MINI","price":698,"chipset":"GeForce RTX 2070 SUPER","memory":8,"core_clock":1605,"boost_clock":1770,"color":"Black","length":210}
+{"name":"PowerColor Red Devil","price":null,"chipset":"Radeon RX 7900 XTX","memory":24,"core_clock":2300,"boost_clock":2565,"color":"Black","length":338}
+{"name":"MSI GT OC","price":239,"chipset":"GeForce GTX 1060 3GB","memory":3,"core_clock":1544,"boost_clock":1759,"color":"Black / White","length":243}
+{"name":"PNY XLR8 Gaming VERTO EPIC-X RGB OC","price":1898,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2595,"color":"Black","length":332}
+{"name":"Asus STRIX GAMING Advanced","price":735,"chipset":"GeForce RTX 2070 SUPER","memory":8,"core_clock":1635,"boost_clock":1830,"color":"Black","length":300}
+{"name":"XFX Mercury OC","price":440.12,"chipset":"Radeon RX 9060 XT","memory":16,"core_clock":2220,"boost_clock":3320,"color":"Black / Silver","length":320}
+{"name":"EVGA XC3 BLACK GAMING","price":789,"chipset":"GeForce RTX 3080 10GB LHR","memory":10,"core_clock":1440,"boost_clock":1710,"color":"Black","length":285}
+{"name":"Asus DUAL OC","price":429.99,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2535,"color":"Black","length":227}
+{"name":"PowerColor Hellhound Spectral","price":null,"chipset":"Radeon RX 7900 XTX","memory":24,"core_clock":2300,"boost_clock":2525,"color":"White","length":338}
+{"name":"Asus TUF GAMING OC","price":null,"chipset":"GeForce GTX 1650 SUPER","memory":4,"core_clock":1530,"boost_clock":1800,"color":"Black","length":206}
+{"name":"MSI GAMING X","price":603.3,"chipset":"Radeon RX 6600 XT","memory":8,"core_clock":1968,"boost_clock":2607,"color":"Black / Silver","length":277}
+{"name":"Asus Phoenix OC","price":289,"chipset":"GeForce GTX 1660 SUPER","memory":6,"core_clock":1530,"boost_clock":1830,"color":"Black / White","length":174}
+{"name":"MSI Radeon RX 5700 8G","price":null,"chipset":"Radeon RX 5700","memory":8,"core_clock":1465,"boost_clock":1725,"color":"Silver","length":270}
+{"name":"MSI VANGUARD SOC LAUNCH EDITION","price":1059.99,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2602,"color":"Black / Silver","length":357}
+{"name":"PowerColor Fighter","price":null,"chipset":"Radeon RX 6600 XT","memory":8,"core_clock":1968,"boost_clock":2589,"color":"Black","length":200}
+{"name":"Asus ROG STRIX GAMING","price":null,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2235,"boost_clock":2550,"color":"White","length":358}
+{"name":"Palit Dual","price":null,"chipset":"GeForce RTX 4060 Ti","memory":8,"core_clock":2310,"boost_clock":2535,"color":"Black","length":250}
+{"name":"Asus ROG STRIX","price":549,"chipset":"GeForce GTX 1070 Ti","memory":8,"core_clock":1607,"boost_clock":1759,"color":"Black","length":298}
+{"name":"MSI GAMING TRIO CLASSIC","price":null,"chipset":"Radeon RX 7900 XTX","memory":24,"core_clock":2300,"boost_clock":2500,"color":"Black / Silver","length":325}
+{"name":"PNY VCQP1000-PB","price":107,"chipset":"Quadro P1000","memory":4,"core_clock":1354,"boost_clock":1455,"color":"Black","length":145}
+{"name":"Sapphire PULSE","price":null,"chipset":"Radeon RX 7900 GRE","memory":16,"core_clock":1270,"boost_clock":2290,"color":"Black / Red","length":320}
+{"name":"Zotac GAMING OC","price":null,"chipset":"GeForce GTX 1650 G6","memory":4,"core_clock":1410,"boost_clock":1620,"color":"Black / Gray","length":151}
+{"name":"MSI VENTUS 3X OC","price":329.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2550,"color":"Silver / Black","length":303}
+{"name":"Asus ROG STRIX GAMING OC","price":999.99,"chipset":"GeForce RTX 3080 12GB LHR","memory":12,"core_clock":1260,"boost_clock":1890,"color":"Black / Silver","length":318}
+{"name":"Gigabyte OC","price":null,"chipset":"GeForce GTX 1660","memory":6,"core_clock":1530,"boost_clock":1785,"color":"Black / Gray","length":224}
+{"name":"Sapphire PULSE","price":979,"chipset":"Radeon RX 6800","memory":16,"core_clock":1700,"boost_clock":null,"color":"Black / Red","length":303}
+{"name":"MSI GeForce RTX 3090 VENTUS 3X 24G OC","price":1599.99,"chipset":"GeForce RTX 3090","memory":24,"core_clock":1395,"boost_clock":null,"color":"Black","length":305}
+{"name":"PNY VERTO","price":null,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":2475,"color":"Black","length":247}
+{"name":"Gigabyte GAMING OC","price":null,"chipset":"GeForce RTX 4060 Ti","memory":16,"core_clock":2310,"boost_clock":2595,"color":"Black","length":281}
+{"name":"NVIDIA 900-1G611-2530-000","price":null,"chipset":"Titan Xp","memory":12,"core_clock":1480,"boost_clock":1582,"color":"Black","length":267}
+{"name":"Gigabyte EAGLE OC","price":473.52,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":2617,"color":"White / Silver","length":215}
+{"name":"PowerColor Fighter OC","price":null,"chipset":"Radeon RX 7700 XT","memory":12,"core_clock":1700,"boost_clock":2584,"color":"Black","length":290}
+{"name":"MSI VENTUS 3X OC","price":1249,"chipset":"GeForce RTX 4070 Ti","memory":12,"core_clock":2310,"boost_clock":2655,"color":"Silver / Black","length":308}
+{"name":"EVGA ACX 2.0","price":359,"chipset":"GeForce GTX 970","memory":4,"core_clock":1050,"boost_clock":1178,"color":"Black / Blue","length":241}
+{"name":"Gigabyte OC Low Profile","price":376.93,"chipset":"GeForce RTX 5050","memory":8,"core_clock":2317,"boost_clock":2587,"color":"Black","length":182}
+{"name":"Asus ROG STRIX GAMING OC V2","price":485.17,"chipset":"GeForce RTX 3060 Ti LHR","memory":8,"core_clock":1410,"boost_clock":1890,"color":"Black / Silver","length":318}
+{"name":"Asus DUAL OC","price":379.99,"chipset":"GeForce RTX 3050 8GB","memory":8,"core_clock":1550,"boost_clock":1852,"color":"Black","length":200}
+{"name":"MSI GAMING X","price":489,"chipset":"Radeon RX 580","memory":8,"core_clock":1257,"boost_clock":1393,"color":"Black / Red","length":276}
+{"name":"PNY VCNRTX4000ADALP-PB","price":1299,"chipset":"RTX 4000 SFF Ada Generation","memory":20,"core_clock":1290,"boost_clock":1565,"color":"Black","length":168}
+{"name":"Palit Infinity 3 OC","price":583.58,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2407,"boost_clock":2662,"color":"Black","length":292}
+{"name":"Asus DUAL EVO OC","price":null,"chipset":"GeForce RTX 2070 SUPER","memory":8,"core_clock":1635,"boost_clock":1845,"color":"Black","length":267}
+{"name":"EVGA FTW GAMING ACX 3.0","price":489,"chipset":"GeForce GTX 1070","memory":8,"core_clock":1607,"boost_clock":1797,"color":"Black / Gray","length":267}
+{"name":"Gigabyte GAMING","price":null,"chipset":"GeForce GTX 1080 Ti","memory":11,"core_clock":1518,"boost_clock":1657,"color":"White / Orange","length":280}
+{"name":"Sapphire PULSE","price":null,"chipset":"Radeon RX 6700","memory":10,"core_clock":1941,"boost_clock":2495,"color":"Black / Red","length":260}
+{"name":"Gainward Python III OC","price":null,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2662,"color":"Black","length":292}
+{"name":"Gainward Phantom","price":null,"chipset":"GeForce RTX 5080","memory":16,"core_clock":2300,"boost_clock":2617,"color":"Black","length":332}
+{"name":"Asus TUF GAMING OC","price":868.88,"chipset":"Radeon RX 6700 XT","memory":12,"core_clock":2321,"boost_clock":null,"color":"Black","length":322}
+{"name":"MSI EXPERT","price":1989,"chipset":"GeForce RTX 4080 SUPER","memory":16,"core_clock":2210,"boost_clock":2625,"color":"Copper / Black","length":312}
+{"name":"MSI VENTUS 2X E OC","price":1398.88,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":2520,"color":"Silver / Black","length":245}
+{"name":"Palit StormX","price":256,"chipset":"GeForce RTX 3050 6GB","memory":6,"core_clock":1040,"boost_clock":1470,"color":"Black","length":162}
+{"name":"Asus STRIX GAMING OC","price":null,"chipset":"GeForce RTX 2060 SUPER","memory":8,"core_clock":1500,"boost_clock":1860,"color":"Black","length":301}
+{"name":"Palit GamingPro OC","price":null,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2482,"color":"Black","length":332}
+{"name":"EVGA SSC GAMING","price":383,"chipset":"GeForce GTX 1060 6GB","memory":6,"core_clock":1607,"boost_clock":1835,"color":"Black","length":267}
+{"name":"MSI SHADOW 3X OC","price":null,"chipset":"GeForce RTX 4070 Ti SUPER","memory":16,"core_clock":2340,"boost_clock":2655,"color":"Black","length":308}
+{"name":"Gigabyte WINDFORCE OC","price":null,"chipset":"GeForce RTX 2060 SUPER","memory":8,"core_clock":1470,"boost_clock":1680,"color":"Black","length":265}
+{"name":"MSI SHADOW 3X","price":1089,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2467,"color":"Black","length":303}
+{"name":"Asus TUF GAMING OC","price":539.99,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":2692,"color":"Black / Silver","length":302}
+{"name":"PNY VCQFX1800-PCIE-PB","price":null,"chipset":"Quadro FX 1800","memory":0.75,"core_clock":null,"boost_clock":null,"color":"Black / Green","length":null}
+{"name":"PNY VCQP620-PB","price":91.07,"chipset":"Quadro P620","memory":2,"core_clock":1266,"boost_clock":1354,"color":"Black","length":145}
+{"name":"Asus STRIX GAMING OC","price":null,"chipset":"GeForce RTX 2080 SUPER","memory":8,"core_clock":1650,"boost_clock":1890,"color":"Black","length":300}
+{"name":"ASRock Challenger Pro OC","price":null,"chipset":"Radeon RX 6750 XT","memory":12,"core_clock":2150,"boost_clock":2618,"color":"Black","length":303}
+{"name":"Asus TUF GAMING OC V2","price":698.97,"chipset":"GeForce RTX 3060 Ti LHR","memory":8,"core_clock":1410,"boost_clock":1785,"color":"Black","length":301}
+{"name":"Gigabyte GAMING OC","price":null,"chipset":"GeForce RTX 3060 8GB","memory":8,"core_clock":1320,"boost_clock":1807,"color":"Black / Silver","length":198}
+{"name":"ASRock Challenger D OC","price":null,"chipset":"Radeon RX 6700 XT","memory":12,"core_clock":2330,"boost_clock":2615,"color":"Black","length":269}
+{"name":"MSI GAMING Z","price":916.69,"chipset":"GeForce RTX 2060","memory":6,"core_clock":1365,"boost_clock":1830,"color":"Black / Gray","length":247}
+{"name":"Asus ROG STRIX GAMING OC","price":1229.99,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2670,"color":"Black","length":339}
+{"name":"ASRock Phantom Gaming D OC","price":null,"chipset":"Radeon RX 6800 XT","memory":16,"core_clock":1825,"boost_clock":null,"color":"Black / Silver","length":330}
+{"name":"Zotac GAMING AMP","price":399.99,"chipset":"GeForce RTX 5060 Ti","memory":8,"core_clock":2410,"boost_clock":2632,"color":"Black","length":220}
+{"name":"Asus DUAL OC","price":970,"chipset":"Radeon RX 6750 XT","memory":12,"core_clock":2150,"boost_clock":2618,"color":"Black / Silver","length":295}
+{"name":"MSI RTX 3090 SUPRIM X 24G","price":1658,"chipset":"GeForce RTX 3090","memory":24,"core_clock":1395,"boost_clock":1875,"color":"Silver","length":336}
+{"name":"MSI Radeon RX 6900 XT GAMING X TRIO 16G","price":1135.01,"chipset":"Radeon RX 6900 XT","memory":16,"core_clock":1825,"boost_clock":2340,"color":"Silver / Black","length":324}
+{"name":"XFX GTS","price":294.3,"chipset":"Radeon RX 580","memory":8,"core_clock":1405,"boost_clock":1425,"color":"Black / Red","length":270}
+{"name":"Sapphire NITRO+ SE","price":null,"chipset":"Radeon RX 590","memory":8,"core_clock":1469,"boost_clock":1560,"color":"Blue / White","length":260}
+{"name":"PowerColor Red Devil","price":null,"chipset":"Radeon RX 580","memory":8,"core_clock":1257,"boost_clock":1380,"color":"Black / Red","length":255}
+{"name":"PowerColor ITX","price":149.8,"chipset":"Radeon RX 6500 XT","memory":4,"core_clock":2310,"boost_clock":null,"color":"Black","length":165}
+{"name":"Sapphire NITRO+","price":898,"chipset":"Radeon RX 6800 XT","memory":16,"core_clock":1825,"boost_clock":null,"color":"Black / Silver","length":310}
+{"name":"Asus STRIX-GTX960-DC2OC-2GD5","price":249,"chipset":"GeForce GTX 960","memory":2,"core_clock":1228,"boost_clock":1291,"color":"Black","length":215}
+{"name":"Gigabyte GAMING OC","price":589,"chipset":"Radeon RX 6600 XT","memory":8,"core_clock":1968,"boost_clock":2593,"color":"Black / Silver","length":282}
+{"name":"Gigabyte WINDFORCE OC","price":null,"chipset":"GeForce GTX 1060 3GB","memory":3,"core_clock":1556,"boost_clock":1797,"color":"Black / Orange","length":223}
+{"name":"XFX RX-97TMAQKW9","price":1221.15,"chipset":"Radeon RX 9070 XT","memory":16,"core_clock":2400,"boost_clock":2970,"color":"White","length":360}
+{"name":"Asus ProArt OC","price":720,"chipset":"GeForce RTX 4060","memory":8,"core_clock":1830,"boost_clock":2580,"color":"Black / Gold","length":300}
+{"name":"MSI GAMING X TRIO","price":1249,"chipset":"Radeon RX 6950 XT","memory":16,"core_clock":1890,"boost_clock":2454,"color":"Silver / Black","length":325}
+{"name":"MSI VENTUS 2X OC","price":null,"chipset":"GeForce RTX 3050 8GB","memory":8,"core_clock":1550,"boost_clock":null,"color":"Black","length":235}
+{"name":"Asus DUAL OC V2","price":null,"chipset":"GeForce RTX 3070 LHR","memory":8,"core_clock":1500,"boost_clock":1800,"color":"Black","length":267}
+{"name":"Gigabyte EAGLE OC","price":null,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":1770,"color":"Black / Silver","length":282}
+{"name":"Acer Predator BiFrost OC","price":null,"chipset":"Arc A770","memory":16,"core_clock":2200,"boost_clock":2400,"color":"Black / Silver","length":267}
+{"name":"Asus TUF Gaming EVO OC","price":420,"chipset":"GeForce GTX 1660 Ti","memory":6,"core_clock":1500,"boost_clock":1845,"color":"Black / Gray","length":206}
+{"name":"PowerColor Hellhound","price":null,"chipset":"Radeon RX 6700 XT","memory":12,"core_clock":2321,"boost_clock":2581,"color":"Black","length":305}
+{"name":"Zotac GAMING Twin Edge OC","price":309.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2527,"color":"Black","length":220}
+{"name":"Gigabyte GAMING OC","price":1569.99,"chipset":"GeForce RTX 3090","memory":24,"core_clock":1395,"boost_clock":1755,"color":"Black / Gray","length":320}
+{"name":"Zotac Twin Edge","price":null,"chipset":"GeForce RTX 4070 SUPER","memory":12,"core_clock":1980,"boost_clock":2475,"color":"Black","length":234}
+{"name":"Gigabyte EAGLE","price":null,"chipset":"Radeon RX 6700 XT","memory":12,"core_clock":2321,"boost_clock":null,"color":"Black","length":282}
+{"name":"Gigabyte AERO OC","price":null,"chipset":"GeForce RTX 4060 Ti","memory":16,"core_clock":2310,"boost_clock":2595,"color":"White / Silver","length":281}
+{"name":"EVGA XC3 ULTRA GAMING iCX3","price":null,"chipset":"GeForce RTX 3080 Ti","memory":12,"core_clock":1365,"boost_clock":1725,"color":"Black","length":300}
+{"name":"Palit Dual","price":null,"chipset":"GeForce RTX 5050","memory":8,"core_clock":2317,"boost_clock":2572,"color":"Black","length":262}
+{"name":"Asus DUAL OC","price":549,"chipset":"Radeon RX 6600 XT","memory":8,"core_clock":1968,"boost_clock":2607,"color":"Black / White","length":243}
+{"name":"Gigabyte WINDFORCE 3X","price":null,"chipset":"GeForce GTX 970","memory":4,"core_clock":1114,"boost_clock":1253,"color":"Black","length":310}
+{"name":"ASRock Phantom Gaming D OC","price":null,"chipset":"Radeon RX 6800","memory":16,"core_clock":1700,"boost_clock":null,"color":"Black / Silver","length":305}
+{"name":"Zotac GAMING SOLO","price":278.53,"chipset":"GeForce RTX 3050 6GB","memory":6,"core_clock":1040,"boost_clock":1470,"color":"Black","length":151}
+{"name":"Zotac GAMING AMP Holo","price":585.99,"chipset":"GeForce RTX 3070 Ti","memory":8,"core_clock":1575,"boost_clock":1830,"color":"Black / Silver","length":317}
+{"name":"Gigabyte GAMING OC","price":null,"chipset":"GeForce RTX 4080","memory":16,"core_clock":2205,"boost_clock":2535,"color":"Black","length":342}
+{"name":"AMD 100-438378","price":null,"chipset":"Radeon RX 6800","memory":16,"core_clock":1700,"boost_clock":2105,"color":"Black / Silver","length":267}
+{"name":"MSI GAMING X TRIO","price":913.46,"chipset":"Radeon RX 6750 XT","memory":12,"core_clock":2150,"boost_clock":2623,"color":"Silver / Black","length":327}
+{"name":"Asus TUF GAMING","price":null,"chipset":"GeForce RTX 5060 Ti","memory":16,"core_clock":2410,"boost_clock":2602,"color":"Black / Silver","length":302}
+{"name":"Asus ROG Matrix Platinum","price":null,"chipset":"GeForce RTX 4090","memory":24,"core_clock":2670,"boost_clock":2700,"color":"Black / Silver","length":286}
+{"name":"MSI Radeon RX 6800 XT Gaming X Trio 16G","price":1170.49,"chipset":"Radeon RX 6800 XT","memory":16,"core_clock":1850,"boost_clock":2285,"color":"Silver / Black","length":324}
+{"name":"PNY XLR8 Gaming REVEL EPIC-X RGB","price":null,"chipset":"GeForce RTX 3070","memory":8,"core_clock":1500,"boost_clock":1725,"color":"Black / Silver","length":294}
+{"name":"Asus DUAL","price":345,"chipset":"GeForce GTX 1060 3GB","memory":3,"core_clock":1594,"boost_clock":1809,"color":"White","length":242}
+{"name":"XFX Speedster QICK 309","price":null,"chipset":"Radeon RX 7600 XT","memory":16,"core_clock":1720,"boost_clock":2810,"color":"Black","length":302}
+{"name":"MSI GeForce RTX 2080 TI VENTUS 11G OC","price":998,"chipset":"GeForce RTX 2080 Ti","memory":11,"core_clock":1350,"boost_clock":1635,"color":"Silver / Black","length":268}
+{"name":"MSI VENTUS 2X","price":null,"chipset":"GeForce RTX 4070","memory":12,"core_clock":1920,"boost_clock":2490,"color":"Silver / Black","length":242}
+{"name":"EVGA FTW3 ULTRA GAMING LHR","price":799.99,"chipset":"GeForce RTX 3080 10GB LHR","memory":10,"core_clock":1440,"boost_clock":1800,"color":"Black","length":300}
+{"name":"AMD 100-505999","price":139.96,"chipset":"Radeon Pro WX 3100","memory":4,"core_clock":925,"boost_clock":1219,"color":"Blue","length":168}
+{"name":"Gigabyte GAMING OC Rev 2.0","price":849.99,"chipset":"GeForce RTX 3080 10GB LHR","memory":10,"core_clock":1440,"boost_clock":1800,"color":"Black / Gray","length":320}
+{"name":"EVGA Black","price":998,"chipset":"GeForce RTX 2080 Ti","memory":11,"core_clock":1350,"boost_clock":1545,"color":"Black / Clear","length":270}
+{"name":"Gigabyte AORUS ELITE","price":null,"chipset":"GeForce RTX 3060 Ti","memory":8,"core_clock":1410,"boost_clock":1785,"color":"Black","length":296}
+{"name":"PNY VCQRTX5000-PB","price":749.96,"chipset":"Quadro RTX 5000","memory":16,"core_clock":1620,"boost_clock":1815,"color":"Silver / Black","length":267}
+{"name":"MSI MSI RTX 2070 Ventus 8G Video Card","price":659,"chipset":"GeForce RTX 2070","memory":8,"core_clock":1410,"boost_clock":1620,"color":"Silver / Black","length":226}
+{"name":"Gainward Phoenix","price":null,"chipset":"GeForce RTX 5070 Ti","memory":16,"core_clock":2300,"boost_clock":2452,"color":"Black / Silver","length":332}
+{"name":"PNY ARGB EPIC-X RGB OC","price":339.99,"chipset":"GeForce RTX 5060","memory":8,"core_clock":2280,"boost_clock":2580,"color":"Black","length":280}
+{"name":"EVGA SC GAMING","price":589,"chipset":"GeForce RTX 2060","memory":6,"core_clock":1365,"boost_clock":1710,"color":"Black","length":190}
+{"name":"MSI VENTUS 2X","price":null,"chipset":"GeForce RTX 3050 8GB","memory":8,"core_clock":1550,"boost_clock":null,"color":"Black","length":235}
+{"name":"PNY VCQP400-PB","price":89.99,"chipset":"Quadro P400","memory":2,"core_clock":1070,"boost_clock":1170,"color":"Black","length":145}
+{"name":"MSI SUPRIM X","price":1667.49,"chipset":"GeForce RTX 3070 Ti","memory":8,"core_clock":1575,"boost_clock":1875,"color":"Black / Silver","length":335}

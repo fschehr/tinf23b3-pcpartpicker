@@ -12,12 +12,22 @@ import java.sql.SQLException;
  */
 public class ConnectionFactory {
 
+    private final String jdbcUrl;
+
+    public ConnectionFactory() {
+        this(DatabaseConfig.jdbcUrl());
+    }
+
+    public ConnectionFactory(String jdbcUrl) {
+        this.jdbcUrl = jdbcUrl;
+    }
+
     /**
      * Erstellt neue Verbindung
      * @return Connection-Objekt, das die Verbindung zur Datenbank repräsentiert.
      * @throws SQLException
      */
     public Connection createConnection() throws SQLException {
-        return DriverManager.getConnection(DatabaseConfig.jdbcUrl());
+        return DriverManager.getConnection(jdbcUrl);
     }
 }

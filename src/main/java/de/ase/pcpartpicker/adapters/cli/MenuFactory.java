@@ -4,6 +4,7 @@ import de.ase.pcpartpicker.adapters.cli.commands.LoginCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.LogoutCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.NewUserCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.OpenMenuCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.ResetDatabaseCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.SelectComponentCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ShowAllUserCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ShowComputerCommand;
@@ -11,6 +12,7 @@ import de.ase.pcpartpicker.adapters.cli.commands.ShowCurrentDraftCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ShowListCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.StartComputerDraftCommand;
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
+import de.ase.pcpartpicker.adapters.sqlite.DatabaseInitializer;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.ComputerRepository;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.UserRepository;
 
@@ -24,6 +26,7 @@ public class MenuFactory {
     private final ListConfiguration configs;
     private final InputReader inputReader = new InputReader();
     private final ConnectionFactory connectionFactory = new ConnectionFactory();
+    private final DatabaseInitializer databaseInitializer = new DatabaseInitializer(connectionFactory);
     private final UserRepository userRepository = new UserRepository(connectionFactory); 
     private final ComputerRepository computerRepository = new ComputerRepository(connectionFactory);
     private final ComputerDraft computerDraft = new ComputerDraft();
@@ -42,6 +45,7 @@ public class MenuFactory {
         mainMenu.add(new MenuItem("Computerverwaltung", new OpenMenuCommand(createComputerMenu())));
         mainMenu.add(new MenuItem("Nutzerverwaltung", new OpenMenuCommand(createUserMenu()))); 
         mainMenu.add(new MenuItem("Login", new OpenMenuCommand(createLoginMenu()))); 
+        mainMenu.add(new MenuItem("Datenbank reset", new ResetDatabaseCommand(inputReader, databaseInitializer)));
         return mainMenu;
     }
 
