@@ -97,8 +97,8 @@ public class Computer {
     }
 
 
-    public double getTotalPowerConsumption() {
-        double totalPower = 0;
+    public int getTotalPowerConsumption() {
+        int totalPower = 0;
         totalPower += computerCase.getPowerConsumptionW();
         totalPower += cpu.getPowerConsumptionW();
         if (gpu != null) {
