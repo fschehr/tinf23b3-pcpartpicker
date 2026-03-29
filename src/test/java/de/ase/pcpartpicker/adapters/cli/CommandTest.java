@@ -81,7 +81,7 @@ public class CommandTest {
             }
         };
 
-        rComponentConfig<Component> config = new rComponentConfig<>(
+        rListConfiguration<Component> config = new rListConfiguration<>(
             "Test-Komponenten",
             new String[] { "Header1", "Header2" },
             dummyRepo,

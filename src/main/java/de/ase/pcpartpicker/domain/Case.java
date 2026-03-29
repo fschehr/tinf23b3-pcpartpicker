@@ -46,4 +46,21 @@ public class Case extends Component {
     public int getFanSlots() {
         return fanSlots;
     }
+
+    @Override
+    public String toString() {
+        String motherboardFormFactorName = motherboardFormFactor != null ? motherboardFormFactor.getName() : "-";
+        String psuFormFactorName = psuFormFactor != null ? psuFormFactor.getName() : "-";
+        return String.format(
+            "%s | %s | %.2f EUR | %s | %s | %s | %d | %d W",
+            getName(),
+            getManufacturer() != null ? getManufacturer().getName() : "-",
+            getPrice(),
+            motherboardFormFactorName,
+            psuFormFactorName,
+            hasWindow ? "ja" : "nein",
+            fanSlots,
+            getPowerConsumptionW()
+        );
+    }
 }

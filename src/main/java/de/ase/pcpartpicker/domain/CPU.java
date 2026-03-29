@@ -32,11 +32,26 @@ public class CPU extends Component {
         return socket;
     }
 
-    public double getspeedGHz() {
+    public double getSpeedGHz() {
         return speedGHz;
     }
 
     public boolean hasIntegratedGraphics() {
         return hasIntegratedGraphics;
+    }
+
+    @Override
+    public String toString() {
+        String socketName = socket != null ? socket.getName() : "-";
+        return String.format(
+            "%s | %s | %.2f EUR | %s | %.2f GHz | %s | %d W",
+            getName(),
+            getManufacturer() != null ? getManufacturer().getName() : "-",
+            getPrice(),
+            socketName,
+            speedGHz,
+            hasIntegratedGraphics ? "ja" : "nein",
+            getPowerConsumptionW()
+        );
     }
 }

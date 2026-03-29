@@ -1,10 +1,5 @@
 package de.ase.pcpartpicker.adapters.sqlite.repositories;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
@@ -37,29 +32,23 @@ public class PsuRepository extends BaseRepository<PSU> {
             JOIN psu_form_factor ff ON ff.id = p.form_factor_id
             ORDER BY p.id
             """;
-        List<PSU> psus = new ArrayList<>();
 
-        try (Connection connection = connectionFactory.createConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
+        return queryList(
+            sql,
+            resultSet -> {
                 Manufacturer manufacturer = new Manufacturer(resultSet.getInt("manufacturer_id"), resultSet.getString("manufacturer_name"));
                 PSUFormFactor formFactor = new PSUFormFactor(resultSet.getInt("form_factor_id"), resultSet.getString("form_factor_name"));
 
-                psus.add(new PSU(
+                return new PSU(
                     resultSet.getInt("id"),
                     resultSet.getString("name"),
                     resultSet.getDouble("price"),
                     manufacturer,
                     resultSet.getInt("wattage"),
                     formFactor
-                ));
-            }
-            return psus;
-
-        } catch (SQLException e) {
-            throw new IllegalStateException("PSU-Daten konnten nicht geladen werden.", e);
-        }
+                );
+            },
+            "PSU-Daten konnten nicht geladen werden."
+        );
     }
 }

@@ -25,6 +25,7 @@ public class Menu implements IMenuComponent {
     public void add(IMenuComponent component) {
         children.add(component);
     }
+
     
     @Override
     public void execute() {
@@ -32,11 +33,21 @@ public class Menu implements IMenuComponent {
         while (running) {
             UIUtils.clear();
             System.out.println("\n=== " + title + " ===\n");
+
+            if(SessionManager.isLoggedIn()) {
+                System.out.println("Eingeloggt als: "+ SessionManager.getcurrentUser().getName()+ "\n");
+            }
             
             for (int i = 0; i < children.size(); i++) {
                 System.out.println((i + 1) + ") " + children.get(i).getTitle());
             }
-            System.out.println("0) Beenden"); 
+            
+            if (title.toLowerCase().contains("hauptmenü")) {
+                System.out.println("0) Beenden");
+            } 
+            else {
+                System.out.println("0) Zurück");
+            }
             System.out.print("\nAuswahl: ");
             
             int choice = inputReader.readInt("Ein Zahl eingeben", 0, children.size());
@@ -53,4 +64,5 @@ public class Menu implements IMenuComponent {
     public String getTitle() {
         return title;
     }
+
 }

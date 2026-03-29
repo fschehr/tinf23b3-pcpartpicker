@@ -1,47 +1,27 @@
 package de.ase.pcpartpicker.adapters.sqlite.repositories;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
 
-public class UserRepository {
-
-    private final ConnectionFactory connectionFactory;
+public class UserRepository extends JdbcRepository<User> {
 
     public UserRepository(ConnectionFactory connectionFactory) {
-        this.connectionFactory = connectionFactory;
+        super(connectionFactory);
     }
 
+    @Override
     public List<User> findAll() {
         String sql = """
             SELECT id, name
             FROM users
             ORDER BY id
             """;
-        List<User> users = new ArrayList<>();
 
-        try (Connection connection = connectionFactory.createConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
-                users.add(new User(
-                    resultSet.getInt("id"),
-                    resultSet.getString("name")
-                ));
-            }
-            return users;
-
-        } catch (SQLException e) {
-            throw new IllegalStateException("User-Daten konnten nicht geladen werden.", e);
-        }
+        return queryList(sql, this::mapUser, "User-Daten konnten nicht geladen werden.");
     }
 
     public User findById(int id) {
@@ -51,24 +31,12 @@ public class UserRepository {
             WHERE id = ?
             """;
 
-        try (Connection connection = connectionFactory.createConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            statement.setInt(1, id);
-
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (!resultSet.next()) {
-                    return null;
-                }
-                return new User(
-                    resultSet.getInt("id"),
-                    resultSet.getString("name")
-                );
-            }
-
-        } catch (SQLException e) {
-            throw new IllegalStateException("User konnte nicht geladen werden.", e);
-        }
+        return queryOptional(
+            sql,
+            statement -> statement.setInt(1, id),
+            this::mapUser,
+            "User konnte nicht geladen werden."
+        ).orElse(null);
     }
 
     public User save(String name) {
@@ -77,21 +45,38 @@ public class UserRepository {
             VALUES (?)
             """;
 
-        try (Connection connection = connectionFactory.createConnection();
-             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        int generatedId = insertAndReturnGeneratedKey(
+            sql,
+            statement -> statement.setString(1, name),
+            "User konnte nicht gespeichert werden."
+        );
+        return new User(generatedId, name);
+    }
 
-            statement.setString(1, name);
-            statement.executeUpdate();
+    private User mapUser(ResultSet resultSet) throws SQLException {
+        return new User(
+            resultSet.getInt("id"),
+            resultSet.getString("name")
+        );
+    }
 
-            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    return new User(generatedKeys.getInt(1), name);
-                }
-            }
-            throw new IllegalStateException("User konnte nicht gespeichert werden: Keine ID zurückgegeben.");
+    public int findUserIdByComputerId(int computerId) {
+        String sql = "SELECT user_id FROM config WHERE computer_id = ?";
+        return queryOptional(
+            sql,
+            statement -> statement.setInt(1, computerId),
+            rs -> rs.getInt("user_id"),
+            "User-ID konnte über Computer-ID nicht geladen werden."
+        ).orElse(-1);
+    }
 
-        } catch (SQLException e) {
-            throw new IllegalStateException("User konnte nicht gespeichert werden.", e);
-        }
+    public User findByComputerId(int computerId) {
+        String sql = "SELECT u.id, u.name FROM users u JOIN config c ON c.user_id = u.id WHERE c.computer_id = ?";
+        return queryOptional(
+            sql,
+            statement -> statement.setInt(1, computerId),
+            this::mapUser,
+            "User konnte über Computer-ID nicht geladen werden."
+        ).orElse(null);
     }
 }

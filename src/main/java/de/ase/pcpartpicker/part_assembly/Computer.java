@@ -1,5 +1,6 @@
 package de.ase.pcpartpicker.part_assembly;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.ase.pcpartpicker.domain.CPU;
@@ -9,6 +10,11 @@ import de.ase.pcpartpicker.domain.Mainboard;
 import de.ase.pcpartpicker.domain.PSU;
 import de.ase.pcpartpicker.domain.RAM;
 import de.ase.pcpartpicker.domain.Storage;
+import de.ase.pcpartpicker.domain.Component;
+
+import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
+
+import de.ase.pcpartpicker.ColorConstants;
 
 /**
  * Klasse die einen vollständig konfigurierten Computer abbildet
@@ -19,6 +25,7 @@ import de.ase.pcpartpicker.domain.Storage;
  */
 public class Computer {
     
+    private final int id;
     private final Case computerCase;
     private final CPU cpu;
     private final GPU gpu;
@@ -33,6 +40,7 @@ public class Computer {
      * @param builder Der Builder, der die Komponenten enthält.
      */
     private Computer(Builder builder) {
+        this.id = builder.id;
         this.computerCase = builder.computerCase;
         this.cpu = builder.cpu;
         this.gpu = builder.gpu;
@@ -41,20 +49,6 @@ public class Computer {
         this.ramModule = builder.ramModule;
         this.psu = builder.psu;
         this.storageDevices = builder.storageDevices;
-    }
-
-    public void printConfiguration() {
-        System.out.println("Computer-Konfiguration:");
-        System.out.println("Gehäuse: " + computerCase.getName());
-        System.out.println("CPU: " + cpu.getName());
-        System.out.println("GPU: " + (gpu != null ? gpu.getName() : "Keine dedizierte Grafikkarte"));
-        System.out.println("Mainboard: " + mainboard.getName());
-        System.out.println("RAM: " + ram.getName() + " (" + ramModule + " Module)");
-        System.out.println("Netzteil: " + psu.getName());
-        System.out.println("Speichermedien:");
-        for (Storage storage : storageDevices) {
-            System.out.println(" - " + storage.getName());
-        }
     }
 
     public double getTotalPrice() {
@@ -73,23 +67,35 @@ public class Computer {
         return totalPrice;
     }
 
+    public int getId() {
+        return id;
+    }
     public Case getComputerCase() {
         return computerCase;
     }
-    public CPU getCpu() {
+    public CPU getCPU() {
         return cpu;
     }
-    public GPU getGpu() {
+    public GPU getGPU() {
         return gpu;
     }
     public Mainboard getMainboard() {
         return mainboard;
     }
-    public RAM getRam() {
+    public RAM getRAM() {
         return ram;
     }
-    public PSU getPsu() {
+    public int getRamModule() {
+        return ramModule;
+    }
+    public PSU getPSU() {
         return psu;
+    }
+
+
+    // TODO: Erstmal temporär eingefügt, damit die Funktion gefunden wird
+    public List<Storage> getStorageDevices() {
+        return storageDevices;
     }
 
 
@@ -123,6 +129,7 @@ public class Computer {
      * @author Tuluhan
      */
     public static class Builder {
+        private int id = 0;
         private Case computerCase;
         private CPU cpu;
         private GPU gpu;
@@ -130,7 +137,12 @@ public class Computer {
         private RAM ram;
         private int ramModule; // Anzahl der RAM-Module, z.B. 2 für 2x8GB
         private PSU psu;
-        private List<Storage> storageDevices;
+        private List<Storage> storageDevices = new ArrayList<>();
+
+        public Builder setId(int id) {
+            this.id = id;
+            return this;
+        }
 
         /**
          * Setzt das Gehäuse für den Computer. Es muss ein Gehäuse ausgewählt werden, damit der Computer erstellt werden kann.
@@ -198,65 +210,137 @@ public class Computer {
         }
 
         /**
+         * Diese Methode soll dazu dienen die Kompatibilität von Komponenten live zu überprüfen, während der Benutzer die Komponenten auswählt.
+         * @return die Warnung die ausgegeben werden soll. Wenn kein Konflikt herrscht, wird null zurückgegeben.
+         * @author Tuluhan
+         */
+        public String validate(ComputerDraft draft, Component component) {
+            
+            if(component instanceof CPU) {
+                if(draft.getMainboard() != null && !((CPU) component).getSocket().equals(draft.getMainboard().getSocket())) {
+                    //System.out.println("LIVE: Die ausgewählte CPU ist nicht mit dem Mainboard kompatibel.");
+                    return "Dieser Prozessor ist nicht mit dem Mainboard kompatibel.";
+                }
+            }
+
+            if(component instanceof Mainboard) {
+                if(draft.getCPU() != null && !((Mainboard) component).getSocket().equals(draft.getCPU().getSocket())) {
+                    //System.out.println("LIVE: Das ausgewählte Mainboard ist nicht mit der CPU kompatibel.");
+                    return "Dieses Mainboard ist nicht mit der CPU kompatibel.";
+                } else if(draft.getRamModule() > ((Mainboard) component).getRamSlots()) {
+                    //System.out.println("LIVE: Das ausgewählte Mainboard hat nicht genug RAM-Slots für die Anzahl der RAM-Module.");
+                    return "Dieses Mainboard hat nicht genug RAM-Slots für die Anzahl der RAM-Module.";
+                } else if(draft.getComputerCase() != null && !checkMainboardCaseCompatibility((Mainboard) component, draft.getComputerCase())) {
+                    //System.out.println("LIVE: Das ausgewählte Mainboard passt nicht ins Gehäuse.");
+                    return "Dieses Mainboard passt nicht in das ausgewählte Gehäuse.";
+                }
+            }
+
+            if(component instanceof Case) {
+                if(draft.getPSU() != null && !((Case) component).getPSUFormFactor().equals(draft.getPSU().getFormFactor())) {
+                    //System.out.println("LIVE: Die Form des ausgewählten Netzteils passt nicht zum Gehäuse.");
+                    return "Das ausgewählte Netzeil passt nicht in das Gehäuse.";
+                    // WICHTIG: Hier ergänzen dass abwärtskompatibel
+                } else if(draft.getMainboard() != null && !checkMainboardCaseCompatibility(draft.getMainboard(), (Case) component)) {
+                    //System.out.println("LIVE: Das ausgewählte Mainboard passt nicht ins Gehäuse.");
+                    return "Das ausgewählte Mainboard ist zu groß für das Gehäuse.";
+                }
+            }
+
+            if(component instanceof PSU) {
+                if(draft.getComputerCase() != null && !((PSU) component).getFormFactor().equals(draft.getComputerCase().getPSUFormFactor())) {
+                    //System.out.println("LIVE: Die Form des ausgewählten Netzteils passt nicht zum Gehäuse.");
+                    return "Dieses Netzeil passt nicht in das ausgewählte Gehäuse.";
+                }
+            }
+
+            return null;
+        }
+
+        /**
+         * Checkt die Kompatibilität von Mainboard und Gehäuse bezüglich der Formfaktoren. Es wird berücksichtigt, dass größere Formfaktoren abwärtskompatibel zu kleineren sind (z.B. passt ein ATX-Mainboard in ein E-ATX-Gehäuse, aber nicht umgekehrt).
+         * @return true, wenn das Mainboard mit dem Gehäuse kompatibel ist, andernfalls false.
+         * @author Tuluhan
+         */
+        private boolean checkMainboardCaseCompatibility(Mainboard mainboard, Case caseComponent) {
+            String[] mainboardFormFactors = {"E-ATX", "ATX", "Micro-ATX", "Mini-ITX"};
+
+            String mainboardFormFactor = mainboard.getFormFactor().getName();
+            String caseFormFactor = caseComponent.getMotherboardFormFactor().getName();
+
+            for(int i = 0; i < mainboardFormFactors.length; i++) {
+                if(mainboardFormFactors[i].equals(caseFormFactor)) {
+                    for(int j = i; j < mainboardFormFactors.length; j++) {
+                        if(mainboardFormFactors[j].equals(mainboardFormFactor)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            
+            return false;
+        }
+
+        /**
          * Diese Methode überprüft die Kompatibilität der Komponenten.
          * Es wird lediglich überprüft, ob der PC so gebaut werden und existieren könnte.
          * Bspw. ob das Netzteil genug Leistung hat, um die Komponenten zu versorgen, wird hier nicht überprüft.
          * @return true, wenn die Komponenten kompatibel sind und der Computer erstellt werden kann, andernfalls false. Es werden auch Fehlermeldungen ausgegeben, die erklären, warum der Computer nicht erstellt werden kann.
+         * @author Tuluhan
          */
         private boolean validate() {
 
             if(ram == null) {
-                System.out.println("Es muss mindestens ein RAM-Modul ausgewählt werden.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Es muss mindestens ein RAM-Modul ausgewählt werden.");
                 return false;
             }
 
             if(cpu == null) {
-                System.out.println("Es muss eine CPU ausgewählt werden.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Es muss eine CPU ausgewählt werden.");
                 return false;
             }
 
             if(!cpu.hasIntegratedGraphics() && gpu == null) {
-                System.out.println("Warnung: Der Computer hat keine dedizierte Grafikkarte und die CPU verfügt nicht über integrierte Grafik. Es könnte zu Problemen bei der Anzeige kommen.");
+                System.out.println(ColorConstants.YELLOW("WARNUNG") + " | Der Computer hat keine dedizierte Grafikkarte und die CPU verfügt nicht über integrierte Grafik. Es könnte zu Problemen bei der Anzeige kommen.");
             }
 
             if(mainboard == null) {
-                System.out.println("Es muss ein Mainboard ausgewählt werden.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Es muss ein Mainboard ausgewählt werden.");
                 return false;
             }
 
             if(psu == null) {
-                System.out.println("Es muss ein Netzteil ausgewählt werden.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Es muss ein Netzteil ausgewählt werden.");
                 return false;
             }
 
             if(computerCase == null) {
-                System.out.println("Es muss ein Gehäuse ausgewählt werden.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Es muss ein Gehäuse ausgewählt werden.");
                 return false;
             }
 
             if (!computerCase.getPSUFormFactor().equals(psu.getFormFactor())) {
-                System.out.println("Die Form des Netzteils passt nicht zum Gehäuse.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Die Form des Netzteils passt nicht zum Gehäuse.");
                 return false;
             }
 
-            // Ergänzen: Mainboard-Gehäuse Kompatibilität bezüglich abwärtskompatibler Formfaktoren (z.B. ATX, Micro-ATX, Mini-ITX)
-            if (!computerCase.getMotherboardFormFactor().equals(mainboard.getFormFactor())) {
-                System.out.println("Das Mainboard passt nicht ins Gehäuse.");
+            if (!checkMainboardCaseCompatibility(mainboard, computerCase)) {
+                System.out.println(ColorConstants.RED("FEHLER") + " | Das Mainboard passt nicht ins Gehäuse.");
                 return false;
             }            
 
             if(!cpu.getSocket().equals(mainboard.getSocket())) {
-                System.out.println("Die CPU ist nicht mit dem Mainboard kompatibel.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Die CPU ist nicht mit dem Mainboard kompatibel.");
                 return false;
             }
 
             if(ramModule > mainboard.getRamSlots()) {
-                System.out.println("Das Mainboard hat nicht genug RAM-Slots für die Anzahl der RAM-Module.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Das Mainboard hat nicht genug RAM-Slots für die Anzahl der RAM-Module.");
                 return false;
             }
 
             if(storageDevices.isEmpty()) {
-                System.out.println("Es muss mindestens ein Speichermedium ausgewählt werden.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Es muss mindestens ein Speichermedium ausgewählt werden.");
                 return false;
             }
 
@@ -271,7 +355,7 @@ public class Computer {
             if(validate())
                 return new Computer(this);
             else
-                System.out.println("Der Computer konnte nicht erstellt werden. Bitte prüfen sie die Kompatibilität der Komponenten.\n");
+                System.out.println(ColorConstants.RED("FEHLER") + " | Der Computer konnte nicht erstellt werden. Bitte prüfen sie die Kompatibilität der Komponenten.\n");
             return null;
         }
     }

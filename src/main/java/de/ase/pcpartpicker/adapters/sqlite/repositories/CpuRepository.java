@@ -1,10 +1,5 @@
 package de.ase.pcpartpicker.adapters.sqlite.repositories;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
@@ -23,7 +18,6 @@ public class CpuRepository extends BaseRepository<CPU> {
         super(connectionFactory);
     }
 
-
     @Override
     public List<CPU> findAll() {
         String sql = """
@@ -31,7 +25,8 @@ public class CpuRepository extends BaseRepository<CPU> {
                    c.name,
                    c.price,
                    c.speed_ghz,
-                     c.hasIntegratedGraphics,
+                   c.hasIntegratedGraphics,
+                   c.power_consumption_w,
                    t.id AS type_id,
                    t.name AS type_name,
                    m.id AS manufacturer_id,
@@ -44,17 +39,14 @@ public class CpuRepository extends BaseRepository<CPU> {
             JOIN sockets s ON s.id = c.socket_id
             ORDER BY c.id
             """;
-        List<CPU> cpus = new ArrayList<>();
 
-        try (Connection connection = connectionFactory.createConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
+        return queryList(
+            sql,
+            resultSet -> {
                 Manufacturer manufacturer = new Manufacturer(resultSet.getInt("manufacturer_id"), resultSet.getString("manufacturer_name"));
                 Socket socket = new Socket(resultSet.getInt("socket_id"), resultSet.getString("socket_name"));
 
-                cpus.add(new CPU(
+                return new CPU(
                     resultSet.getInt("id"),
                     resultSet.getString("name"),
                     resultSet.getDouble("price"),
@@ -62,13 +54,10 @@ public class CpuRepository extends BaseRepository<CPU> {
                     socket,
                     resultSet.getDouble("speed_ghz"),
                     resultSet.getBoolean("hasIntegratedGraphics"),
-                    0 // Damit Compiler nicht rumheult, bitte fixen @Fabio
-                ));
-            }
-            return cpus;
-
-        } catch (SQLException e) {
-            throw new IllegalStateException("CPU-Daten konnten nicht geladen werden.", e);
-        }
+                    resultSet.getInt("power_consumption_w")
+                );
+            },
+            "CPU-Daten konnten nicht geladen werden."
+        );
     }
 }

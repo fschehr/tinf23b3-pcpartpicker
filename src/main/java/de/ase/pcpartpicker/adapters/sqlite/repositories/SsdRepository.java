@@ -1,10 +1,5 @@
 package de.ase.pcpartpicker.adapters.sqlite.repositories;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
@@ -36,27 +31,21 @@ public class SsdRepository extends BaseRepository<SSD> {
             JOIN manufacturer m ON m.id = s.manufacturer_id
             ORDER BY s.id
             """;
-        List<SSD> ssds = new ArrayList<>();
 
-        try (Connection connection = connectionFactory.createConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
+        return queryList(
+            sql,
+            resultSet -> {
                 Manufacturer manufacturer = new Manufacturer(resultSet.getInt("manufacturer_id"), resultSet.getString("manufacturer_name"));
 
-                ssds.add(new SSD(
+                return new SSD(
                     resultSet.getInt("id"),
                     resultSet.getString("name"),
                     resultSet.getDouble("price"),
                     manufacturer,
                     resultSet.getInt("capacity_gb")
-                ));
-            }
-            return ssds;
-
-        } catch (SQLException e) {
-            throw new IllegalStateException("SSD-Daten konnten nicht geladen werden.", e);
-        }
+                );
+            },
+            "SSD-Daten konnten nicht geladen werden."
+        );
     }
 }

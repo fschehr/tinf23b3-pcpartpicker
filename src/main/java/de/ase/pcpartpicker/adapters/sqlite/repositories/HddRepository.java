@@ -1,10 +1,5 @@
 package de.ase.pcpartpicker.adapters.sqlite.repositories;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
@@ -36,27 +31,21 @@ public class HddRepository extends BaseRepository<HDD> {
             JOIN manufacturer m ON m.id = h.manufacturer_id
             ORDER BY h.id
             """;
-        List<HDD> hdds = new ArrayList<>();
 
-        try (Connection connection = connectionFactory.createConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
+        return queryList(
+            sql,
+            resultSet -> {
                 Manufacturer manufacturer = new Manufacturer(resultSet.getInt("manufacturer_id"), resultSet.getString("manufacturer_name"));
 
-                hdds.add(new HDD(
+                return new HDD(
                     resultSet.getInt("id"),
                     resultSet.getString("name"),
                     resultSet.getDouble("price"),
                     manufacturer,
                     resultSet.getInt("capacity_gb")
-                ));
-            }
-            return hdds;
-
-        } catch (SQLException e) {
-            throw new IllegalStateException("HDD-Daten konnten nicht geladen werden.", e);
-        }
+                );
+            },
+            "HDD-Daten konnten nicht geladen werden."
+        );
     }
 }

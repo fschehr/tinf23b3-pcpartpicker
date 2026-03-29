@@ -24,7 +24,7 @@ public class DomainTests {
         assertEquals(199.99, cpu.getPrice());
         assertEquals("Test Manufacturer", cpu.getManufacturer().getName());
         assertEquals("Test Socket", cpu.getSocket().getName());
-        assertEquals(8, cpu.getspeedGHz());
+        assertEquals(8, cpu.getSpeedGHz());
         assertFalse(cpu.hasIntegratedGraphics());
         assertEquals(95, cpu.getPowerConsumptionW());
     }
