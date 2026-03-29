@@ -115,7 +115,7 @@ public class MenuFactory {
             inputReader, computerDraft, configs.ram(),
             ram -> ram.getId(), ram -> ram.getName(), 
             (draft, ram) -> {
-                int amount = inputReader.readInt("Wie viele dieser Module willst du verbauen?", 1, 4);
+                int amount = inputReader.readInt("Wie viele dieser Module willst du verbauen?", 1, draft.getMainboardRamSlots());
                 draft.setRam(ram, amount);
             }
         )));

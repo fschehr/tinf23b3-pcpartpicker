@@ -1,6 +1,5 @@
 package de.ase.pcpartpicker.adapters.cli;
 
-import java.util.ArrayList;
 import java.util.List;
 import de.ase.pcpartpicker.domain.CPU;
 import de.ase.pcpartpicker.domain.Case;
@@ -131,5 +130,31 @@ public class ComputerDraft {
         }
         return totalPrice; 
     }
+
+    public double getTotalPowerConsumption() {
+        double totalPower = 0.0;
+        if (computerCase != null) totalPower += computerCase.getPowerConsumptionW();
+        if (cpu != null) totalPower += cpu.getPowerConsumptionW();
+        if (gpu != null) totalPower += gpu.getPowerConsumptionW();
+        if (mainboard != null) totalPower += mainboard.getPowerConsumptionW();
+        if (ram != null) totalPower += ram.getPowerConsumptionW();
+        if (psu != null) totalPower += psu.getPowerConsumptionW();
+        if (storage != null && !storage.isEmpty()) {
+            for (Storage s : storage) {
+                totalPower += s.getPowerConsumptionW();
+            }
+        }
+        return totalPower; 
+    }
+
+    public int getMainboardRamSlots(){
+        if(mainboard != null) {
+            return mainboard.getRamSlots();
+        }
+        else {
+            return 4; 
+        }
+    }
+   
 
 }

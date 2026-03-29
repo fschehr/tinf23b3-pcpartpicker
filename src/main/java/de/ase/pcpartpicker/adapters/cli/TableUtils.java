@@ -1,8 +1,6 @@
 package de.ase.pcpartpicker.adapters.cli;
 
-import java.net.ConnectException;
 import java.util.List;
-
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.UserRepository;
 import de.ase.pcpartpicker.domain.Storage;
@@ -53,7 +51,7 @@ public class TableUtils {
         if (computer.getRAM() != null) {
             rows.add(new String[]{"RAM", "Name", computer.getRAM().getName()});
             rows.add(new String[]{"", "Module", String.valueOf(computer.getRamModule())});
-            rows.add(new String[]{"", "Kapazität", computer.getRAM().getCapacityGB() + " GB"});
+            rows.add(new String[]{"", "Kapazität/Gesamtkapazität", computer.getRAM().getCapacityGB() + " GB / " + getRAMCapacity(computer.getRamModule(),computer.getRAM().getCapacityGB())+ " GB "});
             rows.add(new String[]{"", "Preis", String.valueOf(computer.getRAM().getPrice()) + " €"});
         }
         rows.add(new String[]{"", "", ""});
@@ -83,6 +81,7 @@ public class TableUtils {
 
         // Trennlinie und Gesamtpreis
         rows.add(new String[]{"---", "---", "---"});
+        rows.add(new String[]{"Leistungsaufnahme/Gesamt", "", String.format("%.2f W/ %d W", computer.getTotalPowerConsumption(),computer.getPSU().getWattage())}); 
         rows.add(new String[]{"Gesamtpreis", "", String.format("%.2f €", computer.getTotalPrice())});
 
         return rows.toArray(new String[0][]);
@@ -128,7 +127,7 @@ public class TableUtils {
         if (computer.getRAM() != null) {
             rows.add(new String[]{"RAM", "Name", computer.getRAM().getName()});
             rows.add(new String[]{"", "Module", String.valueOf(computer.getRamModule())});
-            rows.add(new String[]{"", "Kapazität", computer.getRAM().getCapacityGB() + " GB"});
+            rows.add(new String[]{"", "Kapazität/Gesamtkapazität", computer.getRAM().getCapacityGB() + " GB / " + getRAMCapacity(computer.getRamModule(),computer.getRAM().getCapacityGB())+ " GB "});
             rows.add(new String[]{"", "Preis", String.valueOf(computer.getRAM().getPrice()) + " €"});
         }
         rows.add(new String[]{"", "", ""});
@@ -158,11 +157,21 @@ public class TableUtils {
 
         // Trennlinie und Gesamtpreis
         rows.add(new String[]{"---", "---", "---"});
+        rows.add(new String[]{"Leistungsaufnahme/Gesamt", "", String.format("%.2f W / %d W", computer.getTotalPowerConsumption(), computer.getPSU().getWattage())});
         rows.add(new String[]{"Gesamtpreis", "", String.format("%.2f €", computer.getTotalPrice())});
 
         return rows.toArray(new String[0][]);
     }
+    
 
+    public static int getRAMCapacity(int module, int capacity) {
+        return module* capacity; 
+    }
+
+    /**
+     * gibt den Usernamen der zum jeweiligen Computer gehört als String zurück 
+     * @param computerID ID des Computers, dessen User man haben möchte
+    */
     public String getUserName(int computerID) {
         User user = userRepository.findByComputerId(computerID);
         return user.getName();

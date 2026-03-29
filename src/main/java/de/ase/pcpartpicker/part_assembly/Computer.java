@@ -92,8 +92,6 @@ public class Computer {
         return psu;
     }
 
-
-    // TODO: Erstmal temporär eingefügt, damit die Funktion gefunden wird
     public List<Storage> getStorageDevices() {
         return storageDevices;
     }

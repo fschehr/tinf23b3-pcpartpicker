@@ -85,13 +85,14 @@ public class ListConfiguration {
     public rListConfiguration<Mainboard> mainboard() {
         return new rListConfiguration<>(
             "Mainboards",
-            new String[]{"#", "Name", "Hersteller", "Sockel", "Formfaktor", "Preis"},
+            new String[]{"#", "Name", "Hersteller", "Sockel", "RAM Slots", "Formfaktor", "Preis"},
             new MainboardRepository(cf),
             mb -> new String[]{
                 String.valueOf(mb.getId()),
                 mb.getName(),
                 mb.getManufacturer().getName(),
                 mb.getSocket().getName(),
+                String.valueOf(mb.getRamSlots()),
                 mb.getFormFactor().getName(),
                 mb.getPrice() + " €"
             }
