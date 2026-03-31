@@ -5,7 +5,6 @@ import de.ase.pcpartpicker.adapters.cli.ListConfiguration;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
 
 public class ShowAllUserCommand implements ICommand {
-    
 
     private final ListConfiguration listConfiguration;
     private InputReader inputReader;
