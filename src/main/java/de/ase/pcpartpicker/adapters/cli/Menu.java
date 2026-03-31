@@ -50,7 +50,7 @@ public class Menu implements IMenuComponent {
             }
             System.out.print("\nAuswahl: ");
             
-            int choice = inputReader.readInt("Ein Zahl eingeben", 0, children.size());
+            int choice = inputReader.readInt("Eine Zahl eingeben", 0, children.size());
             
             if (choice == 0) {
                 running = false;
