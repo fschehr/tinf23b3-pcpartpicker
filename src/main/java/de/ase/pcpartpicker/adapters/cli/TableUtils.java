@@ -81,7 +81,7 @@ public class TableUtils {
 
         // Trennlinie und Gesamtpreis
         rows.add(new String[]{"---", "---", "---"});
-        rows.add(new String[]{"Leistungsaufnahme/Gesamt", "", String.format("%.2f W/ %d W", computer.getTotalPowerConsumption(),computer.getPSU().getWattage())}); 
+        rows.add(new String[]{"Leistungsaufnahme/Gesamt", "", String.format("%.2f W / %d W", computer.getTotalPowerConsumption(),computer.getPSU().getWattage())}); 
         rows.add(new String[]{"Gesamtpreis", "", String.format("%.2f €", computer.getTotalPrice())});
 
         return rows.toArray(new String[0][]);
