@@ -2,6 +2,7 @@ package de.ase.pcpartpicker.adapters.cli.commands;
 
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
@@ -23,8 +24,8 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
     private final String componentName;
     private final String[] tableHeaders;
     
-    // Die Extractor-Funktionen sind weg!
     private final BiConsumer<ComputerDraft, T> draftSetter; 
+    private final Function<T, String[]> rowMapper; 
 
     public SelectComponentCommand(
             InputReader inputReader, 
@@ -38,6 +39,7 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
         this.componentName = config.title();
         this.tableHeaders = config.headers();
         this.draftSetter = draftSetter;
+        this.rowMapper = config.rowMapper();
     }
 
     @Override
@@ -60,12 +62,12 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
             int startIndex = currentPage * PAGE_SIZE;
             int endIndex = Math.min(startIndex + PAGE_SIZE, items.size());
 
-            TableGenerator table = new TableGenerator(tableHeaders);
+
+           TableGenerator table = new TableGenerator(tableHeaders);
             for (int i = startIndex; i < endIndex; i++) {
-                table.addRow(items.get(i).toString().split(" \\| ")); // Nutzt toString für Tabellen-Vorschau oder deinen eigenen RowMapper
+                table.addRow(rowMapper.apply(items.get(i)));
             }
             table.printTable();
-
             System.out.println("\nSeite " + (currentPage + 1) + " von " + totalPages
                 + " | m = nächste Seite | n = vorherige Seite | 0 = zurück");
 
@@ -115,7 +117,6 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
             }
 
             draftSetter.accept(draft, selectedItem);
-            // Direkt selectedItem.getName() aufrufen!
             System.out.println("\n" + ColorConstants.GREEN("ERFOLG") + " | " + selectedItem.getName() + " wurde zum Computer hinzugefügt!");
             inputReader.waitForEnter("Enter drücken um zurück zum Konfigurator zu gelangen");
             return;
