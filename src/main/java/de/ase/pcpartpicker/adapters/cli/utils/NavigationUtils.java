@@ -1,16 +1,18 @@
-package de.ase.pcpartpicker.adapters.cli;
+package de.ase.pcpartpicker.adapters.cli.utils;
 
 import de.ase.pcpartpicker.adapters.cli.commands.BackCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.ConfirmBackCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ExitCommand;
-import de.ase.pcpartpicker.ColorConstants;
+import de.ase.pcpartpicker.adapters.cli.*;
 
-/**
- * Klasse, die Hilfsmethoden enhält
- * @link {@link #clear()} Bereinigt die CLI
- * @author Henri
- */
-public class UIUtils {
+public class NavigationUtils {
 
+
+    private NavigationUtils() {
+
+    }
+
+    
     public static void clear() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
@@ -22,6 +24,7 @@ public class UIUtils {
         } catch (Exception ignored) {}
     }
 
+
     public static void addBackNavigation(Menu menu) {
         menu.setZeroComponent(new BackCommand(() -> menu.setRunning(false)));
     }
@@ -30,8 +33,10 @@ public class UIUtils {
         menu.setZeroComponent(new ExitCommand(()-> System.exit(0))); 
     }
 
+
+
     public static void addConfiguratorBackNavigation(Menu menu, InputReader inputReader, ComputerDraft draft) {
-        menu.setZeroComponent(new de.ase.pcpartpicker.adapters.cli.commands.ConfirmBackCommand(
+        menu.setZeroComponent(new ConfirmBackCommand(
             "Wenn du zurückgehst, gehen ungespeicherte Änderungen am Entwurf verloren.",
             inputReader,
             () -> {
@@ -40,5 +45,6 @@ public class UIUtils {
             }
         ));
     }
+    
 
 }

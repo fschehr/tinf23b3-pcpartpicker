@@ -7,8 +7,9 @@ import java.util.function.Function;
 import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
-import de.ase.pcpartpicker.adapters.cli.UIUtils;
 import de.ase.pcpartpicker.adapters.cli.rListConfiguration;
+import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
+import de.ase.pcpartpicker.adapters.cli.utils.UIUtils;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.Repository;
 import de.ase.pcpartpicker.domain.Component;
 
@@ -56,7 +57,7 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
         int totalPages = (items.size() + PAGE_SIZE - 1) / PAGE_SIZE;
 
         while (true) {
-            UIUtils.clear();
+            NavigationUtils.clear();
             System.out.println("\n--- " + componentName + " Auswählen ---");
 
             int startIndex = currentPage * PAGE_SIZE;

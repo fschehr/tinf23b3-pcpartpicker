@@ -1,41 +1,34 @@
 package de.ase.pcpartpicker.adapters.cli.commands;
-
-import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
-import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.Menu;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
-import de.ase.pcpartpicker.adapters.sqlite.repositories.UserRepository;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
+import de.ase.pcpartpicker.adapters.cli.AppContext;
 
 public class StartComputerDraftCommand implements ICommand {
-    private final ComputerDraft draft;
+    private final AppContext context; 
     private final Menu configuratorMenu; 
-    private final InputReader inputReader; 
-    private final UserRepository userRepository; 
 
-    public StartComputerDraftCommand(ComputerDraft draft, Menu configuratorMenu, UserRepository userRepository, InputReader inputReader) {
-        this.draft = draft;
+    public StartComputerDraftCommand(AppContext context, Menu configuratorMenu) {
+        this.context = context; 
         this.configuratorMenu = configuratorMenu;
-        this.inputReader = inputReader;
-        this.userRepository = userRepository; 
     }
 
     @Override
     public void execute() {
         if(!SessionManager.isLoggedIn()) {
-            User standardUser = userRepository.findById(1); 
+            User standardUser = context.userRepository.findById(1); 
 
             System.out.println("Du bist momentan nicht eingeloggt möchtest du mit dem Standard User fortfahren?");
-            int input = inputReader.readInt("Drücke 1 um mit dem Standard User fortzufahren. Drücke 0 um zurückzukehren", 0, 1);
+            int input = context.inputReader.readInt("Drücke 1 um mit dem Standard User fortzufahren. Drücke 0 um zurückzukehren", 0, 1);
 
             if (input == 1) {
                 SessionManager.setCurrentUser(standardUser);
-                draft.startNewDraft();
+                context.computerDraft.startNewDraft();
                 configuratorMenu.execute();
             }
         }
         else {
-            draft.startNewDraft();
+            context.computerDraft.startNewDraft();
             configuratorMenu.execute();
         }
         

@@ -1,17 +1,14 @@
 package de.ase.pcpartpicker.adapters.cli.commands;
 
-import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
-import de.ase.pcpartpicker.adapters.cli.InputReader;
+import de.ase.pcpartpicker.adapters.cli.AppContext;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
-import de.ase.pcpartpicker.adapters.cli.TableUtils;
+import de.ase.pcpartpicker.adapters.cli.utils.TableUtils;
 
 public class ShowCurrentDraftCommand implements ICommand {
-    private final ComputerDraft draft;
-    private final InputReader inputReader;
+    private final AppContext context; 
 
-    public ShowCurrentDraftCommand(ComputerDraft draft, InputReader inputReader) {
-        this.draft = draft;
-        this.inputReader = inputReader;
+    public ShowCurrentDraftCommand(AppContext context) {
+        this.context = context;
     }
 
     @Override
@@ -23,12 +20,12 @@ public class ShowCurrentDraftCommand implements ICommand {
         // draft.printCurrentState(); 
 
         TableGenerator table = new TableGenerator(new String[]{"Komponente", "Eigenschaft", "Details"});
-        for (String[] row : TableUtils.getDraftAsTableRows(draft)) {
+        for (String[] row : TableUtils.getDraftAsTableRows(context.computerDraft)) {
             table.addRow(row);
         }
         table.printTable();
         
         System.out.println("==================================\n");
-        inputReader.waitForEnter("Enter drücken um zurückzukehren...");
+        context.inputReader.waitForEnter("Enter drücken um zurückzukehren...");
     }
 }

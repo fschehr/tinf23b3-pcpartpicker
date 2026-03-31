@@ -4,8 +4,9 @@ import java.util.List;
 
 import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
-import de.ase.pcpartpicker.adapters.cli.UIUtils;
 import de.ase.pcpartpicker.adapters.cli.rListConfiguration;
+import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
+import de.ase.pcpartpicker.adapters.cli.utils.UIUtils;
 
 public class ShowListCommand<T> implements ICommand {
     private static final int PAGE_SIZE = 10;
@@ -23,7 +24,7 @@ public class ShowListCommand<T> implements ICommand {
         List<T> items = config.repository().findAll();
 
         if (items.isEmpty()) {
-            UIUtils.clear();
+            NavigationUtils.clear();
             System.out.println("\n=== " + config.title() + " ===\n");
             System.out.println("Keine Einträge gefunden.");
             inputReader.waitForEnter("\nEnter drücken um zurückzukehren.");
@@ -34,7 +35,7 @@ public class ShowListCommand<T> implements ICommand {
         int totalPages = (items.size() + PAGE_SIZE - 1) / PAGE_SIZE;
 
         while (true) {
-            UIUtils.clear();
+            NavigationUtils.clear();
             System.out.println("\n=== " + config.title() + " ===\n");
 
             int startIndex = currentPage * PAGE_SIZE;
