@@ -34,6 +34,10 @@ public class StartComputerDraftCommand implements ICommand {
                 configuratorMenu.execute();
             }
         }
+        else {
+            draft.startNewDraft();
+            configuratorMenu.execute();
+        }
         
     }
 }
