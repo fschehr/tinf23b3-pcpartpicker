@@ -1,5 +1,4 @@
 package de.ase.pcpartpicker.part_assembly;
-import de.ase.pcpartpicker.part_assembly.Computer;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
 
 public class Config{

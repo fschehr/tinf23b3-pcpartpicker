@@ -3,10 +3,7 @@ package de.ase.pcpartpicker.part_assembly;
 import de.ase.pcpartpicker.domain.*;
 import de.ase.pcpartpicker.domain.HelperClasses.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.*;

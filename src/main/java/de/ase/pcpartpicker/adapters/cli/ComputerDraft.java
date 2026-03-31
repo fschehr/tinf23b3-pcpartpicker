@@ -131,8 +131,8 @@ public class ComputerDraft {
         return totalPrice; 
     }
 
-    public double getTotalPowerConsumption() {
-        double totalPower = 0.0;
+    public int getTotalPowerConsumption() {
+        int totalPower = 0;
         if (computerCase != null) totalPower += computerCase.getPowerConsumptionW();
         if (cpu != null) totalPower += cpu.getPowerConsumptionW();
         if (gpu != null) totalPower += gpu.getPowerConsumptionW();
