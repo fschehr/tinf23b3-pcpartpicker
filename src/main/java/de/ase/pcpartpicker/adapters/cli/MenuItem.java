@@ -1,6 +1,7 @@
 package de.ase.pcpartpicker.adapters.cli;
 
 import de.ase.pcpartpicker.adapters.cli.commands.ICommand;
+import java.util.function.Supplier;
 /**
  * Klasse, die definiert welche Komponenten ein Menüeintrag hat
  * @param title Name des Menüeintrages
@@ -8,12 +9,18 @@ import de.ase.pcpartpicker.adapters.cli.commands.ICommand;
  * @author Henri
  */
 public class MenuItem implements IMenuComponent {
-    private final String title;
+    private final Supplier<String> titleSupplier;
     private final ICommand command;
     
     public MenuItem(String title, ICommand command) {
-        this.title = title;
+        this.titleSupplier = () -> title;
         this.command = command;
+    }
+
+    // Konstruktor für dynamische Titel 
+    public MenuItem(Supplier<String> titleSupplier, ICommand command) {
+        this.titleSupplier = titleSupplier;
+        this.command = command; 
     }
     
     @Override
@@ -23,6 +30,6 @@ public class MenuItem implements IMenuComponent {
     
     @Override
     public String getTitle() {
-        return title;
+        return titleSupplier.get();
     }
 }

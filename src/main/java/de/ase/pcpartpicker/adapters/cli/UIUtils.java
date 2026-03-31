@@ -2,6 +2,7 @@ package de.ase.pcpartpicker.adapters.cli;
 
 import de.ase.pcpartpicker.adapters.cli.commands.BackCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ExitCommand;
+import de.ase.pcpartpicker.ColorConstants;
 
 /**
  * Klasse, die Hilfsmethoden enhält
@@ -9,6 +10,7 @@ import de.ase.pcpartpicker.adapters.cli.commands.ExitCommand;
  * @author Henri
  */
 public class UIUtils {
+
     public static void clear() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
@@ -26,6 +28,17 @@ public class UIUtils {
 
     public static void addExitNavigation(Menu menu) {
         menu.setZeroComponent(new ExitCommand(()-> System.exit(0))); 
+    }
+
+    public static void addConfiguratorBackNavigation(Menu menu, InputReader inputReader, ComputerDraft draft) {
+        menu.setZeroComponent(new de.ase.pcpartpicker.adapters.cli.commands.ConfirmBackCommand(
+            "Wenn du zurückgehst, gehen ungespeicherte Änderungen am Entwurf verloren.",
+            inputReader,
+            () -> {
+                draft.clear();
+                menu.setRunning(false);
+            }
+        ));
     }
 
 }

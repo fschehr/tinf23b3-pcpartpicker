@@ -261,8 +261,6 @@ public class UserTest {
             listConfig("CPUs", new String[] { "#", "Name", "Preis" }, fixedRepo(List.of(cpu)), c -> new String[] {
                 String.valueOf(c.getId()), c.getName(), c.getPrice() + ""
             }),
-            CPU::getId,
-            CPU::getName,
             (d, c) -> d.setCpu(c)
         )));
 
@@ -272,8 +270,6 @@ public class UserTest {
             listConfig("GPUs", new String[] { "#", "Name", "Preis" }, fixedRepo(List.of(gpu)), g -> new String[] {
                 String.valueOf(g.getId()), g.getName(), g.getPrice() + ""
             }),
-            GPU::getId,
-            GPU::getName,
             (d, g) -> d.setGpu(g)
         )));
 
@@ -283,8 +279,6 @@ public class UserTest {
             listConfig("Mainboards", new String[] { "#", "Name", "Preis" }, fixedRepo(List.of(mainboard)), m -> new String[] {
                 String.valueOf(m.getId()), m.getName(), m.getPrice() + ""
             }),
-            Mainboard::getId,
-            Mainboard::getName,
             (d, m) -> d.setMainboard(m)
         )));
 
@@ -294,8 +288,6 @@ public class UserTest {
             listConfig("RAM", new String[] { "#", "Name", "Preis" }, fixedRepo(List.of(ram)), r -> new String[] {
                 String.valueOf(r.getId()), r.getName(), r.getPrice() + ""
             }),
-            RAM::getId,
-            RAM::getName,
             (d, r) -> {
                 int amount = inputReader.readInt("Wie viele dieser Module willst du verbauen?", 1, d.getMainboardRamSlots());
                 d.setRam(r, amount);
@@ -308,8 +300,6 @@ public class UserTest {
             listConfig("Netzteile", new String[] { "#", "Name", "Preis" }, fixedRepo(List.of(psu)), p -> new String[] {
                 String.valueOf(p.getId()), p.getName(), p.getPrice() + ""
             }),
-            PSU::getId,
-            PSU::getName,
             (d, p) -> d.setPsu(p)
         )));
 
@@ -319,8 +309,6 @@ public class UserTest {
             listConfig("Cases", new String[] { "#", "Name", "Preis" }, fixedRepo(List.of(computerCase)), c -> new String[] {
                 String.valueOf(c.getId()), c.getName(), c.getPrice() + ""
             }),
-            Case::getId,
-            Case::getName,
             (d, c) -> d.setComputerCase(c)
         )));
 
@@ -330,8 +318,6 @@ public class UserTest {
             listConfig("SSDs", new String[] { "#", "Name", "Preis" }, fixedRepo(List.of(ssd)), s -> new String[] {
                 String.valueOf(s.getId()), s.getName(), s.getPrice() + ""
             }),
-            SSD::getId,
-            SSD::getName,
             (d, s) -> d.addStorage(s)
         )));
 

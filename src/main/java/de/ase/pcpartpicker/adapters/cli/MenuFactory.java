@@ -1,4 +1,5 @@
 package de.ase.pcpartpicker.adapters.cli;
+import de.ase.pcpartpicker.ColorConstants;
 import de.ase.pcpartpicker.adapters.cli.commands.FinishComputerCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.LoginCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.LogoutCommand;
@@ -15,6 +16,7 @@ import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
 import de.ase.pcpartpicker.adapters.sqlite.DatabaseInitializer;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.ComputerRepository;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.UserRepository;
+import de.ase.pcpartpicker.domain.*;
 
 /**
  * Klasse, die die Menüs erstellt und konfiguriert
@@ -98,75 +100,95 @@ public class MenuFactory {
     private Menu createConfiguratorMenu() {
         Menu menu = new Menu("PC Konfigurator (Entwurf)", inputReader);
 
-    
-        menu.add(new MenuItem("CPU auswählen", new SelectComponentCommand<>(
-            inputReader, computerDraft, configs.cpu(),
-            cpu -> cpu.getId(), cpu -> cpu.getName(),
-            (draft, cpu) -> draft.setCpu(cpu)
-        )));
+        menu.add(createDraftMenuItem(
+            "CPU auswählen",
+            () -> computerDraft.getCPU() != null,
+            configs.cpu(),
+            ComputerDraft::setCpu
+        ));
 
-       
-        menu.add(new MenuItem("GPU auswählen", new SelectComponentCommand<>(
-            inputReader, computerDraft, configs.gpu(),
-            gpu -> gpu.getId(), gpu -> gpu.getName(), (draft, gpu) -> draft.setGpu(gpu)
-        )));
+        menu.add(createDraftMenuItem(
+            "GPU auswählen",
+            () -> computerDraft.getGPU() != null,
+            configs.gpu(),
+            ComputerDraft::setGpu
+        ));
 
-        menu.add(new MenuItem("Mainboard auswählen", new SelectComponentCommand<>(
-            inputReader, computerDraft, configs.mainboard(),
-            mb -> mb.getId(), mb -> mb.getName(), (draft, mb) -> draft.setMainboard(mb)
-        )));
+        menu.add(createDraftMenuItem(
+            "Mainboard auswählen",
+            () -> computerDraft.getMainboard() != null,
+            configs.mainboard(),
+            ComputerDraft::setMainboard
+        ));
 
-        menu.add(new MenuItem("RAM auswählen", new SelectComponentCommand<>(
-            inputReader, computerDraft, configs.ram(),
-            ram -> ram.getId(), ram -> ram.getName(), 
+        // Beim RAM brauchen wir weiterhin die Lambda, wegen der Zusatz-Abfrage
+        menu.add(createDraftMenuItem(
+            "RAM auswählen",
+            () -> computerDraft.getRAM() != null,
+            configs.ram(),
             (draft, ram) -> {
                 int amount = inputReader.readInt("Wie viele dieser Module willst du verbauen?", 1, draft.getMainboardRamSlots());
                 draft.setRam(ram, amount);
             }
-        )));
+        ));
 
-        menu.add(new MenuItem("Netzteil auswählen", new SelectComponentCommand<>(
-            inputReader, computerDraft, configs.psu(),
-            psu -> psu.getId(), psu -> psu.getName(), (draft, psu) -> draft.setPsu(psu)
-        )));
+        menu.add(createDraftMenuItem(
+            "Netzteil auswählen",
+            () -> computerDraft.getPSU() != null,
+            configs.psu(),
+            ComputerDraft::setPsu
+        ));
 
-        menu.add(new MenuItem("Gehäuse auswählen", new SelectComponentCommand<>(
-            inputReader, computerDraft, configs.pcCase(),
-            c -> c.getId(), c -> c.getName(), (draft, c) -> draft.setComputerCase(c)
-        )));
+        menu.add(createDraftMenuItem(
+            "Gehäuse auswählen",
+            () -> computerDraft.getComputerCase() != null,
+            configs.pcCase(),
+            ComputerDraft::setComputerCase
+        ));
 
-  
-        menu.add(new MenuItem("Speicher (SSD) auswählen", new SelectComponentCommand<>(
-            inputReader, computerDraft, configs.ssd(),
-            ssd -> ssd.getId(), ssd -> ssd.getName(), 
-            (draft, ssd) -> draft.addStorage(ssd) 
-        )));
+        menu.add(createDraftMenuItem(
+            "Speicher (SSD) auswählen",
+            () -> computerDraft.getStorage() != null && computerDraft.getStorage().stream().anyMatch(s -> s instanceof SSD),
+            configs.ssd(),
+            ComputerDraft::addStorage
+        ));
 
-        menu.add(new MenuItem("Speicher (M2SSD) auswählen", new SelectComponentCommand<>(
-            inputReader, computerDraft, configs.m2ssd(),
-                m2ssd -> m2ssd.getId(), m2ssd -> m2ssd.getName(),
-                (draft, m2ssd) -> draft.addStorage(m2ssd)
-            )));
+        menu.add(createDraftMenuItem(
+            "Speicher (M2SSD) auswählen",
+            () -> computerDraft.getStorage() != null && computerDraft.getStorage().stream().anyMatch(s -> s instanceof M2SSD),
+            configs.m2ssd(),
+            ComputerDraft::addStorage
+        ));
 
-
-        menu.add(new MenuItem("Speicher (HDD) auswählen", new SelectComponentCommand<>(
-            inputReader, computerDraft, configs.hdd(),
-            hdd -> hdd.getId(), hdd -> hdd.getName(), 
-            (draft, hdd) -> draft.addStorage(hdd) 
-        )));
+        menu.add(createDraftMenuItem(
+            "Speicher (HDD) auswählen",
+            () -> computerDraft.getStorage() != null && computerDraft.getStorage().stream().anyMatch(s -> s instanceof HDD),
+            configs.hdd(),
+            ComputerDraft::addStorage
+        ));
 
         menu.add(new MenuItem("Gewählte Komponenten anzeigen", new ShowCurrentDraftCommand(computerDraft, inputReader)));
-
-     
         menu.add(new MenuItem("Computer prüfen & speichern", new FinishComputerCommand(inputReader, computerRepository, computerDraft)));
 
-        UIUtils.addBackNavigation(menu);
+        UIUtils.addConfiguratorBackNavigation(menu, inputReader, computerDraft);
 
         return menu;
     }
 
 
-    private <T extends de.ase.pcpartpicker.domain.Component> MenuItem listItem(rListConfiguration<T> config) {
+    private <T extends Component> MenuItem listItem(rListConfiguration<T> config) {
         return new MenuItem(config.title(), new ShowListCommand<>(config, inputReader));
+    }
+
+    private <T extends Component> MenuItem createDraftMenuItem(
+        String title,
+        java.util.function.Supplier<Boolean> isSelected,
+        rListConfiguration<T> config,
+        java.util.function.BiConsumer<ComputerDraft, T> draftSetter
+    ) {
+        return new MenuItem(
+            () -> title + (isSelected.get() ? ColorConstants.GREEN(" (ausgewählt)") : ""),
+            new SelectComponentCommand<>(inputReader, computerDraft, config, draftSetter)
+        );
     }
 }

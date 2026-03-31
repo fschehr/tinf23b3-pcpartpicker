@@ -2,7 +2,6 @@ package de.ase.pcpartpicker.adapters.cli.commands;
 
 import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.function.Function;
 
 import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
@@ -24,17 +23,13 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
     private final String componentName;
     private final String[] tableHeaders;
     
-    private final Function<T, String[]> rowMapper; 
-    private final Function<T, Integer> idExtractor; 
-    private final Function<T, String> nameExtractor; 
+    // Die Extractor-Funktionen sind weg!
     private final BiConsumer<ComputerDraft, T> draftSetter; 
 
     public SelectComponentCommand(
             InputReader inputReader, 
             ComputerDraft draft,
             rListConfiguration<T> config, 
-            Function<T, Integer> idExtractor,
-            Function<T, String> nameExtractor,
             BiConsumer<ComputerDraft, T> draftSetter) {
         
         this.draft = draft;
@@ -42,10 +37,7 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
         this.repository = config.repository();
         this.componentName = config.title();
         this.tableHeaders = config.headers();
-        this.rowMapper = config.rowMapper();
         this.draftSetter = draftSetter;
-        this.idExtractor = idExtractor;
-        this.nameExtractor = nameExtractor;
     }
 
     @Override
@@ -70,7 +62,7 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
 
             TableGenerator table = new TableGenerator(tableHeaders);
             for (int i = startIndex; i < endIndex; i++) {
-                table.addRow(rowMapper.apply(items.get(i)));
+                table.addRow(items.get(i).toString().split(" \\| ")); // Nutzt toString für Tabellen-Vorschau oder deinen eigenen RowMapper
             }
             table.printTable();
 
@@ -85,16 +77,12 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
             }
 
             if ("m".equals(input)) {
-                if (currentPage < totalPages - 1) {
-                    currentPage++;
-                }
+                if (currentPage < totalPages - 1) currentPage++;
                 continue;
             }
 
             if ("n".equals(input)) {
-                if (currentPage > 0) {
-                    currentPage--;
-                }
+                if (currentPage > 0) currentPage--;
                 continue;
             }
 
@@ -108,7 +96,7 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
 
             T selectedItem = null;
             for (T item : items) {
-                if (idExtractor.apply(item) == selectedId) {
+                if (item.getId() == selectedId) { // Direkt item.getId() aufrufen!
                     selectedItem = item;
                     break;
                 }
@@ -123,13 +111,12 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
             if (warning != null) {
                 System.out.println(ColorConstants.YELLOW("WARNUNG") + " | " + warning);
                 int add = inputReader.readInt("Willst du die Komponente wirklich hinzufügen? [0: Nein, 1: Ja]", 0, 1);
-                if (add == 0) {
-                    return;
-                }
+                if (add == 0) return;
             }
 
             draftSetter.accept(draft, selectedItem);
-            System.out.println("\n" + ColorConstants.GREEN("ERFOLG") + " | " + nameExtractor.apply(selectedItem) + " wurde zum Computer hinzugefügt!");
+            // Direkt selectedItem.getName() aufrufen!
+            System.out.println("\n" + ColorConstants.GREEN("ERFOLG") + " | " + selectedItem.getName() + " wurde zum Computer hinzugefügt!");
             inputReader.waitForEnter("Enter drücken um zurück zum Konfigurator zu gelangen");
             return;
         }
