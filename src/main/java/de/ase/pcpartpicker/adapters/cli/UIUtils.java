@@ -1,4 +1,8 @@
 package de.ase.pcpartpicker.adapters.cli;
+
+import de.ase.pcpartpicker.adapters.cli.commands.BackCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.ExitCommand;
+
 /**
  * Klasse, die Hilfsmethoden enhält
  * @link {@link #clear()} Bereinigt die CLI
@@ -15,4 +19,13 @@ public class UIUtils {
             }
         } catch (Exception ignored) {}
     }
+
+    public static void addBackNavigation(Menu menu) {
+        menu.setZeroComponent(new BackCommand(() -> menu.setRunning(false)));
+    }
+
+    public static void addExitNavigation(Menu menu) {
+        menu.setZeroComponent(new ExitCommand(()-> System.exit(0))); 
+    }
+
 }

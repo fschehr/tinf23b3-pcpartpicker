@@ -46,6 +46,7 @@ public class MenuFactory {
         mainMenu.add(new MenuItem("Nutzerverwaltung", new OpenMenuCommand(createUserMenu()))); 
         mainMenu.add(new MenuItem("Login", new OpenMenuCommand(createLoginMenu()))); 
         mainMenu.add(new MenuItem("Datenbank reset", new ResetDatabaseCommand(inputReader, databaseInitializer)));
+        UIUtils.addExitNavigation(mainMenu);
         return mainMenu;
     }
 
@@ -61,6 +62,7 @@ public class MenuFactory {
         componentMenu.add(listItem(configs.m2ssd())); 
         componentMenu.add(listItem(configs.ssd()));    
         componentMenu.add(listItem(configs.hdd()));     
+        UIUtils.addBackNavigation(componentMenu);
         return componentMenu;
     }
 
@@ -69,6 +71,7 @@ public class MenuFactory {
         Menu userMenu = new Menu("Nutzerverwaltung",inputReader); 
         userMenu.add(new MenuItem("Neuen Nutzer anlegen", new NewUserCommand(inputReader, userRepository))); 
         userMenu.add(new MenuItem("Zeige alle Nutzer", new ShowAllUserCommand(inputReader,configs))); 
+        UIUtils.addBackNavigation(userMenu);
         return userMenu; 
     }
 
@@ -76,6 +79,7 @@ public class MenuFactory {
         Menu loginMenu = new Menu("Login", inputReader);
         loginMenu.add(new MenuItem("Login starten", new LoginCommand(inputReader, userRepository)));
         loginMenu.add(new MenuItem("Logout", new LogoutCommand()));
+        UIUtils.addBackNavigation(loginMenu);
         return loginMenu;
     }
 
@@ -86,6 +90,7 @@ public class MenuFactory {
         computerMenu.add(new MenuItem("Neuen Computer anlegen", new StartComputerDraftCommand(computerDraft, configuratorMenu, userRepository, inputReader)));
         computerMenu.add(new MenuItem("Meine Computer anzeigen", new ShowComputerCommand(inputReader, computerRepository, false)));
         computerMenu.add(new MenuItem("Alle Computer anzeigen", new ShowComputerCommand(inputReader, computerRepository, true)));
+        UIUtils.addBackNavigation(computerMenu);
         return computerMenu;
     }
 
@@ -154,6 +159,8 @@ public class MenuFactory {
 
      
         menu.add(new MenuItem("Computer prüfen & speichern", new FinishComputerCommand(inputReader, computerRepository, computerDraft)));
+
+        UIUtils.addBackNavigation(menu);
 
         return menu;
     }
