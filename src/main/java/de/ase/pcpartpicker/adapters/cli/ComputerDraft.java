@@ -156,6 +156,12 @@ public class ComputerDraft {
             return 4; 
         }
     }
+
+    public boolean hasUnsavedChanges() {
+        return cpu != null || gpu != null || mainboard != null || ram != null
+                || psu != null || computerCase != null || (storage != null && !storage.isEmpty());
+    }
+
    
 
 }

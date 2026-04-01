@@ -36,14 +36,7 @@ public class NavigationUtils {
 
 
     public static void addConfiguratorBackNavigation(Menu menu, InputReader inputReader, ComputerDraft draft) {
-        menu.setZeroComponent(new ConfirmBackCommand(
-            "Wenn du zurückgehst, gehen ungespeicherte Änderungen am Entwurf verloren.",
-            inputReader,
-            () -> {
-                draft.clear();
-                menu.setRunning(false);
-            }
-        ));
+        menu.setZeroComponent(new ConfirmBackCommand(inputReader, draft, menu));
     }
     
 

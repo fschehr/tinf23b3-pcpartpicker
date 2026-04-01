@@ -63,7 +63,6 @@ public class ShowComputerCommand implements ICommand {
             NavigationUtils.clear();
 
             Computer computer = computers.get(currentPage);
-//            System.out.println("Computer " + (currentPage + 1) + " von " + totalPages);
 
             if (mode == Mode.ALL) {
                 User owner = context.userRepository.findByComputerId(computer.getId());

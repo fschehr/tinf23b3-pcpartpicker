@@ -1,27 +1,34 @@
 package de.ase.pcpartpicker.adapters.cli.commands;
 
+import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.cli.IMenuComponent;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.ColorConstants;
+import de.ase.pcpartpicker.adapters.cli.Menu;
 
 public class ConfirmBackCommand implements ICommand, IMenuComponent {
-    private final String warningMessage;
     private final InputReader inputReader;
-    private final Runnable onConfirm;
-    
-    public ConfirmBackCommand(String warningMessage, InputReader inputReader, Runnable onConfirm) {
-        this.warningMessage = warningMessage;
+    private final ComputerDraft draft;
+    private final Menu menu;
+
+    public ConfirmBackCommand(InputReader inputReader, ComputerDraft draft, Menu menu) {
         this.inputReader = inputReader;
-        this.onConfirm = onConfirm;
+        this.draft = draft;
+        this.menu = menu;
     }
-    
-    @Override
+
     public void execute() {
-        System.out.println("\n" + ColorConstants.YELLOW("WARNUNG") + " | " + warningMessage);
-        int choice = inputReader.readInt("Willst du wirklich zurückgehen? [0: Nein (bleiben), 1: Ja (verlassen)]", 0, 1);
-        
-        if (choice == 1) {
-            onConfirm.run();
+        if (draft.hasUnsavedChanges()) {
+            // Es gibt ungespeicherte Änderungen
+            System.out.println(ColorConstants.YELLOW("WARNUNG") + " | Wenn du zurückgehst, gehen ungespeicherte Änderungen am Entwurf verloren.");
+            int confirm = inputReader.readInt("Willst du wirklich zurück? [0: Nein, 1: Ja]", 0, 1);
+            if (confirm == 1) {
+                draft.clear();
+                menu.setRunning(false);
+            }
+        } else {
+            // Keine Änderungen, direkt zurück
+            menu.setRunning(false);
         }
     }
 

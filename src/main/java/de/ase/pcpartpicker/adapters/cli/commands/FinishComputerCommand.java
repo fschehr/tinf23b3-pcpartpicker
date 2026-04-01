@@ -39,7 +39,8 @@ public class FinishComputerCommand implements ICommand {
                     table.addRow(row);
                 }
                 table.printTable();
-                
+                // TODO: erstmal so, dass man einen neuen Computer anlegen kann
+                draft.startNewDraft();
             } 
         } catch (Exception e) {
             System.out.println(ColorConstants.RED("FEHLER") + " | Beim Speichern ist ein Fehler aufgetreten: " + e.getMessage());
