@@ -11,7 +11,7 @@ import de.ase.pcpartpicker.adapters.cli.rListConfiguration;
 import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
 import de.ase.pcpartpicker.adapters.cli.utils.PagingInput;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.Repository;
-import de.ase.pcpartpicker.domain.Component;
+import de.ase.pcpartpicker.domain.*;
 
 import de.ase.pcpartpicker.ColorConstants;
 
@@ -64,9 +64,17 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
             int endIndex = Math.min(startIndex + PAGE_SIZE, items.size());
 
 
-           TableGenerator table = new TableGenerator(tableHeaders);
+            TableGenerator table = new TableGenerator(tableHeaders);
             for (int i = startIndex; i < endIndex; i++) {
-                table.addRow(rowMapper.apply(items.get(i)));
+                T item = items.get(i);
+
+                boolean isSelected = isComponentSelected(item);
+
+                if (isSelected) {
+                    table.addColoredRow(ColorConstants.ANSI_GREEN, rowMapper.apply(item));
+                } else {
+                    table.addRow(rowMapper.apply(item));
+                }
             }
             table.printTable();
             System.out.println("\nSeite " + (currentPage + 1) + " von " + totalPages
@@ -120,4 +128,38 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
             return;
         }
     }
+
+    private boolean isComponentSelected(T item) {
+        if (item instanceof CPU) {
+            return draft.getCPU() != null && draft.getCPU().getId() == item.getId();
+        }
+        if (item instanceof GPU) {
+            return draft.getGPU() != null && draft.getGPU().getId() == item.getId();
+        }
+        if (item instanceof Mainboard) {
+            return draft.getMainboard() != null && draft.getMainboard().getId() == item.getId();
+        }
+        if (item instanceof RAM) {
+            return draft.getRAM() != null && draft.getRAM().getId() == item.getId();
+        }
+        if (item instanceof PSU) {
+            return draft.getPSU() != null && draft.getPSU().getId() == item.getId();
+        }
+        if (item instanceof Case) {
+            return draft.getComputerCase() != null && draft.getComputerCase().getId() == item.getId();
+        }
+        if (item instanceof Storage) {
+            if (draft.getStorage() == null || draft.getStorage().isEmpty()) {
+                return false;
+            }
+            for (Storage storage : draft.getStorage()) {
+                if (storage.getId() == item.getId()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+
 }
