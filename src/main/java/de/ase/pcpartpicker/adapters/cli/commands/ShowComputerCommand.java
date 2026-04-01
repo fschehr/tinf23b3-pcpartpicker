@@ -1,13 +1,15 @@
 package de.ase.pcpartpicker.adapters.cli.commands;
 
+import java.awt.*;
 import java.util.List;
+
+import de.ase.pcpartpicker.ColorConstants;
 import de.ase.pcpartpicker.adapters.cli.AppContext;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
 import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
 import de.ase.pcpartpicker.adapters.cli.utils.PagingInput;
 import de.ase.pcpartpicker.adapters.cli.utils.TableUtils;
-import de.ase.pcpartpicker.adapters.cli.utils.UIUtils;
 import de.ase.pcpartpicker.part_assembly.Computer;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
 
@@ -34,17 +36,23 @@ public class ShowComputerCommand implements ICommand {
 
     @Override
     public void execute() {
-        List<Computer> computers = loadComputers();
 
-        if (!SessionManager.isLoggedIn()) {
-            System.out.println("Du bist nicht eingeloggt!");
+        if(mode == Mode.OWN && !SessionManager.isLoggedIn()) {
+            showInfo("Du musst eingeloggt sein, um deine Computer zu sehen.");
+            return;
         }
 
-        if (computers.isEmpty()) {
-            System.out.println(mode == Mode.OWN
-                    ? "Du hast nich keine Computer angelegt."
-                    : "Es sind keine Computer verfügbar.");
-            context.inputReader.waitForEnter("Enter drücken um zurückzukehren...");
+        List<Computer> computers;
+        try {
+            computers = loadComputers();
+        } catch (Exception e) {
+
+
+            return;
+        }
+
+        if (computers == null || computers.isEmpty()) {
+            showInfo(getEmptyMessageForMode());
             return;
         }
 
@@ -64,7 +72,7 @@ public class ShowComputerCommand implements ICommand {
                 }
             }
 
-            TableGenerator table = new TableGenerator(new String[]{"Komponente", "Eigenschaften", "Details"});
+            TableGenerator table = new TableGenerator("Komponente", "Eigenschaften", "Details");
             for (String[] row : TableUtils.getComputerAsTableRows(computer)) {
                 table.addRow(row);
             }
@@ -75,15 +83,15 @@ public class ShowComputerCommand implements ICommand {
                     + " | m = nächste Seite | n = vorherige Seite | 0 = zurück");
 
             String input = context.inputReader
-                    .readString("ID oder Aktion (m/n/0)")
+                    .readString("Aktion (m/n/0)")
                     .trim().toLowerCase();
 
             PagingInput.Action action = PagingInput.parse(input);
 
             if (action == PagingInput.Action.BACK) {
-                System.out.println("-> Auswahl abgebrochen");
                 return;
             }
+
 
             currentPage = PagingInput.movePage(currentPage, totalPages, action);
 
@@ -95,12 +103,28 @@ public class ShowComputerCommand implements ICommand {
     private List<Computer> loadComputers() {
         return switch (mode) {
             case ALL -> context.computerRepository.findAll();
-            case OWN -> {
-                if (!SessionManager.isLoggedIn()) yield List.of();
-                yield context.computerRepository.findAllByUserId(SessionManager.getcurrentUser().getId());
+            case OWN -> context.computerRepository.findAllByUserId(SessionManager.getcurrentUser().getId());
+            case USER -> {
+                if (userID == null || userID <= 0) {
+                    yield List.of();
+                }
+                yield context.computerRepository.findAllByUserId(userID);
             }
-            // TODO: nullPointer Exception behandeln
-            case USER -> context.computerRepository.findAllByUserId(userID);
         };
     }
+
+    private String getEmptyMessageForMode() {
+        return switch (mode) {
+            case OWN -> "Du hast noch keine Computer angelegt.";
+            case USER -> "Dieser Nutzer hat noch keine Computer angelegt.";
+            case ALL -> "Es sind keine Computer verfügbar.";
+        };
+    }
+
+
+    private void showInfo(String message) {
+        System.out.println(ColorConstants.BLUE("INFO") + " | " + message);
+        context.inputReader.waitForEnter("Enter drücken um zurückzukehren...");
+    }
+
 }
