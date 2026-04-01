@@ -25,7 +25,6 @@ public class FinishComputerCommand implements ICommand {
     @Override
     public void execute() {
         
-
         try {
             System.out.println("\n--- Kompatibilität wird geprüft ---\n");
             Computer newComputer = draft.getBuilder().build();

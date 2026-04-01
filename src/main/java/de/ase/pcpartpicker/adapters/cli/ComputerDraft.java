@@ -1,6 +1,7 @@
 package de.ase.pcpartpicker.adapters.cli;
 
 import java.util.List;
+
 import de.ase.pcpartpicker.domain.CPU;
 import de.ase.pcpartpicker.domain.Case;
 import de.ase.pcpartpicker.domain.GPU;

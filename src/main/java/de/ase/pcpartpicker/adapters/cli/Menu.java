@@ -2,10 +2,7 @@ package de.ase.pcpartpicker.adapters.cli;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
-import de.ase.pcpartpicker.adapters.cli.utils.UIUtils;
-
 /**
  * Klasse, die den grundsätzlichen Aufbau eines Menüs definiert
  * @param title Titel des Menüs

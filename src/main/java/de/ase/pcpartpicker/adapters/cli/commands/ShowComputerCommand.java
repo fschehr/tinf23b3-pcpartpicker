@@ -4,99 +4,103 @@ import java.util.List;
 import de.ase.pcpartpicker.adapters.cli.AppContext;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
+import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
+import de.ase.pcpartpicker.adapters.cli.utils.PagingInput;
 import de.ase.pcpartpicker.adapters.cli.utils.TableUtils;
+import de.ase.pcpartpicker.adapters.cli.utils.UIUtils;
 import de.ase.pcpartpicker.part_assembly.Computer;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
 
-public class ShowComputerCommand implements ICommand{
-    
-    private final AppContext context; 
-    private boolean showAll; 
-    private int userID; 
+public class ShowComputerCommand implements ICommand {
 
-    public ShowComputerCommand(AppContext context, boolean showAll) {
+    public enum Mode {OWN, ALL, USER}
+
+    private final AppContext context;
+    private final Mode mode;
+    private final Integer userID;
+
+    public ShowComputerCommand(AppContext context, Mode mode) {
         this.context = context;
-        this.showAll = showAll; 
+        this.mode = mode;
+        this.userID = null;
     }
 
-    //wenn man nur 
     public ShowComputerCommand(AppContext context, int userID) {
         this.context = context;
-        this.userID= userID;
+        this.mode = Mode.USER;
+        this.userID = userID;
     }
+
 
     @Override
     public void execute() {
-        if (userID > 0) { // userID wurde gesetzt
-            List<Computer> computers = context.computerRepository.findAllByUserId(userID);
-            if (computers.isEmpty()) {
-                System.out.println("Dieser Nutzer hat noch keine Computer angelegt.");
-            } else {
-                for (Computer computer : computers) {
-                    TableGenerator table = new TableGenerator(new String[] {"Komponente", "Eigenschaften", "Details"});
-                    for (String[] row : TableUtils.getComputerAsTableRows(computer)) {
-                        table.addRow(row);
-                    }
-                    table.printTable();
-                    System.out.println("--------------------------------------------------");
-                }
-            }
+        List<Computer> computers = loadComputers();
+
+        if (!SessionManager.isLoggedIn()) {
+            System.out.println("Du bist nicht eingeloggt!");
+        }
+
+        if (computers.isEmpty()) {
+            System.out.println(mode == Mode.OWN
+                    ? "Du hast nich keine Computer angelegt."
+                    : "Es sind keine Computer verfügbar.");
             context.inputReader.waitForEnter("Enter drücken um zurückzukehren...");
             return;
         }
 
-        if(!showAll) {
-            // Zeige alle Computer des akutellen Users 
-            try {
-                
-                User currentUser= SessionManager.getcurrentUser();
-                int userID = currentUser.getId();
-                List<Computer> computers = context.computerRepository.findAllByUserId(userID);
-    
-                if(computers.isEmpty()) {
-                    System.out.println("Du hast noch keine Computer angelegt.");
-                }
-                else {
-                    for(Computer computer: computers) {
-                        TableGenerator table = new TableGenerator(new String[] {"Komponente", "Eigenschaten", "Details"}); 
-                        for(String[] row: TableUtils.getComputerAsTableRows(computer)) {
-                            table.addRow(row);
-                        }
-                        table.printTable();
-                        System.out.println("--------------------------------------------------");
-                    }
-                }
-            } catch (Exception e) {
-                System.out.println("Keine Computer verfügbar, da du momentan nicht eingeloggt bist."); 
-            }
-        }
-        else {
-            List<Computer> computers = context.computerRepository.findAll();
-            
-            if(computers.isEmpty()) {
-                System.out.println("Es sind keine Computer verfügbar.");
-            } else {
-                for (Computer computer: computers) {
-                    int cid = computer.getId();
-                    String userName = getUserName(cid); 
-                    System.out.println(userName); 
-                    TableGenerator table = new TableGenerator(new String[] {"Komponente", "Eigenschaten", "Details"}); 
-                    for(String[] row: TableUtils.getComputerAsTableRows(computer)){
-                        table.addRow(row); 
-                    }
-                    table.printTable();
-                    System.out.println("--------------------------------------------------");
+        int currentPage = 0;
+        int totalPages = computers.size();
+
+        while (true) {
+            NavigationUtils.clear();
+
+            Computer computer = computers.get(currentPage);
+//            System.out.println("Computer " + (currentPage + 1) + " von " + totalPages);
+
+            if (mode == Mode.ALL) {
+                User owner = context.userRepository.findByComputerId(computer.getId());
+                if (owner != null) {
+                    System.out.println("Besitzer: " + owner.getName());
                 }
             }
 
+            TableGenerator table = new TableGenerator(new String[]{"Komponente", "Eigenschaften", "Details"});
+            for (String[] row : TableUtils.getComputerAsTableRows(computer)) {
+                table.addRow(row);
+            }
+            table.printTable();
+
+
+            System.out.println("\nSeite " + (currentPage + 1) + " von " + totalPages
+                    + " | m = nächste Seite | n = vorherige Seite | 0 = zurück");
+
+            String input = context.inputReader
+                    .readString("ID oder Aktion (m/n/0)")
+                    .trim().toLowerCase();
+
+            PagingInput.Action action = PagingInput.parse(input);
+
+            if (action == PagingInput.Action.BACK) {
+                System.out.println("-> Auswahl abgebrochen");
+                return;
+            }
+
+            currentPage = PagingInput.movePage(currentPage, totalPages, action);
+
         }
-            context.inputReader.waitForEnter("Enter drücken um zurückzukehren...");
+
+
     }
 
-
-    public String getUserName(int computerID) {
-        User user = context.userRepository.findByComputerId(computerID);
-        return user.getName();
+    private List<Computer> loadComputers() {
+        return switch (mode) {
+            case ALL -> context.computerRepository.findAll();
+            case OWN -> {
+                if (!SessionManager.isLoggedIn()) yield List.of();
+                yield context.computerRepository.findAllByUserId(SessionManager.getcurrentUser().getId());
+            }
+            // TODO: nullPointer Exception behandeln
+            case USER -> context.computerRepository.findAllByUserId(userID);
+        };
     }
 }
-

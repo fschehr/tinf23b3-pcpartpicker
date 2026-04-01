@@ -6,7 +6,6 @@ import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
 import de.ase.pcpartpicker.adapters.cli.rListConfiguration;
 import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
-import de.ase.pcpartpicker.adapters.cli.utils.UIUtils;
 
 public class ShowListCommand<T> implements ICommand {
     private static final int PAGE_SIZE = 10;

@@ -86,15 +86,14 @@ public class MenuFactory {
         // Hier nutzen wir nun das refaktorierte Command, dem wir einfach nur den Context übergeben
         computerMenu.add(new MenuItem("Neuen Computer anlegen", new StartComputerDraftCommand(context, configuratorMenu)));
         
-        computerMenu.add(new MenuItem("Meine Computer anzeigen", new ShowComputerCommand(context, false)));
+        computerMenu.add(new MenuItem("Meine Computer anzeigen", new ShowComputerCommand(context, ShowComputerCommand.Mode.OWN)));
         computerMenu.add(new MenuItem("Alle Computer anzeigen", new OpenMenuCommand(createAllComputerMenu())));
         
         NavigationUtils.addBackNavigation(computerMenu);
         return computerMenu;
     }
 
-    // Das ist die Methode, die vorher in UIUtils "versteckt" war. 
-    // Hier in der Factory ist genau der richtige Ort dafür!
+
     private Menu createAllComputerMenu() {
         Menu showComputerMenu = new Menu("User auswählen", context.inputReader); 
         
@@ -179,7 +178,6 @@ public class MenuFactory {
 
         menu.add(new MenuItem("Gewählte Komponenten anzeigen", new ShowCurrentDraftCommand(context)));
         
-        // Auch hier könntest du künftig einfach das context-Objekt übergeben, falls du das Command anpasst!
         menu.add(new MenuItem("Computer prüfen & speichern", new FinishComputerCommand(context.inputReader, context.computerRepository, draft)));
 
         NavigationUtils.addConfiguratorBackNavigation(menu, context.inputReader, draft);
