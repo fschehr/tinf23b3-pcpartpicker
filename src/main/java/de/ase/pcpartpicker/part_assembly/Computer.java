@@ -53,16 +53,28 @@ public class Computer {
 
     public double getTotalPrice() {
         double totalPrice = 0;
-        totalPrice += computerCase.getPrice();
-        totalPrice += cpu.getPrice();
+        if (computerCase != null) {
+            totalPrice += computerCase.getPrice();
+        }
+        if (cpu != null) {
+            totalPrice += cpu.getPrice();
+        }
         if (gpu != null) {
             totalPrice += gpu.getPrice();
         }
-        totalPrice += mainboard.getPrice();
-        totalPrice += ram.getPrice();
-        totalPrice += psu.getPrice();
-        for (Storage storage : storageDevices) {
-            totalPrice += storage.getPrice();
+        if (mainboard != null) {
+            totalPrice += mainboard.getPrice();
+        }
+        if (ram != null) {
+            totalPrice += ram.getPrice();
+        }
+        if (psu != null) {
+            totalPrice += psu.getPrice();
+        }
+        if (storageDevices != null) {
+            for (Storage storage : storageDevices) {
+                totalPrice += storage.getPrice();
+            }
         }
         return totalPrice;
     }
@@ -99,16 +111,28 @@ public class Computer {
 
     public int getTotalPowerConsumption() {
         int totalPower = 0;
-        totalPower += computerCase.getPowerConsumptionW();
-        totalPower += cpu.getPowerConsumptionW();
+        if (computerCase != null) {
+            totalPower += computerCase.getPowerConsumptionW();
+        }
+        if (cpu != null) {
+            totalPower += cpu.getPowerConsumptionW();
+        }
         if (gpu != null) {
             totalPower += gpu.getPowerConsumptionW();
         }
-        totalPower += mainboard.getPowerConsumptionW();
-        totalPower += ram.getPowerConsumptionW();
-        totalPower += psu.getPowerConsumptionW();
-        for (Storage storage : storageDevices) {
-            totalPower += storage.getPowerConsumptionW();
+        if (mainboard != null) {
+            totalPower += mainboard.getPowerConsumptionW();
+        }
+        if (ram != null) {
+            totalPower += ram.getPowerConsumptionW();
+        }
+        if (psu != null) {
+            totalPower += psu.getPowerConsumptionW();
+        }
+        if (storageDevices != null) {
+            for (Storage storage : storageDevices) {
+                totalPower += storage.getPowerConsumptionW();
+            }
         }
         return totalPower;
     }
@@ -355,6 +379,10 @@ public class Computer {
             else
                 System.out.println(ColorConstants.RED("FEHLER") + " | Der Computer konnte nicht erstellt werden. Bitte prüfen sie die Kompatibilität der Komponenten.\n");
             return null;
+        }
+
+        public Computer buildUnchecked() {
+            return new Computer(this);
         }
     }
 }

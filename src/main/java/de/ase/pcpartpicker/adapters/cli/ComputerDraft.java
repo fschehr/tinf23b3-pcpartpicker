@@ -13,6 +13,7 @@ import de.ase.pcpartpicker.part_assembly.Computer;
 
 public class ComputerDraft {
     private Computer.Builder builder;
+    private Integer editingComputerId;
     private CPU cpu;
     private GPU gpu;
     private Mainboard mainboard;
@@ -24,9 +25,48 @@ public class ComputerDraft {
 
     public void startNewDraft() {
         this.builder = new Computer.Builder();
+        this.editingComputerId = null;
         this.cpu = null; this.gpu = null; this.mainboard = null;
         this.ram = null; this.ramModule = 0; this.psu = null;
         this.computerCase = null; this.storage = null;
+    }
+
+    public void loadFromComputer(Computer computer) {
+        this.builder = new Computer.Builder();
+        this.editingComputerId = computer.getId();
+        this.cpu = computer.getCPU();
+        this.gpu = computer.getGPU();
+        this.mainboard = computer.getMainboard();
+        this.ram = computer.getRAM();
+        this.ramModule = computer.getRamModule();
+        this.psu = computer.getPSU();
+        this.computerCase = computer.getComputerCase();
+        this.storage = computer.getStorageDevices() == null ? null : new java.util.ArrayList<>(computer.getStorageDevices());
+
+        this.builder.setId(computer.getId());
+        if (this.cpu != null) {
+            this.builder.setCPU(this.cpu);
+        }
+        this.builder.setGPU(this.gpu);
+        if (this.mainboard != null) {
+            this.builder.setMainboard(this.mainboard);
+        }
+        if (this.ram != null) {
+            this.builder.setRAM(this.ram, this.ramModule);
+        }
+        if (this.psu != null) {
+            this.builder.setPSU(this.psu);
+        }
+        if (this.computerCase != null) {
+            this.builder.setComputerCase(this.computerCase);
+        }
+        if (this.storage != null && !this.storage.isEmpty()) {
+            this.builder.setStorageDevices(this.storage.toArray(new Storage[0]));
+        }
+    }
+
+    public void editDraft(Computer computer) {
+        loadFromComputer(computer);
     }
 
     public Computer.Builder getBuilder() {
@@ -35,6 +75,7 @@ public class ComputerDraft {
 
     public void clear() {
         this.builder = null;
+        this.editingComputerId = null;
     }
 
 
@@ -71,7 +112,9 @@ public class ComputerDraft {
 
     public void setStorage(List<Storage> storage) {
         this.storage = storage;
-        this.builder.setStorageDevices(storage.toArray(new Storage[0])); 
+        if (storage != null && !storage.isEmpty()) {
+            this.builder.setStorageDevices(storage.toArray(new Storage[0]));
+        }
     }
 
     public void addStorage(Storage s) {
@@ -113,6 +156,10 @@ public class ComputerDraft {
 
     public int getRamModule() {
         return ramModule;
+    }
+
+    public Integer getEditingComputerId() {
+        return editingComputerId;
     }
 
 

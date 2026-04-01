@@ -2,7 +2,7 @@ package de.ase.pcpartpicker.adapters.cli.utils;
 
 public final class PagingInput {
     public enum Action {
-        NEXT, PREVIOUS, BACK, OTHER
+        NEXT, PREVIOUS, BACK, EDIT, OTHER
     }
 
     private PagingInput() {}
@@ -15,6 +15,7 @@ public final class PagingInput {
             case "m" -> Action.NEXT;
             case "n" -> Action.PREVIOUS;
             case "0" -> Action.BACK;
+            case "e" -> Action.EDIT;
             default -> Action.OTHER;
         };
     }

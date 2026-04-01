@@ -3,6 +3,7 @@ package de.ase.pcpartpicker.adapters.sqlite;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Files;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 
+import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.*;
 import de.ase.pcpartpicker.domain.*;
 import de.ase.pcpartpicker.domain.HelperClasses.*;
@@ -124,6 +126,115 @@ class DatabaseIntegrationTest {
         assertEquals(computer.getRAM().getId(), loadedComputer.getRAM().getId());
         assertEquals(computer.getPSU().getId(), loadedComputer.getPSU().getId());
         assertEquals(computer.getComputerCase().getId(), loadedComputer.getComputerCase().getId());
+    }
+
+    @Test
+    void saveAsDraftWorksWithOnlyCpuSelected() {
+        UserRepository userRepository = new UserRepository(connectionFactory);
+        ComputerRepository computerRepository = new ComputerRepository(connectionFactory);
+
+        User user = userRepository.save("Draft User " + System.nanoTime());
+        CPU cpu = new CpuRepository(connectionFactory).findAll().get(0);
+
+        ComputerDraft draft = new ComputerDraft();
+        draft.startNewDraft();
+        draft.setCpu(cpu);
+
+        int draftId = computerRepository.saveAsDraft(user.getId(), draft);
+        assertTrue(draftId > 0);
+
+        List<Computer> userComputers = computerRepository.findAllByUserId(user.getId());
+        assertEquals(1, userComputers.size());
+        Computer loaded = userComputers.get(0);
+
+        assertNotNull(loaded.getCPU());
+        assertEquals(cpu.getId(), loaded.getCPU().getId());
+        assertNull(loaded.getMainboard());
+        assertNull(loaded.getRAM());
+        assertNull(loaded.getPSU());
+        assertNull(loaded.getComputerCase());
+    }
+
+    @Test
+    void saveAsDraftUpdatesExistingDraftForOwner() {
+        UserRepository userRepository = new UserRepository(connectionFactory);
+        ComputerRepository computerRepository = new ComputerRepository(connectionFactory);
+
+        User user = userRepository.save("Draft Edit User " + System.nanoTime());
+        CPU cpu = new CpuRepository(connectionFactory).findAll().get(0);
+        GPU gpu = new GpuRepository(connectionFactory).findAll().get(0);
+
+        ComputerDraft draft = new ComputerDraft();
+        draft.startNewDraft();
+        draft.setCpu(cpu);
+        int firstDraftId = computerRepository.saveAsDraft(user.getId(), draft);
+
+        Computer persistedDraft = computerRepository.findAllByUserId(user.getId()).get(0);
+        draft.loadFromComputer(persistedDraft);
+        draft.setGpu(gpu);
+
+        int updatedDraftId = computerRepository.saveAsDraft(user.getId(), draft);
+        assertEquals(firstDraftId, updatedDraftId);
+
+        List<Computer> userComputers = computerRepository.findAllByUserId(user.getId());
+        assertEquals(1, userComputers.size());
+        assertNotNull(userComputers.get(0).getGPU());
+        assertEquals(gpu.getId(), userComputers.get(0).getGPU().getId());
+    }
+
+    @Test
+    void saveAsDraftDoesNotOverwriteOtherUsersComputer() {
+        UserRepository userRepository = new UserRepository(connectionFactory);
+        ComputerRepository computerRepository = new ComputerRepository(connectionFactory);
+
+        User owner = userRepository.save("Owner " + System.nanoTime());
+        User otherUser = userRepository.save("Other " + System.nanoTime());
+        CPU cpu = new CpuRepository(connectionFactory).findAll().get(0);
+
+        ComputerDraft ownerDraft = new ComputerDraft();
+        ownerDraft.startNewDraft();
+        ownerDraft.setCpu(cpu);
+        int ownersDraftId = computerRepository.saveAsDraft(owner.getId(), ownerDraft);
+
+        Computer ownerComputer = computerRepository.findAllByUserId(owner.getId()).get(0);
+        ComputerDraft foreignEditAttempt = new ComputerDraft();
+        foreignEditAttempt.loadFromComputer(ownerComputer);
+
+        int newDraftId = computerRepository.saveAsDraft(otherUser.getId(), foreignEditAttempt);
+        assertTrue(newDraftId > 0);
+        assertTrue(newDraftId != ownersDraftId);
+
+        assertEquals(1, computerRepository.findAllByUserId(owner.getId()).size());
+        assertEquals(1, computerRepository.findAllByUserId(otherUser.getId()).size());
+    }
+
+    @Test
+    void saveComputerAllowsDuplicateStorageDevices() {
+        UserRepository userRepository = new UserRepository(connectionFactory);
+        ComputerRepository computerRepository = new ComputerRepository(connectionFactory);
+
+        User user = userRepository.save("Duplicate Storage User " + System.nanoTime());
+        Computer baseComputer = createCompatibleComputer(connectionFactory);
+        Storage duplicatedStorage = baseComputer.getStorageDevices().get(0);
+
+        Computer computerWithDuplicateStorage = new Computer.Builder()
+            .setCPU(baseComputer.getCPU())
+            .setGPU(baseComputer.getGPU())
+            .setMainboard(baseComputer.getMainboard())
+            .setRAM(baseComputer.getRAM(), baseComputer.getRamModule())
+            .setPSU(baseComputer.getPSU())
+            .setComputerCase(baseComputer.getComputerCase())
+            .setStorageDevices(new Storage[] { duplicatedStorage, duplicatedStorage })
+            .build();
+
+        assertNotNull(computerWithDuplicateStorage);
+
+        int savedComputerId = computerRepository.save(user.getId(), computerWithDuplicateStorage);
+        assertTrue(savedComputerId > 0);
+
+        List<Computer> userComputers = computerRepository.findAllByUserId(user.getId());
+        assertEquals(1, userComputers.size());
+        assertEquals(2, userComputers.get(0).getStorageDevices().size());
     }
 
     private Computer createCompatibleComputer(ConnectionFactory connectionFactory) {
