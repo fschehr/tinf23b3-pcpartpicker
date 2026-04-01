@@ -12,6 +12,27 @@ public final class Performance {
     private Performance() {}
 
     /**
+     * Berechnet die geschätzten FPS (Frames Per Second) für einen gegebenen Computer und eine bestimmte Auflösung.
+     * Grobe Rechnung für Mid-Einstellungen da wir keine Logik haben die irgendwas mit Video Spielen kategorisiert
+     * @param computer der Computer, dessen FPS berechnet werden soll
+     * @return die geschätzten FPS für den gegebenen Computer für 1080p, 1440p und 4K Auflösung
+     */
+    public static int[] calculateFPS(Computer computer) {
+        
+        final int baseFPS = 60;
+        final int vram = computer.getGPU() == null ? 0 : computer.getGPU().getVramGB();
+
+        // FPS für 1080p
+        final int fps1080p = (int) (baseFPS * (vram / 4.0)); // 4GB VRAM als Basis für 60 FPS
+        // FPS für 1440p
+        final int fps1440p = (int) (baseFPS * (vram / 8.0)); // 8GB VRAM als Basis für 60 FPS
+        // FPS für 4K
+        final int fps4K = (int) (baseFPS * (vram / 16.0)); // 16GB VRAM als Basis für 60 FPS
+
+        return new int[]{fps1080p, fps1440p, fps4K};
+    }
+
+    /**
      * Berechnet den Schehr Benchmark Score für einen gegebenen Computer.
      * Schehr Benchmark ist ein fiktiver Benchmark für Gaming
      * @param computer der Computer, dessen Schehr Benchmark Score berechnet werden soll
