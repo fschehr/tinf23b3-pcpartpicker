@@ -135,8 +135,7 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
 
             draftSetter.accept(draft, selectedItem);
             System.out.println("\n" + ColorConstants.GREEN("ERFOLG") + " | " + selectedItem.getName() + " wurde zum Computer hinzugefügt!");
-            inputReader.waitForEnter("Enter drücken um zurück zum Konfigurator zu gelangen");
-            return;
+            inputReader.waitForEnter("Enter drücken...");
         }
     }
 
@@ -227,7 +226,7 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
 
             boolean removed = updated.removeIf(storageType::isInstance);
             if (removed) {
-                draft.setStorage(updated); // auch leeres List<Storage> ist ok
+                draft.setStorage(updated);
             }
             return removed;
         }
