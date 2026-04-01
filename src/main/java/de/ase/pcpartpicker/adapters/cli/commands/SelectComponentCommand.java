@@ -9,6 +9,7 @@ import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
 import de.ase.pcpartpicker.adapters.cli.rListConfiguration;
 import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
+import de.ase.pcpartpicker.adapters.cli.utils.PagingInput;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.Repository;
 import de.ase.pcpartpicker.domain.Component;
 
@@ -73,18 +74,15 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
 
             String input = inputReader.readString("ID oder Aktion (m/n/0)").trim().toLowerCase();
 
-            if ("0".equals(input)) {
+            PagingInput.Action action = PagingInput.parse(input);
+
+            if (action == PagingInput.Action.BACK) {
                 System.out.println("-> Auswahl abgebrochen.");
                 return;
             }
 
-            if ("m".equals(input)) {
-                if (currentPage < totalPages - 1) currentPage++;
-                continue;
-            }
-
-            if ("n".equals(input)) {
-                if (currentPage > 0) currentPage--;
+            if (action != PagingInput.Action.OTHER) {
+                currentPage = PagingInput.movePage(currentPage, totalPages, action);
                 continue;
             }
 
