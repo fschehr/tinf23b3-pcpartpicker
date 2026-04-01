@@ -6,6 +6,7 @@ import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
 import de.ase.pcpartpicker.adapters.cli.rListConfiguration;
 import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
+import de.ase.pcpartpicker.adapters.cli.utils.PagingInput;
 
 public class ShowListCommand<T> implements ICommand {
     private static final int PAGE_SIZE = 10;
@@ -46,28 +47,18 @@ public class ShowListCommand<T> implements ICommand {
             }
             table.printTable();
 
-            System.out.println("\nSeite " + (currentPage + 1) + " von " + totalPages
-                + " | m = nächste Seite | n = vorherige Seite | 0 = zurück");
+            System.out.println("\n" + PagingInput.helpText(currentPage, totalPages, false));
+            String input = inputReader.readString(PagingInput.promptText(false)).trim().toLowerCase();
+            PagingInput.Action action = PagingInput.parse(input, false);
 
-            String command = inputReader.readString("Aktion (m/n/0)").trim().toLowerCase();
-
-            if ("0".equals(command)) {
+            if (action == PagingInput.Action.BACK) {
                 return;
             }
 
-            if ("m".equals(command)) {
-                if (currentPage < totalPages - 1) {
-                    currentPage++;
-                }
-                continue;
+            if (action != PagingInput.Action.OTHER) {
+                currentPage = PagingInput.movePage(currentPage, totalPages, action);
             }
 
-            if ("n".equals(command)) {
-                if (currentPage > 0) {
-                    currentPage--;
-                }
-                continue;
-            }
         }
     }
 }

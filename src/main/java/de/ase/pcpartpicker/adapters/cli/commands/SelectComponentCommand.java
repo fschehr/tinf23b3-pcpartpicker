@@ -77,16 +77,27 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
                 }
             }
             table.printTable();
-            System.out.println("\nSeite " + (currentPage + 1) + " von " + totalPages
-                + " | m = nächste Seite | n = vorherige Seite | 0 = zurück");
+            System.out.println("\n" + PagingInput.helpText(currentPage,totalPages, true));
+
 
             String input = inputReader.readString("ID oder Aktion (m/n/0)").trim().toLowerCase();
 
-            PagingInput.Action action = PagingInput.parse(input);
+            PagingInput.Action action = PagingInput.parse(input, true);
 
             if (action == PagingInput.Action.BACK) {
                 System.out.println("-> Auswahl abgebrochen.");
                 return;
+            }
+
+            if (action == PagingInput.Action.CLEAR) {
+                boolean cleared = clearCurrentCategory(items); // deine Clear-Logik
+                if (cleared) {
+                    System.out.println(ColorConstants.GREEN("ERFOLG") + " | Auswahl wurde entfernt.");
+                } else {
+                    System.out.println(ColorConstants.YELLOW("HINWEIS") + " | Nichts zum Entfernen ausgewählt.");
+                }
+                inputReader.waitForEnter("Enter drücken...");
+                continue;
             }
 
             if (action != PagingInput.Action.OTHER) {
@@ -161,5 +172,68 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
         }
         return false;
     }
+
+
+    private boolean clearCurrentCategory(List<T> items) {
+        if (items == null || items.isEmpty()) {
+            return false;
+        }
+
+        T sample = items.get(0);
+
+        if (sample instanceof CPU) {
+            if (draft.getCPU() == null) return false;
+            draft.setCpu(null);
+            return true;
+        }
+
+        if (sample instanceof GPU) {
+            if (draft.getGPU() == null) return false;
+            draft.setGpu(null);
+            return true;
+        }
+
+        if (sample instanceof Mainboard) {
+            if (draft.getMainboard() == null) return false;
+            draft.setMainboard(null);
+            return true;
+        }
+
+        if (sample instanceof RAM) {
+            if (draft.getRAM() == null) return false;
+            draft.setRam(null, 0);
+            return true;
+        }
+
+        if (sample instanceof PSU) {
+            if (draft.getPSU() == null) return false;
+            draft.setPsu(null);
+            return true;
+        }
+
+        if (sample instanceof Case) {
+            if (draft.getComputerCase() == null) return false;
+            draft.setComputerCase(null);
+            return true;
+        }
+
+        if (sample instanceof Storage) {
+            if (draft.getStorage() == null || draft.getStorage().isEmpty()) {
+                return false;
+            }
+
+            List<Storage> updated = new java.util.ArrayList<>(draft.getStorage());
+            Class<?> storageType = sample.getClass();
+
+            boolean removed = updated.removeIf(storageType::isInstance);
+            if (removed) {
+                draft.setStorage(updated); // auch leeres List<Storage> ist ok
+            }
+            return removed;
+        }
+
+        return false;
+    }
+
 
 }

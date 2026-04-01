@@ -79,13 +79,13 @@ public class ShowComputerCommand implements ICommand {
 
 
             System.out.println("\nSeite " + (currentPage + 1) + " von " + totalPages
-                    + " | m = nächste Seite | n = vorherige Seite | 0 = zurück");
+                    + " | m = nächste Seite | n = vorherige Seite  | c = löschen | 0 = zurück");
 
             String input = context.inputReader
                     .readString("Aktion (m/n/0)")
                     .trim().toLowerCase();
 
-            PagingInput.Action action = PagingInput.parse(input);
+            PagingInput.Action action = PagingInput.parse(input, true);
 
             if (action == PagingInput.Action.BACK) {
                 return;
