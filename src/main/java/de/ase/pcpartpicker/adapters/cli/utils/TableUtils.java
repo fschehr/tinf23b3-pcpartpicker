@@ -1,16 +1,11 @@
 package de.ase.pcpartpicker.adapters.cli.utils;
 
 import java.util.List;
-
 import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
-import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
-import de.ase.pcpartpicker.adapters.sqlite.repositories.UserRepository;
 import de.ase.pcpartpicker.domain.Storage;
 import de.ase.pcpartpicker.part_assembly.Computer;
 
 public class TableUtils {
-    ConnectionFactory cf = new ConnectionFactory();
-    UserRepository userRepository = new UserRepository(cf);
 
     public static String[][] getComputerAsTableRows(Computer computer) {
         List<String[]> rows = new java.util.ArrayList<>();
@@ -152,9 +147,7 @@ public class TableUtils {
         if (computer.getRAM() != null) {
             rows.add(new String[]{"RAM", "Name", computer.getRAM().getName()});
             rows.add(new String[]{"", "Module", String.valueOf(computer.getRamModule())});
-            rows.add(new String[]{"", "Kapazität/Gesamtkapazität",
-                computer.getRAM().getCapacityGB() + " GB / " +
-                getRAMCapacity(computer.getRamModule(), computer.getRAM().getCapacityGB()) + " GB"});
+            rows.add(new String[]{"", "Gesamtkapazität", getRAMCapacity(computer.getRamModule(), computer.getRAM().getCapacityGB()) + " GB"});
             rows.add(new String[]{"", "Preis", computer.getRAM().getPrice() + " €"});
         } else {
             rows.add(new String[]{"RAM", "nicht ausgewählt", ""});
