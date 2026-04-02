@@ -3,13 +3,25 @@ package de.ase.pcpartpicker.adapters.cli;
 import java.util.List;
 
 import de.ase.pcpartpicker.ColorConstants;
-import de.ase.pcpartpicker.adapters.cli.commands.*;
+import de.ase.pcpartpicker.adapters.cli.commands.FinishComputerCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.LoginCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.LogoutCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.NewUserCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.OpenMenuCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.ResetDatabaseCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.SaveDraftCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.SelectComponentCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.ShowAllUserCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.ShowComputerCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.ShowCurrentDraftCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.ShowListCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.StartComputerDraftCommand;
+import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
 import de.ase.pcpartpicker.domain.Component;
-import de.ase.pcpartpicker.domain.HelperClasses.User;
 import de.ase.pcpartpicker.domain.HDD;
+import de.ase.pcpartpicker.domain.HelperClasses.User;
 import de.ase.pcpartpicker.domain.M2SSD;
 import de.ase.pcpartpicker.domain.SSD;
-import de.ase.pcpartpicker.adapters.cli.utils.*;
 
 /**
  * Klasse, die die Menüs erstellt und konfiguriert.
@@ -93,9 +105,14 @@ public class MenuFactory {
         return computerMenu;
     }
 
+    private FlexibleMenu createMyComputerMenu(){
+        FlexibleMenu menu = new FlexibleMenu("Meine Computer", context.inputReader);
+        return menu;
+    }
+
 
     private Menu createAllComputerMenu(Menu configuratorMenu) {
-        Menu showComputerMenu = new Menu("User auswählen", context.inputReader); 
+        Menu showComputerMenu = new Menu("Alle Computer: User wählen", context.inputReader); 
         
         List<User> users = context.userRepository.findAll();
         for(User user : users) {

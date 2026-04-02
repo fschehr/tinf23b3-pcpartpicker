@@ -7,7 +7,7 @@ import de.ase.pcpartpicker.domain.HelperClasses.User;
 public class ShowAllUserCommand implements ICommand {
 
     private final ListConfiguration listConfiguration;
-    private InputReader inputReader;
+    private final  InputReader inputReader;
 
     public ShowAllUserCommand(InputReader inputReader, ListConfiguration listConfiguration) {
         this.inputReader = inputReader;

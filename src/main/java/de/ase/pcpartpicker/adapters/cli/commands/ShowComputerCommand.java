@@ -65,6 +65,10 @@ public class ShowComputerCommand implements ICommand {
         while (true) {
             NavigationUtils.clear();
 
+            if(mode == Mode.OWN) {
+                System.err.println("Meine Computer");
+            }
+
             Computer computer = computers.get(currentPage);
 
             if (mode == Mode.ALL) {

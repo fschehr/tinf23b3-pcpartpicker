@@ -2,6 +2,7 @@ package de.ase.pcpartpicker.adapters.cli;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
 /**
  * Klasse, die den grundsätzlichen Aufbau eines Menüs definiert
@@ -31,6 +32,9 @@ public class Menu implements IMenuComponent {
         this.zeroComponent = component;
     }
 
+    public void setRunning(boolean running){
+        this.running = running;
+    }
     
     @Override
     public void execute() {
@@ -70,8 +74,6 @@ public class Menu implements IMenuComponent {
         return title;
     }
 
-    public void setRunning(boolean running){
-        this.running = running;
-    }
+
 
 }
