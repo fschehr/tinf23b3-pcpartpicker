@@ -1,9 +1,9 @@
 package de.ase.pcpartpicker.adapters.cli.commands;
 
+import de.ase.pcpartpicker.ColorConstants;
 import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.cli.IMenuComponent;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
-import de.ase.pcpartpicker.ColorConstants;
 import de.ase.pcpartpicker.adapters.cli.Menu;
 
 public class ConfirmBackCommand implements ICommand, IMenuComponent {
@@ -16,7 +16,8 @@ public class ConfirmBackCommand implements ICommand, IMenuComponent {
         this.draft = draft;
         this.menu = menu;
     }
-
+    
+    @Override
     public void execute() {
         if (draft.hasUnsavedChanges()) {
             // Es gibt ungespeicherte Änderungen
@@ -27,7 +28,7 @@ public class ConfirmBackCommand implements ICommand, IMenuComponent {
                 menu.setRunning(false);
             }
         } else {
-            // Keine Änderungen, direkt zurück
+    
             menu.setRunning(false);
         }
     }
