@@ -114,4 +114,16 @@ public abstract class JdbcRepository<T> implements Repository<T> {
             throw new IllegalStateException(errorMessage, e);
         }
     }
+
+    protected int executeUpdate(String sql, StatementConfigurer statementConfigurer, String errorMessage) {
+        try (Connection connection = connectionFactory.createConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statementConfigurer.configure(statement);
+            return statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new IllegalStateException(errorMessage, e);
+        }
+    }
 }

@@ -61,7 +61,7 @@ public class UserRepository extends JdbcRepository<User> {
     }
 
     public int findUserIdByComputerId(int computerId) {
-        String sql = "SELECT user_id FROM config WHERE computer_id = ?";
+        String sql = "SELECT user_id FROM computer WHERE id = ?";
         return queryOptional(
             sql,
             statement -> statement.setInt(1, computerId),
@@ -71,7 +71,7 @@ public class UserRepository extends JdbcRepository<User> {
     }
 
     public User findByComputerId(int computerId) {
-        String sql = "SELECT u.id, u.name FROM users u JOIN config c ON c.user_id = u.id WHERE c.computer_id = ?";
+        String sql = "SELECT u.id, u.name FROM users u JOIN computer c ON c.user_id = u.id WHERE c.id = ?";
         return queryOptional(
             sql,
             statement -> statement.setInt(1, computerId),

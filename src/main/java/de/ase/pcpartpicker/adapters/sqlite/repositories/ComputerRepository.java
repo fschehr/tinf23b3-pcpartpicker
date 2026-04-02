@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
 import de.ase.pcpartpicker.domain.CPU;
 import de.ase.pcpartpicker.domain.GPU;
@@ -32,7 +33,7 @@ import de.ase.pcpartpicker.part_assembly.Computer;
  */
 public class ComputerRepository extends JdbcRepository<Computer> {
     private static final String BASE_COMPUTER_SELECT = """
-        SELECT id, cpu_id, gpu_id, mainboard_id, ram_id, ram_module_count, psu_id, case_id
+        SELECT id, user_id, is_draft, cpu_id, gpu_id, mainboard_id, ram_id, ram_module_count, psu_id, case_id
         FROM computer
         """;
 
@@ -57,19 +58,12 @@ public class ComputerRepository extends JdbcRepository<Computer> {
         );
     }
 
-    /**
-     * Lädt alle gespeicherten Computer-Konfigurationen eines bestimmten Users über die Config-Tabelle.
-     *
-     * @param userId ID des Users.
-     * @return Liste aller Computer des Users in aufsteigender ID-Reihenfolge.
-     * @throws IllegalStateException wenn die Datenbankabfrage fehlschlägt.
-     */
     public List<Computer> findAllByUserId(int userId) {
         String sql = """
-            SELECT computer.id, computer.cpu_id, computer.gpu_id, computer.mainboard_id, computer.ram_id, computer.ram_module_count, computer.psu_id, computer.case_id
+            SELECT id, user_id, is_draft, cpu_id, gpu_id, mainboard_id, ram_id, ram_module_count, psu_id, case_id
             FROM computer
-            JOIN config ON computer.id = config.computer_id
-            WHERE config.user_id = ? ORDER BY computer.id
+            WHERE user_id = ?
+            ORDER BY id
             """;
         ComponentIndex index = loadComponentIndex();
 
@@ -81,53 +75,14 @@ public class ComputerRepository extends JdbcRepository<Computer> {
         );
     }
 
-    /**
-     * Speichert eine Computer-Konfiguration und verknüpft sie mit einem User via Config-Tabelle.
-     *
-     * @param userId ID des Users, dem die Konfiguration gehört.
-     * @param computer zu speichernde Computer-Konfiguration.
-     * @return generierte Primärschlüssel-ID der Computer-Konfiguration.
-     * @throws IllegalStateException wenn der Insert fehlschlägt oder keine ID zurückgegeben wird.
-     */
     public int save(int userId, Computer computer) {
-        String sqlComputer = """
-            INSERT INTO computer (cpu_id, gpu_id, mainboard_id, ram_id, ram_module_count, psu_id, case_id)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-            """;
+        Integer editingComputerId = computer.getId() > 0 ? computer.getId() : null;
+        return upsertComputer(userId, editingComputerId, computer, false);
+    }
 
-        int computerId = insertAndReturnGeneratedKey(
-            sqlComputer,
-            statement -> {
-                statement.setInt(1, computer.getCPU().getId());
-                if (computer.getGPU() != null) {
-                    statement.setInt(2, computer.getGPU().getId());
-                } else {
-                    statement.setNull(2, Types.INTEGER);
-                }
-                statement.setInt(3, computer.getMainboard().getId());
-                statement.setInt(4, computer.getRAM().getId());
-                statement.setInt(5, computer.getRamModule());
-                statement.setInt(6, computer.getPSU().getId());
-                statement.setInt(7, computer.getComputerCase().getId());
-            },
-            "Computer konnte nicht gespeichert werden."
-        );
-
-        // Erstelle Config-Eintrag für die User-Computer-Verknüpfung
-        String sqlConfig = "INSERT INTO config (user_id, computer_id) VALUES (?, ?)";
-        try (Connection connection = connectionFactory.createConnection();
-             java.sql.PreparedStatement statement = connection.prepareStatement(sqlConfig)) {
-            statement.setInt(1, userId);
-            statement.setInt(2, computerId);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            throw new IllegalStateException("Config-Eintrag konnte nicht erstellt werden.", e);
-        }
-
-        // Speichere StorageDevices in der computer_storage Tabelle
-        saveStorageDevices(computerId, computer.getStorageDevices());
-
-        return computerId;
+    public int saveAsDraft(int userId, ComputerDraft draft) {
+        Computer draftComputer = fromDraft(draft);
+        return upsertComputer(userId, draft.getEditingComputerId(), draftComputer, true);
     }
 
     /**
@@ -142,33 +97,42 @@ public class ComputerRepository extends JdbcRepository<Computer> {
      */
     private Computer mapComputer(ResultSet resultSet, ComponentIndex index) throws SQLException {
         int computerId = resultSet.getInt("id");
-        int cpuId = resultSet.getInt("cpu_id");
-        CPU cpu = getRequired(index.cpus, cpuId, "CPU");
+        Integer cpuId = getNullableInt(resultSet, "cpu_id");
+        CPU cpu = getOptional(index.cpus, cpuId);
 
-        int gpuId = resultSet.getInt("gpu_id");
-        GPU gpu = resultSet.wasNull() ? null : getRequired(index.gpus, gpuId, "GPU");
+        Integer gpuId = getNullableInt(resultSet, "gpu_id");
+        GPU gpu = getOptional(index.gpus, gpuId);
 
-        int mainboardId = resultSet.getInt("mainboard_id");
-        Mainboard mainboard = getRequired(index.mainboards, mainboardId, "Mainboard");
+        Integer mainboardId = getNullableInt(resultSet, "mainboard_id");
+        Mainboard mainboard = getOptional(index.mainboards, mainboardId);
 
-        int ramId = resultSet.getInt("ram_id");
-        RAM ram = getRequired(index.rams, ramId, "RAM");
+        Integer ramId = getNullableInt(resultSet, "ram_id");
+        RAM ram = getOptional(index.rams, ramId);
         int ramModuleCount = resultSet.getInt("ram_module_count");
 
-        int psuId = resultSet.getInt("psu_id");
-        PSU psu = getRequired(index.psus, psuId, "PSU");
+        Integer psuId = getNullableInt(resultSet, "psu_id");
+        PSU psu = getOptional(index.psus, psuId);
 
-        int caseId = resultSet.getInt("case_id");
-        de.ase.pcpartpicker.domain.Case pcCase = getRequired(index.cases, caseId, "Case");
+        Integer caseId = getNullableInt(resultSet, "case_id");
+        de.ase.pcpartpicker.domain.Case pcCase = getOptional(index.cases, caseId);
 
-        Computer.Builder builder = new Computer.Builder()
-            .setId(computerId)
-            .setCPU(cpu)
-            .setGPU(gpu)
-            .setMainboard(mainboard)
-            .setRAM(ram, ramModuleCount)
-            .setPSU(psu)
-            .setComputerCase(pcCase);
+        Computer.Builder builder = new Computer.Builder().setId(computerId);
+        if (cpu != null) {
+            builder.setCPU(cpu);
+        }
+        builder.setGPU(gpu);
+        if (mainboard != null) {
+            builder.setMainboard(mainboard);
+        }
+        if (ram != null) {
+            builder.setRAM(ram, ramModuleCount);
+        }
+        if (psu != null) {
+            builder.setPSU(psu);
+        }
+        if (pcCase != null) {
+            builder.setComputerCase(pcCase);
+        }
 
         // Lade StorageDevices
         List<Storage> storageDevices = loadStorageDevices(computerId, index);
@@ -176,12 +140,107 @@ public class ComputerRepository extends JdbcRepository<Computer> {
             builder.setStorageDevices(storageDevices.toArray(new Storage[0]));
         }
 
-        Computer computer = builder.build();
+        return builder.buildUnchecked();
+    }
 
-        if (computer == null) {
-            throw new IllegalStateException("Computer konnte aus Datenbankeintrag nicht aufgebaut werden.");
+    private int upsertComputer(int userId, Integer existingComputerId, Computer computer, boolean isDraft) {
+        if (existingComputerId != null && existingComputerId > 0 && isOwnedByUser(existingComputerId, userId)) {
+            updateComputer(existingComputerId, userId, computer, isDraft);
+            replaceStorageDevices(existingComputerId, computer.getStorageDevices());
+            return existingComputerId;
         }
-        return computer;
+
+        int createdComputerId = insertComputer(userId, computer, isDraft);
+        saveStorageDevices(createdComputerId, computer.getStorageDevices());
+        return createdComputerId;
+    }
+
+    private Computer fromDraft(ComputerDraft draft) {
+        Computer.Builder builder = new Computer.Builder();
+        if (draft.getEditingComputerId() != null) {
+            builder.setId(draft.getEditingComputerId());
+        }
+        if (draft.getCPU() != null) {
+            builder.setCPU(draft.getCPU());
+        }
+        builder.setGPU(draft.getGPU());
+        if (draft.getMainboard() != null) {
+            builder.setMainboard(draft.getMainboard());
+        }
+        if (draft.getRAM() != null) {
+            builder.setRAM(draft.getRAM(), draft.getRamModule());
+        }
+        if (draft.getPSU() != null) {
+            builder.setPSU(draft.getPSU());
+        }
+        if (draft.getComputerCase() != null) {
+            builder.setComputerCase(draft.getComputerCase());
+        }
+        if (draft.getStorage() != null && !draft.getStorage().isEmpty()) {
+            builder.setStorageDevices(draft.getStorage().toArray(new Storage[0]));
+        }
+        return builder.buildUnchecked();
+    }
+
+    private int insertComputer(int userId, Computer computer, boolean isDraft) {
+        String sqlComputer = """
+            INSERT INTO computer (user_id, is_draft, cpu_id, gpu_id, mainboard_id, ram_id, ram_module_count, psu_id, case_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """;
+
+        return insertAndReturnGeneratedKey(
+            sqlComputer,
+            statement -> {
+                statement.setInt(1, userId);
+                statement.setInt(2, isDraft ? 1 : 0);
+                bindNullableId(statement, 3, computer.getCPU() == null ? null : computer.getCPU().getId());
+                bindNullableId(statement, 4, computer.getGPU() == null ? null : computer.getGPU().getId());
+                bindNullableId(statement, 5, computer.getMainboard() == null ? null : computer.getMainboard().getId());
+                bindNullableId(statement, 6, computer.getRAM() == null ? null : computer.getRAM().getId());
+                statement.setInt(7, computer.getRAM() == null ? 0 : computer.getRamModule());
+                bindNullableId(statement, 8, computer.getPSU() == null ? null : computer.getPSU().getId());
+                bindNullableId(statement, 9, computer.getComputerCase() == null ? null : computer.getComputerCase().getId());
+            },
+            "Computer konnte nicht gespeichert werden."
+        );
+    }
+
+    private void updateComputer(int computerId, int userId, Computer computer, boolean isDraft) {
+        String sql = """
+            UPDATE computer
+            SET is_draft = ?, cpu_id = ?, gpu_id = ?, mainboard_id = ?, ram_id = ?, ram_module_count = ?, psu_id = ?, case_id = ?
+            WHERE id = ? AND user_id = ?
+            """;
+
+        executeUpdate(
+            sql,
+            statement -> {
+                statement.setInt(1, isDraft ? 1 : 0);
+                bindNullableId(statement, 2, computer.getCPU() == null ? null : computer.getCPU().getId());
+                bindNullableId(statement, 3, computer.getGPU() == null ? null : computer.getGPU().getId());
+                bindNullableId(statement, 4, computer.getMainboard() == null ? null : computer.getMainboard().getId());
+                bindNullableId(statement, 5, computer.getRAM() == null ? null : computer.getRAM().getId());
+                statement.setInt(6, computer.getRAM() == null ? 0 : computer.getRamModule());
+                bindNullableId(statement, 7, computer.getPSU() == null ? null : computer.getPSU().getId());
+                bindNullableId(statement, 8, computer.getComputerCase() == null ? null : computer.getComputerCase().getId());
+                statement.setInt(9, computerId);
+                statement.setInt(10, userId);
+            },
+            "Computer konnte nicht aktualisiert werden."
+        );
+    }
+
+    private boolean isOwnedByUser(int computerId, int userId) {
+        String sql = "SELECT 1 FROM computer WHERE id = ? AND user_id = ?";
+        return queryOptional(
+            sql,
+            statement -> {
+                statement.setInt(1, computerId);
+                statement.setInt(2, userId);
+            },
+            resultSet -> resultSet.getInt(1),
+            "Computer-Besitz konnte nicht geprüft werden."
+        ).isPresent();
     }
 
     /**
@@ -214,6 +273,9 @@ public class ComputerRepository extends JdbcRepository<Computer> {
      * @param storageDevices zu speichernde Storage-Geräte.
      */
     private void saveStorageDevices(int computerId, List<Storage> storageDevices) {
+        if (storageDevices == null || storageDevices.isEmpty()) {
+            return;
+        }
         String sql = "INSERT INTO computer_storage (computer_id, storage_type, storage_id) VALUES (?, ?, ?)";
         try (Connection connection = connectionFactory.createConnection();
              java.sql.PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -225,6 +287,8 @@ public class ComputerRepository extends JdbcRepository<Computer> {
                     statement.setString(2, "ssd");
                 } else if (storage instanceof M2SSD) {
                     statement.setString(2, "m2_ssd");
+                } else {
+                    continue;
                 }
                 statement.setInt(3, storage.getId());
                 statement.executeUpdate();
@@ -232,6 +296,15 @@ public class ComputerRepository extends JdbcRepository<Computer> {
         } catch (SQLException e) {
             throw new IllegalStateException("StorageDevices konnten nicht gespeichert werden.", e);
         }
+    }
+
+    private void replaceStorageDevices(int computerId, List<Storage> storageDevices) {
+        executeUpdate(
+            "DELETE FROM computer_storage WHERE computer_id = ?",
+            statement -> statement.setInt(1, computerId),
+            "StorageDevices konnten nicht aktualisiert werden."
+        );
+        saveStorageDevices(computerId, storageDevices);
     }
 
     /**
@@ -300,12 +373,24 @@ public class ComputerRepository extends JdbcRepository<Computer> {
      * @return gefundenes Objekt.
      * @throws IllegalStateException wenn kein Eintrag für die ID vorhanden ist.
      */
-    private <T> T getRequired(Map<Integer, T> map, int id, String type) {
-        T value = map.get(id);
+    private Integer getNullableInt(ResultSet resultSet, String columnName) throws SQLException {
+        int value = resultSet.getInt(columnName);
+        return resultSet.wasNull() ? null : value;
+    }
+
+    private void bindNullableId(java.sql.PreparedStatement statement, int parameterIndex, Integer value) throws SQLException {
         if (value == null) {
-            throw new IllegalStateException(type + " mit ID " + id + " nicht gefunden.");
+            statement.setNull(parameterIndex, Types.INTEGER);
+        } else {
+            statement.setInt(parameterIndex, value);
         }
-        return value;
+    }
+
+    private <T> T getOptional(Map<Integer, T> map, Integer id) {
+        if (id == null) {
+            return null;
+        }
+        return map.get(id);
     }
 
     /**

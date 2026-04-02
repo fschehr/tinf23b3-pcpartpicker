@@ -1,34 +1,37 @@
 package de.ase.pcpartpicker.adapters.cli.commands;
 
-import java.awt.*;
 import java.util.List;
 
 import de.ase.pcpartpicker.ColorConstants;
 import de.ase.pcpartpicker.adapters.cli.AppContext;
+import de.ase.pcpartpicker.adapters.cli.Menu;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
 import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
 import de.ase.pcpartpicker.adapters.cli.utils.PagingInput;
 import de.ase.pcpartpicker.adapters.cli.utils.TableUtils;
-import de.ase.pcpartpicker.part_assembly.Computer;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
+import de.ase.pcpartpicker.part_assembly.Computer;
 
 public class ShowComputerCommand implements ICommand {
 
     public enum Mode {OWN, ALL, USER}
 
     private final AppContext context;
+    private final Menu configuratorMenu;
     private final Mode mode;
     private final Integer userID;
 
-    public ShowComputerCommand(AppContext context, Mode mode) {
+    public ShowComputerCommand(AppContext context, Menu configuratorMenu, Mode mode) {
         this.context = context;
+        this.configuratorMenu = configuratorMenu;
         this.mode = mode;
         this.userID = null;
     }
 
-    public ShowComputerCommand(AppContext context, int userID) {
+    public ShowComputerCommand(AppContext context, Menu configuratorMenu, int userID) {
         this.context = context;
+        this.configuratorMenu = configuratorMenu;
         this.mode = Mode.USER;
         this.userID = userID;
     }
@@ -78,17 +81,43 @@ public class ShowComputerCommand implements ICommand {
             table.printTable();
 
 
-            System.out.println("\nSeite " + (currentPage + 1) + " von " + totalPages
-                    + " | m = nächste Seite | n = vorherige Seite  | c = löschen | 0 = zurück");
+                System.out.println("\nSeite " + (currentPage + 1) + " von " + totalPages
+                    + " | m = nächste Seite | n = vorherige Seite  | c = löschen | e = bearbeiten | 0 = zurück");
 
             String input = context.inputReader
-                    .readString("Aktion (m/n/0)")
+                    .readString("Aktion (m/n/e/0)")
                     .trim().toLowerCase();
 
             PagingInput.Action action = PagingInput.parse(input, true);
 
             if (action == PagingInput.Action.BACK) {
                 return;
+            }
+
+            if (action == PagingInput.Action.EDIT) {
+                if (!SessionManager.isLoggedIn()) {
+                    showInfo("Du musst eingeloggt sein, um einen Computer zu bearbeiten.");
+                    continue;
+                }
+
+                int currentUserId = SessionManager.getcurrentUser().getId();
+                int ownerId = context.userRepository.findUserIdByComputerId(computer.getId());
+                if (ownerId != currentUserId) {
+                    showInfo("Nur eigene Computer dürfen bearbeitet werden.");
+                    continue;
+                }
+
+                context.computerDraft.editDraft(computer);
+                configuratorMenu.execute();
+
+                computers = loadComputers();
+                if (computers == null || computers.isEmpty()) {
+                    showInfo(getEmptyMessageForMode());
+                    return;
+                }
+                totalPages = computers.size();
+                currentPage = Math.min(currentPage, totalPages - 1);
+                continue;
             }
 
 

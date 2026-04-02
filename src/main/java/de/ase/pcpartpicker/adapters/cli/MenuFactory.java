@@ -86,20 +86,20 @@ public class MenuFactory {
         // Hier nutzen wir nun das refaktorierte Command, dem wir einfach nur den Context übergeben
         computerMenu.add(new MenuItem("Neuen Computer anlegen", new StartComputerDraftCommand(context, configuratorMenu)));
         
-        computerMenu.add(new MenuItem("Meine Computer anzeigen", new ShowComputerCommand(context, ShowComputerCommand.Mode.OWN)));
-        computerMenu.add(new MenuItem("Alle Computer anzeigen", new OpenMenuCommand(createAllComputerMenu())));
+        computerMenu.add(new MenuItem("Meine Computer anzeigen", new ShowComputerCommand(context, configuratorMenu, ShowComputerCommand.Mode.OWN)));
+        computerMenu.add(new MenuItem("Alle Computer anzeigen", new OpenMenuCommand(createAllComputerMenu(configuratorMenu))));
         
         NavigationUtils.addBackNavigation(computerMenu);
         return computerMenu;
     }
 
 
-    private Menu createAllComputerMenu() {
+    private Menu createAllComputerMenu(Menu configuratorMenu) {
         Menu showComputerMenu = new Menu("User auswählen", context.inputReader); 
         
         List<User> users = context.userRepository.findAll();
         for(User user : users) {
-            showComputerMenu.add(new MenuItem(user.getName(), new ShowComputerCommand(context, user.getId())));
+            showComputerMenu.add(new MenuItem(user.getName(), new ShowComputerCommand(context, configuratorMenu, user.getId())));
         }
         
         NavigationUtils.addBackNavigation(showComputerMenu);
@@ -177,6 +177,7 @@ public class MenuFactory {
         ));
 
         menu.add(new MenuItem("Gewählte Komponenten anzeigen", new ShowCurrentDraftCommand(context)));
+        menu.add(new MenuItem("Entwurf speichern", new SaveDraftCommand(context.inputReader, context.computerRepository, draft)));
         
         menu.add(new MenuItem("Computer prüfen & speichern", new FinishComputerCommand(context.inputReader, context.computerRepository, draft)));
 

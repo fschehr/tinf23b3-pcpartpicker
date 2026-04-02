@@ -103,7 +103,6 @@ public class DatabaseInitializer {
 
     private void dropSchema(Statement statement) throws SQLException {
         statement.executeUpdate("DROP TABLE IF EXISTS computer_storage");
-        statement.executeUpdate("DROP TABLE IF EXISTS config");
         statement.executeUpdate("DROP TABLE IF EXISTS computer");
         statement.executeUpdate("DROP TABLE IF EXISTS users");
         statement.executeUpdate("DROP TABLE IF EXISTS cpu");
@@ -304,13 +303,16 @@ public class DatabaseInitializer {
             statement.executeUpdate("""
                 CREATE TABLE IF NOT EXISTS computer (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    cpu_id INTEGER NOT NULL,
+                    user_id INTEGER NOT NULL,
+                    is_draft INTEGER NOT NULL DEFAULT 0,
+                    cpu_id INTEGER,
                     gpu_id INTEGER,
-                    mainboard_id INTEGER NOT NULL,
-                    ram_id INTEGER NOT NULL,
-                    ram_module_count INTEGER NOT NULL DEFAULT 1,
-                    psu_id INTEGER NOT NULL,
-                    case_id INTEGER NOT NULL,
+                    mainboard_id INTEGER,
+                    ram_id INTEGER,
+                    ram_module_count INTEGER NOT NULL DEFAULT 0,
+                    psu_id INTEGER,
+                    case_id INTEGER,
+                    FOREIGN KEY (user_id) REFERENCES users(id),
                     FOREIGN KEY (cpu_id) REFERENCES cpu(id),
                     FOREIGN KEY (gpu_id) REFERENCES gpu(id),
                     FOREIGN KEY (mainboard_id) REFERENCES mainboard(id),
@@ -321,23 +323,12 @@ public class DatabaseInitializer {
                 """);
 
             statement.executeUpdate("""
-                CREATE TABLE IF NOT EXISTS config (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    user_id INTEGER NOT NULL,
-                    computer_id INTEGER NOT NULL,
-                    FOREIGN KEY (user_id) REFERENCES users(id),
-                    FOREIGN KEY (computer_id) REFERENCES computer(id) ON DELETE CASCADE
-                )
-                """);
-
-            statement.executeUpdate("""
                 CREATE TABLE IF NOT EXISTS computer_storage (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     computer_id INTEGER NOT NULL,
                     storage_type TEXT NOT NULL,
                     storage_id INTEGER NOT NULL,
-                    FOREIGN KEY (computer_id) REFERENCES computer(id) ON DELETE CASCADE,
-                    CONSTRAINT unique_computer_storage UNIQUE(computer_id, storage_type, storage_id)
+                    FOREIGN KEY (computer_id) REFERENCES computer(id) ON DELETE CASCADE
                 )
                 """);
 
