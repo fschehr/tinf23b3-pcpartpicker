@@ -82,7 +82,6 @@ public class MenuFactory {
         Menu userMenu = new Menu("Nutzerverwaltung", context.inputReader); 
         userMenu.add(new MenuItem("Neuen Nutzer anlegen", new NewUserCommand(context.inputReader, context.userRepository))); 
         userMenu.add(new MenuItem("Zeige alle Nutzer", new ShowAllUserCommand(context.inputReader, context.listConfigs))); 
-        
         NavigationUtils.addBackNavigation(userMenu);
         return userMenu; 
     }
@@ -101,7 +100,10 @@ public class MenuFactory {
         Menu configuratorMenu = createConfiguratorMenu();
         computerMenu.add(new MenuItem("Neuen Computer anlegen", new StartComputerDraftCommand(context, configuratorMenu)));
         computerMenu.add(new MenuItem("Meine Computer anzeigen", new OpenMenuCommand(createOwnComputerMenu())));
-        computerMenu.add(new MenuItem("Alle Computer anzeigen", new OpenMenuCommand(createAllComputerMenu())));
+        // hier etwas anders, damit die User immer wieder neu geladen werden 
+        computerMenu.add(new MenuItem("Alle Computer anzeigen", () -> {
+            this.createAllComputerMenu().execute();
+        }));
         
         NavigationUtils.addBackNavigation(computerMenu);
         return computerMenu;
@@ -115,17 +117,17 @@ public class MenuFactory {
     }
 
     private Menu createAllComputerMenu() {
-        Menu showComputerMenu = new Menu("Alle Computer: User wählen", context.inputReader); 
+        Menu allComputerMenu = new Menu("Alle Computer: User wählen", context.inputReader); 
         
         List<User> users = context.userRepository.findAll();
         for(User user : users) {
             String username = user.getName(); 
             int userID = user.getId();
-            showComputerMenu.add(new MenuItem(username, new OpenMenuCommand(createUserComputerMenu(username, userID))));
+            allComputerMenu.add(new MenuItem(username, new OpenMenuCommand(createUserComputerMenu(username, userID))));
         }
         
-        NavigationUtils.addBackNavigation(showComputerMenu);
-        return showComputerMenu;
+        NavigationUtils.addBackNavigation(allComputerMenu);
+        return allComputerMenu;
     }
 
     private Menu createUserComputerMenu(String name, int userID){

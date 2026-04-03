@@ -49,7 +49,7 @@ public class Menu implements IMenuComponent {
      */
     public void renderContent(Renderable content) {
         if (content != null) {
-            content.render();
+            content.render(title);
         }
     }
     
@@ -72,7 +72,7 @@ public class Menu implements IMenuComponent {
             
             
             if(nav == NavMode.PAGING && customContent != null) {
-                customContent.render();
+                customContent.render(title);
                 running=false;
                 return;
             }
@@ -85,7 +85,7 @@ public class Menu implements IMenuComponent {
             }
 
             if(customContent != null) {
-                customContent.render();
+                customContent.render(title);
             }
 
             for (int i = 0; i < children.size(); i++) {

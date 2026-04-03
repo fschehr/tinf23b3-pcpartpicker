@@ -22,7 +22,7 @@ public class ShowListCommand<T> implements Renderable {
 
 
     @Override
-    public void render() {
+    public void render(String title) {
         List<T> items = config.repository().findAll();
 
         if (items.isEmpty()) {
@@ -33,13 +33,11 @@ public class ShowListCommand<T> implements Renderable {
             return;
         }
 
-        Paging.pageThroughList(
-            items,
-            (item, currentPage) -> {
-                //TODO: prüfen ob jetzt Fehler auftreten
-                // NavigationUtils.clear();
-                System.out.println("\n=== " + config.title() + " ===\n");
-
+        Paging.builder(items)
+            .withTitle(title)
+            .withPageSize(PAGE_SIZE)
+            .withInputReader(() -> inputReader.readString(Paging.promptText(false, false)).trim().toLowerCase())
+            .withRenderer((item, currentPage) -> {
                 int startIndex = currentPage * PAGE_SIZE;
                 int endIndex = Math.min(startIndex + PAGE_SIZE, items.size());
 
@@ -48,11 +46,27 @@ public class ShowListCommand<T> implements Renderable {
                     table.addRow(config.rowMapper().apply(items.get(i)));
                 }
                 table.printTable();
-            },
-            () -> inputReader.readString(Paging.promptText(false)).trim().toLowerCase(),
-            false, 
-            PAGE_SIZE,
-            null //null gibt an, dass kein EDIT verwendet wird 
-        );
+            })
+            .start();
+
+        // Paging.pageThroughList(
+        //     items,
+        //     (item, currentPage) -> {
+        //         System.out.println("\n=== " + config.title() + " ===\n");
+
+        //         int startIndex = currentPage * PAGE_SIZE;
+        //         int endIndex = Math.min(startIndex + PAGE_SIZE, items.size());
+
+        //         TableGenerator table = new TableGenerator(config.headers());
+        //         for (int i = startIndex; i < endIndex; i++) {
+        //             table.addRow(config.rowMapper().apply(items.get(i)));
+        //         }
+        //         table.printTable();
+        //     },
+        //     () -> inputReader.readString(Paging.promptText(false)).trim().toLowerCase(),
+        //     false, 
+        //     PAGE_SIZE,
+        //     null //null gibt an, dass kein EDIT verwendet wird 
+        // );
     }
 }

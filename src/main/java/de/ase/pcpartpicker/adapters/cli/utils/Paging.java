@@ -46,64 +46,163 @@ public final class Paging {
         return text.toString();
     }
 
-    public static String promptText(boolean allowClear) {
+    public static String promptText(boolean allowClear, boolean alloEdit) {
         return allowClear ? "ID oder Aktion (m/n/c/0)" : "Aktion (m/n/0)";
     }
 
     
-    public static <T> void pageThroughList(
-        List<T> items,
-        BiConsumer<T, Integer> renderPage,
-        Supplier<String> readInput,
-        boolean allowClear,
-        int pageSize,
-        Function<T, List<T>> onEdit
-    ) {
-        if (items == null || items.isEmpty()) {
-            System.out.println("Keine Einträge vorhanden.");
-            return;
-        }
-        int currentPage = 0;
-        int totalPages = (pageSize > 0) 
-            ? (items.size() + pageSize -1) / pageSize
-            :1;
-
-        boolean allowEdit = (onEdit != null); 
-
-        while (true) {
-            NavigationUtils.clear();
-            renderPage.accept(items.get(currentPage), currentPage);
-
-            System.out.println(Paging.helpText(currentPage, totalPages, allowClear, allowEdit));
-
-            // Eingabe lesen
-            String input = readInput.get();
-            Action action = Paging.parse(input, allowClear);
-
-            if (action == Action.BACK) return;
-            if (action == Action.CLEAR && allowClear) {
-                // Optional: Clear-Logik hier einbauen
-                continue;
-            }
-            if (action == Action.EDIT) {
-                if(onEdit != null) {
-                    List<T> updateItems = onEdit.apply(items.get(currentPage)); 
-                    
-                    if(updateItems != null) {
-                        items = updateItems;
-                        if(items.isEmpty()) {
-                            System.out.println("Keine Einträge mehr vorhanden nach Bearbeitung");
-                        }
-                        totalPages = (pageSize > 0) ? (items.size() + pageSize -1) / pageSize : 1;
-                        currentPage = Math.min(currentPage, totalPages -1); 
-                    }
-
-                }
-                continue;
-            }
-
-            currentPage = Paging.movePage(currentPage, totalPages, action);
-        }
-        
+    public static <T> Builder<T> builder(List<T> items) {
+        return new Builder<>(items);
     }
+
+    public static class Builder<T> {
+        private String pageTitle;
+        private final List<T> items;
+        private BiConsumer<T, Integer> renderPage;
+        private Supplier<String> readInput;
+        private boolean allowClear = false;
+        private int pageSize = 1; 
+        private Function<T, List<T>> onEdit = null;
+
+        public Builder(List<T> items) {
+            this.items = items;
+        }
+
+        public Builder<T> withTitle(String title) {
+            this.pageTitle = title;
+            return this;
+        }
+
+        public Builder<T> withRenderer(BiConsumer<T, Integer> renderPage) {
+            this.renderPage = renderPage;
+            return this;
+        }
+
+        public Builder<T> withInputReader(Supplier<String> readInput) {
+            this.readInput = readInput;
+            return this;
+        }
+
+        public Builder<T> allowClear(boolean allowClear) {
+            this.allowClear = allowClear;
+            return this;
+        }
+
+        public Builder<T> withPageSize(int pageSize) {
+            this.pageSize = pageSize;
+            return this;
+        }
+
+        public Builder<T> onEdit(Function<T, List<T>> onEdit) {
+            this.onEdit = onEdit;
+            return this;
+        }
+
+        public void start() {
+            List<T> currentItems = this.items;
+            if (currentItems == null || currentItems.isEmpty()) {
+                System.out.println("Keine Einträge vorhanden.");
+                return;
+            }
+
+            int currentPage = 0;
+            int totalPages = (pageSize > 0) ? (currentItems.size() + pageSize - 1) / pageSize : 1;
+            boolean allowEdit = (onEdit != null);
+
+            while (true) {
+                NavigationUtils.clear();
+
+                if (pageTitle != null && !pageTitle.isBlank()) {
+                    System.out.println("\n=== " + pageTitle + " ===\n");
+                }
+
+                renderPage.accept(currentItems.get(currentPage), currentPage);
+
+                System.out.println(Paging.helpText(currentPage, totalPages, allowClear, allowEdit));
+                String input = readInput.get();
+                Action action = Paging.parse(input, allowClear);
+
+                if (action == Action.BACK) return;
+                
+                if (action == Action.CLEAR && allowClear) {
+                    continue; 
+                }
+
+                if (action == Action.EDIT) {
+                    if (onEdit != null) {
+                        List<T> updatedItems = onEdit.apply(currentItems.get(currentPage));
+                        if (updatedItems != null) {
+                            currentItems = updatedItems;
+                            if (currentItems.isEmpty()) {
+                                System.out.println("Keine Einträge mehr vorhanden nach Bearbeitung.");
+                                return;
+                            }
+                            totalPages = (pageSize > 0) ? (currentItems.size() + pageSize - 1) / pageSize : 1;
+                            currentPage = Math.min(currentPage, totalPages - 1);
+                        }
+                    }
+                    continue;
+                }
+
+                currentPage = Paging.movePage(currentPage, totalPages, action);
+            }
+        }
+    }
+
+
+    // public static <T> void pageThroughList(
+    //     List<T> items,
+    //     BiConsumer<T, Integer> renderPage,
+    //     Supplier<String> readInput,
+    //     boolean allowClear,
+    //     int pageSize,
+    //     Function<T, List<T>> onEdit
+    // ) {
+    //     if (items == null || items.isEmpty()) {
+    //         System.out.println("Keine Einträge vorhanden.");
+    //         return;
+    //     }
+    //     int currentPage = 0;
+    //     int totalPages = (pageSize > 0) 
+    //         ? (items.size() + pageSize -1) / pageSize
+    //         :1;
+
+    //     boolean allowEdit = (onEdit != null); 
+
+    //     while (true) {
+    //         NavigationUtils.clear();
+    //         renderPage.accept(items.get(currentPage), currentPage);
+
+    //         System.out.println(Paging.helpText(currentPage, totalPages, allowClear, allowEdit));
+
+    //         // Eingabe lesen
+    //         String input = readInput.get();
+    //         Action action = Paging.parse(input, allowClear);
+
+    //         if (action == Action.BACK) return;
+    //         if (action == Action.CLEAR && allowClear) {
+    //             // Optional: Clear-Logik hier einbauen
+    //             continue;
+    //         }
+    //         if (action == Action.EDIT) {
+    //             if(onEdit != null) {
+    //                 List<T> updateItems = onEdit.apply(items.get(currentPage)); 
+                    
+    //                 if(updateItems != null) {
+    //                     items = updateItems;
+    //                     if(items.isEmpty()) {
+    //                         System.out.println("Keine Einträge mehr vorhanden nach Bearbeitung");
+    //                     }
+    //                     totalPages = (pageSize > 0) ? (items.size() + pageSize -1) / pageSize : 1;
+    //                     currentPage = Math.min(currentPage, totalPages -1); 
+    //                 }
+
+    //             }
+    //             continue;
+    //         }
+
+    //         currentPage = Paging.movePage(currentPage, totalPages, action);
+    //     }
+        
+    // }
 }

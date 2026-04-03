@@ -13,7 +13,7 @@ import de.ase.pcpartpicker.adapters.cli.utils.TableUtils;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
 import de.ase.pcpartpicker.part_assembly.Computer;
 
-public class ShowComputerCommand implements Renderable, ICommand {
+public class ShowComputerCommand implements Renderable {
 
     public enum Mode {OWN, ALL, USER}
 
@@ -34,15 +34,8 @@ public class ShowComputerCommand implements Renderable, ICommand {
     }
 
 
-    // TODO: Obsolet
     @Override
-    public void execute() {
-
-    }
-
-
-    @Override
-    public void render() {
+    public void render(String title) {
         if (mode == Mode.OWN && !SessionManager.isLoggedIn()) {
             showInfo("Du musst eingeloggt sein, um deine Computer zu sehen.");
             return;
@@ -61,17 +54,16 @@ public class ShowComputerCommand implements Renderable, ICommand {
             return;
         }
 
-        Paging.pageThroughList(
-            computers,
-            (computer, currentPage) -> {
-                // Optional: Titel
-                if (mode == Mode.OWN) {
-                    System.err.println("Meine Computer");
-                }
+
+        Paging.builder(computers)
+            .withTitle(title)
+            .withPageSize(1)
+            .withInputReader(() -> context.inputReader.readString(Paging.promptText(false, true)).trim().toLowerCase())
+            .withRenderer((computer, currentPage) -> {
                 if (mode == Mode.ALL) {
                     User owner = context.userRepository.findByComputerId(computer.getId());
                     if (owner != null) {
-                        System.out.println("Besitzer: " + owner.getName());
+                        System.out.println("Besitzer: " + owner.getName() + "\n");
                     }
                 }
                 TableGenerator table = new TableGenerator("Komponente", "Eigenschaften", "Details");
@@ -79,14 +71,11 @@ public class ShowComputerCommand implements Renderable, ICommand {
                     table.addRow(row);
                 }
                 table.printTable();
-            },
-            () -> context.inputReader.readString("Aktion (m/n/e/0)"),
-            true, 
-            1,
-            (computer) -> {
+            })
+            .onEdit((computer) -> {
                 if(!SessionManager.isLoggedIn()) {
                     showInfo("Du musst eingeloggt sein, um einen Computer zu bearbeiten.");
-                    return null; // null = Liste hat sich nicht verändert
+                    return null; 
                 }
 
                 int currentUserId = SessionManager.getcurrentUser().getId();
@@ -95,15 +84,55 @@ public class ShowComputerCommand implements Renderable, ICommand {
                     showInfo("Nur eigene Computer dürfen bearbeitet werden.");
                     return null;
                 }
-        
-                context.computerDraft.editDraft(computer);
                 
-                new MenuFactory(context).createConfiguratorMenu().execute();
+                context.computerDraft.editDraft(computer);
+                new de.ase.pcpartpicker.adapters.cli.MenuFactory(context).createConfiguratorMenu().execute();
+                return loadComputers();
+            })
+            .start(); 
+        // Paging.pageThroughList(
+        //     computers,
+        //     (computer, currentPage) -> {
+        //         // Optional: Titel
+        //         if (mode == Mode.OWN) {
+        //             System.out.println("\n=== Meine Computer ===\n");
+        //         }
+        //         if (mode == Mode.ALL) {
+        //             User owner = context.userRepository.findByComputerId(computer.getId());
+        //             if (owner != null) {
+        //                 System.out.println("Besitzer: " + owner.getName());
+        //             }
+        //         }
+        //         TableGenerator table = new TableGenerator("Komponente", "Eigenschaften", "Details");
+        //         for (String[] row : TableUtils.getComputerAsTableRows(computer)) {
+        //             table.addRow(row);
+        //         }
+        //         table.printTable();
+        //     },
+        //     () -> context.inputReader.readString("Aktion (m/n/e/0)"),
+        //     true, 
+        //     1,
+        //     (computer) -> {
+        //         if(!SessionManager.isLoggedIn()) {
+        //             showInfo("Du musst eingeloggt sein, um einen Computer zu bearbeiten.");
+        //             return null; // null = Liste hat sich nicht verändert
+        //         }
+
+        //         int currentUserId = SessionManager.getcurrentUser().getId();
+        //         int ownerId = context.userRepository.findUserIdByComputerId(computer.getId());
+        //         if (ownerId != currentUserId) {
+        //             showInfo("Nur eigene Computer dürfen bearbeitet werden.");
+        //             return null;
+        //         }
+        
+        //         context.computerDraft.editDraft(computer);
+                
+        //         new MenuFactory(context).createConfiguratorMenu().execute();
 
          
-                return loadComputers();
-            }
-        );
+        //         return loadComputers();
+        //     }
+        // );
     }
 
 
