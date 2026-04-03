@@ -137,6 +137,13 @@ public class ComputerDraft {
         this.unsavedChanges = true;
     }
 
+    public void setEditingComputerId(int id) {
+        this.editingComputerId = id; 
+        if(this.builder != null) {
+            this.builder.setId(id);
+        }
+    }
+
     public void addStorage(Storage s) {
         if (this.storage == null) {
             this.storage = new java.util.ArrayList<>();
@@ -174,16 +181,19 @@ public class ComputerDraft {
     public List<Storage> getStorage() {
         return storage;
     }
-
+    
     public int getRamModule() {
         return ramModule;
     }
-
+    
     public Integer getEditingComputerId() {
         return editingComputerId;
     }
-
-
+    
+    public boolean hasUnsavedChanges() {
+        return this.unsavedChanges;
+    }
+    
 
 
     public double getTotalPrice() {
@@ -227,9 +237,8 @@ public class ComputerDraft {
         }
     }
 
-    public boolean hasUnsavedChanges() {
-        return this.unsavedChanges;
-    }
+
+ 
 
    
 

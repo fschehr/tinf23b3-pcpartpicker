@@ -31,7 +31,8 @@ public class FinishComputerCommand implements ICommand {
 
             if (newComputer != null) {
                 User currentUser = SessionManager.getcurrentUser();
-                computerRepository.save(currentUser.getId(), newComputer);
+
+                int saveId = computerRepository.save(currentUser.getId(), newComputer);
                 
                 System.out.println(ColorConstants.GREEN("ERFOLG") + " | Computer wurde erfolgreich gebaut.");
                 TableGenerator table = new TableGenerator(new String[]{"Komponente", "Eigenschaft", "Details"});
@@ -39,8 +40,8 @@ public class FinishComputerCommand implements ICommand {
                     table.addRow(row);
                 }
                 table.printTable();
-                // TODO: erstmal so, dass man einen neuen Computer anlegen kann
-                draft.startNewDraft();
+                draft.setEditingComputerId(saveId);
+                draft.markAsSaved();
             } 
         } catch (Exception e) {
             System.out.println(ColorConstants.RED("FEHLER") + " | Beim Speichern ist ein Fehler aufgetreten: " + e.getMessage());
