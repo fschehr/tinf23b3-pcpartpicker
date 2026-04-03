@@ -29,6 +29,7 @@ public class SaveDraftCommand implements ICommand {
         try {
             User currentUser = SessionManager.getcurrentUser();
             int computerId = computerRepository.saveAsDraft(currentUser.getId(), draft);
+            draft.markAsSaved();
             System.out.println(ColorConstants.GREEN("ERFOLG") + " | Entwurf gespeichert (Computer-ID: " + computerId + ").");
         } catch (Exception e) {
             System.out.println(ColorConstants.RED("FEHLER") + " | Entwurf konnte nicht gespeichert werden: " + e.getMessage());

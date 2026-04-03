@@ -22,13 +22,20 @@ public class ComputerDraft {
     private PSU psu;
     private Case computerCase;
     private List<Storage> storage;
+    private boolean unsavedChanges; 
 
     public void startNewDraft() {
         this.builder = new Computer.Builder();
         this.editingComputerId = null;
-        this.cpu = null; this.gpu = null; this.mainboard = null;
-        this.ram = null; this.ramModule = 0; this.psu = null;
-        this.computerCase = null; this.storage = null;
+        this.cpu = null; 
+        this.gpu = null; 
+        this.mainboard = null;
+        this.ram = null; 
+        this.ramModule = 0; 
+        this.psu = null;
+        this.computerCase = null; 
+        this.storage = null;
+        this.unsavedChanges = false;
     }
 
     public void loadFromComputer(Computer computer) {
@@ -63,6 +70,12 @@ public class ComputerDraft {
         if (this.storage != null && !this.storage.isEmpty()) {
             this.builder.setStorageDevices(this.storage.toArray(new Storage[0]));
         }
+
+        this.unsavedChanges = false;
+    }
+
+    public void markAsSaved() {
+        this.unsavedChanges = false;
     }
 
     public void editDraft(Computer computer) {
@@ -82,32 +95,38 @@ public class ComputerDraft {
     public void setCpu(CPU cpu) {
         this.cpu = cpu;
         this.builder.setCPU(cpu);
+        this.unsavedChanges = true;
     }
 
     public void setGpu(GPU gpu) {
         this.gpu = gpu;
         this.builder.setGPU(gpu);
+        this.unsavedChanges = true;
     }
 
     public void setMainboard(Mainboard mb) {
         this.mainboard = mb;
         this.builder.setMainboard(mb);
+        this.unsavedChanges = true;
     }
 
     public void setRam(RAM ram, int module) {
         this.ram = ram;
         this.ramModule = module;
         this.builder.setRAM(ram, module);
+        this.unsavedChanges = true;
     }
 
     public void setPsu(PSU psu) {
         this.psu = psu;
         this.builder.setPSU(psu);
+        this.unsavedChanges = true;
     }
 
     public void setComputerCase(Case c) {
         this.computerCase = c;
         this.builder.setComputerCase(c);
+        this.unsavedChanges = true;
     }
 
     public void setStorage(List<Storage> storage) {
@@ -115,6 +134,7 @@ public class ComputerDraft {
         if (storage != null && !storage.isEmpty()) {
             this.builder.setStorageDevices(storage.toArray(new Storage[0]));
         }
+        this.unsavedChanges = true;
     }
 
     public void addStorage(Storage s) {
@@ -124,6 +144,7 @@ public class ComputerDraft {
         this.storage.add(s);
         
         this.builder.setStorageDevices(this.storage.toArray(new Storage[0]));
+        this.unsavedChanges = true;
     }
 
     public GPU getGPU() {
@@ -161,6 +182,8 @@ public class ComputerDraft {
     public Integer getEditingComputerId() {
         return editingComputerId;
     }
+
+
 
 
     public double getTotalPrice() {
@@ -205,8 +228,7 @@ public class ComputerDraft {
     }
 
     public boolean hasUnsavedChanges() {
-        return cpu != null || gpu != null || mainboard != null || ram != null
-                || psu != null || computerCase != null || (storage != null && !storage.isEmpty());
+        return this.unsavedChanges;
     }
 
    

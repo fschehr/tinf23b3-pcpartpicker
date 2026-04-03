@@ -35,8 +35,6 @@ public class NavigationUtils {
         menu.setZeroComponent(new ExitCommand(()-> System.exit(0))); 
     }
 
-
-
     public static void addConfiguratorBackNavigation(Menu menu, InputReader inputReader, ComputerDraft draft) {
         menu.setZeroComponent(new ConfirmBackCommand(inputReader, draft, menu));
     }
