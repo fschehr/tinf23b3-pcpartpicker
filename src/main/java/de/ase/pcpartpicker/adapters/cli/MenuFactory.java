@@ -25,20 +25,19 @@ import de.ase.pcpartpicker.domain.SSD;
 
 /**
  * Klasse, die die Menüs erstellt und konfiguriert.
- * Bezieht alle Abhängigkeiten sauber über den AppContext.
+ * Bezieht alle Abhängigkeiten über den AppContext.
  */
 public class MenuFactory {
     
-    // Nur noch EINE Abhängigkeit anstelle von 8 einzelnen Feldern!
+
     private final AppContext context;
 
     public MenuFactory(AppContext context) {
         this.context = context;
     }
 
-    // Zentraler Einstiegspunkt für die Anwendung
     public static Menu createApp() {
-        AppContext context = new AppContext(); // Kontext wird 1x beim Start erzeugt
+        AppContext context = new AppContext(); 
         return new MenuFactory(context).createMainMenu();
     }
 
@@ -48,8 +47,6 @@ public class MenuFactory {
         mainMenu.add(new MenuItem("Computerverwaltung", new OpenMenuCommand(createComputerMenu())));
         mainMenu.add(new MenuItem("Nutzerverwaltung", new OpenMenuCommand(createUserMenu()))); 
         mainMenu.add(new MenuItem("Login", new OpenMenuCommand(createLoginMenu()))); 
-        
-        // Hinweis: DatabaseInitializer könntest du auch in den AppContext packen
         mainMenu.add(new MenuItem("Datenbank reset", new ResetDatabaseCommand(context.inputReader, context.databaseInitializer)));
         
         NavigationUtils.addExitNavigation(mainMenu);
@@ -58,17 +55,25 @@ public class MenuFactory {
 
     private Menu createComponentMenu() {
         Menu componentMenu = new Menu("Komponenten auswählen", context.inputReader);
-        
-        componentMenu.add(listItem(context.listConfigs.cpu()));
-        componentMenu.add(listItem(context.listConfigs.gpu()));
-        componentMenu.add(listItem(context.listConfigs.ram()));
-        componentMenu.add(listItem(context.listConfigs.mainboard()));
-        componentMenu.add(listItem(context.listConfigs.psu()));
-        componentMenu.add(listItem(context.listConfigs.pcCase()));
-        componentMenu.add(listItem(context.listConfigs.m2ssd())); 
-        componentMenu.add(listItem(context.listConfigs.ssd()));    
-        componentMenu.add(listItem(context.listConfigs.hdd()));     
-        
+
+        Object[][] configs = {
+            { "CPUs anzeigen", context.listConfigs.cpu() },
+            { "GPUs anzeigen", context.listConfigs.gpu() },
+            { "RAM anzeigen", context.listConfigs.ram() },
+            { "Mainboards anzeigen", context.listConfigs.mainboard() },
+            { "Netzteile anzeigen", context.listConfigs.psu() },
+            { "Gehäuse anzeigen", context.listConfigs.pcCase() },
+            { "M.2 SSDs anzeigen", context.listConfigs.m2ssd() },
+            { "SSDs anzeigen", context.listConfigs.ssd() },
+            { "HDDs anzeigen", context.listConfigs.hdd() }
+        };
+
+        for (Object[] entry : configs) {
+            String title = (String) entry[0];
+            rListConfiguration<?> config = (rListConfiguration<?>) entry[1];
+            componentMenu.add(new MenuItem(title, new OpenMenuCommand(createListMenu(config))));
+        }
+
         NavigationUtils.addBackNavigation(componentMenu);
         return componentMenu;
     }
@@ -94,36 +99,43 @@ public class MenuFactory {
     private Menu createComputerMenu() {
         Menu computerMenu = new Menu("Computerverwaltung", context.inputReader);
         Menu configuratorMenu = createConfiguratorMenu();
-        
-        // Hier nutzen wir nun das refaktorierte Command, dem wir einfach nur den Context übergeben
         computerMenu.add(new MenuItem("Neuen Computer anlegen", new StartComputerDraftCommand(context, configuratorMenu)));
-        
-        computerMenu.add(new MenuItem("Meine Computer anzeigen", new ShowComputerCommand(context, configuratorMenu, ShowComputerCommand.Mode.OWN)));
-        computerMenu.add(new MenuItem("Alle Computer anzeigen", new OpenMenuCommand(createAllComputerMenu(configuratorMenu))));
+        computerMenu.add(new MenuItem("Meine Computer anzeigen", new OpenMenuCommand(createOwnComputerMenu())));
+        computerMenu.add(new MenuItem("Alle Computer anzeigen", new OpenMenuCommand(createAllComputerMenu())));
         
         NavigationUtils.addBackNavigation(computerMenu);
         return computerMenu;
     }
 
-    private FlexibleMenu createMyComputerMenu(){
-        FlexibleMenu menu = new FlexibleMenu("Meine Computer", context.inputReader);
+    private Menu createOwnComputerMenu() {
+        Menu menu = new Menu("Meine Computer", context.inputReader,Menu.NavMode.PAGING); 
+        ShowComputerCommand show = new ShowComputerCommand(context,ShowComputerCommand.Mode.OWN);
+        menu.setCustomContent(show);
         return menu;
     }
 
-
-    private Menu createAllComputerMenu(Menu configuratorMenu) {
+    private Menu createAllComputerMenu() {
         Menu showComputerMenu = new Menu("Alle Computer: User wählen", context.inputReader); 
         
         List<User> users = context.userRepository.findAll();
         for(User user : users) {
-            showComputerMenu.add(new MenuItem(user.getName(), new ShowComputerCommand(context, configuratorMenu, user.getId())));
+            String username = user.getName(); 
+            int userID = user.getId();
+            showComputerMenu.add(new MenuItem(username, new OpenMenuCommand(createUserComputerMenu(username, userID))));
         }
         
         NavigationUtils.addBackNavigation(showComputerMenu);
         return showComputerMenu;
     }
 
-    private Menu createConfiguratorMenu() {
+    private Menu createUserComputerMenu(String name, int userID){
+        Menu menu = new Menu(name + "'s Computer", context.inputReader, Menu.NavMode.PAGING); 
+        ShowComputerCommand showComputer = new ShowComputerCommand(context, userID); 
+        menu.setCustomContent(showComputer);
+        return menu; 
+    }
+
+    public Menu createConfiguratorMenu() {
         Menu menu = new Menu("PC Konfigurator (Entwurf)", context.inputReader);
         ComputerDraft draft = context.computerDraft;
 
@@ -195,7 +207,6 @@ public class MenuFactory {
 
         menu.add(new MenuItem("Gewählte Komponenten anzeigen", new ShowCurrentDraftCommand(context)));
         menu.add(new MenuItem("Entwurf speichern", new SaveDraftCommand(context.inputReader, context.computerRepository, draft)));
-        
         menu.add(new MenuItem("Computer prüfen & speichern", new FinishComputerCommand(context.inputReader, context.computerRepository, draft)));
 
         NavigationUtils.addConfiguratorBackNavigation(menu, context.inputReader, draft);
@@ -203,9 +214,12 @@ public class MenuFactory {
         return menu;
     }
 
-    private <T extends Component> MenuItem listItem(rListConfiguration<T> config) {
-        return new MenuItem(config.title(), new ShowListCommand<>(config, context.inputReader));
+    private <T> Menu createListMenu(rListConfiguration<T> config) {
+        Menu menu = new Menu(config.title(), context.inputReader, Menu.NavMode.PAGING);
+        menu.setCustomContent(new ShowListCommand<>(config, context.inputReader));
+        return menu;
     }
+
 
     private <T extends Component> MenuItem createDraftMenuItem(
         String title,

@@ -4,16 +4,22 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
+import de.ase.pcpartpicker.ColorConstants;
 import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
 import de.ase.pcpartpicker.adapters.cli.rListConfiguration;
 import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
-import de.ase.pcpartpicker.adapters.cli.utils.PagingInput;
+import de.ase.pcpartpicker.adapters.cli.utils.Paging;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.Repository;
-import de.ase.pcpartpicker.domain.*;
-
-import de.ase.pcpartpicker.ColorConstants;
+import de.ase.pcpartpicker.domain.CPU;
+import de.ase.pcpartpicker.domain.Case;
+import de.ase.pcpartpicker.domain.Component;
+import de.ase.pcpartpicker.domain.GPU;
+import de.ase.pcpartpicker.domain.Mainboard;
+import de.ase.pcpartpicker.domain.PSU;
+import de.ase.pcpartpicker.domain.RAM;
+import de.ase.pcpartpicker.domain.Storage;
 
 public class SelectComponentCommand<T extends Component> implements ICommand {
     private static final int PAGE_SIZE = 10;
@@ -77,19 +83,19 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
                 }
             }
             table.printTable();
-            System.out.println("\n" + PagingInput.helpText(currentPage,totalPages, true));
+            System.out.println("\n" + Paging.helpText(currentPage,totalPages, true, false));
 
 
             String input = inputReader.readString("ID oder Aktion (m/n/0)").trim().toLowerCase();
 
-            PagingInput.Action action = PagingInput.parse(input, true);
+            Paging.Action action = Paging.parse(input, true);
 
-            if (action == PagingInput.Action.BACK) {
+            if (action == Paging.Action.BACK) {
                 System.out.println("-> Auswahl abgebrochen.");
                 return;
             }
 
-            if (action == PagingInput.Action.CLEAR) {
+            if (action == Paging.Action.CLEAR) {
                 boolean cleared = clearCurrentCategory(items); // deine Clear-Logik
                 if (cleared) {
                     System.out.println(ColorConstants.GREEN("ERFOLG") + " | Auswahl wurde entfernt.");
@@ -100,8 +106,8 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
                 continue;
             }
 
-            if (action != PagingInput.Action.OTHER) {
-                currentPage = PagingInput.movePage(currentPage, totalPages, action);
+            if (action != Paging.Action.OTHER) {
+                currentPage = Paging.movePage(currentPage, totalPages, action);
                 continue;
             }
 
@@ -115,7 +121,7 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
 
             T selectedItem = null;
             for (T item : items) {
-                if (item.getId() == selectedId) { // Direkt item.getId() aufrufen!
+                if (item.getId() == selectedId) { 
                     selectedItem = item;
                     break;
                 }

@@ -1,10 +1,16 @@
 package de.ase.pcpartpicker.adapters.cli.commands;
+import de.ase.pcpartpicker.adapters.cli.AppContext;
 import de.ase.pcpartpicker.adapters.cli.Menu;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
-import de.ase.pcpartpicker.adapters.cli.AppContext;
 
 public class StartComputerDraftCommand implements ICommand {
+
+    /** 
+     * Prüft ob die Vorrausetzungen um den Draft zu starten erfüllt sind
+     * wenn ja starte den Draft
+     * wenn nein zeige eine Fehlermeldung
+    */
     private final AppContext context; 
     private final Menu configuratorMenu; 
 

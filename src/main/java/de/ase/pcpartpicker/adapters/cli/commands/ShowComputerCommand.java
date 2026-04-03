@@ -4,43 +4,46 @@ import java.util.List;
 
 import de.ase.pcpartpicker.ColorConstants;
 import de.ase.pcpartpicker.adapters.cli.AppContext;
-import de.ase.pcpartpicker.adapters.cli.Menu;
+import de.ase.pcpartpicker.adapters.cli.MenuFactory;
+import de.ase.pcpartpicker.adapters.cli.Renderable;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
-import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
-import de.ase.pcpartpicker.adapters.cli.utils.PagingInput;
+import de.ase.pcpartpicker.adapters.cli.utils.Paging;
 import de.ase.pcpartpicker.adapters.cli.utils.TableUtils;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
 import de.ase.pcpartpicker.part_assembly.Computer;
 
-public class ShowComputerCommand implements ICommand {
+public class ShowComputerCommand implements Renderable, ICommand {
 
     public enum Mode {OWN, ALL, USER}
 
     private final AppContext context;
-    private final Menu configuratorMenu;
     private final Mode mode;
     private final Integer userID;
 
-    public ShowComputerCommand(AppContext context, Menu configuratorMenu, Mode mode) {
-        this.context = context;
-        this.configuratorMenu = configuratorMenu;
-        this.mode = mode;
-        this.userID = null;
-    }
 
-    public ShowComputerCommand(AppContext context, Menu configuratorMenu, int userID) {
+    public ShowComputerCommand(AppContext context, Mode mode) {
+        this.context = context; 
+        this.mode = mode; 
+        userID = null; 
+    }
+    public ShowComputerCommand(AppContext context, int userID) {
         this.context = context;
-        this.configuratorMenu = configuratorMenu;
         this.mode = Mode.USER;
         this.userID = userID;
     }
 
 
+    // TODO: Obsolet
     @Override
     public void execute() {
 
-        if(mode == Mode.OWN && !SessionManager.isLoggedIn()) {
+    }
+
+
+    @Override
+    public void render() {
+        if (mode == Mode.OWN && !SessionManager.isLoggedIn()) {
             showInfo("Du musst eingeloggt sein, um deine Computer zu sehen.");
             return;
         }
@@ -49,8 +52,7 @@ public class ShowComputerCommand implements ICommand {
         try {
             computers = loadComputers();
         } catch (Exception e) {
-
-
+            showInfo("Fehler beim Laden der Computer.");
             return;
         }
 
@@ -59,78 +61,52 @@ public class ShowComputerCommand implements ICommand {
             return;
         }
 
-        int currentPage = 0;
-        int totalPages = computers.size();
-
-        while (true) {
-            NavigationUtils.clear();
-
-            if(mode == Mode.OWN) {
-                System.err.println("Meine Computer");
-            }
-
-            Computer computer = computers.get(currentPage);
-
-            if (mode == Mode.ALL) {
-                User owner = context.userRepository.findByComputerId(computer.getId());
-                if (owner != null) {
-                    System.out.println("Besitzer: " + owner.getName());
+        Paging.pageThroughList(
+            computers,
+            (computer, currentPage) -> {
+                // Optional: Titel
+                if (mode == Mode.OWN) {
+                    System.err.println("Meine Computer");
                 }
-            }
-
-            TableGenerator table = new TableGenerator("Komponente", "Eigenschaften", "Details");
-            for (String[] row : TableUtils.getComputerAsTableRows(computer)) {
-                table.addRow(row);
-            }
-            table.printTable();
-
-
-                System.out.println("\nSeite " + (currentPage + 1) + " von " + totalPages
-                    + " | m = nächste Seite | n = vorherige Seite  | c = löschen | e = bearbeiten | 0 = zurück");
-
-            String input = context.inputReader
-                    .readString("Aktion (m/n/e/0)")
-                    .trim().toLowerCase();
-
-            PagingInput.Action action = PagingInput.parse(input, true);
-
-            if (action == PagingInput.Action.BACK) {
-                return;
-            }
-
-            if (action == PagingInput.Action.EDIT) {
-                if (!SessionManager.isLoggedIn()) {
+                if (mode == Mode.ALL) {
+                    User owner = context.userRepository.findByComputerId(computer.getId());
+                    if (owner != null) {
+                        System.out.println("Besitzer: " + owner.getName());
+                    }
+                }
+                TableGenerator table = new TableGenerator("Komponente", "Eigenschaften", "Details");
+                for (String[] row : TableUtils.getComputerAsTableRows(computer)) {
+                    table.addRow(row);
+                }
+                table.printTable();
+            },
+            () -> context.inputReader.readString("Aktion (m/n/e/0)"),
+            true, 
+            1,
+            (computer) -> {
+                if(!SessionManager.isLoggedIn()) {
                     showInfo("Du musst eingeloggt sein, um einen Computer zu bearbeiten.");
-                    continue;
+                    return null; // null = Liste hat sich nicht verändert
                 }
 
                 int currentUserId = SessionManager.getcurrentUser().getId();
                 int ownerId = context.userRepository.findUserIdByComputerId(computer.getId());
                 if (ownerId != currentUserId) {
                     showInfo("Nur eigene Computer dürfen bearbeitet werden.");
-                    continue;
+                    return null;
                 }
-
+        
                 context.computerDraft.editDraft(computer);
-                configuratorMenu.execute();
+                
+                new MenuFactory(context).createConfiguratorMenu().execute();
 
-                computers = loadComputers();
-                if (computers == null || computers.isEmpty()) {
-                    showInfo(getEmptyMessageForMode());
-                    return;
-                }
-                totalPages = computers.size();
-                currentPage = Math.min(currentPage, totalPages - 1);
-                continue;
+         
+                return loadComputers();
             }
-
-
-            currentPage = PagingInput.movePage(currentPage, totalPages, action);
-
-        }
-
-
+        );
     }
+
+
 
     private List<Computer> loadComputers() {
         return switch (mode) {

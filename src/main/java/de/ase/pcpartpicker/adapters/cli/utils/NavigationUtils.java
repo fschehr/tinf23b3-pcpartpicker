@@ -1,9 +1,11 @@
 package de.ase.pcpartpicker.adapters.cli.utils;
 
+import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
+import de.ase.pcpartpicker.adapters.cli.InputReader;
+import de.ase.pcpartpicker.adapters.cli.Menu;
 import de.ase.pcpartpicker.adapters.cli.commands.BackCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ConfirmBackCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ExitCommand;
-import de.ase.pcpartpicker.adapters.cli.*;
 
 public class NavigationUtils {
 

@@ -3,12 +3,13 @@ package de.ase.pcpartpicker.adapters.cli.commands;
 import java.util.List;
 
 import de.ase.pcpartpicker.adapters.cli.InputReader;
+import de.ase.pcpartpicker.adapters.cli.Renderable;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
 import de.ase.pcpartpicker.adapters.cli.rListConfiguration;
 import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
-import de.ase.pcpartpicker.adapters.cli.utils.PagingInput;
+import de.ase.pcpartpicker.adapters.cli.utils.Paging;
 
-public class ShowListCommand<T> implements ICommand {
+public class ShowListCommand<T> implements Renderable {
     private static final int PAGE_SIZE = 10;
 
     private final rListConfiguration<T> config;
@@ -19,8 +20,9 @@ public class ShowListCommand<T> implements ICommand {
         this.inputReader = inputReader;
     }
 
+
     @Override
-    public void execute() {
+    public void render() {
         List<T> items = config.repository().findAll();
 
         if (items.isEmpty()) {
@@ -31,34 +33,26 @@ public class ShowListCommand<T> implements ICommand {
             return;
         }
 
-        int currentPage = 0;
-        int totalPages = (items.size() + PAGE_SIZE - 1) / PAGE_SIZE;
+        Paging.pageThroughList(
+            items,
+            (item, currentPage) -> {
+                //TODO: prüfen ob jetzt Fehler auftreten
+                // NavigationUtils.clear();
+                System.out.println("\n=== " + config.title() + " ===\n");
 
-        while (true) {
-            NavigationUtils.clear();
-            System.out.println("\n=== " + config.title() + " ===\n");
+                int startIndex = currentPage * PAGE_SIZE;
+                int endIndex = Math.min(startIndex + PAGE_SIZE, items.size());
 
-            int startIndex = currentPage * PAGE_SIZE;
-            int endIndex = Math.min(startIndex + PAGE_SIZE, items.size());
-
-            TableGenerator table = new TableGenerator(config.headers());
-            for (int i = startIndex; i < endIndex; i++) {
-                table.addRow(config.rowMapper().apply(items.get(i)));
-            }
-            table.printTable();
-
-            System.out.println("\n" + PagingInput.helpText(currentPage, totalPages, false));
-            String input = inputReader.readString(PagingInput.promptText(false)).trim().toLowerCase();
-            PagingInput.Action action = PagingInput.parse(input, false);
-
-            if (action == PagingInput.Action.BACK) {
-                return;
-            }
-
-            if (action != PagingInput.Action.OTHER) {
-                currentPage = PagingInput.movePage(currentPage, totalPages, action);
-            }
-
-        }
+                TableGenerator table = new TableGenerator(config.headers());
+                for (int i = startIndex; i < endIndex; i++) {
+                    table.addRow(config.rowMapper().apply(items.get(i)));
+                }
+                table.printTable();
+            },
+            () -> inputReader.readString(Paging.promptText(false)).trim().toLowerCase(),
+            false, 
+            PAGE_SIZE,
+            null //null gibt an, dass kein EDIT verwendet wird 
+        );
     }
 }

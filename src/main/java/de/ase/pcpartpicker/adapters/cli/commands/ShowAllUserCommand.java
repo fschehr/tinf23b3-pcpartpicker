@@ -18,7 +18,7 @@ public class ShowAllUserCommand implements ICommand {
     @Override
     public void execute() {
         ShowListCommand<User> showList = new ShowListCommand<>(listConfiguration.user(), inputReader);  
-        showList.execute();
+        showList.render();
     }
 
 

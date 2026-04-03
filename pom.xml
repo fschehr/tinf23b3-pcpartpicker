@@ -31,6 +31,12 @@
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.46.0.0</version>
         </dependency>
+    
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-unit</artifactId>
+        <version>4.0.0-milestone1</version>
+      </dependency>
     </dependencies>
 
     <build>
