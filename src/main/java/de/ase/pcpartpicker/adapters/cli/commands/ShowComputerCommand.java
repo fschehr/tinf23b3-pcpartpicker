@@ -4,7 +4,6 @@ import java.util.List;
 
 import de.ase.pcpartpicker.ColorConstants;
 import de.ase.pcpartpicker.adapters.cli.AppContext;
-import de.ase.pcpartpicker.adapters.cli.MenuFactory;
 import de.ase.pcpartpicker.adapters.cli.Renderable;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
@@ -90,49 +89,7 @@ public class ShowComputerCommand implements Renderable {
                 return loadComputers();
             })
             .start(); 
-        // Paging.pageThroughList(
-        //     computers,
-        //     (computer, currentPage) -> {
-        //         // Optional: Titel
-        //         if (mode == Mode.OWN) {
-        //             System.out.println("\n=== Meine Computer ===\n");
-        //         }
-        //         if (mode == Mode.ALL) {
-        //             User owner = context.userRepository.findByComputerId(computer.getId());
-        //             if (owner != null) {
-        //                 System.out.println("Besitzer: " + owner.getName());
-        //             }
-        //         }
-        //         TableGenerator table = new TableGenerator("Komponente", "Eigenschaften", "Details");
-        //         for (String[] row : TableUtils.getComputerAsTableRows(computer)) {
-        //             table.addRow(row);
-        //         }
-        //         table.printTable();
-        //     },
-        //     () -> context.inputReader.readString("Aktion (m/n/e/0)"),
-        //     true, 
-        //     1,
-        //     (computer) -> {
-        //         if(!SessionManager.isLoggedIn()) {
-        //             showInfo("Du musst eingeloggt sein, um einen Computer zu bearbeiten.");
-        //             return null; // null = Liste hat sich nicht verändert
-        //         }
-
-        //         int currentUserId = SessionManager.getcurrentUser().getId();
-        //         int ownerId = context.userRepository.findUserIdByComputerId(computer.getId());
-        //         if (ownerId != currentUserId) {
-        //             showInfo("Nur eigene Computer dürfen bearbeitet werden.");
-        //             return null;
-        //         }
-        
-        //         context.computerDraft.editDraft(computer);
-                
-        //         new MenuFactory(context).createConfiguratorMenu().execute();
-
-         
-        //         return loadComputers();
-        //     }
-        // );
+       
     }
 
 

@@ -49,24 +49,6 @@ public class ShowListCommand<T> implements Renderable {
             })
             .start();
 
-        // Paging.pageThroughList(
-        //     items,
-        //     (item, currentPage) -> {
-        //         System.out.println("\n=== " + config.title() + " ===\n");
 
-        //         int startIndex = currentPage * PAGE_SIZE;
-        //         int endIndex = Math.min(startIndex + PAGE_SIZE, items.size());
-
-        //         TableGenerator table = new TableGenerator(config.headers());
-        //         for (int i = startIndex; i < endIndex; i++) {
-        //             table.addRow(config.rowMapper().apply(items.get(i)));
-        //         }
-        //         table.printTable();
-        //     },
-        //     () -> inputReader.readString(Paging.promptText(false)).trim().toLowerCase(),
-        //     false, 
-        //     PAGE_SIZE,
-        //     null //null gibt an, dass kein EDIT verwendet wird 
-        // );
     }
 }
