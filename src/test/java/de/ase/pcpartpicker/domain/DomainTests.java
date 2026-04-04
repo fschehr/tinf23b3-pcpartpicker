@@ -18,26 +18,29 @@ public class DomainTests {
 
     @Test
     public void testCPUCreation() {
-        CPU cpu = new CPU(1, "Test CPU", 199.99, new Manufacturer(1, "Test Manufacturer"), new Socket(1, "Test Socket"), 8, false, 95);
+        CPU cpu = new CPU(1, "Test CPU", 199.99, new Manufacturer(1, "Test Manufacturer"), new Socket(1, "Test Socket"), 3.8, 5.2, false, 95);
         assertNotNull(cpu);
         assertEquals("Test CPU", cpu.getName());
         assertEquals(199.99, cpu.getPrice());
         assertEquals("Test Manufacturer", cpu.getManufacturer().getName());
         assertEquals("Test Socket", cpu.getSocket().getName());
-        assertEquals(8, cpu.getSpeedGHz());
+        assertEquals(3.8, cpu.getSpeedGHz());
+        assertEquals(5.2, cpu.getBoostClockGHz());
         assertFalse(cpu.hasIntegratedGraphics());
         assertEquals(95, cpu.getPowerConsumptionW());
     }
 
     @Test
     public void testGPUCreation() {
-        GPU gpu = new GPU(1, "Test GPU", 299.99, new Manufacturer(1, "Test Manufacturer"), 16, 150);
+        GPU gpu = new GPU(1, "Test GPU", 299.99, new Manufacturer(1, "Test Manufacturer"), 2220, 3290.0, 16, 190);
         assertNotNull(gpu);
         assertEquals("Test GPU", gpu.getName());
         assertEquals(299.99, gpu.getPrice());
         assertEquals("Test Manufacturer", gpu.getManufacturer().getName());
+        assertEquals(2220, gpu.getCoreClockMHz());
+        assertEquals(3290.0, gpu.getBoostClockMHz());
         assertEquals(16, gpu.getVramGB());
-        assertEquals(150, gpu.getPowerConsumptionW());
+        assertEquals(190, gpu.getPowerConsumptionW());
     }
 
     @Test

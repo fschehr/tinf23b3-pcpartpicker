@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -167,6 +168,7 @@ public class DatabaseInitializer {
                     price REAL NOT NULL,
                     socket_id INTEGER NOT NULL,
                     speed_ghz REAL NOT NULL,
+                    boost_clock REAL,
                     hasIntegratedGraphics BOOLEAN NOT NULL DEFAULT 0,
                     power_consumption_w INTEGER NOT NULL DEFAULT 0,
                     FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(id),
@@ -182,6 +184,8 @@ public class DatabaseInitializer {
                     type_id INTEGER NOT NULL,
                     name TEXT NOT NULL,
                     price REAL NOT NULL,
+                    core_clock REAL NOT NULL DEFAULT 0,
+                    boost_clock REAL,
                     vram_gb INTEGER NOT NULL,
                     power_consumption_w INTEGER NOT NULL DEFAULT 0,
                     FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(id),
@@ -387,14 +391,15 @@ public class DatabaseInitializer {
 
     private void importCpu(Connection connection, int typeId) throws SQLException {
         String sql = """
-            INSERT INTO cpu (manufacturer_id, type_id, name, price, socket_id, speed_ghz, hasIntegratedGraphics, power_consumption_w)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO cpu (manufacturer_id, type_id, name, price, socket_id, speed_ghz, boost_clock, hasIntegratedGraphics, power_consumption_w)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """;
 
         importRows(connection, "cpu.jsonl", sql, (row, ps) -> {
             String name = getString(row, "name");
             Double price = getDouble(row, "price");
             Double speed = getDouble(row, "core_clock");
+            Double boost = getDouble(row, "boost_clock");
             Integer tdp = getInt(row, "tdp");
             if (anyNull(name, price, speed, tdp)) {
                 return false;
@@ -413,23 +418,31 @@ public class DatabaseInitializer {
             ps.setDouble(4, price);
             ps.setInt(5, socketId);
             ps.setDouble(6, speed);
-            ps.setBoolean(7, hasIgpu);
-            ps.setInt(8, tdp);
+            if (boost == null) {
+                ps.setNull(7, Types.REAL);
+            } else {
+                ps.setDouble(7, boost);
+            }
+            ps.setBoolean(8, hasIgpu);
+            ps.setInt(9, tdp);
             return true;
         });
     }
 
     private void importGpu(Connection connection, int typeId) throws SQLException {
         String sql = """
-            INSERT INTO gpu (manufacturer_id, type_id, name, price, vram_gb, power_consumption_w)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO gpu (manufacturer_id, type_id, name, price, core_clock, boost_clock, vram_gb, power_consumption_w)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             """;
 
         importRows(connection, "gpu.jsonl", sql, (row, ps) -> {
-            String name = getString(row, "chipset");
+            String name = getString(row, "name");
             Double price = getDouble(row, "price");
+            Double coreClock = getDouble(row, "core_clock");
+            Double boostClock = getDouble(row, "boost_clock");
             Integer vram = getInt(row, "memory");
-            if (anyNull(name, price, vram)) {
+            Integer tdp = getInt(row, "tdp");
+            if (anyNull(name, price, coreClock, vram, tdp)) {
                 return false;
             }
 
@@ -439,8 +452,14 @@ public class DatabaseInitializer {
             ps.setInt(2, typeId);
             ps.setString(3, name);
             ps.setDouble(4, price);
-            ps.setInt(5, vram);
-            ps.setInt(6, 0);
+            ps.setDouble(5, coreClock);
+            if (boostClock == null) {
+                ps.setNull(6, Types.REAL);
+            } else {
+                ps.setDouble(6, boostClock);
+            }
+            ps.setInt(7, vram);
+            ps.setInt(8, tdp);
             return true;
         });
     }
@@ -461,10 +480,11 @@ public class DatabaseInitializer {
             }
 
             int manufacturerId = ensureNamedId(connection, "manufacturer", extractManufacturer(name));
+            String cleanName = stripManufacturerPrefix(name);
 
             ps.setInt(1, manufacturerId);
             ps.setInt(2, typeId);
-            ps.setString(3, name);
+            ps.setString(3, cleanName);
             ps.setDouble(4, price);
             ps.setInt(5, capacity);
             ps.setInt(6, speed);
@@ -941,6 +961,25 @@ public class DatabaseInitializer {
 
         String[] parts = productName.split("\\s+");
         return parts.length > 0 ? parts[0] : "Unknown";
+    }
+
+    private String stripManufacturerPrefix(String productName) {
+        if (productName == null || productName.isBlank()) {
+            return productName;
+        }
+
+        String manufacturer = extractManufacturer(productName);
+        if (manufacturer == null || manufacturer.equals("Unknown")) {
+            return productName.trim();
+        }
+
+        String trimmed = productName.trim();
+        if (trimmed.regionMatches(true, 0, manufacturer, 0, manufacturer.length())) {
+            String remainder = trimmed.substring(manufacturer.length()).trim();
+            return remainder.isEmpty() ? trimmed : remainder;
+        }
+
+        return trimmed;
     }
 
     private enum StorageTarget {

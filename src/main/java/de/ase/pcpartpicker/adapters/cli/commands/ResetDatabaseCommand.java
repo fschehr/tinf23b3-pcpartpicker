@@ -20,7 +20,7 @@ public class ResetDatabaseCommand implements ICommand {
 
     @Override
     public void execute() {
-        System.out.println(ColorConstants.YELLOW("WARNUNG") + " | Alle vorhandenen Daten in der Datenbank werden gelöscht.");
+        System.out.println(ColorConstants.YELLOW("WARNUNG") + " | Alle vorhandenen Daten in der Datenbank werden gelöscht. Default-Daten werden geladen.");
         int confirmation = inputReader.readInt("Datenbank wirklich resetten? 1=Ja, 2=Nein", 1, 2);
 
         if (confirmation != 1) {

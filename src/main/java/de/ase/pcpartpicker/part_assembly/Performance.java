@@ -1,7 +1,5 @@
 package de.ase.pcpartpicker.part_assembly;
 
-import de.ase.pcpartpicker.domain.*;
-
 /**
  * Diese Klasse enthält statische Methoden zur Berechnung der Leistung eines Computers basierend auf seinen Komponenten.
  * @author Tuluhan

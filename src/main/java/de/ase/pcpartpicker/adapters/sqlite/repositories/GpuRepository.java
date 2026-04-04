@@ -21,6 +21,8 @@ public class GpuRepository extends BaseRepository<GPU> {
             SELECT g.id,
                    g.name,
                    g.price,
+                     g.core_clock,
+                     g.boost_clock,
                    g.vram_gb,
                    g.power_consumption_w,
                    t.id AS type_id,
@@ -43,11 +45,18 @@ public class GpuRepository extends BaseRepository<GPU> {
                     resultSet.getString("name"),
                     resultSet.getDouble("price"),
                     manufacturer,
+                    resultSet.getDouble("core_clock"),
+                    readNullableDouble(resultSet, "boost_clock"),
                     resultSet.getInt("vram_gb"),
                     resultSet.getInt("power_consumption_w")
                 );
             },
             "GPU-Daten konnten nicht geladen werden."
         );
+    }
+
+    private Double readNullableDouble(java.sql.ResultSet resultSet, String columnName) throws java.sql.SQLException {
+        double value = resultSet.getDouble(columnName);
+        return resultSet.wasNull() ? null : value;
     }
 }
