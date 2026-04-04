@@ -8,12 +8,12 @@ import java.util.function.Supplier;
 
 public final class Paging {
     public enum Action {
-        NEXT, PREVIOUS, BACK, CLEAR, EDIT, OTHER
+        NEXT, PREVIOUS, BACK, CLEAR, EDIT, DELETE, OTHER
     }
 
     private Paging() {}
 
-    public static Action parse(String raw, boolean allowClear, boolean allowEdit) {
+    public static Action parse(String raw, boolean allowClear, boolean allowEdit, boolean allowDelete) {
         if (raw == null) return Action.OTHER;
         String input = raw.trim().toLowerCase();
 
@@ -23,6 +23,7 @@ public final class Paging {
             case "0" -> Action.BACK;
             case "c" -> allowClear ? Action.CLEAR : Action.OTHER;
             case "e" -> allowEdit ? Action.EDIT : Action.OTHER;
+            case "d" -> allowDelete ? Action.DELETE : Action.OTHER;
             default -> Action.OTHER;
         };
     }
@@ -37,20 +38,22 @@ public final class Paging {
         };
     }
 
-    public static String helpText(int currentPage, int totalPages, boolean allowClear, boolean alloEdit) {
+    public static String helpText(int currentPage, int totalPages, boolean allowClear, boolean alloEdit, boolean allowDelete) {
         StringBuilder text = new StringBuilder("Seite " + (currentPage + 1) + " von " + totalPages
             + " | m = nächste Seite | n = vorherige Seite"); 
 
         if(allowClear) text.append(" | c = Auswahl löschen");
         if(alloEdit) text.append (" | e = bearbeiten"); 
+        if(allowDelete) text.append(" | d = PC löschen");
         text.append(" | 0 = zurück");
         return text.toString();
     }
 
-    public static String promptText(boolean allowClear, boolean allowEdit) {
+    public static String promptText(boolean allowClear, boolean allowEdit, boolean allowDelete) {
         StringBuilder text = new StringBuilder("ID oder Aktion (m/n");
         if(allowClear) text.append("/c");
         if(allowEdit) text.append("/e");
+        if(allowDelete) text.append("/d");
         text.append("/0)"); 
         String result = text.toString();
         return result; 
@@ -67,6 +70,7 @@ public final class Paging {
         private BiConsumer<T, Integer> renderPage;
         private Supplier<String> readInput;
         private Function<T, List<T>> onEdit = null;
+        private Function<T, List<T>> onDelete = null;
         private Consumer<String> onOtherInput = null; 
         private Runnable onClear = null; 
         private int pageSize = 1; 
@@ -107,6 +111,11 @@ public final class Paging {
             return this;
         }
 
+        public Builder<T> onDelete(Function<T, List<T>> onDelete) {
+            this.onDelete = onDelete;
+            return this;
+        }
+
         public Builder<T> onOtherInput(java.util.function.Consumer<String> action) {
             this.onOtherInput = action;
             return this;
@@ -126,6 +135,7 @@ public final class Paging {
             int totalPages = (pageSize > 0) ? (currentItems.size() + pageSize - 1) / pageSize : 1;
             boolean canClear = (onClear != null);
             boolean canEdit = (onEdit != null);
+            boolean canDelete = (onDelete != null);
 
             while (true) {
                 NavigationUtils.clear();
@@ -136,10 +146,10 @@ public final class Paging {
 
                 renderPage.accept(currentItems.get(currentPage), currentPage);
 
-                System.out.println(Paging.helpText(currentPage, totalPages, canClear, canEdit));
-                System.out.print(Paging.promptText(canClear, canEdit)); 
+                System.out.println(Paging.helpText(currentPage, totalPages, canClear, canEdit, canDelete));
+                System.out.print(Paging.promptText(canClear, canEdit, canDelete)); 
                 String input = readInput.get();
-                Action action = Paging.parse(input, canClear, canEdit);
+                Action action = Paging.parse(input, canClear, canEdit, canDelete);
 
                 if (action == Action.BACK) return;
 
@@ -165,6 +175,20 @@ public final class Paging {
                             totalPages = (pageSize > 0) ? (currentItems.size() + pageSize - 1) / pageSize : 1;
                             currentPage = Math.min(currentPage, totalPages - 1);
                         }
+                    }
+                    continue;
+                }
+
+                if (action == Action.DELETE && onDelete != null) {
+                    List<T> updatedItems = onDelete.apply(currentItems.get(currentPage));
+                    if (updatedItems != null) {
+                        currentItems = updatedItems;
+                        if (currentItems.isEmpty()) {
+                            System.out.println("Keine Einträge mehr vorhanden.");
+                            return;
+                        }
+                        totalPages = (pageSize > 0) ? (currentItems.size() + pageSize - 1) / pageSize : 1;
+                        currentPage = Math.min(currentPage, totalPages - 1);
                     }
                     continue;
                 }

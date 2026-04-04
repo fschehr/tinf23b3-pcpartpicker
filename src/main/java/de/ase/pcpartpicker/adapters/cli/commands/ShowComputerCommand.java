@@ -88,6 +88,22 @@ public class ShowComputerCommand implements Renderable {
                 new de.ase.pcpartpicker.adapters.cli.MenuFactory(context).createConfiguratorMenu().execute();
                 return loadComputers();
             })
+            .onDelete((computer) -> {
+                if (!SessionManager.isLoggedIn()) {
+                    showInfo("Du musst eingeloggt sein, um einen Computer zu löschen.");
+                    return null;
+                }
+
+                int currentUserId = SessionManager.getcurrentUser().getId();
+                boolean deleted = context.computerRepository.deleteByIdForUser(computer.getId(), currentUserId);
+                if (!deleted) {
+                    showInfo("Nur eigene Computer dürfen gelöscht werden.");
+                    return null;
+                }
+
+                showInfo("Computer wurde gelöscht.");
+                return loadComputers();
+            })
             .start(); 
     }
 

@@ -237,6 +237,33 @@ class DatabaseIntegrationTest {
         assertEquals(2, userComputers.get(0).getStorageDevices().size());
     }
 
+    @Test
+    void deleteByIdForUserDeletesOwnedComputer() {
+        UserRepository userRepository = new UserRepository(connectionFactory);
+        ComputerRepository computerRepository = new ComputerRepository(connectionFactory);
+
+        User owner = userRepository.save("Delete Owner " + System.nanoTime());
+        Computer computer = createCompatibleComputer(connectionFactory);
+        int computerId = computerRepository.save(owner.getId(), computer);
+
+        assertTrue(computerRepository.deleteByIdForUser(computerId, owner.getId()));
+        assertTrue(computerRepository.findAllByUserId(owner.getId()).isEmpty());
+    }
+
+    @Test
+    void deleteByIdForUserDoesNotDeleteOtherUsersComputer() {
+        UserRepository userRepository = new UserRepository(connectionFactory);
+        ComputerRepository computerRepository = new ComputerRepository(connectionFactory);
+
+        User owner = userRepository.save("Delete Owner " + System.nanoTime());
+        User attacker = userRepository.save("Delete Attacker " + System.nanoTime());
+        Computer computer = createCompatibleComputer(connectionFactory);
+        int computerId = computerRepository.save(owner.getId(), computer);
+
+        assertFalse(computerRepository.deleteByIdForUser(computerId, attacker.getId()));
+        assertEquals(1, computerRepository.findAllByUserId(owner.getId()).size());
+    }
+
     private Computer createCompatibleComputer(ConnectionFactory connectionFactory) {
         CpuRepository cpuRepository = new CpuRepository(connectionFactory);
         MainboardRepository mainboardRepository = new MainboardRepository(connectionFactory);

@@ -1,6 +1,7 @@
 package de.ase.pcpartpicker.adapters.sqlite.repositories;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -83,6 +84,35 @@ public class ComputerRepository extends JdbcRepository<Computer> {
     public int saveAsDraft(int userId, ComputerDraft draft) {
         Computer draftComputer = fromDraft(draft);
         return upsertComputer(userId, draft.getEditingComputerId(), draftComputer, true);
+    }
+
+    public boolean deleteByIdForUser(int computerId, int userId) {
+        String deleteStorageSql = "DELETE FROM computer_storage WHERE computer_id = ?";
+        String deleteComputerSql = "DELETE FROM computer WHERE id = ? AND user_id = ?";
+
+        try (Connection connection = connectionFactory.createConnection()) {
+            connection.setAutoCommit(false);
+            try (PreparedStatement deleteStorageStatement = connection.prepareStatement(deleteStorageSql);
+                 PreparedStatement deleteComputerStatement = connection.prepareStatement(deleteComputerSql)) {
+
+                deleteStorageStatement.setInt(1, computerId);
+                deleteStorageStatement.executeUpdate();
+
+                deleteComputerStatement.setInt(1, computerId);
+                deleteComputerStatement.setInt(2, userId);
+                int deletedRows = deleteComputerStatement.executeUpdate();
+
+                connection.commit();
+                return deletedRows > 0;
+            } catch (SQLException e) {
+                connection.rollback();
+                throw e;
+            } finally {
+                connection.setAutoCommit(true);
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException("Computer konnte nicht gelöscht werden.", e);
+        }
     }
 
     /**
