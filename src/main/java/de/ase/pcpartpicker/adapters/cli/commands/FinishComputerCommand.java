@@ -1,15 +1,14 @@
 package de.ase.pcpartpicker.adapters.cli.commands;
 
+import de.ase.pcpartpicker.ColorConstants;
 import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
+import de.ase.pcpartpicker.adapters.cli.utils.TableUtils;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.ComputerRepository;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
 import de.ase.pcpartpicker.part_assembly.Computer;
-import de.ase.pcpartpicker.adapters.cli.utils.TableUtils;
-
-import de.ase.pcpartpicker.ColorConstants;
 
 public class FinishComputerCommand implements ICommand {
     private final InputReader inputReader;
@@ -46,8 +45,7 @@ public class FinishComputerCommand implements ICommand {
         } catch (Exception e) {
             System.out.println(ColorConstants.RED("FEHLER") + " | Beim Speichern ist ein Fehler aufgetreten: " + e.getMessage());
         }
-        
-        
+
         inputReader.waitForEnter("Enter drücken...");
     }
 }

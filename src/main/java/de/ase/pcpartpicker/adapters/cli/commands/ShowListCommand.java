@@ -36,7 +36,7 @@ public class ShowListCommand<T> implements Renderable {
         Paging.builder(items)
             .withTitle(title)
             .withPageSize(PAGE_SIZE)
-            .withInputReader(() -> inputReader.readString(Paging.promptText(false, false)).trim().toLowerCase())
+            .withInputReader(() -> inputReader.readString("").trim().toLowerCase())
             .withRenderer((item, currentPage) -> {
                 int startIndex = currentPage * PAGE_SIZE;
                 int endIndex = Math.min(startIndex + PAGE_SIZE, items.size());
@@ -48,7 +48,5 @@ public class ShowListCommand<T> implements Renderable {
                 table.printTable();
             })
             .start();
-
-
     }
 }

@@ -52,12 +52,12 @@ public class ShowComputerCommand implements Renderable {
             showInfo(getEmptyMessageForMode());
             return;
         }
-
+        
 
         Paging.builder(computers)
             .withTitle(title)
             .withPageSize(1)
-            .withInputReader(() -> context.inputReader.readString(Paging.promptText(false, true)).trim().toLowerCase())
+            .withInputReader(() -> context.inputReader.readString("").trim().toLowerCase())
             .withRenderer((computer, currentPage) -> {
                 if (mode == Mode.ALL) {
                     User owner = context.userRepository.findByComputerId(computer.getId());
@@ -89,7 +89,6 @@ public class ShowComputerCommand implements Renderable {
                 return loadComputers();
             })
             .start(); 
-       
     }
 
 

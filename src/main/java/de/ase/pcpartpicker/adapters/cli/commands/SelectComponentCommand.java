@@ -9,7 +9,6 @@ import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
 import de.ase.pcpartpicker.adapters.cli.rListConfiguration;
-import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
 import de.ase.pcpartpicker.adapters.cli.utils.Paging;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.Repository;
 import de.ase.pcpartpicker.domain.CPU;
@@ -59,43 +58,29 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
             return;
         }
 
-        int currentPage = 0;
-        int totalPages = (items.size() + PAGE_SIZE - 1) / PAGE_SIZE;
 
-        while (true) {
-            NavigationUtils.clear();
-            System.out.println("\n--- " + componentName + " Auswählen ---");
+        Paging.builder(items)
+            .withTitle(componentName)
+            .withPageSize(PAGE_SIZE)
+            .withInputReader(() -> inputReader.readString("").trim().toLowerCase())
+            .withRenderer((item, currentPage) -> {
+                int startIndex = currentPage * PAGE_SIZE;
+                int endIndex = Math.min(startIndex + PAGE_SIZE, items.size()); 
 
-            int startIndex = currentPage * PAGE_SIZE;
-            int endIndex = Math.min(startIndex + PAGE_SIZE, items.size());
-
-
-            TableGenerator table = new TableGenerator(tableHeaders);
-            for (int i = startIndex; i < endIndex; i++) {
-                T item = items.get(i);
-
-                boolean isSelected = isComponentSelected(item);
-
-                if (isSelected) {
-                    table.addColoredRow(ColorConstants.ANSI_GREEN, rowMapper.apply(item));
-                } else {
-                    table.addRow(rowMapper.apply(item));
+                 TableGenerator table = new TableGenerator(tableHeaders);
+                for (int i = startIndex; i < endIndex; i++) {
+                    item = items.get(i);
+                    boolean isSelected = isComponentSelected(item);
+                    if (isSelected) {
+                        table.addColoredRow(ColorConstants.ANSI_GREEN, rowMapper.apply(item));
+                    } else {
+                        table.addRow(rowMapper.apply(item));
+                    }
                 }
-            }
-            table.printTable();
-            System.out.println("\n" + Paging.helpText(currentPage,totalPages, true, false));
+                table.printTable();
 
-
-            String input = inputReader.readString("ID oder Aktion (m/n/0)").trim().toLowerCase();
-
-            Paging.Action action = Paging.parse(input, true);
-
-            if (action == Paging.Action.BACK) {
-                System.out.println("-> Auswahl abgebrochen.");
-                return;
-            }
-
-            if (action == Paging.Action.CLEAR) {
+            })
+            .onClear(() ->  {
                 boolean cleared = clearCurrentCategory(items); // deine Clear-Logik
                 if (cleared) {
                     System.out.println(ColorConstants.GREEN("ERFOLG") + " | Auswahl wurde entfernt.");
@@ -103,47 +88,110 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
                     System.out.println(ColorConstants.YELLOW("HINWEIS") + " | Nichts zum Entfernen ausgewählt.");
                 }
                 inputReader.waitForEnter("Enter drücken...");
-                continue;
-            }
+            })
+            .onOtherInput(input -> {
+                try {
+                    int selectedId = Integer.parseInt(input);
+                    T selectedItem = null;
+                    
+            
+                    for (T item : items) {
+                        if (item.getId() == selectedId) { 
+                            selectedItem = item;
+                            break;
+                        }
+                    }
 
-            if (action != Paging.Action.OTHER) {
-                currentPage = Paging.movePage(currentPage, totalPages, action);
-                continue;
-            }
+                    if (selectedItem == null) {
+                        System.out.println(ColorConstants.RED("FEHLER") + " | ID nicht gefunden.");
+                        return; 
+                    }
 
-            int selectedId;
-            try {
-                selectedId = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.out.println("Ungültige Eingabe.");
-                continue;
-            }
+                
+                    String warning = draft.getBuilder().validate(draft, selectedItem);
+                    if (warning != null) {
+                        System.out.println(ColorConstants.YELLOW("WARNUNG") + " | " + warning);
+                        int add = inputReader.readInt("Willst du die Komponente wirklich hinzufügen? [0: Nein, 1: Ja]", 0, 1);
+                        if (add == 0) return; // Zurück in die Paging-Schleife
+                    }
 
-            T selectedItem = null;
-            for (T item : items) {
-                if (item.getId() == selectedId) { 
-                    selectedItem = item;
-                    break;
+                   
+                    draftSetter.accept(draft, selectedItem);
+                    System.out.println("\n" + ColorConstants.GREEN("ERFOLG") + " | " + selectedItem.getName() + " wurde zum Computer hinzugefügt!");
+                    inputReader.waitForEnter("Enter drücken...");
+                    
+                    // TODO: man bleibt im Menü will ich das so?
+                    
+                } catch (NumberFormatException e) {
+                    System.out.println("Ungültige Eingabe.");
                 }
-            }
-
-            if (selectedItem == null) {
-                System.out.println(ColorConstants.RED("FEHLER") + " | ID nicht gefunden.");
-                continue;
-            }
-
-            String warning = draft.getBuilder().validate(draft, selectedItem);
-            if (warning != null) {
-                System.out.println(ColorConstants.YELLOW("WARNUNG") + " | " + warning);
-                int add = inputReader.readInt("Willst du die Komponente wirklich hinzufügen? [0: Nein, 1: Ja]", 0, 1);
-                if (add == 0) return;
-            }
-
-            draftSetter.accept(draft, selectedItem);
-            System.out.println("\n" + ColorConstants.GREEN("ERFOLG") + " | " + selectedItem.getName() + " wurde zum Computer hinzugefügt!");
-            inputReader.waitForEnter("Enter drücken...");
-        }
+            })
+            .start();
     }
+
+    
+        
+    //     while (true) {
+    //         NavigationUtils.clear();
+    //         System.out.println("\n--- " + componentName + " Auswählen ---");
+
+    //         int startIndex = currentPage * PAGE_SIZE;
+    //         int endIndex = Math.min(startIndex + PAGE_SIZE, items.size());
+
+
+           
+    //         System.out.println("\n" + Paging.helpText(currentPage,totalPages, true, false));
+
+
+    //         String input = inputReader.readString("ID oder Aktion (m/n/0)").trim().toLowerCase();
+
+    //         Paging.Action action = Paging.parse(input, true);
+
+    //         if (action == Paging.Action.BACK) {
+    //             System.out.println("-> Auswahl abgebrochen.");
+    //             return;
+    //         }
+
+    //         if (action == Paging.Action.CLEAR) {
+    //             boolean cleared = clearCurrentCategory(items); // deine Clear-Logik
+    //             if (cleared) {
+    //                 System.out.println(ColorConstants.GREEN("ERFOLG") + " | Auswahl wurde entfernt.");
+    //             } else {
+    //                 System.out.println(ColorConstants.YELLOW("HINWEIS") + " | Nichts zum Entfernen ausgewählt.");
+    //             }
+    //             inputReader.waitForEnter("Enter drücken...");
+    //             continue;
+    //         }
+
+    //         if (action != Paging.Action.OTHER) {
+    //             currentPage = Paging.movePage(currentPage, totalPages, action);
+    //             continue;
+    //         }
+
+    //         int selectedId;
+    //         try {
+    //             selectedId = Integer.parseInt(input);
+    //         } catch (NumberFormatException e) {
+    //             System.out.println("Ungültige Eingabe.");
+    //             continue;
+    //         }
+
+    //         T selectedItem = null;
+    //         for (T item : items) {
+    //             if (item.getId() == selectedId) { 
+    //                 selectedItem = item;
+    //                 break;
+    //             }
+    //         }
+
+    //         if (selectedItem == null) {
+    //             System.out.println(ColorConstants.RED("FEHLER") + " | ID nicht gefunden.");
+    //             continue;
+    //         }
+
+            
+    //     }
+    // }
 
     private boolean isComponentSelected(T item) {
         if (item instanceof CPU) {

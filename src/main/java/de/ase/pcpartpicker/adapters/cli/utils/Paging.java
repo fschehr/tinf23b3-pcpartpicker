@@ -2,6 +2,7 @@ package de.ase.pcpartpicker.adapters.cli.utils;
 
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -12,7 +13,7 @@ public final class Paging {
 
     private Paging() {}
 
-    public static Action parse(String raw, boolean allowClear) {
+    public static Action parse(String raw, boolean allowClear, boolean allowEdit) {
         if (raw == null) return Action.OTHER;
         String input = raw.trim().toLowerCase();
 
@@ -21,7 +22,7 @@ public final class Paging {
             case "n" -> Action.PREVIOUS;
             case "0" -> Action.BACK;
             case "c" -> allowClear ? Action.CLEAR : Action.OTHER;
-            case "e" -> Action.EDIT;
+            case "e" -> allowEdit ? Action.EDIT : Action.OTHER;
             default -> Action.OTHER;
         };
     }
@@ -46,8 +47,13 @@ public final class Paging {
         return text.toString();
     }
 
-    public static String promptText(boolean allowClear, boolean alloEdit) {
-        return allowClear ? "ID oder Aktion (m/n/c/0)" : "Aktion (m/n/0)";
+    public static String promptText(boolean allowClear, boolean allowEdit) {
+        StringBuilder text = new StringBuilder("ID oder Aktion (m/n");
+        if(allowClear) text.append("/c");
+        if(allowEdit) text.append("/e");
+        text.append("/0)"); 
+        String result = text.toString();
+        return result; 
     }
 
     
@@ -60,37 +66,40 @@ public final class Paging {
         private final List<T> items;
         private BiConsumer<T, Integer> renderPage;
         private Supplier<String> readInput;
-        private boolean allowClear = false;
-        private int pageSize = 1; 
         private Function<T, List<T>> onEdit = null;
+        private Consumer<String> onOtherInput = null; 
+        private Runnable onClear = null; 
+        private int pageSize = 1; 
 
+        
         public Builder(List<T> items) {
             this.items = items;
         }
-
+        
         public Builder<T> withTitle(String title) {
             this.pageTitle = title;
             return this;
         }
-
+        
         public Builder<T> withRenderer(BiConsumer<T, Integer> renderPage) {
             this.renderPage = renderPage;
             return this;
         }
-
+        
         public Builder<T> withInputReader(Supplier<String> readInput) {
             this.readInput = readInput;
             return this;
         }
-
-        public Builder<T> allowClear(boolean allowClear) {
-            this.allowClear = allowClear;
-            return this;
-        }
-
+        
+        
         public Builder<T> withPageSize(int pageSize) {
             this.pageSize = pageSize;
             return this;
+        }
+        
+        public Builder<T> onClear(Runnable clearAction) {
+            this.onClear = clearAction; 
+            return this; 
         }
 
         public Builder<T> onEdit(Function<T, List<T>> onEdit) {
@@ -98,8 +107,16 @@ public final class Paging {
             return this;
         }
 
+        public Builder<T> onOtherInput(java.util.function.Consumer<String> action) {
+            this.onOtherInput = action;
+            return this;
+        }
+
+   
+        
         public void start() {
             List<T> currentItems = this.items;
+            
             if (currentItems == null || currentItems.isEmpty()) {
                 System.out.println("Keine Einträge vorhanden.");
                 return;
@@ -107,7 +124,8 @@ public final class Paging {
 
             int currentPage = 0;
             int totalPages = (pageSize > 0) ? (currentItems.size() + pageSize - 1) / pageSize : 1;
-            boolean allowEdit = (onEdit != null);
+            boolean canClear = (onClear != null);
+            boolean canEdit = (onEdit != null);
 
             while (true) {
                 NavigationUtils.clear();
@@ -118,17 +136,24 @@ public final class Paging {
 
                 renderPage.accept(currentItems.get(currentPage), currentPage);
 
-                System.out.println(Paging.helpText(currentPage, totalPages, allowClear, allowEdit));
+                System.out.println(Paging.helpText(currentPage, totalPages, canClear, canEdit));
+                System.out.print(Paging.promptText(canClear, canEdit)); 
                 String input = readInput.get();
-                Action action = Paging.parse(input, allowClear);
+                Action action = Paging.parse(input, canClear, canEdit);
 
                 if (action == Action.BACK) return;
-                
-                if (action == Action.CLEAR && allowClear) {
+
+                if(action == Action.PREVIOUS || action == Action.NEXT) {
+                    currentPage = Paging.movePage(currentPage, totalPages, action); 
                     continue; 
                 }
+                
+                if (action == Action.CLEAR && canClear) {
+                    onClear.run();
+                    continue;  
+                }
 
-                if (action == Action.EDIT) {
+                if (action == Action.EDIT && onEdit != null) {
                     if (onEdit != null) {
                         List<T> updatedItems = onEdit.apply(currentItems.get(currentPage));
                         if (updatedItems != null) {
@@ -144,7 +169,9 @@ public final class Paging {
                     continue;
                 }
 
-                currentPage = Paging.movePage(currentPage, totalPages, action);
+                if(action == Action.OTHER && onOtherInput != null) {
+                    onOtherInput.accept(input);
+                }
             }
         }
     }
