@@ -4,6 +4,7 @@ import java.util.List;
 
 import de.ase.pcpartpicker.ColorConstants;
 import de.ase.pcpartpicker.adapters.cli.AppContext;
+import de.ase.pcpartpicker.adapters.cli.MenuFactory;
 import de.ase.pcpartpicker.adapters.cli.Renderable;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
@@ -85,7 +86,7 @@ public class ShowComputerCommand implements Renderable {
                 }
                 
                 context.computerDraft.editDraft(computer);
-                new de.ase.pcpartpicker.adapters.cli.MenuFactory(context).createConfiguratorMenu().execute();
+                new MenuFactory(context).createConfiguratorMenu().execute();
                 return loadComputers();
             })
             .onDelete((computer) -> {

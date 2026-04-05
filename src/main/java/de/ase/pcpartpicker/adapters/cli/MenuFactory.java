@@ -3,12 +3,14 @@ package de.ase.pcpartpicker.adapters.cli;
 import java.util.List;
 
 import de.ase.pcpartpicker.ColorConstants;
+import de.ase.pcpartpicker.adapters.cli.commands.ComputerToBenchmarkCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.FinishComputerCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.LoginCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.LogoutCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.NewUserCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.OpenMenuCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ResetDatabaseCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.RunBenchmarkCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.SaveDraftCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.SelectComponentCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ShowAllUserCommand;
@@ -22,6 +24,7 @@ import de.ase.pcpartpicker.domain.HDD;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
 import de.ase.pcpartpicker.domain.M2SSD;
 import de.ase.pcpartpicker.domain.SSD;
+import de.ase.pcpartpicker.part_assembly.Computer;
 
 /**
  * Klasse, die die Menüs erstellt und konfiguriert.
@@ -104,10 +107,38 @@ public class MenuFactory {
         computerMenu.add(new MenuItem("Alle Computer anzeigen", () -> {
             this.createAllComputerMenu().execute();
         }));
-        
+        computerMenu.add(new MenuItem("Benchmarks", () -> {
+            createChooseComputerMenu().execute();
+        }));
         NavigationUtils.addBackNavigation(computerMenu);
         return computerMenu;
     }
+    
+    private Menu createChooseComputerMenu() {
+        Menu sb = new Menu("Für welchen Computer möchtest du Benchmarks durchführen?", context.inputReader, Menu.NavMode.PAGING); 
+        ComputerToBenchmarkCommand benchmark = new ComputerToBenchmarkCommand(context); 
+        sb.setCustomContent(benchmark);
+        return sb; 
+    }
+
+    public Menu createChooseBenchmarkMenu() {
+        Menu bmMenu = new Menu("Benchmark auswählen", context.inputReader); 
+        bmMenu.add(new MenuItem("Henri Benchmark", new OpenMenuCommand((createBenchmarkMenu(1)))));
+        bmMenu.add(new MenuItem("Fabio Benchmark", new OpenMenuCommand((createBenchmarkMenu(2)))));
+        bmMenu.add(new MenuItem("Tuluhan Benchmark", new OpenMenuCommand((createBenchmarkMenu(3))))); 
+        NavigationUtils.addBackNavigation(bmMenu); 
+        return bmMenu; 
+    }
+
+    private Menu createBenchmarkMenu(int benchmark) {
+        Menu menu = new Menu("Benchmark", context.inputReader);  
+        Computer computer = context.getSelectedComputer();
+        RunBenchmarkCommand rb = new RunBenchmarkCommand(computer, benchmark); 
+        menu.setCustomContent(rb);
+        NavigationUtils.addBackNavigation(menu); 
+        return menu; 
+    }
+
 
     private Menu createOwnComputerMenu() {
         Menu menu = new Menu("Meine Computer", context.inputReader,Menu.NavMode.PAGING); 
