@@ -40,7 +40,7 @@ public class ListConfiguration {
     public rListConfiguration<CPU> cpu() {
         return new rListConfiguration<>(
             "CPUs",
-            new String[]{"#", "Name", "Hersteller", "Sockel", "Takt (GHz)", "Preis"},
+            new String[]{"#", "Name", "Hersteller", "Sockel", "Takt (GHz)", "Boost-Takt (GHz)", "TDP (W)",  "Preis"},
             new CpuRepository(cf),
             cpu -> new String[]{
                 String.valueOf(cpu.getId()),
@@ -48,7 +48,9 @@ public class ListConfiguration {
                 cpu.getManufacturer().getName(),
                 cpu.getSocket().getName(),
                 String.format("%.1f",cpu.getSpeedGHz()),
-                cpu.getPrice() + " €"
+                String.format("%.1f",cpu.getBoostClockGHz()),
+                String.valueOf(cpu.getPowerConsumptionW()),
+                String.format("%.2f", cpu.getPrice()) + " €"
             }
         );
     }
@@ -56,13 +58,17 @@ public class ListConfiguration {
     public rListConfiguration<GPU> gpu() {
         return new rListConfiguration<>(
             "GPUs",
-            new String[]{"#", "Name", "Hersteller", "Preis"},
+            new String[]{"#", "Name", "Hersteller", "VRAM (GB)", "Base-Clock (Mhz)", "Boost-Clock (Mhz)", "TDP (W)", "Preis"},
             new GpuRepository(cf),
             gpu -> new String[]{
                 String.valueOf(gpu.getId()),
                 gpu.getName(),
                 gpu.getManufacturer().getName(),
-                gpu.getPrice() + " €"
+                String.valueOf(gpu.getVramGB()),
+                String.format("%.0f", gpu.getCoreClockMHz()),
+                gpu.getBoostClockMHz() != null ? String.format("%.0f", gpu.getBoostClockMHz()) : "N/A",
+                String.valueOf(gpu.getPowerConsumptionW()),
+                String.format("%.2f", gpu.getPrice()) + " €"
             }
         );
     }
@@ -77,7 +83,7 @@ public class ListConfiguration {
                 ram.getName(),
                 ram.getManufacturer().getName(),
                 String.valueOf(ram.getCapacityGB()),
-                ram.getPrice() + " €"
+                String.format("%.2f", ram.getPrice()) + " €"
             }
         );
     }
@@ -94,7 +100,7 @@ public class ListConfiguration {
                 mb.getSocket().getName(),
                 String.valueOf(mb.getRamSlots()),
                 mb.getFormFactor().getName(),
-                mb.getPrice() + " €"
+                String.format("%.2f", mb.getPrice()) + " €"
             }
         );
     }
@@ -110,7 +116,7 @@ public class ListConfiguration {
                 psu.getManufacturer().getName(),
                 psu.getWattage() + " W",
                 psu.getFormFactor().getName(),
-                psu.getPrice() + " €"
+                String.format("%.2f", psu.getPrice()) + " €"
             }
         );
     }
@@ -125,7 +131,7 @@ public class ListConfiguration {
                 c.getName(),
                 c.getManufacturer().getName(),
                 c.getMotherboardFormFactor().getName(),
-                c.getPrice() + " €"
+                String.format("%.2f", c.getPrice()) + " €"
             }
         );
     }
@@ -139,7 +145,7 @@ public class ListConfiguration {
                 String.valueOf(ssd.getId()),
                 ssd.getName(),
                 ssd.getManufacturer().getName(),
-                ssd.getPrice() + " €"
+                String.format("%.2f", ssd.getPrice()) + " €"
             }
         );
     }
@@ -153,7 +159,7 @@ public class ListConfiguration {
                 String.valueOf(m2.getId()),
                 m2.getName(),
                 m2.getManufacturer().getName(),
-                m2.getPrice() + " €"
+                String.format("%.2f", m2.getPrice()) + " €"
             }
         );
     }
@@ -167,7 +173,7 @@ public class ListConfiguration {
                 String.valueOf(hdd.getId()),
                 hdd.getName(),
                 hdd.getManufacturer().getName(),
-                hdd.getPrice() + " €"
+                String.format("%.2f", hdd.getPrice()) + " €"
             }
         );
     }
