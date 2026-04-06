@@ -2,6 +2,7 @@
 pcpartpicker.db
 
 # Maven - Verhindert, dass kompilierte Dateien hochgeladen werden
+target/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.utils/
@@ -14,6 +15,14 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 
 # Java - Verhindert, dass die manuell erstellten .class Dateien im Repo landen
+*.class
+*.log
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
 
 # IntelliJ IDEA
 .idea/
