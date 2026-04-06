@@ -1,5 +1,5 @@
 package de.ase.pcpartpicker.adapters.cli; 
-import de.ase.pcpartpicker.domain.HelperClasses.*;
+import de.ase.pcpartpicker.domain.HelperClasses.User;
 
 public class SessionManager {
 

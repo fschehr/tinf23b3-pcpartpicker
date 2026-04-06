@@ -126,6 +126,8 @@ public class MenuFactory {
         bmMenu.add(new MenuItem("Henri Benchmark", new OpenMenuCommand((createBenchmarkMenu(1)))));
         bmMenu.add(new MenuItem("Fabio Benchmark", new OpenMenuCommand((createBenchmarkMenu(2)))));
         bmMenu.add(new MenuItem("Tuluhan Benchmark", new OpenMenuCommand((createBenchmarkMenu(3))))); 
+        bmMenu.add(new MenuItem("Spieleperformance messen (FPS)", new OpenMenuCommand(createBenchmarkMenu(4))));
+
         NavigationUtils.addBackNavigation(bmMenu); 
         return bmMenu; 
     }
