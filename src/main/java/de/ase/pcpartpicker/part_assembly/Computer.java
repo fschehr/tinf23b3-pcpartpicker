@@ -161,6 +161,8 @@ public class Computer {
         private PSU psu;
         private List<Storage> storageDevices = new ArrayList<>();
 
+
+
         public Builder setId(int id) {
             this.id = id;
             return this;
@@ -364,6 +366,10 @@ public class Computer {
             if(storageDevices.isEmpty()) {
                 System.out.println(ColorConstants.RED("FEHLER") + " | Es muss mindestens ein Speichermedium ausgewählt werden.");
                 return false;
+            }
+
+            if(psu.getWattage() < (cpu != null ? cpu.getPowerConsumptionW() : 0) + (gpu != null ? gpu.getPowerConsumptionW() : 0) + (mainboard != null ? mainboard.getPowerConsumptionW() : 0) + (ram != null ? ram.getPowerConsumptionW() : 0) + (computerCase != null ? computerCase.getPowerConsumptionW() : 0) + (storageDevices != null ? storageDevices.stream().mapToInt(Storage::getPowerConsumptionW).sum() : 0)) {
+                System.out.println(ColorConstants.YELLOW("WARNUNG") + " | nicht genug saft.");
             }
 
             return true;
