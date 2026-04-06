@@ -1,9 +1,9 @@
 package de.ase.pcpartpicker.adapters.cli.commands;
 
-import de.ase.pcpartpicker.adapters.cli.InputReader;
-import de.ase.pcpartpicker.adapters.sqlite.DatabaseInitializer;
-
 import de.ase.pcpartpicker.ColorConstants;
+import de.ase.pcpartpicker.adapters.cli.InputReader;
+import de.ase.pcpartpicker.adapters.cli.SessionManager;
+import de.ase.pcpartpicker.adapters.sqlite.DatabaseInitializer;
 
 /**
  * Setzt die Datenbank auf Basis der JSONL-Dateien im data-Ordner zurueck.
@@ -32,6 +32,7 @@ public class ResetDatabaseCommand implements ICommand {
         try {
             System.out.println("Reset beginnt. Dies dauert ungefähr eine Minute...");
             databaseInitializer.resetDatabase();
+            SessionManager.setCurrentUser(null);
             System.out.println("Datenbank erfolgreich aus JSONL-Dateien neu aufgebaut.");
         } catch (IllegalStateException e) {
             System.out.println(ColorConstants.RED("FEHLER") + " | " + e.getMessage());

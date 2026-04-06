@@ -1,8 +1,10 @@
 package de.ase.pcpartpicker.adapters.cli.commands;
 
 import java.util.List;
+
 import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
+import de.ase.pcpartpicker.adapters.cli.utils.ExceptionUtils;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.UserRepository;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
 
@@ -32,11 +34,14 @@ public class LoginCommand implements ICommand{
             }
         }
         if(foundUser != null) {
-            System.out.println("Willkommen zurück, " + foundUser.getName()); 
+            ExceptionUtils.printInfo("Willkommen zurück, " + foundUser.getName() + "!"); 
             SessionManager.setCurrentUser(foundUser); 
+            inputReader.waitForEnter("Enter drücken um fortzufahren.");
+
         }
         else{
-            System.out.println("Nutzername nicht gefunden."); 
+            ExceptionUtils.printInfo("Nutzername nicht gefunden!");
+            inputReader.waitForEnter("Enter drücken um zurückzukehren...");
         }
 
     }   

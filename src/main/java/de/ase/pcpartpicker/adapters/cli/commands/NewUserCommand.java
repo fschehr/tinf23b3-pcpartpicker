@@ -1,6 +1,7 @@
 package de.ase.pcpartpicker.adapters.cli.commands;
 
 import de.ase.pcpartpicker.adapters.cli.InputReader;
+import de.ase.pcpartpicker.adapters.cli.utils.ExceptionUtils;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.UserRepository;
 
 
@@ -21,10 +22,10 @@ public class NewUserCommand implements ICommand{
             .anyMatch(user -> user.getName().equalsIgnoreCase(username));
 
         if (exists) {
-            System.out.println("Nutzername existiert bereits!");
+            ExceptionUtils.printInfo("Nutzername existiert bereits!");
         } else {
             userRepository.save(username);
-            System.out.println("Nutzer erfolgreich angelegt!");
+            ExceptionUtils.printInfo("Nutzer erfolgreich angelegt!");
         }
 
         inputReader.waitForEnter("\nEnter drücken zum fortfahren...");

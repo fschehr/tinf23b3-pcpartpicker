@@ -139,12 +139,13 @@ public class ListConfiguration {
     public rListConfiguration<SSD> ssd() {
         return new rListConfiguration<>(
             "SSDs",
-            new String[]{"#", "Name", "Hersteller", "Preis"},
+            new String[]{"#", "Name", "Hersteller", "Kapazität (GB)", "Preis"},
             new SsdRepository(cf),
             ssd -> new String[]{
                 String.valueOf(ssd.getId()),
                 ssd.getName(),
                 ssd.getManufacturer().getName(),
+                String.valueOf(ssd.getCapacityGB()),
                 String.format("%.2f", ssd.getPrice()) + " €"
             }
         );
@@ -153,12 +154,13 @@ public class ListConfiguration {
     public rListConfiguration<M2SSD> m2ssd() {
         return new rListConfiguration<>(
             "M.2 SSDs",
-            new String[]{"#", "Name", "Hersteller", "Preis"},
+            new String[]{"#", "Name", "Hersteller", "Kapaität (GB)", "Preis"},
             new M2SsdRepository(cf),
             m2 -> new String[]{
                 String.valueOf(m2.getId()),
                 m2.getName(),
                 m2.getManufacturer().getName(),
+                String.valueOf(m2.getCapacityGB()),
                 String.format("%.2f", m2.getPrice()) + " €"
             }
         );
@@ -167,12 +169,13 @@ public class ListConfiguration {
     public rListConfiguration<HDD> hdd() {
         return new rListConfiguration<>(
             "HDDs",
-            new String[]{"#", "Name", "Hersteller", "Preis"},
+            new String[]{"#", "Name", "Hersteller", "Kapatität", "Preis"},
             new HddRepository(cf),
             hdd -> new String[]{
                 String.valueOf(hdd.getId()),
                 hdd.getName(),
                 hdd.getManufacturer().getName(),
+                String.valueOf(hdd.getCapacityGB()),
                 String.format("%.2f", hdd.getPrice()) + " €"
             }
         );

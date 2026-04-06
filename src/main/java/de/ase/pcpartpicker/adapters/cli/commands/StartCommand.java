@@ -1,5 +1,5 @@
 package de.ase.pcpartpicker.adapters.cli.commands;
-import de.ase.pcpartpicker.adapters.cli.*;
+import de.ase.pcpartpicker.adapters.cli.MenuFactory;
 
 
 public class StartCommand implements ICommand{

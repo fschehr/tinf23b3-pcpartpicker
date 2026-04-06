@@ -7,6 +7,7 @@ import de.ase.pcpartpicker.adapters.cli.MenuFactory;
 import de.ase.pcpartpicker.adapters.cli.Renderable;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
+import de.ase.pcpartpicker.adapters.cli.utils.ExceptionUtils;
 import de.ase.pcpartpicker.adapters.cli.utils.Paging;
 import de.ase.pcpartpicker.adapters.cli.utils.TableUtils;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
@@ -22,6 +23,15 @@ public class ComputerToBenchmarkCommand implements Renderable {
 
     @Override
     public void render(String title) {
+
+        // erstmal abfangen, wenn man nicht eingeloggt ist, damit currentUser nicht null ist 
+        if(!SessionManager.isLoggedIn()) {
+            ExceptionUtils.printInfo("Du musst eingeloggt sein, um Benchmarks durchzuführen!"); 
+            context.inputReader.waitForEnter("Enter drücken um zurückzukehren..."); 
+            return;        
+        }
+
+
         User currentUser = SessionManager.getcurrentUser(); 
         int userID = currentUser.getId();
 
@@ -32,6 +42,7 @@ public class ComputerToBenchmarkCommand implements Renderable {
             .withPageSize(1)
             .withInputReader(() -> context.inputReader.readString("").trim().toLowerCase())
             .withRenderer((computer, currentPage) -> {
+
 
                 TableGenerator table = new TableGenerator("Komponente", "Eigenschaften", "Details");
                 for (String[] row : TableUtils.getComputerAsTableRows(computer)) {
