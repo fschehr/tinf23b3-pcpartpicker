@@ -369,7 +369,8 @@ public class Computer {
             }
 
             if(psu.getWattage() < (cpu != null ? cpu.getPowerConsumptionW() : 0) + (gpu != null ? gpu.getPowerConsumptionW() : 0) + (mainboard != null ? mainboard.getPowerConsumptionW() : 0) + (ram != null ? ram.getPowerConsumptionW() : 0) + (computerCase != null ? computerCase.getPowerConsumptionW() : 0) + (storageDevices != null ? storageDevices.stream().mapToInt(Storage::getPowerConsumptionW).sum() : 0)) {
-                System.out.println(ColorConstants.YELLOW("WARNUNG") + " | nicht genug saft.");
+                System.out.println(ColorConstants.RED("FEHLER") + " | nicht genug saft.");
+                return false;
             }
 
             return true;
