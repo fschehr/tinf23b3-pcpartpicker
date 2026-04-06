@@ -68,9 +68,12 @@ public class DatabaseInitializer {
             try (Connection connection = connectionFactory.createConnection();
                  Statement statement = connection.createStatement()) {
                 statement.execute("PRAGMA foreign_keys = ON");
-
+                System.out.println("DB-Reset läuft. (Versuch " + attempt + ") ...");
+                System.out.println("Lösche Existierende Tabelle ...");
                 dropSchema(statement);
+                System.out.println("Datenbankschema gelöscht. Erstelle neues Schema ...");
                 createSchema(statement);
+                System.out.println("Neues Datenbankschema erstellt. Importiere Daten ...");
                 seedFromJsonl(connection);
                 return;
             } catch (SQLException e) {
@@ -373,13 +376,21 @@ public class DatabaseInitializer {
             int ssdTypeId = ensureNamedId(connection, "type", "SSD");
             int m2SsdTypeId = ensureNamedId(connection, "type", "M2SSD");
 
+            System.out.println("Erstelle CPUs ...");
             importCpu(connection, cpuTypeId);
+            System.out.println("Erstelle GPUs ...");
             importGpu(connection, gpuTypeId);
+            System.out.println("Erstelle RAM ...");
             importRam(connection, ramTypeId);
+            System.out.println("Erstelle Mainboards ...");
             importMainboard(connection, mainboardTypeId);
+            System.out.println("Erstelle PSUs ...");
             importPsu(connection, psuTypeId);
+            System.out.println("Erstelle Cases ...");
             importCase(connection, caseTypeId);
+            System.out.println("Erstelle Speicher ...");
             importStorage(connection, hddTypeId, ssdTypeId, m2SsdTypeId);
+            System.out.println("Import abgeschlossen.");
         } catch (SQLException e) {
             throw new IllegalStateException("Seed aus JSONL fehlgeschlagen.", e);
         }
@@ -585,14 +596,19 @@ public class DatabaseInitializer {
             """;
 
         List<JsonObject> rows = readJsonl("memory.jsonl");
+        int totalRows = rows.size();
+        int importedRows = 0;
+        int processedRows = 0;
         try (PreparedStatement hddPs = connection.prepareStatement(hddSql);
              PreparedStatement ssdPs = connection.prepareStatement(ssdSql);
              PreparedStatement m2Ps = connection.prepareStatement(m2Sql)) {
             for (JsonObject row : rows) {
+                processedRows++;
                 String name = getString(row, "name");
                 Double price = getDouble(row, "price");
                 Integer capacity = getInt(row, "capacity");
                 if (name == null || price == null || capacity == null) {
+                    printImportProgress("memory.jsonl", processedRows, totalRows, importedRows);
                     continue;
                 }
 
@@ -618,24 +634,46 @@ public class DatabaseInitializer {
                 ps.setDouble(4, price);
                 ps.setInt(5, capacity);
                 ps.addBatch();
+                importedRows++;
+                printImportProgress("memory.jsonl", processedRows, totalRows, importedRows);
             }
 
             hddPs.executeBatch();
             ssdPs.executeBatch();
             m2Ps.executeBatch();
         }
+
+        finishImportProgress("memory.jsonl", totalRows, importedRows);
     }
 
     private void importRows(Connection connection, String fileName, String sql, RowMapper rowMapper) throws SQLException {
         List<JsonObject> rows = readJsonl(fileName);
+        int totalRows = rows.size();
+        int importedRows = 0;
+        int processedRows = 0;
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             for (JsonObject row : rows) {
+                processedRows++;
                 if (rowMapper.map(row, ps)) {
                     ps.addBatch();
+                    importedRows++;
                 }
+                printImportProgress(fileName, processedRows, totalRows, importedRows);
             }
             ps.executeBatch();
         }
+
+        finishImportProgress(fileName, totalRows, importedRows);
+    }
+
+    private void printImportProgress(String fileName, int processedRows, int totalRows, int importedRows) {
+        System.out.print("\r" + fileName + ":" + (processedRows * 100 / totalRows) + "%" + " importiert " + importedRows);
+        System.out.flush();
+    }
+
+    private void finishImportProgress(String fileName, int totalRows, int importedRows) {
+        System.out.print("\r" + fileName + ":" + 100 + "%" + " importiert mit " + importedRows + " validen Einträgen.");
+        System.out.println();
     }
 
     private boolean anyNull(Object... values) {
