@@ -1,10 +1,5 @@
 package de.ase.pcpartpicker.user;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -16,6 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,32 +24,29 @@ import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.Menu;
 import de.ase.pcpartpicker.adapters.cli.MenuItem;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
+import de.ase.pcpartpicker.adapters.cli.commands.BackCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.FinishComputerCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.LoginCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.LogoutCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.NewUserCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.OpenMenuCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.SelectComponentCommand;
-import de.ase.pcpartpicker.adapters.cli.commands.ShowComputerCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ShowListCommand;
-import de.ase.pcpartpicker.adapters.cli.commands.StartComputerDraftCommand;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.ComputerRepository;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.Repository;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.UserRepository;
 import de.ase.pcpartpicker.domain.CPU;
 import de.ase.pcpartpicker.domain.Case;
-import de.ase.pcpartpicker.domain.Component;
 import de.ase.pcpartpicker.domain.GPU;
-import de.ase.pcpartpicker.domain.Mainboard;
-import de.ase.pcpartpicker.domain.PSU;
-import de.ase.pcpartpicker.domain.RAM;
-import de.ase.pcpartpicker.domain.SSD;
-import de.ase.pcpartpicker.domain.Storage;
 import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
 import de.ase.pcpartpicker.domain.HelperClasses.MotherboardFormFactor;
 import de.ase.pcpartpicker.domain.HelperClasses.PSUFormFactor;
 import de.ase.pcpartpicker.domain.HelperClasses.Socket;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
+import de.ase.pcpartpicker.domain.Mainboard;
+import de.ase.pcpartpicker.domain.PSU;
+import de.ase.pcpartpicker.domain.RAM;
+import de.ase.pcpartpicker.domain.SSD;
 import de.ase.pcpartpicker.part_assembly.Computer;
 
 public class UserTest {
@@ -122,8 +118,8 @@ public class UserTest {
 
         String flowInput = String.join("\n",
             "3", "1", username, "", "0", // Nutzer anlegen
-            "4", "1", username, "0",       // Login
-            "0"                                // Beenden
+            "4", "1", username, "", "0", // Login -> Starten -> Username -> Enter -> Zurück
+            "0"                          // Beenden Hauptmenü
         ) + "\n";
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -143,9 +139,9 @@ public class UserTest {
 
         String flowInput = String.join("\n",
             "3", "1", username, "", // Nutzer anlegen
-            "2", "0",                // Nutzerliste anzeigen, dann zurueck
-            "0",                       // Nutzerverwaltung zurueck
-            "0"                        // Beenden
+            "2", "0",               // Nutzerliste anzeigen (Paging), dann Action.BACK (0)
+            "0",                    // Nutzerverwaltung zurueck
+            "0"                     // Beenden
         ) + "\n";
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -162,22 +158,21 @@ public class UserTest {
     public void createCorrectComputer() {
         String username = "builder-user";
 
-        // 4 ist hier die simulierte Eingabe fuer die RAM-Modulanzahl.
         String flowInput = String.join("\n",
             "3", "1", username, "", "0", // Nutzer anlegen
-            "4", "1", username, "0",       // Login
-            "2", "1",                        // Computerverwaltung -> Neu anlegen
-            "1", "1", "",                  // CPU
-            "2", "1", "",                  // GPU
-            "3", "1", "",                  // Mainboard
-            "4", "1", "4", "",            // RAM + Anzahl Module = 4
-            "5", "1", "",                  // PSU
-            "6", "1", "",                  // Case
-            "7", "1", "",                  // SSD
-            "8", "",                        // Finish + waitForEnter
-            "0",                              // Zurueck aus Konfigurator
-            "0",                              // Zurueck aus Computerverwaltung
-            "0"                               // Beenden
+            "4", "1", username, "", "0", // Login
+            "2", "1",                    // Computerverwaltung -> Neu anlegen
+            "1", "1", "", "0",           // CPU -> ID 1 -> Enter -> Zurück Paging
+            "2", "1", "", "0",           // GPU -> ID 1 -> Enter -> Zurück Paging
+            "3", "1", "", "0",           // Mainboard -> ID 1 -> Enter -> Zurück Paging
+            "4", "1", "4", "", "0",      // RAM -> ID 1 -> 4 Module -> Enter -> Zurück Paging
+            "5", "1", "", "0",           // PSU -> ID 1 -> Enter -> Zurück Paging
+            "6", "1", "", "0",           // Case -> ID 1 -> Enter -> Zurück Paging
+            "7", "1", "", "0",           // SSD -> ID 1 -> Enter -> Zurück Paging
+            "8", "",                     // Finish + waitForEnter
+            "0",                         // Zurueck aus Konfigurator
+            "0",                         // Zurueck aus Computerverwaltung
+            "0"                          // Beenden
         ) + "\n";
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -197,12 +192,12 @@ public class UserTest {
 
         String flowInput = String.join("\n",
             "3", "1", username, "", "0", // Nutzer anlegen
-            "4", "1", username, "0",       // Login
-            "2", "1",                        // Computerverwaltung -> Neu anlegen
-            "8", "",                         // Versuch speichern ohne Komponenten
-            "0",                              // Zurueck Konfigurator
-            "0",                              // Zurueck Computerverwaltung
-            "0"                               // Beenden
+            "4", "1", username, "", "0", // Login
+            "2", "1",                    // Computerverwaltung -> Neu anlegen
+            "8", "",                     // Versuch speichern ohne Komponenten -> Print Error & Enter
+            "0",                         // Zurueck Konfigurator
+            "0",                         // Zurueck Computerverwaltung
+            "0"                          // Beenden
         ) + "\n";
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -222,10 +217,10 @@ public class UserTest {
 
         String flowInput = String.join("\n",
             "3", "1", username, "", "0", // Nutzer anlegen
-            "4", "1", username,              // Login
-            "2",                               // Logout
-            "0",                               // Zurueck Login-Menue
-            "0"                                // Beenden
+            "4", "1", username, "",      // Login -> Starten -> Username -> Enter
+            "2",                         // Logout (im Login Menu)
+            "0",                         // Zurueck Login-Menue
+            "0"                          // Beenden Hauptmenue
         ) + "\n";
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -254,6 +249,7 @@ public class UserTest {
 
     private Menu createConfiguratorMenu(ComputerDraft draft, InputReader inputReader) {
         Menu menu = new Menu("PC Konfigurator (Entwurf)", inputReader);
+        menu.setZeroComponent(new BackCommand(() -> menu.setRunning(false)));
 
         menu.add(new de.ase.pcpartpicker.adapters.cli.MenuItem("CPU auswaehlen", new SelectComponentCommand<>(
             inputReader,
@@ -335,23 +331,31 @@ public class UserTest {
         Menu userMenu = new Menu("Nutzerverwaltung", inputReader);
         Menu loginMenu = new Menu("Login", inputReader);
 
+        mainMenu.setZeroComponent(new BackCommand(() -> mainMenu.setRunning(false)));
+        computerMenu.setZeroComponent(new BackCommand(() -> computerMenu.setRunning(false)));
+        userMenu.setZeroComponent(new BackCommand(() -> userMenu.setRunning(false)));
+        loginMenu.setZeroComponent(new BackCommand(() -> loginMenu.setRunning(false)));
+
         ComputerDraft draft = new ComputerDraft();
         Menu configuratorMenu = createConfiguratorMenu(draft, inputReader);
 
-        computerMenu.add(new MenuItem("Neuen Computer anlegen", new StartComputerDraftCommand(draft, configuratorMenu, userRepository, inputReader)));
-        computerMenu.add(new MenuItem("Meine Computer anzeigen", new ShowComputerCommand(inputReader, computerRepository, false)));
+        computerMenu.add(new MenuItem("Neuen Computer anlegen", () -> {
+            draft.startNewDraft();
+            configuratorMenu.execute();
+        }));
+        computerMenu.add(new MenuItem("Meine Computer anzeigen", () -> {}));
 
         userMenu.add(new MenuItem("Neuen Nutzer anlegen", new NewUserCommand(inputReader, userRepository)));
-        userMenu.add(new MenuItem(
-            "Zeige alle Nutzer",
-            new ShowListCommand<>(
-                listConfig("Nutzer", new String[] { "ID", "Name" }, userRepository, user -> new String[] {
-                    String.valueOf(user.getId()), user.getName()
-                }),
-                inputReader
-            )
-        ));
 
+        ShowListCommand<User> showUserList = new ShowListCommand<>(
+            listConfig("Nutzer", new String[] { "ID", "Name" }, userRepository, user -> new String[] {
+                String.valueOf(user.getId()), user.getName()
+            }),
+            inputReader
+        );
+        userMenu.add(new MenuItem("Zeige alle Nutzer", () -> {
+            showUserList.render("Nutzer");
+        }));
         loginMenu.add(new MenuItem("Login starten", new LoginCommand(inputReader, userRepository)));
         loginMenu.add(new MenuItem("Logout", new LogoutCommand()));
 

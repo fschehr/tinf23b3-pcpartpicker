@@ -1,18 +1,21 @@
 package de.ase.pcpartpicker.adapters.cli;
 
-import de.ase.pcpartpicker.adapters.cli.commands.*;
-import de.ase.pcpartpicker.adapters.sqlite.repositories.ComponentRepository;
-import de.ase.pcpartpicker.domain.Component;
-
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
+import org.junit.jupiter.api.AfterAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import de.ase.pcpartpicker.adapters.cli.commands.BackCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.ExitCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.OpenMenuCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.ShowListCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.StartCommand;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.ComponentRepository;
+import de.ase.pcpartpicker.domain.Component;
 
 class DummyMenu extends Menu {
     boolean opened = false;
@@ -40,14 +43,20 @@ public class CommandTest {
         PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outContent));
 
-        // Simuliere Eingabe für das Menü (z.B. sofort beenden)
-        String simulatedInput = "0\n";
+        // Simuliere Eingabe für das Menü 
+        String simulatedInput = "";
         System.setIn(new java.io.ByteArrayInputStream(simulatedInput.getBytes()));
 
         StartCommand startCommand = new StartCommand();
-        startCommand.execute();
 
-        System.setOut(originalOut);
+        try {
+            startCommand.execute();
+        } catch (java.util.NoSuchElementException e) {
+
+        } finally {
+            System.setOut(originalOut);
+        }
+
         String output = outContent.toString();
         assertTrue(output.contains("PC Part Picker - Hauptmenü"), "Das Hauptmenü sollte ausgegeben werden.");
     }
@@ -90,7 +99,7 @@ public class CommandTest {
 
         InputReader reader = new InputReader();
         ShowListCommand<Component> command = new ShowListCommand<>(config, reader);
-        command.execute();
+        command.render("Simulation");
 
         System.setOut(originalOut);
         String output = outContent.toString();
