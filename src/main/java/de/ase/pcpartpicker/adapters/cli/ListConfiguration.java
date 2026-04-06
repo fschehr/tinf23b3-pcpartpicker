@@ -76,7 +76,7 @@ public class ListConfiguration {
     public rListConfiguration<RAM> ram() {
         return new rListConfiguration<>(
             "RAM",
-            new String[]{"#", "Name", "Hersteller", "Größe", "Takt (MHz)", "Preis"},
+            new String[]{"#", "Name", "Hersteller", "Kapzität (GB)", "Takt (MHz)", "Preis"},
             new RamRepository(cf),
             ram -> new String[]{
                 String.valueOf(ram.getId()),
