@@ -427,13 +427,15 @@ public class DatabaseInitializer {
 
         importRows(connection, "gpu.jsonl", sql, (row, ps) -> {
             String name = getString(row, "chipset");
+            String modelName = getString(row, "name");
             Double price = getDouble(row, "price");
             Integer vram = getInt(row, "memory");
             if (anyNull(name, price, vram)) {
                 return false;
             }
 
-            int manufacturerId = ensureNamedId(connection, "manufacturer", extractManufacturer(name));
+            String manufacturerSource = modelName != null && !modelName.isBlank() ? modelName : name;
+            int manufacturerId = ensureNamedId(connection, "manufacturer", extractManufacturer(manufacturerSource));
 
             ps.setInt(1, manufacturerId);
             ps.setInt(2, typeId);
