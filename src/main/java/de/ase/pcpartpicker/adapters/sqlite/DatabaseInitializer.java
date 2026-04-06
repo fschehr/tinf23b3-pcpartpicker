@@ -417,6 +417,7 @@ public class DatabaseInitializer {
             }
 
             String manufacturer = extractManufacturer(name);
+            String cleanName = stripManufacturerPrefix(name);
             String socket = inferCpuSocket(name, getString(row, "microarchitecture"));
             boolean hasIgpu = !isJsonNullOrMissing(row, "graphics");
 
@@ -425,7 +426,7 @@ public class DatabaseInitializer {
 
             ps.setInt(1, manufacturerId);
             ps.setInt(2, typeId);
-            ps.setString(3, name);
+            ps.setString(3, cleanName);
             ps.setDouble(4, price);
             ps.setInt(5, socketId);
             ps.setDouble(6, speed);
@@ -460,10 +461,11 @@ public class DatabaseInitializer {
 
             String manufacturerSource = modelName != null && !modelName.isBlank() ? modelName : name;
             int manufacturerId = ensureNamedId(connection, "manufacturer", extractManufacturer(manufacturerSource));
+            String cleanName = stripManufacturerPrefix(name);
 
             ps.setInt(1, manufacturerId);
             ps.setInt(2, typeId);
-            ps.setString(3, name);
+            ps.setString(3, cleanName);
             ps.setDouble(4, price);
             ps.setDouble(5, coreClock);
             if (boostClock == null) {
@@ -524,10 +526,11 @@ public class DatabaseInitializer {
             int manufacturerId = ensureNamedId(connection, "manufacturer", extractManufacturer(name));
             int socketId = ensureNamedId(connection, "sockets", socket);
             int formFactorId = ensureNamedId(connection, "motherboard_form_factor", formFactor);
+            String cleanName = stripManufacturerPrefix(name);
 
             ps.setInt(1, manufacturerId);
             ps.setInt(2, typeId);
-            ps.setString(3, name);
+            ps.setString(3, cleanName);
             ps.setDouble(4, price);
             ps.setInt(5, socketId);
             ps.setInt(6, formFactorId);
@@ -556,10 +559,11 @@ public class DatabaseInitializer {
 
             int manufacturerId = ensureNamedId(connection, "manufacturer", extractManufacturer(name));
             int formFactorId = ensureNamedId(connection, "psu_form_factor", formFactor);
+            String cleanName = stripManufacturerPrefix(name);
 
             ps.setInt(1, manufacturerId);
             ps.setInt(2, typeId);
-            ps.setString(3, name);
+            ps.setString(3, cleanName);
             ps.setDouble(4, price);
             ps.setInt(5, wattage);
             ps.setInt(6, formFactorId);
@@ -590,10 +594,11 @@ public class DatabaseInitializer {
             int manufacturerId = ensureNamedId(connection, "manufacturer", extractManufacturer(name));
             int mbFormFactorId = ensureNamedId(connection, "motherboard_form_factor", mbFormFactor);
             int psuFormFactorId = ensureNamedId(connection, "psu_form_factor", psuFormFactor);
+            String cleanName = stripManufacturerPrefix(name);
 
             ps.setInt(1, manufacturerId);
             ps.setInt(2, typeId);
-            ps.setString(3, name);
+            ps.setString(3, cleanName);
             ps.setDouble(4, price);
             ps.setInt(5, mbFormFactorId);
             ps.setInt(6, psuFormFactorId);
@@ -633,6 +638,7 @@ public class DatabaseInitializer {
                 }
 
                 int manufacturerId = ensureNamedId(connection, "manufacturer", extractManufacturer(name));
+                String cleanName = stripManufacturerPrefix(name);
                 StorageTarget target = classifyStorage(row);
 
                 PreparedStatement ps;
@@ -650,7 +656,7 @@ public class DatabaseInitializer {
 
                 ps.setInt(1, manufacturerId);
                 ps.setInt(2, typeId);
-                ps.setString(3, name);
+                ps.setString(3, cleanName);
                 ps.setDouble(4, price);
                 ps.setInt(5, capacity);
                 ps.addBatch();

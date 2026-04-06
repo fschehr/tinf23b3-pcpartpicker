@@ -56,6 +56,7 @@ public class TableUtils {
             rows.add(new String[]{"RAM", "Name", computer.getRAM().getName()});
             rows.add(new String[]{"", "Module", String.valueOf(computer.getRamModule())});
             rows.add(new String[]{"", "Gesamtkapazität", getRAMCapacity(computer.getRamModule(), computer.getRAM().getCapacityGB()) + " GB"});
+            rows.add(new String[]{"", "Takt", computer.getRAM().getSpeedMHz() + " MHz"});
             rows.add(new String[]{"", "Preis", computer.getRAM().getPrice() + " €"});
         } else {
             rows.add(new String[]{"RAM", "nicht ausgewählt", ""});
@@ -149,6 +150,7 @@ public class TableUtils {
             rows.add(new String[]{"RAM", "Name", computer.getRAM().getName()});
             rows.add(new String[]{"", "Module", String.valueOf(computer.getRamModule())});
             rows.add(new String[]{"", "Gesamtkapazität", getRAMCapacity(computer.getRamModule(), computer.getRAM().getCapacityGB()) + " GB"});
+            rows.add(new String[]{"", "Takt", computer.getRAM().getSpeedMHz() + " MHz"});
             rows.add(new String[]{"", "Preis", computer.getRAM().getPrice() + " €"});
         } else {
             rows.add(new String[]{"RAM", "nicht ausgewählt", ""});
