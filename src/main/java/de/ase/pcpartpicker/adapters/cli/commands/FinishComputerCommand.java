@@ -1,10 +1,10 @@
 package de.ase.pcpartpicker.adapters.cli.commands;
 
-import de.ase.pcpartpicker.ColorConstants;
 import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
+import de.ase.pcpartpicker.adapters.cli.utils.ExceptionUtils;
 import de.ase.pcpartpicker.adapters.cli.utils.TableUtils;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.ComputerRepository;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
@@ -33,7 +33,7 @@ public class FinishComputerCommand implements ICommand {
 
                 int saveId = computerRepository.save(currentUser.getId(), newComputer);
                 
-                System.out.println(ColorConstants.GREEN("ERFOLG") + " | Computer wurde erfolgreich gebaut.");
+                ExceptionUtils.printSuccess("Computer wurde erfolgreich gebaut.");
                 TableGenerator table = new TableGenerator(new String[]{"Komponente", "Eigenschaft", "Details"});
                 for (String[] row : TableUtils.getComputerAsTableRows(newComputer)){
                     table.addRow(row);
@@ -43,7 +43,7 @@ public class FinishComputerCommand implements ICommand {
                 draft.markAsSaved();
             } 
         } catch (Exception e) {
-            System.out.println(ColorConstants.RED("FEHLER") + " | Beim Speichern ist ein Fehler aufgetreten: " + e.getMessage());
+            ExceptionUtils.printError("Beim Speichern ist ein Fehler aufgetreten: \" + e.getMessage()");
         }
 
         inputReader.waitForEnter("Enter drücken...");

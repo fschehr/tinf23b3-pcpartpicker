@@ -2,12 +2,12 @@ package de.ase.pcpartpicker.adapters.cli.commands;
 
 import java.util.List;
 
-import de.ase.pcpartpicker.ColorConstants;
 import de.ase.pcpartpicker.adapters.cli.AppContext;
 import de.ase.pcpartpicker.adapters.cli.MenuFactory;
 import de.ase.pcpartpicker.adapters.cli.Renderable;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
+import de.ase.pcpartpicker.adapters.cli.utils.ExceptionUtils;
 import de.ase.pcpartpicker.adapters.cli.utils.Paging;
 import de.ase.pcpartpicker.adapters.cli.utils.TableUtils;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
@@ -133,7 +133,7 @@ public class ShowComputerCommand implements Renderable {
 
 
     private void showInfo(String message) {
-        System.out.println(ColorConstants.BLUE("INFO") + " | " + message);
+        ExceptionUtils.printInfo(message);
         context.inputReader.waitForEnter("Enter drücken um zurückzukehren...");
     }
 

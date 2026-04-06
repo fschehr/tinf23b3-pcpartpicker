@@ -6,6 +6,7 @@ import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.Renderable;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
 import de.ase.pcpartpicker.adapters.cli.rListConfiguration;
+import de.ase.pcpartpicker.adapters.cli.utils.ExceptionUtils;
 import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
 import de.ase.pcpartpicker.adapters.cli.utils.Paging;
 
@@ -28,7 +29,7 @@ public class ShowListCommand<T> implements Renderable {
         if (items.isEmpty()) {
             NavigationUtils.clear();
             System.out.println("\n=== " + config.title() + " ===\n");
-            System.out.println("Keine Einträge gefunden.");
+            ExceptionUtils.printInfo("Keine Einträge gefunden.");
             inputReader.waitForEnter("\nEnter drücken um zurückzukehren.");
             return;
         }

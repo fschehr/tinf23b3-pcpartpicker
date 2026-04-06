@@ -2,6 +2,7 @@ package de.ase.pcpartpicker.adapters.cli.commands;
 import de.ase.pcpartpicker.adapters.cli.AppContext;
 import de.ase.pcpartpicker.adapters.cli.Menu;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
+import de.ase.pcpartpicker.adapters.cli.utils.ExceptionUtils;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
 
 public class StartComputerDraftCommand implements ICommand {
@@ -24,7 +25,7 @@ public class StartComputerDraftCommand implements ICommand {
         if(!SessionManager.isLoggedIn()) {
             User standardUser = context.userRepository.findById(1); 
 
-            System.out.println("Du bist momentan nicht eingeloggt möchtest du mit dem Standard User fortfahren?");
+            ExceptionUtils.printInfo("Du bist momentan nicht eingeloggt möchtest du mit dem Standard User fortfahren?");
             int input = context.inputReader.readInt("Drücke 1 um mit dem Standard User fortzufahren. Drücke 0 um zurückzukehren", 0, 1);
 
             if (input == 1) {

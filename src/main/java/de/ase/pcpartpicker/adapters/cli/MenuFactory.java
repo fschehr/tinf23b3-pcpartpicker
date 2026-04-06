@@ -4,6 +4,7 @@ import java.util.List;
 
 import de.ase.pcpartpicker.ColorConstants;
 import de.ase.pcpartpicker.adapters.cli.commands.ComputerToBenchmarkCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.ComputerToCheckCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.FinishComputerCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.LoginCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.LogoutCommand;
@@ -108,13 +109,23 @@ public class MenuFactory {
             this.createAllComputerMenu().execute();
         }));
         computerMenu.add(new MenuItem("Benchmarks", () -> {
-            createChooseComputerMenu().execute();
+            createComputerToBenchmarkMenu().execute();
         }));
+        computerMenu.add(new MenuItem("Bottleneck-Checker", () -> {
+            createComputerToCheckMenu().execute();
+        })); 
         NavigationUtils.addBackNavigation(computerMenu);
         return computerMenu;
     }
     
-    private Menu createChooseComputerMenu() {
+    private Menu createComputerToCheckMenu() {
+        Menu menu = new Menu("Für welchen Computer möchtest du einen Bottleneck-Check machen", context.inputReader, Menu.NavMode.PAGING);
+        ComputerToCheckCommand toBenchmark = new ComputerToCheckCommand(context); 
+        menu.setCustomContent(toBenchmark);
+        return menu; 
+    }
+
+    private Menu createComputerToBenchmarkMenu() {
         Menu sb = new Menu("Für welchen Computer möchtest du Benchmarks durchführen?", context.inputReader, Menu.NavMode.PAGING); 
         ComputerToBenchmarkCommand benchmark = new ComputerToBenchmarkCommand(context); 
         sb.setCustomContent(benchmark);
@@ -149,6 +160,7 @@ public class MenuFactory {
         return menu;
     }
 
+
     private Menu createAllComputerMenu() {
         Menu allComputerMenu = new Menu("Alle Computer: User wählen", context.inputReader); 
         
@@ -167,6 +179,13 @@ public class MenuFactory {
         Menu menu = new Menu(name + "'s Computer", context.inputReader, Menu.NavMode.PAGING); 
         ShowComputerCommand showComputer = new ShowComputerCommand(context, userID); 
         menu.setCustomContent(showComputer);
+        return menu; 
+    }
+
+    public Menu createBottleneckMenu() {
+        Menu menu = new Menu("Prüfe auf Bottlenecks", context.inputReader);
+        System.out.println("To be impemented");
+        NavigationUtils.addBackNavigation(menu);
         return menu; 
     }
 

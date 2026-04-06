@@ -9,6 +9,7 @@ import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
 import de.ase.pcpartpicker.adapters.cli.rListConfiguration;
+import de.ase.pcpartpicker.adapters.cli.utils.ExceptionUtils;
 import de.ase.pcpartpicker.adapters.cli.utils.Paging;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.Repository;
 import de.ase.pcpartpicker.domain.CPU;
@@ -53,7 +54,7 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
         List<T> items = repository.findAll();
 
         if (items.isEmpty()) {
-            System.out.println("\nKeine Komponenten gefunden.");
+            ExceptionUtils.printInfo("\nKeine Komponenten gefunden.");
             inputReader.waitForEnter("Enter drücken...");
             return;
         }
@@ -67,7 +68,7 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
                 int startIndex = currentPage * PAGE_SIZE;
                 int endIndex = Math.min(startIndex + PAGE_SIZE, items.size()); 
 
-                 TableGenerator table = new TableGenerator(tableHeaders);
+                TableGenerator table = new TableGenerator(tableHeaders);
                 for (int i = startIndex; i < endIndex; i++) {
                     item = items.get(i);
                     boolean isSelected = isComponentSelected(item);
@@ -83,9 +84,9 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
             .onClear(() ->  {
                 boolean cleared = clearCurrentCategory(items); // deine Clear-Logik
                 if (cleared) {
-                    System.out.println(ColorConstants.GREEN("ERFOLG") + " | Auswahl wurde entfernt.");
+                    ExceptionUtils.printSuccess("Auswahl wurde entfernt.");
                 } else {
-                    System.out.println(ColorConstants.YELLOW("HINWEIS") + " | Nichts zum Entfernen ausgewählt.");
+                    ExceptionUtils.printWarning("Nichts zum Entfernen ausgewählt.");
                 }
                 inputReader.waitForEnter("Enter drücken...");
             })
@@ -103,95 +104,33 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
                     }
 
                     if (selectedItem == null) {
-                        System.out.println(ColorConstants.RED("FEHLER") + " | ID nicht gefunden.");
+                        ExceptionUtils.printError("ID nicht gefunden.");
                         return; 
                     }
 
                 
                     String warning = draft.getBuilder().validate(draft, selectedItem);
                     if (warning != null) {
-                        System.out.println(ColorConstants.YELLOW("WARNUNG") + " | " + warning);
+                        ExceptionUtils.printWarning(warning);
                         int add = inputReader.readInt("Willst du die Komponente wirklich hinzufügen? [0: Nein, 1: Ja]", 0, 1);
                         if (add == 0) return; // Zurück in die Paging-Schleife
                     }
 
                    
                     draftSetter.accept(draft, selectedItem);
-                    System.out.println("\n" + ColorConstants.GREEN("ERFOLG") + " | " + selectedItem.getName() + " wurde zum Computer hinzugefügt!");
+                    ExceptionUtils.printSuccess(selectedItem.getName() + " wurde zum Computer hinzugefügt!");
                     inputReader.waitForEnter("Enter drücken...");
                     
                     // TODO: man bleibt im Menü will ich das so?
                     
                 } catch (NumberFormatException e) {
-                    System.out.println("Ungültige Eingabe.");
+                    ExceptionUtils.printError("Ungültige Eingabe.");
                 }
             })
             .start();
     }
 
     
-        
-    //     while (true) {
-    //         NavigationUtils.clear();
-    //         System.out.println("\n--- " + componentName + " Auswählen ---");
-
-    //         int startIndex = currentPage * PAGE_SIZE;
-    //         int endIndex = Math.min(startIndex + PAGE_SIZE, items.size());
-
-
-           
-    //         System.out.println("\n" + Paging.helpText(currentPage,totalPages, true, false));
-
-
-    //         String input = inputReader.readString("ID oder Aktion (m/n/0)").trim().toLowerCase();
-
-    //         Paging.Action action = Paging.parse(input, true);
-
-    //         if (action == Paging.Action.BACK) {
-    //             System.out.println("-> Auswahl abgebrochen.");
-    //             return;
-    //         }
-
-    //         if (action == Paging.Action.CLEAR) {
-    //             boolean cleared = clearCurrentCategory(items); // deine Clear-Logik
-    //             if (cleared) {
-    //                 System.out.println(ColorConstants.GREEN("ERFOLG") + " | Auswahl wurde entfernt.");
-    //             } else {
-    //                 System.out.println(ColorConstants.YELLOW("HINWEIS") + " | Nichts zum Entfernen ausgewählt.");
-    //             }
-    //             inputReader.waitForEnter("Enter drücken...");
-    //             continue;
-    //         }
-
-    //         if (action != Paging.Action.OTHER) {
-    //             currentPage = Paging.movePage(currentPage, totalPages, action);
-    //             continue;
-    //         }
-
-    //         int selectedId;
-    //         try {
-    //             selectedId = Integer.parseInt(input);
-    //         } catch (NumberFormatException e) {
-    //             System.out.println("Ungültige Eingabe.");
-    //             continue;
-    //         }
-
-    //         T selectedItem = null;
-    //         for (T item : items) {
-    //             if (item.getId() == selectedId) { 
-    //                 selectedItem = item;
-    //                 break;
-    //             }
-    //         }
-
-    //         if (selectedItem == null) {
-    //             System.out.println(ColorConstants.RED("FEHLER") + " | ID nicht gefunden.");
-    //             continue;
-    //         }
-
-            
-    //     }
-    // }
 
     private boolean isComponentSelected(T item) {
         if (item instanceof CPU) {
