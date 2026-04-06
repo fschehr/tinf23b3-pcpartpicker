@@ -76,13 +76,14 @@ public class ListConfiguration {
     public rListConfiguration<RAM> ram() {
         return new rListConfiguration<>(
             "RAM",
-            new String[]{"#", "Name", "Hersteller", "Größe", "Preis"},
+            new String[]{"#", "Name", "Hersteller", "Größe", "Takt (MHz)", "Preis"},
             new RamRepository(cf),
             ram -> new String[]{
                 String.valueOf(ram.getId()),
                 ram.getName(),
                 ram.getManufacturer().getName(),
                 String.valueOf(ram.getCapacityGB()),
+                String.valueOf(ram.getSpeedMHz()),
                 String.format("%.2f", ram.getPrice()) + " €"
             }
         );
