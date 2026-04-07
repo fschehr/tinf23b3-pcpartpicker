@@ -156,7 +156,7 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
                 return false;
             }
             for (Storage storage : draft.getStorage()) {
-                if (storage.getId() == item.getId()) {
+                if (storage.getId() == item.getId() && storage.getClass().equals(item.getClass())) {
                     return true;
                 }
             }

@@ -3,18 +3,16 @@ package de.ase.pcpartpicker.part_assembly;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.ase.pcpartpicker.ColorConstants;
+import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.domain.CPU;
 import de.ase.pcpartpicker.domain.Case;
+import de.ase.pcpartpicker.domain.Component;
 import de.ase.pcpartpicker.domain.GPU;
 import de.ase.pcpartpicker.domain.Mainboard;
 import de.ase.pcpartpicker.domain.PSU;
 import de.ase.pcpartpicker.domain.RAM;
 import de.ase.pcpartpicker.domain.Storage;
-import de.ase.pcpartpicker.domain.Component;
-
-import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
-
-import de.ase.pcpartpicker.ColorConstants;
 
 /**
  * Klasse die einen vollständig konfigurierten Computer abbildet
