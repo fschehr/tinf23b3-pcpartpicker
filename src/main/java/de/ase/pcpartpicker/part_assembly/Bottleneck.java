@@ -34,7 +34,12 @@ public final class Bottleneck {
 
         // Ein Modell was Punkte für Leistungen vergibt und dann vergleicht ob eines besonders heraussticht.
         double cpuScore = (computer.getCPU().getBoostClockGHz() != null ? computer.getCPU().getBoostClockGHz() : computer.getCPU().getSpeedGHz()) * 8; // Wir nehmen mal 8 Kerne für nen Prozessor an weil noch keine Cores gespeichert werden
-        double gpuScore = (computer.getGPU().getBoostClockMHz() != null ? computer.getGPU().getBoostClockMHz() : computer.getGPU().getCoreClockMHz()) / 1000 * (computer.getGPU().getVramGB() / 2); // VRAM ist hier ein wichtiger Faktor für die Leistung der GPU
+        double gpuScore; // VRAM ist hier ein wichtiger Faktor für die Leistung der GPU
+        if (computer.getGPU() != null) {
+            gpuScore = (computer.getGPU().getBoostClockMHz() != null ? computer.getGPU().getBoostClockMHz() : computer.getGPU().getCoreClockMHz()) / 1000.0 * (computer.getGPU().getVramGB() / 2.0); // Wir nehmen mal an, dass 2GB VRAM ungefähr so viel Leistung bringen wie 1GHz Boost Clock
+        } else {
+            gpuScore = 0; // Kein GPU, also kein Score
+        }
         double ramScore = computer.getRAM().getSpeedMHz() / 1000 * (computer.getRAM().getCapacityGB() * computer.getRamModule() / 8); // RAM-Geschwindigkeit und -Größe tragen beide zur Gesamtleistung bei
         Storage strongestStorage = strongestStorage(computer.getStorageDevices());
         double storageScore;
@@ -50,7 +55,8 @@ public final class Bottleneck {
         }
 
         // Näherungsweise berechnen des Bottlenecks mithilfe des arithmetischen Mittels der Scores. Wenn eine Komponente deutlich schlechter abschneidet als die anderen, könnte sie der Bottleneck sein.
-        double arithmeticMean = (cpuScore + gpuScore + ramScore + storageScore) / 4;
+        double arithmeticMean = (cpuScore + gpuScore + ramScore + storageScore) / (gpuScore > 0 ? 4 : 3); // Wenn keine GPU vorhanden ist, nur 3 Komponenten berücksichtigen
+        if(gpuScore == 0) gpuScore = arithmeticMean; // Wenn keine GPU vorhanden ist, setzen wir den GPU-Score auf den Durchschnitt, damit er die Berechnung nicht verzerrt
 
         if(Math.abs(arithmeticMean - cpuScore) > 15 && Math.abs(arithmeticMean - gpuScore) > 15 && Math.abs(arithmeticMean - ramScore) > 15 && Math.abs(arithmeticMean - storageScore) > 15) {
             // Alle Komponenten weichen stark vom Durchschnitt ab also ist das System absolut unbalanced. Bottleneck ja aber keine klare Komponente
