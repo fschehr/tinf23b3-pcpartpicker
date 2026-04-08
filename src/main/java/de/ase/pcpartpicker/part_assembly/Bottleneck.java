@@ -45,22 +45,22 @@ public final class Bottleneck {
 
         // Ein Modell was Punkte für Leistungen vergibt und dann vergleicht ob eines besonders heraussticht.
         double cpuScore = (computer.getCPU().getBoostClockGHz() != null ? computer.getCPU().getBoostClockGHz() : computer.getCPU().getSpeedGHz()) * 8; // Wir nehmen mal 8 Kerne für nen Prozessor an weil noch keine Cores gespeichert werden
-        double gpuScore; // VRAM ist hier ein wichtiger Faktor für die Leistung der GPU
+        double gpuScore;
         if (computer.getGPU() != null) {
-            gpuScore = (computer.getGPU().getBoostClockMHz() != null ? computer.getGPU().getBoostClockMHz() : computer.getGPU().getCoreClockMHz()) / 1000.0 * (computer.getGPU().getVramGB() / 2.0); // Wir nehmen mal an, dass 2GB VRAM ungefähr so viel Leistung bringen wie 1GHz Boost Clock
+            gpuScore = (computer.getGPU().getBoostClockMHz() != null ? computer.getGPU().getBoostClockMHz() : computer.getGPU().getCoreClockMHz()) / 1000.0 * ((Math.log(computer.getGPU().getVramGB())/Math.log(2) * 4)); // VRAM trägt auch zur Leistung bei, aber logarithmisch, allen voran weil 32GB die Rechnung sprengt
         } else {
             gpuScore = 0; // Kein GPU, also kein Score
         }
-        double ramScore = computer.getRAM().getSpeedMHz() / 1000 * (computer.getRAM().getCapacityGB() * computer.getRamModule() / 8); // RAM-Geschwindigkeit und -Größe tragen beide zur Gesamtleistung bei
+        double ramScore = Math.max(4.5, computer.getRAM().getSpeedMHz() / 1000) * (Math.log(computer.getRAM().getCapacityGB() * computer.getRamModule())/Math.log(2) + 1); // RAM-Geschwindigkeit und -Größe tragen beide zur Gesamtleistung bei. 4.5 als Mindestwert weil DDR4 RAM sonst die Berechnung ordentlich runter zieht
         Storage strongestStorage = strongestStorage(computer.getStorageDevices());
         double storageScore;
 
         if(strongestStorage instanceof M2SSD) {
-            storageScore = 50; // M2-SSDs bieten die beste Leistung
+            storageScore = 45; // M2-SSDs bieten die beste Leistung
         } else if(strongestStorage instanceof SSD) {
-            storageScore = 40; // SSDs sind schneller als HDDs, aber langsamer als M2-SSDs
+            storageScore = 35; // SSDs sind schneller als HDDs, aber langsamer als M2-SSDs
         } else if(strongestStorage instanceof HDD) {
-            storageScore = 20; // HDDs bieten die geringste Leistung
+            storageScore = 15; // HDDs bieten die geringste Leistung (nicht mehr zeitgemäß, wird deswegen mit 10 bestraft wenn stärkste Festplatte)
         } else {
             storageScore = 0; // Kein Speicher oder unbekannter Typ, mittlerer Score
         }
