@@ -1,24 +1,24 @@
 package de.ase.pcpartpicker.adapters.cli.commands;
 
-import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
-import de.ase.pcpartpicker.adapters.cli.InputReader;
+import java.util.List;
+
+import de.ase.pcpartpicker.adapters.cli.AppContext;
 import de.ase.pcpartpicker.adapters.cli.SessionManager;
 import de.ase.pcpartpicker.adapters.cli.TableGenerator;
 import de.ase.pcpartpicker.adapters.cli.utils.ExceptionUtils;
 import de.ase.pcpartpicker.adapters.cli.utils.TableUtils;
-import de.ase.pcpartpicker.adapters.sqlite.repositories.ComputerRepository;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
 import de.ase.pcpartpicker.part_assembly.Computer;
 
 public class FinishComputerCommand implements ICommand {
-    private final InputReader inputReader;
-    private final ComputerRepository computerRepository;
-    private final ComputerDraft draft;
 
-    public FinishComputerCommand(InputReader inputReader, ComputerRepository repo, ComputerDraft draft) {
-        this.inputReader = inputReader;
-        this.computerRepository = repo;
-        this.draft = draft;
+    private final AppContext context; 
+    // private final InputReader inputReader;
+    // private final ComputerRepository computerRepository;
+    // private final ComputerDraft draft;
+
+    public FinishComputerCommand(AppContext context) {
+        this.context = context;
     }
 
     @Override
@@ -26,12 +26,22 @@ public class FinishComputerCommand implements ICommand {
         
         try {
             System.out.println("\n--- Kompatibilität wird geprüft ---\n");
-            Computer newComputer = draft.getBuilder().build();
+            Computer newComputer = context.computerDraft.getBuilder().build();
 
             if (newComputer != null) {
                 User currentUser = SessionManager.getcurrentUser();
 
-                int saveId = computerRepository.save(currentUser.getId(), newComputer);
+                int saveId = context.computerRepository.save(currentUser.getId(), newComputer);
+
+                List<Computer> computers = context.computerRepository.findAllByUserId(currentUser.getId());
+
+
+                Computer updatedComputer = computers.stream()
+                    .filter(c -> c.getId() == saveId)
+                    .findFirst()
+                    .orElse(null);
+
+                context.setSelectedComputer(updatedComputer);
                 
                 ExceptionUtils.printSuccess("Computer wurde erfolgreich gebaut.");
                 TableGenerator table = new TableGenerator(new String[]{"Komponente", "Eigenschaft", "Details"});
@@ -39,13 +49,13 @@ public class FinishComputerCommand implements ICommand {
                     table.addRow(row);
                 }
                 table.printTable();
-                draft.setEditingComputerId(saveId);
-                draft.markAsSaved();
+                context.computerDraft.setEditingComputerId(saveId);
+                context.computerDraft.markAsSaved();
             } 
         } catch (Exception e) {
             ExceptionUtils.printError("Beim Speichern ist ein Fehler aufgetreten: \" + e.getMessage()");
         }
 
-        inputReader.waitForEnter("Enter drücken...");
+        context.inputReader.waitForEnter("Enter drücken...");
     }
 }

@@ -2,9 +2,20 @@ package de.ase.pcpartpicker.part_assembly;
 
 import java.util.List;
 
-import de.ase.pcpartpicker.domain.*;
-import de.ase.pcpartpicker.adapters.sqlite.repositories.*;
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.CpuRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.GpuRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.M2SsdRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.RamRepository;
+import de.ase.pcpartpicker.adapters.sqlite.repositories.SsdRepository;
+import de.ase.pcpartpicker.domain.CPU;
+import de.ase.pcpartpicker.domain.Component;
+import de.ase.pcpartpicker.domain.GPU;
+import de.ase.pcpartpicker.domain.HDD;
+import de.ase.pcpartpicker.domain.M2SSD;
+import de.ase.pcpartpicker.domain.RAM;
+import de.ase.pcpartpicker.domain.SSD;
+import de.ase.pcpartpicker.domain.Storage;
 
 /**
  * Diese Klasse enthält statische Methoden zur Berechnung von Bottlenecks in einem Computer basierend auf seinen Komponenten.
