@@ -1,6 +1,8 @@
 package de.ase.pcpartpicker.adapters.cli;
 
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 import de.ase.pcpartpicker.ColorConstants;
 import de.ase.pcpartpicker.adapters.cli.commands.AutomaticFixCommand;
@@ -284,9 +286,9 @@ public class MenuFactory {
 
     private <T extends Component> MenuItem createDraftMenuItem(
         String title,
-        java.util.function.Supplier<Boolean> isSelected,
+        Supplier<Boolean> isSelected,
         rListConfiguration<T> config,
-        java.util.function.BiConsumer<ComputerDraft, T> draftSetter
+        BiConsumer<ComputerDraft, T> draftSetter
     ) {
         return new MenuItem(
             () -> title + (isSelected.get() ? ColorConstants.GREEN(" (ausgewählt)") : ""),
