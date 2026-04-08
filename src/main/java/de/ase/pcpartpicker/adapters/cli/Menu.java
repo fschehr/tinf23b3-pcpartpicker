@@ -3,6 +3,7 @@ package de.ase.pcpartpicker.adapters.cli;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.ase.pcpartpicker.adapters.cli.utils.ExceptionUtils;
 import de.ase.pcpartpicker.adapters.cli.utils.NavigationUtils;
 /**
  * Klasse, die den grundsätzlichen Aufbau eines Menüs definiert
@@ -16,6 +17,7 @@ public class Menu implements IMenuComponent {
     public enum NavMode {STANDARD, PAGING}; 
 
     private final String title;
+    private String infoMessage; 
     private final List<IMenuComponent> children = new ArrayList<>();
     private IMenuComponent zeroComponent; 
     private final InputReader inputReader;
@@ -43,7 +45,10 @@ public class Menu implements IMenuComponent {
     public void setCustomContent(Renderable content) {
         this.customContent = content;
     }
-
+    
+    public void setInfoMessage(String message) {
+        this.infoMessage = message; 
+    }
     /**
      * Gibt beliebigen renderbaren Inhalt direkt im Menü aus
      */
@@ -82,6 +87,10 @@ public class Menu implements IMenuComponent {
             
             if(SessionManager.isLoggedIn()) {
                 System.out.println("Eingeloggt als: "+ SessionManager.getcurrentUser().getName()+ "\n");
+            }
+
+            if(infoMessage != null && !infoMessage.isEmpty()) {
+                ExceptionUtils.printInfo(infoMessage);
             }
 
             if(customContent != null) {

@@ -19,6 +19,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import de.ase.pcpartpicker.adapters.cli.AppContext;
 import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.Menu;
@@ -53,6 +54,8 @@ public class UserTest {
 
     private InputStream originalIn;
     private PrintStream originalOut;
+
+    private AppContext context; 
 
     private InMemoryUserRepository userRepository;
     private InMemoryComputerRepository computerRepository;
@@ -319,7 +322,7 @@ public class UserTest {
 
         menu.add(new de.ase.pcpartpicker.adapters.cli.MenuItem(
             "Computer pruefen & speichern",
-            new FinishComputerCommand(inputReader, computerRepository, draft)
+            new FinishComputerCommand(context)
         ));
 
         return menu;

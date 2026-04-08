@@ -4,7 +4,14 @@ package de.ase.pcpartpicker.adapters.cli.commands;
 import de.ase.pcpartpicker.adapters.cli.Renderable;
 import de.ase.pcpartpicker.part_assembly.Computer;
 import de.ase.pcpartpicker.part_assembly.Performance;
-
+/**
+ * Klasse die die Benchmark Ergebnisse ausgibt, je nach gewähltem Benchmark
+ * @param computer Computer für den der Benchmark durchgeführt wird
+ * @param benchmark Der Benchmark der durchgeführt werden soll
+ * @param benchmarkResults Ergebnisse des jeweiligen Benchmarks 
+ * @param fpsResults Ergebnisse des FPS-Checks
+ * @author Henri
+ */
 public class RunBenchmarkCommand implements Renderable {
 
     private final Computer computer; 
@@ -40,7 +47,7 @@ public class RunBenchmarkCommand implements Renderable {
     }
 
     private void printBenchmarkResults(double results) {
-        System.out.println("Der Benchmark Score ist: " + results);
+        System.out.println("Der Benchmark Score ist: " + String.format("%.2f", results ));
     }
 
     private void printFPSResults(int[] results) {
@@ -48,10 +55,10 @@ public class RunBenchmarkCommand implements Renderable {
         int fps1440p = results[1];
         int fps4K = results[2];
 
-        System.out.println("Die FPS deines Computers in verschiednenen Auflösungen: \n");
-        System.out.println("1080p: " + fps1080p);
-        System.out.println("1440p: " + fps1440p);
-        System.out.println("4k: " + fps4K);
+        System.out.println("Die FPS deines Computers in verschiedenen Auflösungen: \n");
+        System.out.println("1080p: " + String.format("%d", fps1080p));
+        System.out.println("1440p: " + String.format("%d", fps1440p));
+        System.out.println("4k: " + String.format("%d", fps4K));
         System.out.println("");
     }
     

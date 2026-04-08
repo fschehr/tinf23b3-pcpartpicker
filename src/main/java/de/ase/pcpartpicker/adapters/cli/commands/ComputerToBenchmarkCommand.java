@@ -24,18 +24,22 @@ public class ComputerToBenchmarkCommand implements Renderable {
     @Override
     public void render(String title) {
 
-        // erstmal abfangen, wenn man nicht eingeloggt ist, damit currentUser nicht null ist 
         if(!SessionManager.isLoggedIn()) {
             ExceptionUtils.printInfo("Du musst eingeloggt sein, um Benchmarks durchzuführen!"); 
             context.inputReader.waitForEnter("Enter drücken um zurückzukehren..."); 
             return;        
         }
 
-
         User currentUser = SessionManager.getcurrentUser(); 
         int userID = currentUser.getId();
-
+ 
         List<Computer> computers = context.computerRepository.findAllByUserId(userID);
+
+        if(computers.isEmpty()) {
+            ExceptionUtils.printInfo("Du hast noch keine Computer erstellt.");
+            context.inputReader.waitForEnter("Enter drücken um zurückzukehren..."); 
+            return;
+        }
 
         Paging.builder(computers)
             .withTitle(title)
