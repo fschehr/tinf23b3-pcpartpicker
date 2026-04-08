@@ -35,7 +35,7 @@ public final class Bottleneck {
         // Ein Modell was Punkte für Leistungen vergibt und dann vergleicht ob eines besonders heraussticht.
         double cpuScore = (computer.getCPU().getBoostClockGHz() != null ? computer.getCPU().getBoostClockGHz() : computer.getCPU().getSpeedGHz()) * 8; // Wir nehmen mal 8 Kerne für nen Prozessor an weil noch keine Cores gespeichert werden
         double gpuScore = (computer.getGPU().getBoostClockMHz() != null ? computer.getGPU().getBoostClockMHz() : computer.getGPU().getCoreClockMHz()) / 1000 * (computer.getGPU().getVramGB() / 2); // VRAM ist hier ein wichtiger Faktor für die Leistung der GPU
-        double ramScore = computer.getRAM().getSpeedMHz() / 1000 * (computer.getRAM().getCapacityGB() / 8); // RAM-Geschwindigkeit und -Größe tragen beide zur Gesamtleistung bei
+        double ramScore = computer.getRAM().getSpeedMHz() / 1000 * (computer.getRAM().getCapacityGB() * computer.getRamModule() / 8); // RAM-Geschwindigkeit und -Größe tragen beide zur Gesamtleistung bei
         Storage strongestStorage = strongestStorage(computer.getStorageDevices());
         double storageScore;
 
@@ -51,6 +51,12 @@ public final class Bottleneck {
 
         // Näherungsweise berechnen des Bottlenecks mithilfe des arithmetischen Mittels der Scores. Wenn eine Komponente deutlich schlechter abschneidet als die anderen, könnte sie der Bottleneck sein.
         double arithmeticMean = (cpuScore + gpuScore + ramScore + storageScore) / 4;
+
+        if(Math.abs(arithmeticMean - cpuScore) > 15 && Math.abs(arithmeticMean - gpuScore) > 15 && Math.abs(arithmeticMean - ramScore) > 15 && Math.abs(arithmeticMean - storageScore) > 15) {
+            // Alle Komponenten weichen stark vom Durchschnitt ab also ist das System absolut unbalanced. Bottleneck ja aber keine klare Komponente
+            bottleneck = true;
+            return null;
+        }
 
         if(Math.abs(arithmeticMean - cpuScore) > 15) {
             bottleneck = true;
@@ -117,6 +123,7 @@ public final class Bottleneck {
 
     /**
      * Empfiehlt eine Aufrüstung basierend auf dem gefundenen Bottleneck. Wenn es keinen Bottleneck gibt ODER keine einzelne Komponente den Bottleneck ausmacht, wird null zurückgegeben.
+     * @param bottleneckComponent die Komponente, die den Bottleneck darstellt
      * @return die empfohlene Komponente für ein Upgrade
      */
     private static Component recommendedUpgrade(Component bottleneckComponent) {
@@ -160,13 +167,13 @@ public final class Bottleneck {
 
         if (bottleneckComponent instanceof RAM ram) {
             List<RAM> rams = new RamRepository(cf).findAll();
-            double currentScore = ram.getSpeedMHz() / 1000.0 * (ram.getCapacityGB() / 8.0);
+            double currentScore = ram.getSpeedMHz() / 1000.0 * (ram.getCapacityGB() * 2 / 8.0); // Wir rechnen grob mit 2 RAM Sticks in einem PC
             RAM best = null;
             double bestScore = Double.MAX_VALUE;
 
             for (RAM candidate : rams) {
                 if (candidate.getId() == ram.getId()) continue;
-                double score = candidate.getSpeedMHz() / 1000.0 * (candidate.getCapacityGB() / 8.0);
+                double score = candidate.getSpeedMHz() / 1000.0 * (candidate.getCapacityGB() * 2 / 8.0); // Wir rechnen grob mit 2 RAM Sticks in einem PC
                 if (score >= currentScore + 15 && score < bestScore) {
                     best = candidate;
                     bestScore = score;
