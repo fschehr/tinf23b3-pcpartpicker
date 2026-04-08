@@ -64,7 +64,7 @@ public class Computer {
             totalPrice += mainboard.getPrice();
         }
         if (ram != null) {
-            totalPrice += ram.getPrice();
+            totalPrice += ramModule * ram.getPrice();
         }
         if (psu != null) {
             totalPrice += psu.getPrice();

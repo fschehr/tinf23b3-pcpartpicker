@@ -202,7 +202,7 @@ public class ComputerDraft {
         if (cpu != null) totalPrice += cpu.getPrice();
         if (gpu != null) totalPrice += gpu.getPrice();
         if (mainboard != null) totalPrice += mainboard.getPrice();
-        if (ram != null) totalPrice += ram.getPrice();
+        if (ram != null) totalPrice += ramModule * ram.getPrice();
         if (psu != null) totalPrice += psu.getPrice();
         if (storage != null && !storage.isEmpty()) {
             for (Storage s : storage) {
