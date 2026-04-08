@@ -44,7 +44,7 @@ public final class Bottleneck {
     private static Component calculate(Computer computer) {
 
         // Ein Modell was Punkte für Leistungen vergibt und dann vergleicht ob eines besonders heraussticht.
-        double cpuScore = (computer.getCPU().getBoostClockGHz() != null ? computer.getCPU().getBoostClockGHz() : computer.getCPU().getSpeedGHz()) * 8; // Wir nehmen mal 8 Kerne für nen Prozessor an weil noch keine Cores gespeichert werden
+        double cpuScore = (computer.getCPU().getBoostClockGHz() != null ? computer.getCPU().getBoostClockGHz() : computer.getCPU().getSpeedGHz()) * computer.getCPU().getCoreCount();
         double gpuScore; // VRAM ist hier ein wichtiger Faktor für die Leistung der GPU
         if (computer.getGPU() != null) {
             gpuScore = (computer.getGPU().getBoostClockMHz() != null ? computer.getGPU().getBoostClockMHz() : computer.getGPU().getCoreClockMHz()) / 1000.0 * (computer.getGPU().getVramGB() / 2.0); // Wir nehmen mal an, dass 2GB VRAM ungefähr so viel Leistung bringen wie 1GHz Boost Clock
@@ -150,13 +150,13 @@ public final class Bottleneck {
 
         if (bottleneckComponent instanceof CPU cpu) {
             List<CPU> cpus = new CpuRepository(cf).findAll();
-            double currentScore = (cpu.getBoostClockGHz() != null ? cpu.getBoostClockGHz() : cpu.getSpeedGHz()) * 8;
+            double currentScore = (cpu.getBoostClockGHz() != null ? cpu.getBoostClockGHz() : cpu.getSpeedGHz()) * cpu.getCoreCount();
             CPU best = null;
             double bestScore = Double.MAX_VALUE;
 
             for (CPU candidate : cpus) {
                 if (candidate.getId() == cpu.getId()) continue;
-                double score = (candidate.getBoostClockGHz() != null ? candidate.getBoostClockGHz() : candidate.getSpeedGHz()) * 8;
+                double score = (candidate.getBoostClockGHz() != null ? candidate.getBoostClockGHz() : candidate.getSpeedGHz()) * candidate.getCoreCount();
                 if (score >= currentScore + 15 && score < bestScore) {
                     best = candidate;
                     bestScore = score;

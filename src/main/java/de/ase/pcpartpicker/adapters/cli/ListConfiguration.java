@@ -40,15 +40,16 @@ public class ListConfiguration {
     public rListConfiguration<CPU> cpu() {
         return new rListConfiguration<>(
             "CPUs",
-            new String[]{"#", "Name", "Hersteller", "Sockel", "Takt (GHz)", "Boost-Takt (GHz)", "TDP (W)",  "Preis"},
+            new String[]{"#", "Name", "Hersteller", "Sockel", "Kerne", "Takt (GHz)", "Boost-Takt (GHz)", "TDP (W)", "Preis"},
             new CpuRepository(cf),
             cpu -> new String[]{
                 String.valueOf(cpu.getId()),
                 cpu.getName(),
                 cpu.getManufacturer().getName(),
                 cpu.getSocket().getName(),
+                String.valueOf(cpu.getCoreCount()),
                 String.format("%.1f",cpu.getSpeedGHz()),
-                String.format("%.1f",cpu.getBoostClockGHz()),
+                cpu.getBoostClockGHz() != null ? String.format("%.1f", cpu.getBoostClockGHz()) : "N/A",
                 String.valueOf(cpu.getPowerConsumptionW()),
                 String.format("%.2f", cpu.getPrice()) + " €"
             }

@@ -171,6 +171,7 @@ public class DatabaseInitializer {
                     price REAL NOT NULL,
                     socket_id INTEGER NOT NULL,
                     speed_ghz REAL NOT NULL,
+                    core_count INTEGER NOT NULL DEFAULT 1,
                     boost_clock REAL,
                     hasIntegratedGraphics BOOLEAN NOT NULL DEFAULT 0,
                     power_consumption_w INTEGER NOT NULL DEFAULT 0,
@@ -402,17 +403,21 @@ public class DatabaseInitializer {
 
     private void importCpu(Connection connection, int typeId) throws SQLException {
         String sql = """
-            INSERT INTO cpu (manufacturer_id, type_id, name, price, socket_id, speed_ghz, boost_clock, hasIntegratedGraphics, power_consumption_w)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO cpu (manufacturer_id, type_id, name, price, socket_id, speed_ghz, core_count, boost_clock, hasIntegratedGraphics, power_consumption_w)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """;
 
         importRows(connection, "cpu.jsonl", sql, (row, ps) -> {
             String name = getString(row, "name");
             Double price = getDouble(row, "price");
             Double speed = getDouble(row, "core_clock");
+            Integer coreCount = getInt(row, "core_count");
             Double boost = getDouble(row, "boost_clock");
             Integer tdp = getInt(row, "tdp");
-            if (anyNull(name, price, speed, tdp)) {
+            if (anyNull(name, price, speed, coreCount, tdp)) {
+                return false;
+            }
+            if (coreCount < 1) {
                 return false;
             }
 
@@ -430,13 +435,14 @@ public class DatabaseInitializer {
             ps.setDouble(4, price);
             ps.setInt(5, socketId);
             ps.setDouble(6, speed);
+            ps.setInt(7, coreCount);
             if (boost == null) {
-                ps.setNull(7, Types.REAL);
+                ps.setNull(8, Types.REAL);
             } else {
-                ps.setDouble(7, boost);
+                ps.setDouble(8, boost);
             }
-            ps.setBoolean(8, hasIgpu);
-            ps.setInt(9, tdp);
+            ps.setBoolean(9, hasIgpu);
+            ps.setInt(10, tdp);
             return true;
         });
     }

@@ -25,7 +25,8 @@ public class CpuRepository extends BaseRepository<CPU> {
                    c.name,
                    c.price,
                    c.speed_ghz,
-                     c.boost_clock,
+                                     c.core_count,
+                                     c.boost_clock,
                    c.hasIntegratedGraphics,
                    c.power_consumption_w,
                    t.id AS type_id,
@@ -54,6 +55,7 @@ public class CpuRepository extends BaseRepository<CPU> {
                     manufacturer,
                     socket,
                     resultSet.getDouble("speed_ghz"),
+                    resultSet.getInt("core_count"),
                     readNullableDouble(resultSet, "boost_clock"),
                     resultSet.getBoolean("hasIntegratedGraphics"),
                     resultSet.getInt("power_consumption_w")

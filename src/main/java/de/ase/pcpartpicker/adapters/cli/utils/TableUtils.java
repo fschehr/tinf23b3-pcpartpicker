@@ -25,6 +25,7 @@ public class TableUtils {
         // CPU
         if (computer.getCPU() != null) {
             rows.add(new String[]{"CPU", "Name", computer.getCPU().getName()});
+            rows.add(new String[]{"", "Kerne", String.valueOf(computer.getCPU().getCoreCount())});
             rows.add(new String[]{"", "Takt", computer.getCPU().getSpeedGHz() + " GHz"});
             rows.add(new String[]{"", "Preis", String.format(Locale.GERMAN, "%.2f €", computer.getCPU().getPrice())});
         } else {
@@ -120,6 +121,7 @@ public class TableUtils {
         // CPU
         if (computer.getCPU() != null) {
             rows.add(new String[]{"CPU", "Name", computer.getCPU().getName()});
+            rows.add(new String[]{"", "Kerne", String.valueOf(computer.getCPU().getCoreCount())});
             rows.add(new String[]{"", "Takt", computer.getCPU().getSpeedGHz() + " GHz"});
             rows.add(new String[]{"", "Preis", String.format(Locale.GERMAN, "%.2f €", computer.getCPU().getPrice())});
         } else {
