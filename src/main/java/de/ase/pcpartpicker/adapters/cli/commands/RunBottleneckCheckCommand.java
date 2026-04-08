@@ -20,13 +20,20 @@ public class RunBottleneckCheckCommand implements Renderable {
         Computer selectedComputer = context.getSelectedComputer();
         BottleneckResult result = Bottleneck.calculateBottleneck(selectedComputer);
 
+
         if (!result.hasBottleneck()) {
             ExceptionUtils.printSuccess("Der Computer hat keine Bottlenecks!\n");
             return;
         }
-
+        
+        // hat Bottleneck 
         Component bottleneckComponent = result.bottleneckComponent();
         Component alternativeComponent = result.alternativeComponent();
+
+        if(bottleneckComponent == null && alternativeComponent == null) {
+            ExceptionUtils.printWarning("Die Konfiguration deiner Komponenten ist sehr unausgegliche.\n Bitte überdenke die Konfiguration und starte ggf. neu."); 
+            return; 
+        }
 
         if (bottleneckComponent == null) {
             ExceptionUtils.printInfo("Es konnte kein Bottleneck-Bauteil bestimmt werden.\n");
