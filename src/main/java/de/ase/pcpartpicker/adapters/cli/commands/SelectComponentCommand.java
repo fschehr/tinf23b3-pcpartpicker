@@ -109,7 +109,7 @@ public class SelectComponentCommand<T extends Component> implements ICommand {
                     }
 
                 
-                    String warning = draft.getBuilder().validate(draft, selectedItem);
+                    String warning = draft.getBuilder().validate(selectedItem);
                     if (warning != null) {
                         ExceptionUtils.printWarning(warning);
                         int add = inputReader.readInt("Willst du die Komponente wirklich hinzufügen? [0: Nein, 1: Ja]", 0, 1);

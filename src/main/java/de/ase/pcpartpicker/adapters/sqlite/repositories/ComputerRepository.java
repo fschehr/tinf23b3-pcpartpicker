@@ -76,6 +76,26 @@ public class ComputerRepository extends JdbcRepository<Computer> {
         );
     }
 
+    /**
+     * Lädt nur die fertiggestellten Computer (keine Entwürfe) für einen Nutzer.
+     */
+    public List<Computer> findFinishedByUserId(int userId) {
+        String sql = """
+            SELECT id, user_id, is_draft, cpu_id, gpu_id, mainboard_id, ram_id, ram_module_count, psu_id, case_id
+            FROM computer
+            WHERE user_id = ? AND is_draft = 0
+            ORDER BY id
+            """;
+        ComponentIndex index = loadComponentIndex();
+
+        return queryList(
+            sql,
+            statement -> statement.setInt(1, userId),
+            resultSet -> mapComputer(resultSet, index),
+            "Fertige Computer konnten nicht geladen werden."
+        );
+    }
+
     public int save(int userId, Computer computer) {
         Integer editingComputerId = computer.getId() > 0 ? computer.getId() : null;
         return upsertComputer(userId, editingComputerId, computer, false);

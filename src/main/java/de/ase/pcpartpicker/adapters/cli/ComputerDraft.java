@@ -23,6 +23,7 @@ public class ComputerDraft {
     private Case computerCase;
     private List<Storage> storage;
     private boolean unsavedChanges; 
+    private boolean bottleneckMode = false; 
 
     public void startNewDraft() {
         this.builder = new Computer.Builder();
@@ -36,6 +37,7 @@ public class ComputerDraft {
         this.computerCase = null; 
         this.storage = null;
         this.unsavedChanges = false;
+        this.bottleneckMode = false; 
     }
 
     public void loadFromComputer(Computer computer) {
@@ -91,6 +93,10 @@ public class ComputerDraft {
         this.editingComputerId = null;
     }
 
+
+    public void setBottleneckMode(boolean bottleneckMode) {
+        this.bottleneckMode = bottleneckMode; 
+    }
 
     public void setCpu(CPU cpu) {
         this.cpu = cpu;
@@ -193,6 +199,10 @@ public class ComputerDraft {
     public boolean hasUnsavedChanges() {
         return this.unsavedChanges;
     }
+
+    public boolean isBottlneckMode() {
+        return bottleneckMode; 
+    }
     
 
 
@@ -202,7 +212,7 @@ public class ComputerDraft {
         if (cpu != null) totalPrice += cpu.getPrice();
         if (gpu != null) totalPrice += gpu.getPrice();
         if (mainboard != null) totalPrice += mainboard.getPrice();
-        if (ram != null) totalPrice += ram.getPrice();
+        if (ram != null) totalPrice += ramModule * ram.getPrice();
         if (psu != null) totalPrice += psu.getPrice();
         if (storage != null && !storage.isEmpty()) {
             for (Storage s : storage) {

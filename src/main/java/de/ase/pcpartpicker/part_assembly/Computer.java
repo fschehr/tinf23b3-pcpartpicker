@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.ase.pcpartpicker.ColorConstants;
-import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.domain.CPU;
 import de.ase.pcpartpicker.domain.Case;
 import de.ase.pcpartpicker.domain.Component;
@@ -64,7 +63,7 @@ public class Computer {
             totalPrice += mainboard.getPrice();
         }
         if (ram != null) {
-            totalPrice += ram.getPrice();
+            totalPrice += ramModule * ram.getPrice();
         }
         if (psu != null) {
             totalPrice += psu.getPrice();
@@ -236,43 +235,46 @@ public class Computer {
          * @return die Warnung die ausgegeben werden soll. Wenn kein Konflikt herrscht, wird null zurückgegeben.
          * @author Tuluhan
          */
-        public String validate(ComputerDraft draft, Component component) {
+        public String validate(Component component) {
             
             if(component instanceof CPU) {
-                if(draft.getMainboard() != null && !((CPU) component).getSocket().equals(draft.getMainboard().getSocket())) {
+                if(this.mainboard != null && !((CPU) component).getSocket().equals(this.mainboard.getSocket())) {
                     //System.out.println("LIVE: Die ausgewählte CPU ist nicht mit dem Mainboard kompatibel.");
-                    return "Dieser Prozessor ist nicht mit dem Mainboard kompatibel.";
+                    return "Dieser Prozessor ist nicht mit dem Mainboard kompatibel. Das Mainboard benötigt einen Prozessor mit " + this.mainboard.getSocket().getName() + "-Sockel.";
                 }
             }
 
             if(component instanceof Mainboard) {
-                if(draft.getCPU() != null && !((Mainboard) component).getSocket().equals(draft.getCPU().getSocket())) {
+                if(this.cpu != null && !((Mainboard) component).getSocket().equals(this.cpu.getSocket())) {
                     //System.out.println("LIVE: Das ausgewählte Mainboard ist nicht mit der CPU kompatibel.");
-                    return "Dieses Mainboard ist nicht mit der CPU kompatibel.";
-                } else if(draft.getRamModule() > ((Mainboard) component).getRamSlots()) {
+                    return "Dieses Mainboard ist nicht mit der CPU kompatibel. Die CPU benötigt ein Mainboard mit " + this.cpu.getSocket().getName() + "-Sockel.";
+                } else if(this.ramModule > ((Mainboard) component).getRamSlots()) {
                     //System.out.println("LIVE: Das ausgewählte Mainboard hat nicht genug RAM-Slots für die Anzahl der RAM-Module.");
                     return "Dieses Mainboard hat nicht genug RAM-Slots für die Anzahl der RAM-Module.";
-                } else if(draft.getComputerCase() != null && !checkMainboardCaseCompatibility((Mainboard) component, draft.getComputerCase())) {
+                } else if(this.computerCase != null && !checkMainboardCaseCompatibility((Mainboard) component, this.computerCase)) {
                     //System.out.println("LIVE: Das ausgewählte Mainboard passt nicht ins Gehäuse.");
                     return "Dieses Mainboard passt nicht in das ausgewählte Gehäuse.";
                 }
             }
 
             if(component instanceof Case) {
-                if(draft.getPSU() != null && !((Case) component).getPSUFormFactor().equals(draft.getPSU().getFormFactor())) {
+                if(this.psu != null && !((Case) component).getPSUFormFactor().equals(this.psu.getFormFactor())) {
                     //System.out.println("LIVE: Die Form des ausgewählten Netzteils passt nicht zum Gehäuse.");
                     return "Das ausgewählte Netzeil passt nicht in das Gehäuse.";
                     // WICHTIG: Hier ergänzen dass abwärtskompatibel
-                } else if(draft.getMainboard() != null && !checkMainboardCaseCompatibility(draft.getMainboard(), (Case) component)) {
+                } else if(this.mainboard != null && !checkMainboardCaseCompatibility(this.mainboard, (Case) component)) {
                     //System.out.println("LIVE: Das ausgewählte Mainboard passt nicht ins Gehäuse.");
                     return "Das ausgewählte Mainboard ist zu groß für das Gehäuse.";
                 }
             }
 
             if(component instanceof PSU) {
-                if(draft.getComputerCase() != null && !((PSU) component).getFormFactor().equals(draft.getComputerCase().getPSUFormFactor())) {
+                if(this.computerCase != null && !((PSU) component).getFormFactor().equals(this.computerCase.getPSUFormFactor())) {
                     //System.out.println("LIVE: Die Form des ausgewählten Netzteils passt nicht zum Gehäuse.");
                     return "Dieses Netzeil passt nicht in das ausgewählte Gehäuse.";
+                } else if(this.calculateMomentaryPowerConsumption() > ((PSU) component).getWattage()) {
+                    //System.out.println("LIVE: Das ausgewählte Netzteil hat nicht genug Leistung um das System zu versorgen.");
+                    return "Das ausgewählte Netzteil hat nicht genug Leistung um das System zu versorgen. Es muss mindestens " + calculateMomentaryPowerConsumption() + "W liefern.";
                 }
             }
 
@@ -301,6 +303,40 @@ public class Computer {
             }
             
             return false;
+        }
+
+        /**
+         * Diese Methode berechnet die momentane Leistungsaufnahme des Systems basierend auf den aktuell ausgewählten Komponenten im Builder.
+         * Sie wird verwendet, um zu überprüfen, ob das ausgewählte Netzteil genügend Leistung bereitstellt, um alle Komponenten zu versorgen.
+         * @return Die Leistungsaufnahme des aktuell gebauten Systems in Watt.
+         * @author Tuluhan
+         */
+        private int calculateMomentaryPowerConsumption() {
+            int totalPower = 0;
+            if (cpu != null) {
+                totalPower += cpu.getPowerConsumptionW();
+            }
+            if (gpu != null) {
+                totalPower += gpu.getPowerConsumptionW();
+            }
+            if (mainboard != null) {
+                totalPower += mainboard.getPowerConsumptionW();
+            }
+            if (ram != null) {
+                totalPower += ram.getPowerConsumptionW() * ramModule; // Leistung pro RAM-Modul multipliziert mit der Anzahl der Module
+            }
+            if(psu != null) {
+                totalPower += psu.getPowerConsumptionW();
+            }
+            if (computerCase != null) {
+                totalPower += computerCase.getPowerConsumptionW();
+            }
+            if (storageDevices != null) {
+                for (Storage storage : storageDevices) {
+                    totalPower += storage.getPowerConsumptionW();
+                }
+            }
+            return totalPower;
         }
 
         /**
@@ -366,8 +402,8 @@ public class Computer {
                 return false;
             }
 
-            if(psu.getWattage() < (cpu != null ? cpu.getPowerConsumptionW() : 0) + (gpu != null ? gpu.getPowerConsumptionW() : 0) + (mainboard != null ? mainboard.getPowerConsumptionW() : 0) + (ram != null ? ram.getPowerConsumptionW() : 0) + (computerCase != null ? computerCase.getPowerConsumptionW() : 0) + (storageDevices != null ? storageDevices.stream().mapToInt(Storage::getPowerConsumptionW).sum() : 0)) {
-                System.out.println(ColorConstants.RED("FEHLER") + " | nicht genug saft.");
+            if(psu.getWattage() < calculateMomentaryPowerConsumption()) {
+                System.out.println(ColorConstants.RED("FEHLER") + " | Das Netzteil hat nicht genug Leistung um das System zu versorgen. Das Netzteil muss mindestens " + calculateMomentaryPowerConsumption() + "W liefern, um alle Komponenten zu versorgen.");
                 return false;
             }
 

@@ -13,6 +13,12 @@ import de.ase.pcpartpicker.adapters.cli.utils.TableUtils;
 import de.ase.pcpartpicker.domain.HelperClasses.User;
 import de.ase.pcpartpicker.part_assembly.Computer;
 
+/**
+ * Klasse, die für die Auswahl der Computer für den Bottleneck-Check zuständig ist 
+ * @param context Klasse mit Kontext, sodass nicht zu viele Parameter an den Konstruktor übergeben werden müssen
+ * @author Henri
+ */
+
 public class ComputerToCheckCommand implements Renderable {
     private final AppContext context; 
 
@@ -24,8 +30,8 @@ public class ComputerToCheckCommand implements Renderable {
     @Override
     public void render(String title) {
 
-          if(!SessionManager.isLoggedIn()) {
-            ExceptionUtils.printInfo("Du musst eingeloggt sein, um Benchmarks durchzuführen!"); 
+        if(!SessionManager.isLoggedIn()) {
+            ExceptionUtils.printInfo("Du musst eingeloggt sein, um Bottleneck-Checks durchzuführen!"); 
             context.inputReader.waitForEnter("Enter drücken um zurückzukehren..."); 
             return;        
         }
@@ -33,7 +39,13 @@ public class ComputerToCheckCommand implements Renderable {
         User currentUser = SessionManager.getcurrentUser(); 
         int userID = currentUser.getId();
 
-        List<Computer> computers = context.computerRepository.findAllByUserId(userID);
+        List<Computer> computers = context.computerRepository.findFinishedByUserId(userID);
+
+        if(computers.isEmpty()) {
+            ExceptionUtils.printInfo("Du hast noch keine Computer erstellt.");
+            context.inputReader.waitForEnter("Enter drücken um zurückzukehren..."); 
+            return;
+        }
 
         Paging.builder(computers)
             .withTitle(title)
@@ -52,6 +64,7 @@ public class ComputerToCheckCommand implements Renderable {
                 context.setSelectedComputer(selectedComputer);
 
                 new MenuFactory(context).createBottleneckMenu().execute();
+                return context.computerRepository.findFinishedByUserId(userID); 
             }
 
         )

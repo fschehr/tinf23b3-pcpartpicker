@@ -1,5 +1,6 @@
 package de.ase.pcpartpicker.adapters.cli;
 
+import de.ase.pcpartpicker.adapters.cli.utils.FormatUtils;
 import de.ase.pcpartpicker.adapters.sqlite.ConnectionFactory;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.CaseRepository;
 import de.ase.pcpartpicker.adapters.sqlite.repositories.ComputerRepository;
@@ -40,17 +41,18 @@ public class ListConfiguration {
     public rListConfiguration<CPU> cpu() {
         return new rListConfiguration<>(
             "CPUs",
-            new String[]{"#", "Name", "Hersteller", "Sockel", "Takt (GHz)", "Boost-Takt (GHz)", "TDP (W)",  "Preis"},
+            new String[]{"#", "Name", "Hersteller", "Sockel", "Kerne", "Takt (GHz)", "Boost-Takt (GHz)", "TDP (W)", "Preis"},
             new CpuRepository(cf),
             cpu -> new String[]{
                 String.valueOf(cpu.getId()),
                 cpu.getName(),
                 cpu.getManufacturer().getName(),
                 cpu.getSocket().getName(),
-                String.format("%.1f",cpu.getSpeedGHz()),
-                String.format("%.1f",cpu.getBoostClockGHz()),
-                String.valueOf(cpu.getPowerConsumptionW()),
-                String.format("%.2f", cpu.getPrice()) + " €"
+                FormatUtils.formatNumber(cpu.getCoreCount()),
+                FormatUtils.formatNumer(cpu.getSpeedGHz()),
+                cpu.getBoostClockGHz() != null ? FormatUtils.formatNumer(cpu.getBoostClockGHz()) : "N/A",
+                FormatUtils.formatNumber(cpu.getPowerConsumptionW()),
+                FormatUtils.formatPrice(cpu.getPrice()) 
             }
         );
     }
@@ -64,11 +66,11 @@ public class ListConfiguration {
                 String.valueOf(gpu.getId()),
                 gpu.getName(),
                 gpu.getManufacturer().getName(),
-                String.valueOf(gpu.getVramGB()),
-                String.format("%.0f", gpu.getCoreClockMHz()),
-                gpu.getBoostClockMHz() != null ? String.format("%.0f", gpu.getBoostClockMHz()) : "N/A",
-                String.valueOf(gpu.getPowerConsumptionW()),
-                String.format("%.2f", gpu.getPrice()) + " €"
+                FormatUtils.formatNumber(gpu.getVramGB()),
+                FormatUtils.formatNumer(gpu.getCoreClockMHz()),
+                gpu.getBoostClockMHz() != null ? FormatUtils.formatNumer(gpu.getBoostClockMHz()) : "N/A",
+                FormatUtils.formatNumber(gpu.getPowerConsumptionW()),
+                FormatUtils.formatPrice(gpu.getPrice()) 
             }
         );
     }
@@ -82,9 +84,9 @@ public class ListConfiguration {
                 String.valueOf(ram.getId()),
                 ram.getName(),
                 ram.getManufacturer().getName(),
-                String.valueOf(ram.getCapacityGB()),
-                String.valueOf(ram.getSpeedMHz()),
-                String.format("%.2f", ram.getPrice()) + " €"
+                FormatUtils.formatNumber(ram.getCapacityGB()),
+                FormatUtils.formatNumber(ram.getSpeedMHz()),
+                FormatUtils.formatPrice(ram.getPrice()) 
             }
         );
     }
@@ -99,9 +101,9 @@ public class ListConfiguration {
                 mb.getName(),
                 mb.getManufacturer().getName(),
                 mb.getSocket().getName(),
-                String.valueOf(mb.getRamSlots()),
+                FormatUtils.formatNumber(mb.getRamSlots()),
                 mb.getFormFactor().getName(),
-                String.format("%.2f", mb.getPrice()) + " €"
+                FormatUtils.formatPrice(mb.getPrice()) 
             }
         );
     }
@@ -115,9 +117,9 @@ public class ListConfiguration {
                 String.valueOf(psu.getId()),
                 psu.getName(),
                 psu.getManufacturer().getName(),
-                psu.getWattage() + " W",
+                FormatUtils.formatNumber(psu.getWattage()) + " W",
                 psu.getFormFactor().getName(),
-                String.format("%.2f", psu.getPrice()) + " €"
+                FormatUtils.formatPrice(psu.getPrice()) 
             }
         );
     }
@@ -132,7 +134,7 @@ public class ListConfiguration {
                 c.getName(),
                 c.getManufacturer().getName(),
                 c.getMotherboardFormFactor().getName(),
-                String.format("%.2f", c.getPrice()) + " €"
+                FormatUtils.formatPrice(c.getPrice()) 
             }
         );
     }
@@ -146,8 +148,8 @@ public class ListConfiguration {
                 String.valueOf(ssd.getId()),
                 ssd.getName(),
                 ssd.getManufacturer().getName(),
-                String.valueOf(ssd.getCapacityGB()),
-                String.format("%.2f", ssd.getPrice()) + " €"
+                FormatUtils.formatNumber(ssd.getCapacityGB()),
+                FormatUtils.formatPrice(ssd.getPrice()) 
             }
         );
     }
@@ -161,8 +163,8 @@ public class ListConfiguration {
                 String.valueOf(m2.getId()),
                 m2.getName(),
                 m2.getManufacturer().getName(),
-                String.valueOf(m2.getCapacityGB()),
-                String.format("%.2f", m2.getPrice()) + " €"
+                FormatUtils.formatNumber(m2.getCapacityGB()),
+                FormatUtils.formatPrice(m2.getPrice()) 
             }
         );
     }
@@ -176,8 +178,8 @@ public class ListConfiguration {
                 String.valueOf(hdd.getId()),
                 hdd.getName(),
                 hdd.getManufacturer().getName(),
-                String.valueOf(hdd.getCapacityGB()),
-                String.format("%.2f", hdd.getPrice()) + " €"
+                FormatUtils.formatNumber(hdd.getCapacityGB()),
+                FormatUtils.formatPrice(hdd.getPrice()) 
             }
         );
     }

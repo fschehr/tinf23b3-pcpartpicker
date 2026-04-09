@@ -11,21 +11,38 @@ public final class Performance {
 
     /**
      * Berechnet die geschätzten FPS (Frames Per Second) für einen gegebenen Computer und eine bestimmte Auflösung.
-     * Grobe Rechnung für Mid-Einstellungen da wir keine Logik haben die irgendwas mit Video Spielen kategorisiert
+     * Grobe (und etwas wilkürliche) Rechnung für Mid-Einstellungen da wir keine Logik haben die irgendwas mit Video Spielen kategorisiert
      * @param computer der Computer, dessen FPS berechnet werden soll
      * @return die geschätzten FPS für den gegebenen Computer für 1080p, 1440p und 4K Auflösung
      */
     public static int[] calculateFPS(Computer computer) {
         
         final int baseFPS = 60;
-        final int vram = computer.getGPU() == null ? 0 : computer.getGPU().getVramGB();
+        final int cores = 8; // Bis die CPU-Kerne in der Datenbank gespeichert werden, nehmen wir einfach 8 an
+        final double cpuClock = computer.getCPU().getBoostClockGHz() != null ? computer.getCPU().getBoostClockGHz() : computer.getCPU().getSpeedGHz();
 
-        // FPS für 1080p
-        final int fps1080p = (int) (baseFPS * (vram / 4.0)); // 4GB VRAM als Basis für 60 FPS
-        // FPS für 1440p
-        final int fps1440p = (int) (baseFPS * (vram / 8.0)); // 8GB VRAM als Basis für 60 FPS
-        // FPS für 4K
-        final int fps4K = (int) (baseFPS * (vram / 16.0)); // 16GB VRAM als Basis für 60 FPS
+        int fps1080p;
+        int fps1440p;
+        int fps4K;
+
+        // Ohne GPU nur grobe Schätzung basierend auf der CPU-Leistung, da die GPU der wichtigste Faktor für die FPS ist
+        if(computer.getGPU() == null) {
+            // FPS für 1080p
+            fps1080p = (int) (baseFPS * (cpuClock / 5.0) - (cores / 3.0));
+            // FPS für 1440p
+            fps1440p = (int) (baseFPS * (cpuClock / 5.0) * 0.70 - (cores / 3.0));
+            // FPS für 4K
+            fps4K = (int) (baseFPS * (cpuClock / 5.0) * 0.5 - (cores / 3.0));
+        } else {
+            final double vram = computer.getGPU().getVramGB();
+            final double gpuClock = computer.getGPU().getBoostClockMHz() != null ? computer.getGPU().getBoostClockMHz() / 1000.0 : computer.getGPU().getCoreClockMHz() / 1000.0;
+            // FPS für 1080p
+            fps1080p = (int) (baseFPS * (vram / 10.0) * (cpuClock / 3.0) * (gpuClock / 1.5) - (cores / 2.0));
+            // FPS für 1440p
+            fps1440p = (int) (baseFPS * (vram / 15.0) * (cpuClock / 3.0) * (gpuClock / 1.5) - (cores / 2.0));
+            // FPS für 4K
+            fps4K = (int) (baseFPS * (vram / 25.0) * (cpuClock / 3.0) * (gpuClock / 1.5) - (cores / 2.0));
+        }
 
         return new int[]{fps1080p, fps1440p, fps4K};
     }
@@ -42,11 +59,14 @@ public final class Performance {
         double finalScore = 0.0;
 
         final int vram = computer.getGPU() == null ? 0 : computer.getGPU().getVramGB();
-        final double clock = computer.getCPU().getSpeedGHz();
+        final double gpuClock = computer.getGPU() == null ? 0 : (computer.getGPU().getBoostClockMHz() != null ? computer.getGPU().getBoostClockMHz() / 1000.0 : computer.getGPU().getCoreClockMHz() / 1000.0);
+        final int cores = 8; // Bis die CPU-Kerne in der Datenbank gespeichert werden, nehmen wir einfach
+        final double cpuClock = computer.getCPU().getBoostClockGHz() != null ? computer.getCPU().getBoostClockGHz() : computer.getCPU().getSpeedGHz();
         final int ram = computer.getRAM().getCapacityGB() * computer.getRamModule();
+        final double ramSpeed = computer.getRAM().getSpeedMHz() / 1000.0;
 
         // Division durch High-End Werte um grob eine Punktzashl zwischen 0 und 100 zu erhalten, gewichtet nach der Wichtigkeit der Komponenten
-        finalScore = (vram / 24.0) * 40 + (clock / 6.0) * 40 + (ram / 64.0) * 20;
+        finalScore = (vram / 24.0) * 30 + (gpuClock / 2.5) * 10 + (cpuClock / 5.5) * 30 + (cores / 8.0) * 10 + (ram / 64.0) * 10 + (ramSpeed / 5.0) * 10;
 
         return Math.min(finalScore, targetScore);
     }
@@ -63,11 +83,14 @@ public final class Performance {
         double finalScore = 0.0;
 
         final int vram = computer.getGPU() == null ? 0 : computer.getGPU().getVramGB();
-        final double clock = computer.getCPU().getSpeedGHz();
+        final double gpuClock = computer.getGPU() == null ? 0 : (computer.getGPU().getBoostClockMHz() != null ? computer.getGPU().getBoostClockMHz() / 1000.0 : computer.getGPU().getCoreClockMHz() / 1000.0);
+        final int cores = 8; // Bis die CPU-Kerne in der Datenbank gespeichert werden, nehmen wir einfach 8 an
+        final double cpuClock = computer.getCPU().getBoostClockGHz() != null ? computer.getCPU().getBoostClockGHz() : computer.getCPU().getSpeedGHz();
         final int ram = computer.getRAM().getCapacityGB() * computer.getRamModule();
+        final double ramSpeed = computer.getRAM().getSpeedMHz() / 1000.0;
 
         // Division durch High-End Werte um grob eine Punktzashl zwischen 0 und 100 zu erhalten, gewichtet nach der Wichtigkeit der Komponenten
-        finalScore = (vram / 24.0) * 20 + (clock / 6.0) * 50 + (ram / 64.0) * 30;
+        finalScore = (vram / 24.0) * 10 + (gpuClock / 2.5) * 10 + (cpuClock / 5.5) * 30 + (cores / 8.0) * 20 + (ram / 64.0) * 15 + (ramSpeed / 5.0) * 15;
 
         return Math.min(finalScore, targetScore);
     }
@@ -84,11 +107,14 @@ public final class Performance {
         double finalScore = 0.0;
 
         final int vram = computer.getGPU() == null ? 0 : computer.getGPU().getVramGB();
-        final double clock = computer.getCPU().getSpeedGHz();
+        final double gpuClock = computer.getGPU() == null ? 0 : (computer.getGPU().getBoostClockMHz() != null ? computer.getGPU().getBoostClockMHz() / 1000.0 : computer.getGPU().getCoreClockMHz() / 1000.0);
+        final int cores = 8; // Bis die CPU-Kerne in der Datenbank gespeichert werden, nehmen wir einfach 8 an
+        final double cpuClock = computer.getCPU().getBoostClockGHz() != null ? computer.getCPU().getBoostClockGHz() : computer.getCPU().getSpeedGHz();
         final int ram = computer.getRAM().getCapacityGB() * computer.getRamModule();
+        final double ramSpeed = computer.getRAM().getSpeedMHz() / 1000.0;
 
         // Division durch High-End Werte um grob eine Punktzashl zwischen 0 und 100 zu erhalten, gewichtet nach der Wichtigkeit der Komponenten
-        finalScore = (vram / 24.0) * 60 + (clock / 6.0) * 15 + (ram / 64.0) * 25;
+        finalScore = (vram / 24.0) * 40 + (gpuClock / 2.5) * 20 + (cpuClock / 5.5) * 10 + (cores / 8.0) * 5 + (ram / 64.0) * 10 + (ramSpeed / 5.0) * 15;
 
         return Math.min(finalScore, targetScore);
     }

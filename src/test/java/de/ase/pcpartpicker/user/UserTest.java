@@ -19,6 +19,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import de.ase.pcpartpicker.adapters.cli.AppContext;
 import de.ase.pcpartpicker.adapters.cli.ComputerDraft;
 import de.ase.pcpartpicker.adapters.cli.InputReader;
 import de.ase.pcpartpicker.adapters.cli.Menu;
@@ -54,6 +55,8 @@ public class UserTest {
     private InputStream originalIn;
     private PrintStream originalOut;
 
+    private AppContext context; 
+
     private InMemoryUserRepository userRepository;
     private InMemoryComputerRepository computerRepository;
 
@@ -77,8 +80,8 @@ public class UserTest {
 
         userRepository = new InMemoryUserRepository();
         computerRepository = new InMemoryComputerRepository();
+        
         SessionManager.setCurrentUser(null);
-
         createCompatibleTestComponents();
     }
 
@@ -89,6 +92,7 @@ public class UserTest {
         System.setOut(originalOut);
     }
 
+    
     @Test
     public void registrationTest() {
         String username = "new-user";
@@ -102,11 +106,7 @@ public class UserTest {
             "0"      // Beenden Hauptmenue
         ) + "\n";
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        System.setIn(new ByteArrayInputStream(flowInput.getBytes(StandardCharsets.UTF_8)));
-        createMainMenu(new InputReader()).execute();
-        String output = outContent.toString(StandardCharsets.UTF_8);
+        String output = runTestFlow(flowInput);
 
         assertTrue(userRepository.findAll().stream().anyMatch(u -> u.getName().equals(username)));
         assertTrue(output.contains("Nutzer erfolgreich angelegt!"));
@@ -122,11 +122,7 @@ public class UserTest {
             "0"                          // Beenden Hauptmenü
         ) + "\n";
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        System.setIn(new ByteArrayInputStream(flowInput.getBytes(StandardCharsets.UTF_8)));
-        createMainMenu(new InputReader()).execute();
-        String output = outContent.toString(StandardCharsets.UTF_8);
+        String output = runTestFlow(flowInput);
 
         assertTrue(SessionManager.isLoggedIn());
         assertEquals(username, SessionManager.getcurrentUser().getName());
@@ -144,11 +140,7 @@ public class UserTest {
             "0"                     // Beenden
         ) + "\n";
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        System.setIn(new ByteArrayInputStream(flowInput.getBytes(StandardCharsets.UTF_8)));
-        createMainMenu(new InputReader()).execute();
-        String output = outContent.toString(StandardCharsets.UTF_8);
+        String output = runTestFlow(flowInput);
 
         assertTrue(output.contains("Nutzer"));
         assertTrue(output.contains(username));
@@ -175,11 +167,7 @@ public class UserTest {
             "0"                          // Beenden
         ) + "\n";
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        System.setIn(new ByteArrayInputStream(flowInput.getBytes(StandardCharsets.UTF_8)));
-        createMainMenu(new InputReader()).execute();
-        String output = outContent.toString(StandardCharsets.UTF_8);
+        String output = runTestFlow(flowInput);
 
         User currentUser = SessionManager.getcurrentUser();
         assertEquals(1, computerRepository.findAllByUserId(currentUser.getId()).size());
@@ -200,11 +188,7 @@ public class UserTest {
             "0"                          // Beenden
         ) + "\n";
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        System.setIn(new ByteArrayInputStream(flowInput.getBytes(StandardCharsets.UTF_8)));
-        createMainMenu(new InputReader()).execute();
-        String output = outContent.toString(StandardCharsets.UTF_8);
+        String output = runTestFlow(flowInput);
 
         User currentUser = SessionManager.getcurrentUser();
         assertTrue(computerRepository.findAllByUserId(currentUser.getId()).isEmpty());
@@ -223,10 +207,7 @@ public class UserTest {
             "0"                          // Beenden Hauptmenue
         ) + "\n";
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        System.setIn(new ByteArrayInputStream(flowInput.getBytes(StandardCharsets.UTF_8)));
-        createMainMenu(new InputReader()).execute();
+        runTestFlow(flowInput);
 
         assertFalse(SessionManager.isLoggedIn());
         assertNull(SessionManager.getcurrentUser());
@@ -319,10 +300,56 @@ public class UserTest {
 
         menu.add(new de.ase.pcpartpicker.adapters.cli.MenuItem(
             "Computer pruefen & speichern",
-            new FinishComputerCommand(inputReader, computerRepository, draft)
+            new FinishComputerCommand(context)
         ));
 
         return menu;
+    }
+
+
+private String runTestFlow(String flowInput) {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        System.setIn(new ByteArrayInputStream(flowInput.getBytes(StandardCharsets.UTF_8)));
+
+        context = new AppContext(); 
+
+        try {
+            java.lang.reflect.Field userRepoField = AppContext.class.getDeclaredField("userRepository");
+            userRepoField.setAccessible(true);
+            userRepoField.set(context, userRepository);
+
+            java.lang.reflect.Field compRepoField = AppContext.class.getDeclaredField("computerRepository");
+            compRepoField.setAccessible(true);
+            compRepoField.set(context, computerRepository);
+
+            // WICHTIG: Sicherstellen, dass computerDraft im Context existiert
+            java.lang.reflect.Field draftField = AppContext.class.getDeclaredField("computerDraft");
+            draftField.setAccessible(true);
+            if (draftField.get(context) == null) {
+                draftField.set(context, new ComputerDraft());
+            }
+            
+            // Sicherstellen, dass inputReader da ist
+            java.lang.reflect.Field readerField = AppContext.class.getDeclaredField("inputReader");
+            readerField.setAccessible(true);
+            if (readerField.get(context) == null) {
+                readerField.set(context, new InputReader());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        InputReader currentReader = null;
+        try {
+            java.lang.reflect.Field readerField = AppContext.class.getDeclaredField("inputReader");
+            readerField.setAccessible(true);
+            currentReader = (InputReader) readerField.get(context);
+        } catch(Exception e) {}
+
+        createMainMenu(currentReader).execute();
+        
+        return outContent.toString(StandardCharsets.UTF_8);
     }
 
     private Menu createMainMenu(InputReader inputReader) {
@@ -336,11 +363,27 @@ public class UserTest {
         userMenu.setZeroComponent(new BackCommand(() -> userMenu.setRunning(false)));
         loginMenu.setZeroComponent(new BackCommand(() -> loginMenu.setRunning(false)));
 
-        ComputerDraft draft = new ComputerDraft();
+        // FIX: Wir holen uns exakt den Draft, den der AppContext (und damit der FinishCommand) benutzt!
+        ComputerDraft draft = null;
+        try {
+            java.lang.reflect.Field draftField = AppContext.class.getDeclaredField("computerDraft");
+            draftField.setAccessible(true);
+            draft = (ComputerDraft) draftField.get(context);
+        } catch (Exception e) {
+            e.printStackTrace();
+            draft = new ComputerDraft(); // Fallback
+        }
+
         Menu configuratorMenu = createConfiguratorMenu(draft, inputReader);
 
         computerMenu.add(new MenuItem("Neuen Computer anlegen", () -> {
-            draft.startNewDraft();
+            // Hier greifen wir auf den gemappten Draft zu
+            try {
+                java.lang.reflect.Field draftField = AppContext.class.getDeclaredField("computerDraft");
+                draftField.setAccessible(true);
+                ComputerDraft currentDraft = (ComputerDraft) draftField.get(context);
+                currentDraft.startNewDraft();
+            } catch (Exception e) {}
             configuratorMenu.execute();
         }));
         computerMenu.add(new MenuItem("Meine Computer anzeigen", () -> {}));
@@ -366,6 +409,47 @@ public class UserTest {
 
         return mainMenu;
     }
+    // private Menu createMainMenu(InputReader inputReader) {
+    //     Menu mainMenu = new Menu("PC Part Picker - Hauptmenue", inputReader);
+    //     Menu computerMenu = new Menu("Computerverwaltung", inputReader);
+    //     Menu userMenu = new Menu("Nutzerverwaltung", inputReader);
+    //     Menu loginMenu = new Menu("Login", inputReader);
+
+    //     mainMenu.setZeroComponent(new BackCommand(() -> mainMenu.setRunning(false)));
+    //     computerMenu.setZeroComponent(new BackCommand(() -> computerMenu.setRunning(false)));
+    //     userMenu.setZeroComponent(new BackCommand(() -> userMenu.setRunning(false)));
+    //     loginMenu.setZeroComponent(new BackCommand(() -> loginMenu.setRunning(false)));
+
+    //     ComputerDraft draft = new ComputerDraft();
+    //     Menu configuratorMenu = createConfiguratorMenu(draft, inputReader);
+
+    //     computerMenu.add(new MenuItem("Neuen Computer anlegen", () -> {
+    //         draft.startNewDraft();
+    //         configuratorMenu.execute();
+    //     }));
+    //     computerMenu.add(new MenuItem("Meine Computer anzeigen", () -> {}));
+
+    //     userMenu.add(new MenuItem("Neuen Nutzer anlegen", new NewUserCommand(inputReader, userRepository)));
+
+    //     ShowListCommand<User> showUserList = new ShowListCommand<>(
+    //         listConfig("Nutzer", new String[] { "ID", "Name" }, userRepository, user -> new String[] {
+    //             String.valueOf(user.getId()), user.getName()
+    //         }),
+    //         inputReader
+    //     );
+    //     userMenu.add(new MenuItem("Zeige alle Nutzer", () -> {
+    //         showUserList.render("Nutzer");
+    //     }));
+    //     loginMenu.add(new MenuItem("Login starten", new LoginCommand(inputReader, userRepository)));
+    //     loginMenu.add(new MenuItem("Logout", new LogoutCommand()));
+
+    //     mainMenu.add(new MenuItem("Teile ansehen", new OpenMenuCommand(new Menu("Leer", inputReader))));
+    //     mainMenu.add(new MenuItem("Computerverwaltung", new OpenMenuCommand(computerMenu)));
+    //     mainMenu.add(new MenuItem("Nutzerverwaltung", new OpenMenuCommand(userMenu)));
+    //     mainMenu.add(new MenuItem("Login", new OpenMenuCommand(loginMenu)));
+
+    //     return mainMenu;
+    // }
 
     private <T> de.ase.pcpartpicker.adapters.cli.rListConfiguration<T> listConfig(
         String title,

@@ -1,7 +1,8 @@
 package de.ase.pcpartpicker.adapters.cli;
 
-import de.ase.pcpartpicker.adapters.cli.commands.ICommand;
 import java.util.function.Supplier;
+
+import de.ase.pcpartpicker.adapters.cli.commands.ICommand;
 /**
  * Klasse, die definiert welche Komponenten ein Menüeintrag hat
  * @param title Name des Menüeintrages
@@ -11,6 +12,7 @@ import java.util.function.Supplier;
 public class MenuItem implements IMenuComponent {
     private final Supplier<String> titleSupplier;
     private final ICommand command;
+    private Supplier<Boolean> visibilitySupplier =  () -> true; 
     
     public MenuItem(String title, ICommand command) {
         this.titleSupplier = () -> title;
@@ -22,7 +24,17 @@ public class MenuItem implements IMenuComponent {
         this.titleSupplier = titleSupplier;
         this.command = command; 
     }
+
+    public MenuItem(String title, ICommand command, Supplier<Boolean> visibilitySupplier) {
+        this.titleSupplier =  () -> title;
+        this.command = command; 
+        this.visibilitySupplier = visibilitySupplier; 
+    }
     
+    @Override
+    public boolean isVisible() {
+        return visibilitySupplier.get();
+    }
     @Override
     public void execute() {
         command.execute();
@@ -32,4 +44,5 @@ public class MenuItem implements IMenuComponent {
     public String getTitle() {
         return titleSupplier.get();
     }
+
 }

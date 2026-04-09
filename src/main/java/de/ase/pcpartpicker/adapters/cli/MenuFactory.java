@@ -1,8 +1,11 @@
 package de.ase.pcpartpicker.adapters.cli;
 
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 import de.ase.pcpartpicker.ColorConstants;
+import de.ase.pcpartpicker.adapters.cli.commands.AutomaticFixCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ComputerToBenchmarkCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ComputerToCheckCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.FinishComputerCommand;
@@ -12,6 +15,7 @@ import de.ase.pcpartpicker.adapters.cli.commands.NewUserCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.OpenMenuCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ResetDatabaseCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.RunBenchmarkCommand;
+import de.ase.pcpartpicker.adapters.cli.commands.RunBottleneckCheckCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.SaveDraftCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.SelectComponentCommand;
 import de.ase.pcpartpicker.adapters.cli.commands.ShowAllUserCommand;
@@ -63,12 +67,12 @@ public class MenuFactory {
         Object[][] configs = {
             { "CPUs anzeigen", context.listConfigs.cpu() },
             { "GPUs anzeigen", context.listConfigs.gpu() },
-            { "RAM anzeigen", context.listConfigs.ram() },
             { "Mainboards anzeigen", context.listConfigs.mainboard() },
+            { "RAM anzeigen", context.listConfigs.ram() },
             { "Netzteile anzeigen", context.listConfigs.psu() },
             { "Gehäuse anzeigen", context.listConfigs.pcCase() },
-            { "M.2 SSDs anzeigen", context.listConfigs.m2ssd() },
             { "SSDs anzeigen", context.listConfigs.ssd() },
+            { "M.2 SSDs anzeigen", context.listConfigs.m2ssd() },
             { "HDDs anzeigen", context.listConfigs.hdd() }
         };
 
@@ -112,16 +116,16 @@ public class MenuFactory {
             createComputerToBenchmarkMenu().execute();
         }));
         computerMenu.add(new MenuItem("Bottleneck-Checker", () -> {
-            createComputerToCheckMenu().execute();
+            createToBottleneckCheckMenu().execute();
         })); 
         NavigationUtils.addBackNavigation(computerMenu);
         return computerMenu;
     }
     
-    private Menu createComputerToCheckMenu() {
+    private Menu createToBottleneckCheckMenu() {
         Menu menu = new Menu("Für welchen Computer möchtest du einen Bottleneck-Check machen", context.inputReader, Menu.NavMode.PAGING);
-        ComputerToCheckCommand toBenchmark = new ComputerToCheckCommand(context); 
-        menu.setCustomContent(toBenchmark);
+        ComputerToCheckCommand toBottlneckCheck = new ComputerToCheckCommand(context); 
+        menu.setCustomContent(toBottlneckCheck);
         return menu; 
     }
 
@@ -184,7 +188,13 @@ public class MenuFactory {
 
     public Menu createBottleneckMenu() {
         Menu menu = new Menu("Prüfe auf Bottlenecks", context.inputReader);
-        System.out.println("To be impemented");
+        RunBottleneckCheckCommand runCheck = new RunBottleneckCheckCommand(context);
+        menu.setCustomContent(runCheck);
+        //hole den entsprechenden Computer, der ausgwählt wurde 
+        context.computerDraft.editDraft(context.getSelectedComputer());
+        context.computerDraft.setBottleneckMode(true);
+        menu.add(new MenuItem("Öffne Konfigurator", new OpenMenuCommand(createConfiguratorMenu())));
+        menu.add(new MenuItem("Teil automatisch ersetzen und Konfigurator öffnen", new AutomaticFixCommand(context))); 
         NavigationUtils.addBackNavigation(menu);
         return menu; 
     }
@@ -260,8 +270,11 @@ public class MenuFactory {
         ));
 
         menu.add(new MenuItem("Gewählte Komponenten anzeigen", new ShowCurrentDraftCommand(context)));
-        menu.add(new MenuItem("Entwurf speichern", new SaveDraftCommand(context.inputReader, context.computerRepository, draft)));
-        menu.add(new MenuItem("Computer prüfen & speichern", new FinishComputerCommand(context.inputReader, context.computerRepository, draft)));
+        menu.add(new MenuItem(
+            "Entwurf speichern",
+            new SaveDraftCommand(context.inputReader, context.computerRepository, draft),
+            () -> !draft.isBottlneckMode()));
+        menu.add(new MenuItem("Computer prüfen & speichern", new FinishComputerCommand(context)));
 
         NavigationUtils.addConfiguratorBackNavigation(menu, context.inputReader, draft);
 
@@ -277,9 +290,9 @@ public class MenuFactory {
 
     private <T extends Component> MenuItem createDraftMenuItem(
         String title,
-        java.util.function.Supplier<Boolean> isSelected,
+        Supplier<Boolean> isSelected,
         rListConfiguration<T> config,
-        java.util.function.BiConsumer<ComputerDraft, T> draftSetter
+        BiConsumer<ComputerDraft, T> draftSetter
     ) {
         return new MenuItem(
             () -> title + (isSelected.get() ? ColorConstants.GREEN(" (ausgewählt)") : ""),
