@@ -65,16 +65,9 @@ public final class Bottleneck {
             storageScore = 0; // Kein Speicher oder unbekannter Typ, mittlerer Score
         }
 
-        System.out.println("CPU Score: " + cpuScore);
-        System.out.println("GPU Score: " + gpuScore);
-        System.out.println("RAM Score: " + ramScore);
-        System.out.println("Storage Score: " + storageScore);
-
         // Näherungsweise berechnen des Bottlenecks mithilfe des arithmetischen Mittels der Scores. Wenn eine Komponente deutlich schlechter abschneidet als die anderen, könnte sie der Bottleneck sein.
         double arithmeticMean = (cpuScore + gpuScore + ramScore + storageScore) / (gpuScore > 0 ? 4 : 3); // Wenn keine GPU vorhanden ist, nur 3 Komponenten berücksichtigen
         if(gpuScore == 0) gpuScore = arithmeticMean; // Wenn keine GPU vorhanden ist, setzen wir den GPU-Score auf den Durchschnitt, damit er die Berechnung nicht verzerrt
-
-        System.out.println("Arithmetic Mean: " + arithmeticMean);
 
         if(Math.abs(arithmeticMean - cpuScore) > 15 && Math.abs(arithmeticMean - gpuScore) > 15 && Math.abs(arithmeticMean - ramScore) > 15 && Math.abs(arithmeticMean - storageScore) > 15) {
             // Alle Komponenten weichen stark vom Durchschnitt ab also ist das System absolut unbalanced. Bottleneck ja aber keine klare Komponente
