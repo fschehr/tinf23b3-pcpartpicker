@@ -58,6 +58,7 @@ public class ComputerToBenchmarkCommand implements Renderable {
                 context.setSelectedComputer(selectedComputer);
 
                 new MenuFactory(context).createChooseBenchmarkMenu().execute();
+                return context.computerRepository.findAllByUserId(userID);
             }
 
         )

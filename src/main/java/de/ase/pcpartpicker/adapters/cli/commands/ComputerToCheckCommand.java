@@ -64,6 +64,7 @@ public class ComputerToCheckCommand implements Renderable {
                 context.setSelectedComputer(selectedComputer);
 
                 new MenuFactory(context).createBottleneckMenu().execute();
+                return context.computerRepository.findAllByUserId(userID); 
             }
 
         )

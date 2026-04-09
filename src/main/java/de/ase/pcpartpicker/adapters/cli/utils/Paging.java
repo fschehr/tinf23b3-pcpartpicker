@@ -75,7 +75,7 @@ public final class Paging {
         private Function<T, List<T>> onEdit = null;
         private Function<T, List<T>> onDelete = null;
         private Consumer<String> onOtherInput = null; 
-        private Consumer<T> onSelect = null; 
+        private Function<T, List<T>> onSelect = null; 
         private Runnable onClear = null; 
         private int pageSize = 1; 
 
@@ -120,7 +120,7 @@ public final class Paging {
             return this;
         }
 
-        public Builder<T> onSelect(Consumer<T> selectAction) {
+        public Builder<T> onSelect(Function<T, List<T>> selectAction) {
             this.onSelect = selectAction;
             return this; 
         }
@@ -204,8 +204,17 @@ public final class Paging {
                 }
 
                 if(action == Action.SELECT && onSelect != null) {
-                    onSelect.accept(currentItems.get(currentPage));
-                    continue;
+                    List<T> updatedItems = onSelect.apply(currentItems.get(currentPage));
+                    if (updatedItems != null) {
+                        currentItems = updatedItems;
+                        if (currentItems.isEmpty()) {
+                            System.out.println("Keine Einträge mehr vorhanden.");
+                            return;
+                        }
+                        totalPages = (pageSize > 0) ? (currentItems.size() + pageSize - 1) / pageSize : 1;
+                        currentPage = Math.min(currentPage, totalPages - 1);
+                    }
+                    continue;   
                 }
 
                 if(action == Action.OTHER && onOtherInput != null) {

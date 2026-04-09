@@ -1,7 +1,8 @@
 package de.ase.pcpartpicker.adapters.cli;
 
-import de.ase.pcpartpicker.adapters.cli.commands.ICommand;
 import java.util.function.Supplier;
+
+import de.ase.pcpartpicker.adapters.cli.commands.ICommand;
 /**
  * Klasse, die definiert welche Komponenten ein Menüeintrag hat
  * @param title Name des Menüeintrages
