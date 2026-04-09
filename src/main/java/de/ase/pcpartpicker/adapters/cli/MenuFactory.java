@@ -67,12 +67,12 @@ public class MenuFactory {
         Object[][] configs = {
             { "CPUs anzeigen", context.listConfigs.cpu() },
             { "GPUs anzeigen", context.listConfigs.gpu() },
-            { "RAM anzeigen", context.listConfigs.ram() },
             { "Mainboards anzeigen", context.listConfigs.mainboard() },
+            { "RAM anzeigen", context.listConfigs.ram() },
             { "Netzteile anzeigen", context.listConfigs.psu() },
             { "Gehäuse anzeigen", context.listConfigs.pcCase() },
-            { "M.2 SSDs anzeigen", context.listConfigs.m2ssd() },
             { "SSDs anzeigen", context.listConfigs.ssd() },
+            { "M.2 SSDs anzeigen", context.listConfigs.m2ssd() },
             { "HDDs anzeigen", context.listConfigs.hdd() }
         };
 
