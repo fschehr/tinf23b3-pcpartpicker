@@ -14,5 +14,7 @@ Die Anwendung bietet eine strukturierte Lösung für die Auswahl von PC-Komponen
 git clone https://github.com/fschehr/tinf23b3-pcpartpicker.git
 cd tinf23b3-pcpartpicker
 git switch endprodukt
+clear
 java -jar pc-konfigurator.jar
+
 ```
