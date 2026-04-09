@@ -51,8 +51,13 @@ public final class Paging {
         return text.toString();
     }
 
-    public static String promptText(boolean allowClear, boolean allowEdit, boolean allowDelete, boolean allowSelect) {
-        StringBuilder text = new StringBuilder("ID oder Aktion (m/n");
+    public static String promptText(boolean allowOther, boolean allowClear, boolean allowEdit, boolean allowDelete, boolean allowSelect) {
+        StringBuilder text = new StringBuilder();
+        if(allowOther) {
+            text.append("ID oder Aktion (m/n");
+        } else {
+            text.append("Aktion (m/n");
+        }
         if(allowClear) text.append("/c");
         if(allowEdit) text.append("/e");
         if(allowDelete) text.append("/d");
@@ -146,7 +151,7 @@ public final class Paging {
             boolean canEdit = (onEdit != null);
             boolean canDelete = (onDelete != null);
             boolean canSelect = (onSelect != null);
-
+            boolean canOther = (onOtherInput != null); 
             while (true) {
                 NavigationUtils.clear();
 
@@ -157,7 +162,7 @@ public final class Paging {
                 renderPage.accept(currentItems.get(currentPage), currentPage);
 
                 System.out.println(Paging.helpText(currentPage, totalPages, canClear, canEdit, canDelete, canSelect));
-                System.out.print(Paging.promptText(canClear, canEdit, canDelete, canSelect)); 
+                System.out.print(Paging.promptText(canOther, canClear, canEdit, canDelete, canSelect)); 
                 String input = readInput.get();
                 Action action = Paging.parse(input, canClear, canEdit, canDelete, canSelect);
 
