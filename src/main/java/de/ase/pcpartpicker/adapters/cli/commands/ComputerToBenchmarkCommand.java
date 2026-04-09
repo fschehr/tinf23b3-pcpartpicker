@@ -33,7 +33,7 @@ public class ComputerToBenchmarkCommand implements Renderable {
         User currentUser = SessionManager.getcurrentUser(); 
         int userID = currentUser.getId();
  
-        List<Computer> computers = context.computerRepository.findAllByUserId(userID);
+        List<Computer> computers = context.computerRepository.findFinishedByUserId(userID);
 
         if(computers.isEmpty()) {
             ExceptionUtils.printInfo("Du hast noch keine Computer erstellt.");
@@ -58,7 +58,7 @@ public class ComputerToBenchmarkCommand implements Renderable {
                 context.setSelectedComputer(selectedComputer);
 
                 new MenuFactory(context).createChooseBenchmarkMenu().execute();
-                return context.computerRepository.findAllByUserId(userID);
+                return context.computerRepository.findFinishedByUserId(userID);
             }
 
         )
