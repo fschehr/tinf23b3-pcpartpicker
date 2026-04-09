@@ -49,8 +49,8 @@ public class ListConfiguration {
                 cpu.getManufacturer().getName(),
                 cpu.getSocket().getName(),
                 FormatUtils.formatNumber(cpu.getCoreCount()),
-                FormatUtils.formatNumer(cpu.getSpeedGHz()),
-                cpu.getBoostClockGHz() != null ? FormatUtils.formatNumer(cpu.getBoostClockGHz()) : "N/A",
+                FormatUtils.formatNumber(cpu.getSpeedGHz()),
+                cpu.getBoostClockGHz() != null ? FormatUtils.formatNumber(cpu.getBoostClockGHz()) : "N/A",
                 FormatUtils.formatNumber(cpu.getPowerConsumptionW()),
                 FormatUtils.formatPrice(cpu.getPrice()) 
             }
@@ -67,8 +67,8 @@ public class ListConfiguration {
                 gpu.getName(),
                 gpu.getManufacturer().getName(),
                 FormatUtils.formatNumber(gpu.getVramGB()),
-                FormatUtils.formatNumer(gpu.getCoreClockMHz()),
-                gpu.getBoostClockMHz() != null ? FormatUtils.formatNumer(gpu.getBoostClockMHz()) : "N/A",
+                FormatUtils.formatNumber(gpu.getCoreClockMHz()),
+                gpu.getBoostClockMHz() != null ? FormatUtils.formatNumber(gpu.getBoostClockMHz()) : "N/A",
                 FormatUtils.formatNumber(gpu.getPowerConsumptionW()),
                 FormatUtils.formatPrice(gpu.getPrice()) 
             }

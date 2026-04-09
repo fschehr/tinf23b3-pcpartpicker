@@ -26,6 +26,8 @@ public class SaveDraftCommand implements ICommand {
             return;
         }
 
+        
+
         try {
             User currentUser = SessionManager.getcurrentUser();
             int computerId = computerRepository.saveAsDraft(currentUser.getId(), draft);

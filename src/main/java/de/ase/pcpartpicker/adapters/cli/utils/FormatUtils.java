@@ -17,7 +17,7 @@ public class FormatUtils {
         return NUMBER_FORMAT.format(number); 
     }
 
-    public static String formatNumer(double number) {
+    public static String formatNumber(double number) {
         return NUMBER_FORMAT.format(number); 
     }
 
