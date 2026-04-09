@@ -97,8 +97,15 @@ public class Menu implements IMenuComponent {
                 customContent.render(title);
             }
 
-            for (int i = 0; i < children.size(); i++) {
-                System.out.println((i + 1) + ") " + children.get(i).getTitle());
+            List<IMenuComponent> visibleChildren = new ArrayList<>(); 
+            for(IMenuComponent child: children) {
+                if(child.isVisible()) {
+                    visibleChildren.add(child); 
+                }
+            }
+
+            for (int i = 0; i < visibleChildren.size(); i++) {
+                System.out.println((i + 1) + ") " + visibleChildren.get(i).getTitle());
             }
 
             if (zeroComponent != null) {
@@ -108,13 +115,13 @@ public class Menu implements IMenuComponent {
                 
             System.out.print("\nAuswahl: ");
             
-            int choice = inputReader.readInt("Eine Zahl eingeben", 0, children.size());
+            int choice = inputReader.readInt("Eine Zahl eingeben", 0, visibleChildren.size());
             
         
             if (choice == 0 && zeroComponent != null) {
                 zeroComponent.execute();
-            } else if (choice > 0 && choice <= children.size()) {
-                children.get(choice - 1).execute();
+            } else if (choice > 0 && choice <= visibleChildren.size()) {
+                visibleChildren.get(choice - 1).execute();
             }
             
         }

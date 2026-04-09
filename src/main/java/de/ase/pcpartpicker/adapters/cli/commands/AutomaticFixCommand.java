@@ -37,6 +37,8 @@ public class AutomaticFixCommand implements ICommand {
         Computer selectedComputer = context.getSelectedComputer();
         context.computerDraft.editDraft(selectedComputer);
 
+        context.computerDraft.setBottleneckMode(true);
+
         BottleneckResult result = Bottleneck.calculateBottleneck(selectedComputer);
 
         if (result.hasBottleneck()) {

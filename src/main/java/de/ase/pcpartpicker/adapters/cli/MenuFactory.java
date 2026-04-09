@@ -192,6 +192,7 @@ public class MenuFactory {
         menu.setCustomContent(runCheck);
         //hole den entsprechenden Computer, der ausgwählt wurde 
         context.computerDraft.editDraft(context.getSelectedComputer());
+        context.computerDraft.setBottleneckMode(true);
         menu.add(new MenuItem("Öffne Konfigurator", new OpenMenuCommand(createConfiguratorMenu())));
         menu.add(new MenuItem("Teil automatisch ersetzen und Konfigurator öffnen", new AutomaticFixCommand(context))); 
         NavigationUtils.addBackNavigation(menu);
@@ -269,7 +270,10 @@ public class MenuFactory {
         ));
 
         menu.add(new MenuItem("Gewählte Komponenten anzeigen", new ShowCurrentDraftCommand(context)));
-        menu.add(new MenuItem("Entwurf speichern", new SaveDraftCommand(context.inputReader, context.computerRepository, draft)));
+        menu.add(new MenuItem(
+            "Entwurf speichern",
+            new SaveDraftCommand(context.inputReader, context.computerRepository, draft),
+            () -> !draft.isBottlneckMode()));
         menu.add(new MenuItem("Computer prüfen & speichern", new FinishComputerCommand(context)));
 
         NavigationUtils.addConfiguratorBackNavigation(menu, context.inputReader, draft);
