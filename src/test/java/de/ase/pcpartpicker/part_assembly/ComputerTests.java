@@ -1,12 +1,23 @@
 package de.ase.pcpartpicker.part_assembly;
 
-import de.ase.pcpartpicker.domain.*;
-import de.ase.pcpartpicker.domain.HelperClasses.*;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.*;
+import de.ase.pcpartpicker.domain.CPU;
+import de.ase.pcpartpicker.domain.Case;
+import de.ase.pcpartpicker.domain.GPU;
+import de.ase.pcpartpicker.domain.HDD;
+import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
+import de.ase.pcpartpicker.domain.HelperClasses.MotherboardFormFactor;
+import de.ase.pcpartpicker.domain.HelperClasses.PSUFormFactor;
+import de.ase.pcpartpicker.domain.HelperClasses.Socket;
+import de.ase.pcpartpicker.domain.Mainboard;
+import de.ase.pcpartpicker.domain.PSU;
+import de.ase.pcpartpicker.domain.RAM;
+import de.ase.pcpartpicker.domain.SSD;
+import de.ase.pcpartpicker.domain.Storage;
 
 public class ComputerTests {
 
