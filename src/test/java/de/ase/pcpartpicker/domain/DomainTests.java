@@ -1,13 +1,17 @@
 package de.ase.pcpartpicker.domain;
 
-import de.ase.pcpartpicker.domain.HelperClasses.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.*;
+import de.ase.pcpartpicker.domain.HelperClasses.Manufacturer;
+import de.ase.pcpartpicker.domain.HelperClasses.MotherboardFormFactor;
+import de.ase.pcpartpicker.domain.HelperClasses.PSUFormFactor;
+import de.ase.pcpartpicker.domain.HelperClasses.Socket;
 
 public class DomainTests {
     
@@ -127,4 +131,60 @@ public class DomainTests {
         assertEquals(4, mainboard.getSataSlots());
     }
 
+
+    @Test
+    public void testHelperTableEqualsAndHashCode() {
+        Manufacturer m1 = new Manufacturer(1, "Intel");
+        Manufacturer m2 = new Manufacturer(1, "Intel");
+        Manufacturer m3 = new Manufacturer(2, "AMD");
+
+        // Teste Gleichheit und HashCode
+        assertEquals(m1, m2, "Hersteller mit gleicher ID und Name sollten gleich sein.");
+        assertEquals(m1.hashCode(), m2.hashCode(), "HashCodes sollten übereinstimmen.");
+        
+        // Teste Ungleichheit
+        assertNotEquals(m1, m3, "Unterschiedliche Hersteller sollten nicht gleich sein.");
+        assertNotEquals(m1, null, "Sollte nicht gleich null sein.");
+        assertNotEquals(m1, new Object(), "Sollte nicht gleich einem komplett anderen Objekt sein.");
+    }
+
+    @Test
+    public void testComponentToStringFormatting() {
+        Manufacturer m = new Manufacturer(1, "TestBrand");
+        Socket s = new Socket(1, "AM4");
+        MotherboardFormFactor mff = new MotherboardFormFactor(1, "ATX");
+        PSUFormFactor pff = new PSUFormFactor(1, "ATX");
+
+        // CPU toString Test
+        CPU cpu = new CPU(1, "TestCPU", 100.0, m, s, 3.0, 4, 4.0, true, 65);
+        String cpuString = cpu.toString();
+        assertTrue(cpuString.contains("TestCPU"), "Name fehlt in CPU toString");
+        assertTrue(cpuString.contains("4,00 GHz"), "Boost Clock fehlt in CPU toString");
+
+        // GPU toString Test
+        GPU gpu = new GPU(1, "TestGPU", 200.0, m, 1000, 1500.0, 8, 150);
+        String gpuString = gpu.toString();
+        assertTrue(gpuString.contains("1500 MHz"), "Boost Clock fehlt in GPU toString");
+        assertTrue(gpuString.contains("8 GB VRAM"), "VRAM fehlt in GPU toString");
+
+        // RAM toString Test
+        RAM ram = new RAM(1, "TestRAM", 50.0, m, 16, 3200);
+        assertTrue(ram.toString().contains("16 GB"), "Kapazität fehlt in RAM toString");
+
+        // Mainboard toString Test
+        Mainboard mb = new Mainboard(1, "TestMB", 100.0, m, s, mff, 4, 2, 4, 2);
+        assertTrue(mb.toString().contains("4 RAM-Slots"), "RAM-Slots fehlen in Mainboard toString");
+
+        // PSU toString Test
+        PSU psu = new PSU(1, "TestPSU", 80.0, m, 500, pff);
+        assertTrue(psu.toString().contains("500 W"), "Wattzahl fehlt in PSU toString");
+
+        // Case toString Test
+        Case pcCase = new Case(1, "TestCase", 60.0, m, mff, pff, true, 3);
+        assertTrue(pcCase.toString().contains("ja"), "Fenster-Info fehlt in Case toString");
+
+        // Storage toString Test
+        SSD ssd = new SSD(1, "TestSSD", 50.0, m, 500);
+        assertTrue(ssd.toString().contains("500 GB"), "Kapazität fehlt in SSD toString");
+    }
 }
