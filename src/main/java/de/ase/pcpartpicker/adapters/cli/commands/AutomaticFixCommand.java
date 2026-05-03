@@ -61,7 +61,7 @@ public class AutomaticFixCommand implements ICommand {
                     configuratorMenu.execute();
                 }
                 else {
-                    ExceptionUtils.printError("Tiel konnte nicht getauscht werden!");
+                    ExceptionUtils.printError("Teil konnte nicht getauscht werden!");
                 }
             }
         } else {

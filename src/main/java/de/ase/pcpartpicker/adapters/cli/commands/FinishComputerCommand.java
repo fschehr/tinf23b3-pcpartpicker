@@ -13,9 +13,6 @@ import de.ase.pcpartpicker.part_assembly.Computer;
 public class FinishComputerCommand implements ICommand {
 
     private final AppContext context; 
-    // private final InputReader inputReader;
-    // private final ComputerRepository computerRepository;
-    // private final ComputerDraft draft;
 
     public FinishComputerCommand(AppContext context) {
         this.context = context;
